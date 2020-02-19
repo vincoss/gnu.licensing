@@ -18,9 +18,9 @@ namespace Shot.Licensing.Test
             var puk = key.ToXmlString(false);
             var pri = key.ToXmlString(true);
 
-            var dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var pukf = Path.Combine(dir, $@"C:\Temp\{nameof(GenerateKeys)}.puk.xml");
-            var prif = Path.Combine(dir, $@"C:\Temp\{nameof(GenerateKeys)}.pri.xml");
+            var dir = @"C:\Temp\Lic";// AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            var pukf = Path.Combine(dir, $"{ nameof(GenerateKeys)}.public.xml");
+            var prif = Path.Combine(dir, $"{nameof(GenerateKeys)}.private.xml");
 
             File.WriteAllText(pukf, puk, Encoding.UTF8);
             File.WriteAllText(prif, pri, Encoding.UTF8);

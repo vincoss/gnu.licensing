@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shot.Licensing.Test", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shot.Licensing.Sample_Console", "src\Shot.Licensing.Sample_Console\Shot.Licensing.Sample_Console.csproj", "{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shot.Licensing.Svr", "src\Shot.Licensing.Svr\Shot.Licensing.Svr.csproj", "{BA87D90F-702D-49B9-9EAF-612542C6DD09}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
