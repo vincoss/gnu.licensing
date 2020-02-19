@@ -26,12 +26,16 @@ device_id can be used with apikey as a custom attribute, line rhinoLicensing use
 test how to migrate licence between devices, here do some research, must be very easy,
 	just ping server with license key, and device id, see rhino licencing
 	user can copy licence to many devices but when online it will deatvicate licence for other devices
+all dates to UTC
 
 1. check lic on machine
 2. check on server
 	if has connection
 		if not valid remove or switch to demo 
 3. note serve might have only one active licence
+
+## Localization
+need to localize build in messages InvalidSignatureValidationFailure
 
 ## Lic server
 licence API
