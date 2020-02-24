@@ -27,6 +27,8 @@ test how to migrate licence between devices, here do some research, must be very
 	just ping server with license key, and device id, see rhino licencing
 	user can copy licence to many devices but when online it will deatvicate licence for other devices
 all dates to UTC
+License Keys Black-Listing
+	Any license key can be blacklisted, which means it won't be accepted by  even if it is valid.
 
 1. check lic on machine
 2. check on server

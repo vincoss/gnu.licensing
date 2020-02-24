@@ -198,7 +198,7 @@ namespace Standard.Licensing
         /// <param name="privateKey">The private key in xml string format to compute the signature.</param>
         public void Sign(string privateKey)
         {
-            using (var rsa = new RSACryptoServiceProvider())
+            using (var rsa = RSA.Create())
             {
                 rsa.FromXmlString(privateKey);
                 var signature = _xmlData.ToXmlDocument().GetXmlDigitalSignature(rsa);
@@ -213,7 +213,7 @@ namespace Standard.Licensing
         /// <returns>true if the <see cref="License.Signature"/> verifies; otherwise false.</returns>
         public bool VerifySignature(string publicKey)
         {
-            using (var rsa = new RSACryptoServiceProvider())
+            using (var rsa = RSA.Create())
             {
                 rsa.FromXmlString(publicKey);
                 return _xmlData.ToXmlDocument().VerifyXml(rsa);
