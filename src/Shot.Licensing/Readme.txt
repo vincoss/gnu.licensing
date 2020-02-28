@@ -17,6 +17,7 @@ App store lic location
 	test install uninstall, how it affect, lic, pwd and other
 shall be able transfer licence from device to device 
 (floating licence)
+	Rhino licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID
 always check for licence when there is internet connectivity. no connectivity and has existing then ok
 shall be able to export licence or, license request
 user must be able to use registration email that was sent with licence to add new device

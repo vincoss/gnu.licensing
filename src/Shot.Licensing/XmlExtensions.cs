@@ -23,7 +23,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using Standard.Licensing;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
@@ -141,5 +144,101 @@ namespace Shot.Licensing
             // Get the XML representation of the signature.
             return signedXml.GetXml();
         }
+
+        public static void GenerateKeys(int keySize, string directory)
+        {
+            if(keySize <= 0)
+            {
+                throw new ArgumentException(nameof(keySize));
+            }
+            if(string.IsNullOrWhiteSpace(directory))
+            {
+                throw new ArgumentNullException(nameof(directory));
+            }
+
+            using (var rsa = RSA.Create())
+            {
+                rsa.KeySize = keySize;
+                var pub = rsa.ToXmlString(false);
+                var pri = rsa.ToXmlString(true);
+                var name = $"{DateTime.Now.ToString("yyyyMMddHHmmss")}";
+
+                var pubf = Path.Combine(directory, $"{name}.public.xml");
+                var prif = Path.Combine(directory, $"{name}.private.xml");
+                
+                using (StreamWriter writer = File.CreateText(pubf))
+                {
+                    var xpub = XElement.Parse(pub);
+                    xpub.Save(writer);
+                }
+
+                using (StreamWriter writer = File.CreateText(prif))
+                {
+                    var xpub = XElement.Parse(pri);
+                    xpub.Save(writer);
+                }
+            }
+        }
+
+        public static void Generate(string toName, string toEmail, LicenseType type, DateTime expire, int volume, IDictionary<string, string> features, IDictionary<string, string> attributes, FileInfo pkInfo, DirectoryInfo destination)
+        {
+            if(string.IsNullOrWhiteSpace(toName))
+            {
+                throw new ArgumentNullException(nameof(toName));
+            }
+            if (string.IsNullOrWhiteSpace(toEmail))
+            {
+                throw new ArgumentNullException(nameof(toEmail));
+            }
+            if(expire <= DateTime.Now)
+            {
+                throw new ArgumentException(nameof(expire));
+            }
+            if(volume <= 0)
+            {
+                throw new ArgumentException(nameof(volume));
+            }
+            if(features == null)
+            {
+                features = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            }
+            if (attributes == null)
+            {
+                attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            }
+            if(pkInfo == null)
+            {
+                throw new ArgumentNullException(nameof(pkInfo));
+            }
+            if (destination == null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
+
+            string pss = null;
+            using (var reader = new StreamReader(pkInfo.OpenRead()))
+            {
+                pss = reader.ReadToEnd();
+            }
+
+            var license = Standard.Licensing.License.New()
+                       .WithUniqueIdentifier(Guid.NewGuid())
+                       .As(type)
+                       .ExpiresAt(expire)
+                       .WithMaximumUtilization(volume)
+                       .WithProductFeatures(features)
+                       .WithAdditionalAttributes(attributes)
+                       .LicensedTo(toName, toEmail)
+                       .CreateAndSignWithPrivateKey(pss);
+
+            var fileName = $"{license.Id}.xml";
+            var path = Path.Combine(destination.FullName, fileName);
+            using (var writer = File.CreateText(path))
+            {
+                var xmlElement = XElement.Parse(license.ToString(), LoadOptions.None);
+                xmlElement.Save(writer);
+            }
+        }
+
     }
 }

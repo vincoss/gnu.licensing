@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Shot.Licensing.Cli": {
+      "commandName": "Project"
+    }
+  }
+}
