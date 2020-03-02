@@ -18,6 +18,7 @@ shall be able transfer licence from device to device, user can use license ID to
 always check for licence when there is internet connectivity. no connectivity and has existing then ok
 user must be able to use registration email that was sent with licence to add new device
 device_id can be used with apikey as a custom attribute, line rhinoLicensing user request licence then we send it to them
+display license information
 
 ## Testing
 test how to migrate licence between devices, here do some research, must be very easy,

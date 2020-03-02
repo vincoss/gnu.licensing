@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-
+using System.Xml.Linq;
 
 namespace Shot.Licensing.Svr.Services
 {
@@ -14,7 +14,7 @@ namespace Shot.Licensing.Svr.Services
         public static string PrivateKey;
         static LicenseService()
         {
-            PrivateKey = File.ReadAllText(@"C:\Temp\Lic\Private.xml"); // TODO:
+            PrivateKey = File.ReadAllText(@"C:\_Data\GitHub\Shot.Licensing\resources\test.private.xml"); // TODO:
         }
 
         public Task<string> Create(RegisterLicense register)

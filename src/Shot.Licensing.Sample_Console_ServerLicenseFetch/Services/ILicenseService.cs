@@ -6,11 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Shot.Licensing.Sample_Console.Services
+namespace Shot.Licensing.Sample_Console_ServerLicenseFetch.Services
 {
     public interface ILicenseService
     {
-
         Task<string> Register(string licenseRequest, IDictionary<string, string> attributes, string serverUrl);
     }
 }

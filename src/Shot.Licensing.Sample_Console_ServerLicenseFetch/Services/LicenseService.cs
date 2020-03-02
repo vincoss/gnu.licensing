@@ -1,16 +1,12 @@
-﻿using Shot.Licensing;
-using Shot.Licensing.Validation;
-using System;
-using System.Linq;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 
-namespace Shot.Licensing.Sample_Console.Services
+namespace Shot.Licensing.Sample_Console_ServerLicenseFetch.Services
 {
     public class LicenseService : ILicenseService
     {
@@ -29,26 +25,39 @@ namespace Shot.Licensing.Sample_Console.Services
                 throw new ArgumentNullException(nameof(serverUrl));
             }
 
-            var data = new { LicenseId = licenseRequest, Attributes = attributes };
-            var json = JsonSerializer.Serialize(data);
-
-            using (var client = new HttpClient())
-            using (var request = new HttpRequestMessage(HttpMethod.Post, serverUrl))
+            string license = null;
+            
+            try
             {
-                using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
-                {
-                    request.Content = stringContent;
+                var data = new { LicenseId = licenseRequest, Attributes = attributes };
+                var json = JsonSerializer.Serialize(data);
 
-                    using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
+                using (var client = CreateHttpClient())
+                using (var request = new HttpRequestMessage(HttpMethod.Post, serverUrl))
+                {
+                    using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
                     {
-                        response.EnsureSuccessStatusCode();
-                        var result = await response.Content.ReadAsStringAsync();
-                        return result;
+                        request.Content = stringContent;
+
+                        using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
+                        {
+                            response.EnsureSuccessStatusCode();
+                            license = await response.Content.ReadAsStringAsync();
+                        }
                     }
                 }
             }
+            catch
+            {
+                license = null;
+            }
+            return license;
         }
 
-    
+        private HttpClient CreateHttpClient() // TODO: must reuse client on the server.
+        {
+            var httpClient = new HttpClient();
+            return httpClient;
+        }
     }
 }

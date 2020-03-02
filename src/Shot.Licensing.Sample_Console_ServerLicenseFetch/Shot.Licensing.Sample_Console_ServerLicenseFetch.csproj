@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="..\..\resources\test.public.xml" Link="Data\test.public.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Shot.Licensing\Shot.Licensing.csproj" />
   </ItemGroup>
 
