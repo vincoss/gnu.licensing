@@ -35,7 +35,7 @@ using System.Xml.Linq;
 using Shot.Licensing;
 
 
-namespace Standard.Licensing
+namespace Shot.Licensing
 {
     /// <summary>
     /// A software license

@@ -1,4 +1,4 @@
-﻿using Standard.Licensing;
+﻿using Shot.Licensing;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;

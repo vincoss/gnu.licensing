@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Shot.Licensing;
+using Shot.Licensing.Validation;
+using System;
+using System.Linq;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -44,5 +48,7 @@ namespace Shot.Licensing.Sample_Console.Services
                 }
             }
         }
+
+    
     }
 }

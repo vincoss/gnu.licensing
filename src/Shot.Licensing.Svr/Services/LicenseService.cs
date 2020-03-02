@@ -1,6 +1,6 @@
 ﻿using Shot.Licensing.Svr.Interface;
 using Shot.Licensing.Svr.Models;
-using Standard.Licensing;
+using Shot.Licensing;
 using System;
 using System.Collections.Generic;
 using System.IO;

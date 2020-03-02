@@ -25,7 +25,7 @@
 
 using System;
 
-namespace Standard.Licensing.Validation
+namespace Shot.Licensing.Validation
 {
     /// <summary>
     /// Represents a <see cref="License"/> validator.

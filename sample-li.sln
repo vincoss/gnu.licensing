@@ -13,9 +13,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shot.Licensing.Cli", "src\S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shot.Licensing.Test", "test\Shot.Licensing.Test\Shot.Licensing.Test.csproj", "{B3031946-ED08-4F18-9F95-4D66F054DF5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shot.Licensing.Sample_Console", "src\Shot.Licensing.Sample_Console\Shot.Licensing.Sample_Console.csproj", "{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shot.Licensing.Sample_Console", "src\Shot.Licensing.Sample_Console\Shot.Licensing.Sample_Console.csproj", "{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shot.Licensing.Svr", "src\Shot.Licensing.Svr\Shot.Licensing.Svr.csproj", "{BA87D90F-702D-49B9-9EAF-612542C6DD09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shot.Licensing.Svr", "src\Shot.Licensing.Svr\Shot.Licensing.Svr.csproj", "{BA87D90F-702D-49B9-9EAF-612542C6DD09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shot.Licensing.Sample_Console_ServerLicenseFetch", "src\Shot.Licensing.Sample_Console_ServerLicenseFetch\Shot.Licensing.Sample_Console_ServerLicenseFetch.csproj", "{19E70CC1-3F53-4A80-A23E-A55DC2C819DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA87D90F-702D-49B9-9EAF-612542C6DD09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E70CC1-3F53-4A80-A23E-A55DC2C819DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E70CC1-3F53-4A80-A23E-A55DC2C819DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E70CC1-3F53-4A80-A23E-A55DC2C819DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E70CC1-3F53-4A80-A23E-A55DC2C819DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B3031946-ED08-4F18-9F95-4D66F054DF5E} = {0DB40E06-1133-4B03-9189-82952F335119}
 		{D21F1AED-21AC-46B6-8F41-9C03CB54EAE6} = {DABCEE42-464B-420F-8D07-A73C2A501F0A}
+		{19E70CC1-3F53-4A80-A23E-A55DC2C819DD} = {DABCEE42-464B-420F-8D07-A73C2A501F0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED6533B7-4BAB-4BCC-95D9-141B5F813020}
