@@ -2,13 +2,13 @@
 ## Generic
 +create cli project
 +find additional documentation (at home)
++generate public and private key
 export licence
 import licence
 verify licence
 
 ## Client
 +build public key into the app already
-generate public and private key
 license on client store in the root directory or secureStore
 	root directory is good (there is some reason for that)
 	secure store if user install and uninstall app no need to get new license
@@ -16,9 +16,13 @@ License.xml (name as)
 test install uninstall, how it affect, lic, pwd and other
 shall be able transfer licence from device to device, user can use license ID to get new one from server.
 always check for licence when there is internet connectivity. no connectivity and has existing then ok
+	at least one time a day
 user must be able to use registration email that was sent with licence to add new device
 device_id can be used with apikey as a custom attribute, line rhinoLicensing user request licence then we send it to them
 display license information
+http request client timeout setting
+if not valid remove the license.xml file
+if http check fail do nothing if license.xml exists not to be removed
 
 ## Testing
 test how to migrate licence between devices, here do some research, must be very easy,
@@ -27,6 +31,7 @@ test how to migrate licence between devices, here do some research, must be very
 
 ## Samples
 Create sample Shot.Licensing.Sample_Console
+Create sample Shot.Licensing.Sample_Console_ServerLicenseFetch
 Create sample Shot.Licensing.Sample_Wpf
 Create sample Shot.Licensing.Sample_Website
 Create sample Shot.Licensing.Sample_Xamarin
