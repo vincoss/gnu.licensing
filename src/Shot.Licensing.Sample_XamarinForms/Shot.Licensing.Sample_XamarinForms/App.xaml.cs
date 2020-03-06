@@ -1,4 +1,5 @@
-﻿using System;
+﻿using samplesl.Sample_XamarinForms.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,12 +11,12 @@ namespace samplesl.Sample_XamarinForms
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new LicenseView();
         }
 
         protected override void OnStart()
         {
-            new Helper().Run();
+            //new Helper().Run();
         }
 
         protected override void OnSleep()
