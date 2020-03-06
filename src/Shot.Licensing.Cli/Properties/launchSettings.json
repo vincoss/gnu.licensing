@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Shot.Licensing.Cli": {
+    "samplesl.Cli": {
       "commandName": "Project"
     }
   }

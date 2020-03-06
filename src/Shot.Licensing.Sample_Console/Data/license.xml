@@ -9,7 +9,7 @@
     <Attribute name="AppId">B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B</Attribute>
   </LicenseAttributes>
   <Customer>
-    <Name>Shot.Licensing.Sample_Console</Name>
+    <Name>samplesl.Sample_Console</Name>
     <Email>asd@example.com</Email>
   </Customer>
   <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">

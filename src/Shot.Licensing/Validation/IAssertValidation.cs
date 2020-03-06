@@ -25,7 +25,7 @@
 
 using System.Collections.Generic;
 
-namespace Shot.Licensing.Validation
+namespace samplesl.Validation
 {
     /// <summary>
     /// Interface for the fluent validation syntax.

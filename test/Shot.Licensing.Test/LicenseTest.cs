@@ -1,4 +1,4 @@
-﻿using Shot.Licensing;
+﻿using samplesl;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -6,9 +6,9 @@ using System.Xml.Linq;
 using Xunit;
 using System.IO;
 using System.Text;
-using Shot.Licensing.Validation;
+using samplesl.Validation;
 
-namespace Shot.Licensing.Test
+namespace samplesl.Test
 {
     public class LicenseTest : BaseLicenseTest
     {

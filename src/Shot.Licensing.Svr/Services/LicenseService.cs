@@ -1,20 +1,20 @@
-﻿using Shot.Licensing.Svr.Interface;
-using Shot.Licensing.Svr.Models;
-using Shot.Licensing;
+﻿using samplesl.Svr.Interface;
+using samplesl.Svr.Models;
+using samplesl;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Shot.Licensing.Svr.Services
+namespace samplesl.Svr.Services
 {
     public class LicenseService : ILicenseService
     {
         public static string PrivateKey;
         static LicenseService()
         {
-            PrivateKey = File.ReadAllText(@"C:\_Data\GitHub\Shot.Licensing\resources\test.private.xml"); // TODO:
+            PrivateKey = File.ReadAllText(@"C:\_Data\GitHub\samplesl\resources\test.private.xml"); // TODO:
         }
 
         public Task<string> Create(RegisterLicense register)

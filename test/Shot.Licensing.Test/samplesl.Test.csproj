@@ -23,8 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Shot.Licensing.Cli\Shot.Licensing.Cli.csproj" />
-    <ProjectReference Include="..\..\src\Shot.Licensing\Shot.Licensing.csproj" />
+    <ProjectReference Include="..\..\src\Shot.Licensing.Cli\samplesl.Cli.csproj" />
+    <ProjectReference Include="..\..\src\Shot.Licensing\samplesl.csproj" />
   </ItemGroup>
+
 
 </Project>

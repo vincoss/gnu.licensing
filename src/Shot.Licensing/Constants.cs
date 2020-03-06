@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Shot.Licensing
+namespace samplesl
 {
     public static class Constants
     {

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace Shot.Licensing.Sample_XamarinForms
+namespace samplesl.Sample_XamarinForms
 {
+    // TODO:
     public static class LicenseContants
     {
         public const string AppId = "AppId";
-        public const string LicenseServerUrl = "https://localhost:5001/api/license";
+        public const string LicenseServerUrl = "http://localhost:5000/api/license";
 
         public static string PublicKey = new StreamReader(typeof(LicenseContants)
                                                      .Assembly
                                                      .GetManifestResourceStream(
-                                                     "Shot.Licensing.Sample_XamarinForms.Data.test.public.xml")).ReadToEnd();
+                                                     "samplesl.Sample_XamarinForms.Data.test.public.xml")).ReadToEnd();
 
     }
 }

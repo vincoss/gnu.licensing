@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace Shot.Licensing.Sample_XamarinForms
+namespace samplesl.Sample_XamarinForms
 {
     // Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer

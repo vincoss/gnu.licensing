@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using Xunit;
 
-namespace Shot.Licensing.Test
+namespace samplesl.Test
 {
     public class XmlExtensionsTest : BaseLicenseTest
     {

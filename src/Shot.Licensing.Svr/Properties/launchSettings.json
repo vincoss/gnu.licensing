@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Shot.Licensing.Svr": {
+    "samplesl.Svr": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

@@ -29,7 +29,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace Shot.Licensing.Validation
+namespace samplesl.Validation
 {
     /// <summary>
     /// Extension methods for <see cref="License"/> validation.

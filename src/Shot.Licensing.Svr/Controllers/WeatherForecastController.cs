@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Shot.Licensing.Svr.Controllers
+namespace samplesl.Svr.Controllers
 {
     [ApiController]
     [Route("[controller]")]

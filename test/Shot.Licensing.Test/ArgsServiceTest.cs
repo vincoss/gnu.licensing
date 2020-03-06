@@ -1,4 +1,4 @@
-﻿using Shot.Licensing.Cli;
+﻿using samplesl.Cli;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Text;
 using Xunit;
 
-namespace Shot.Licensing.Test
+namespace samplesl.Test
 {
     public class ArgsServiceTest
     {

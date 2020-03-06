@@ -7,9 +7,9 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 
-namespace Shot.Licensing.Sample_XamarinForms.Droid
+namespace samplesl.Sample_XamarinForms.Droid
 {
-    [Activity(Label = "Shot.Licensing.Sample_XamarinForms", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "samplesl.Sample_XamarinForms", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

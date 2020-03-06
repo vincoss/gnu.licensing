@@ -5,11 +5,11 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Text;
 using System.Xml.Linq;
-using Shot.Licensing.Sample_Console_ServerLicenseFetch.Services;
-using Shot.Licensing.Validation;
+using samplesl.Sample_Console_ServerLicenseFetch.Services;
+using samplesl.Validation;
 
 
-namespace Shot.Licensing.Sample_Console_ServerLicenseFetch
+namespace samplesl.Sample_Console_ServerLicenseFetch
 {
     class Program
     {

@@ -1,4 +1,4 @@
-﻿﻿//
+﻿//
 // Copyright © 2012 - 2013 Nauck IT KG     http://www.nauck-it.de
 //
 // Author:
@@ -23,9 +23,10 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using samplesl;
 using System;
 
-namespace Shot.Licensing.Validation
+namespace samplesl.Validation
 {
     /// <summary>
     /// Represents a <see cref="License"/> validator.

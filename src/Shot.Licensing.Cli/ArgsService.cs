@@ -1,4 +1,4 @@
-﻿using Shot.Licensing;
+﻿using samplesl;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 
-namespace Shot.Licensing.Cli
+namespace samplesl.Cli
 {
     public class ArgsService
     {

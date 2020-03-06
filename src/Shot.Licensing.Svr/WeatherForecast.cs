@@ -1,6 +1,6 @@
 using System;
 
-namespace Shot.Licensing.Svr
+namespace samplesl.Svr
 {
     public class WeatherForecast
     {

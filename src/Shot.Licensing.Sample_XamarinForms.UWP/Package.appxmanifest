@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  IgnorableNamespaces="uap mp">
+
+  <Identity
+    Name="309b68a8-eaf9-4d3a-9fd5-7df46ed80bef"
+    Publisher="CN=67236f46-544c-4a8f-a121-03f00c45e977"
+    Version="1.0.0.0" />
+
+  <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+
+  <Properties>
+    <DisplayName>samplesl.Sample_XamarinForms.UWP</DisplayName>
+    <PublisherDisplayName>67236f46-544c-4a8f-a121-03f00c45e977</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="x-generate"/>
+  </Resources>
+
+  <Applications>
+    <Application Id="App"
+      Executable="$targetnametoken$.exe"
+      EntryPoint="samplesl.Sample_XamarinForms.UWP.App">
+      <uap:VisualElements
+        DisplayName="samplesl.Sample_XamarinForms.UWP"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png"
+        Description="samplesl.Sample_XamarinForms.UWP"
+        BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+    <Capability Name="privateNetworkClientServer"/>
+    <Capability Name="internetClientServer"/>
+  </Capabilities>
+</Package>

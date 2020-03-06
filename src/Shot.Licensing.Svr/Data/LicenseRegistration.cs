@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Shot.Licensing.Svr.Data
+namespace samplesl.Svr.Data
 {
     public class LicenseRegistration
     {

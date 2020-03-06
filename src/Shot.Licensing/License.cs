@@ -28,14 +28,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using Shot.Licensing;
+using samplesl;
 
 
-namespace Shot.Licensing
+namespace samplesl
 {
     /// <summary>
     /// A software license
@@ -215,7 +214,8 @@ namespace Shot.Licensing
         {
             using (var rsa = RSA.Create())
             {
-                rsa.FromXmlString(publicKey);
+                // rsa.FromXmlString(publicKey);
+                RsaExtensions.FromXmlString2(rsa, publicKey);
                 return _xmlData.ToXmlDocument().VerifyXml(rsa);
             }
         }

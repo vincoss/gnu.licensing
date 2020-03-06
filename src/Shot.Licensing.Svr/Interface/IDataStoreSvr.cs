@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Shot.Licensing.Svr.Interface
+namespace samplesl.Svr.Interface
 {
     public interface IDataStoreSvr
     {

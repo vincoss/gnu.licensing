@@ -1,11 +1,11 @@
-﻿using Shot.Licensing.Svr.Data;
-using Shot.Licensing.Svr.Interface;
+﻿using samplesl.Svr.Data;
+using samplesl.Svr.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shot.Licensing.Svr.Services
+namespace samplesl.Svr.Services
 {
     public class EfDataStoreSvr : IDataStoreSvr
     {

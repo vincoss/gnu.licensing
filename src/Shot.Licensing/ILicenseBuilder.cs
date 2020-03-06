@@ -26,7 +26,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Shot.Licensing
+namespace samplesl
 {
     /// <summary>
     /// Fluent api to create and sign a new <see cref="License"/>. 

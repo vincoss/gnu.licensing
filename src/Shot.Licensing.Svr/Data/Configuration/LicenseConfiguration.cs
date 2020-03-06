@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Shot.Licensing.Svr.Data.Configuration
+namespace samplesl.Svr.Data.Configuration
 {
     public class LicenseConfiguration : IEntityTypeConfiguration<License>
     {

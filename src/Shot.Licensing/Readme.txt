@@ -23,6 +23,7 @@ display license information
 http request client timeout setting
 if not valid remove the license.xml file
 if http check fail do nothing if license.xml exists not to be removed
+license file might not be valid possible to remove it if tampered
 
 ## Testing
 test how to migrate licence between devices, here do some research, must be very easy,
@@ -30,17 +31,18 @@ test how to migrate licence between devices, here do some research, must be very
 	user can copy licence to many devices but when online it will deatvicate licence for other devices
 
 ## Samples
-Create sample Shot.Licensing.Sample_Console
-Create sample Shot.Licensing.Sample_Console_ServerLicenseFetch
-Create sample Shot.Licensing.Sample_Wpf
-Create sample Shot.Licensing.Sample_Website
-Create sample Shot.Licensing.Sample_Xamarin
+Create sample samplesl.Sample_Console
+Create sample samplesl.Sample_Console_ServerLicenseFetch
+Create sample samplesl.Sample_Wpf
+Create sample samplesl.Sample_Website
+Create sample samplesl.Sample_Xamarin
 
 ## Server
 lincese server & client timeout setting, setting for httpClient timeout
 see balsamique license request email if user needs to re-fetch license email. send same email as for registration.
 Licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID
 possible use license API to retrieve an license again by email and sent an email then, use original request data
+add the the licensing dll from nuget after publish, cli too
 
 ## Server UI
 see teamcity licence for the UI
@@ -104,9 +106,9 @@ Content-Type: application/json
 {"LicenseId":"D4248D45-7B4A-4832-A7D1-6AA32A752453","Attributes":{"ClientId":"FAAAEB70-3BCF-4FDC-B67A-5C6B81C316C5"}}
 
 ## Resources
-https://github.com/junian/Shot.Licensing
+https://github.com/junian/samplesl
 https://github.com/dnauck/Portable.Licensing
-https://www.nuget.org/packages/Shot.Licensing
+https://www.nuget.org/packages/samplesl
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-sign-xml-documents-with-digital-signatures
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-verify-the-digital-signatures-of-xml-documents
 

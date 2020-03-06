@@ -11,11 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Shot.Licensing.Svr.Data;
-using Shot.Licensing.Svr.Interface;
-using Shot.Licensing.Svr.Services;
+using samplesl.Svr.Data;
+using samplesl.Svr.Interface;
+using samplesl.Svr.Services;
 
-namespace Shot.Licensing.Svr
+namespace samplesl.Svr
 {
     public class Startup
     {
@@ -49,7 +49,7 @@ namespace Shot.Licensing.Svr
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+          //  app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthorization();

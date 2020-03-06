@@ -2,7 +2,7 @@
 using System.IO;
 
 
-namespace Shot.Licensing.Cli
+namespace samplesl.Cli
 {
     public class KeysArgs
     {

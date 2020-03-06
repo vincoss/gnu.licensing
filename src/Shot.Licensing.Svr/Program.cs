@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Shot.Licensing.Svr
+namespace samplesl.Svr
 {
     public class Program
     {

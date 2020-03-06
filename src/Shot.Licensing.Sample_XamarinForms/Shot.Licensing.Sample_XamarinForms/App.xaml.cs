@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Shot.Licensing.Sample_XamarinForms
+namespace samplesl.Sample_XamarinForms
 {
     public partial class App : Application
     {
@@ -15,6 +15,7 @@ namespace Shot.Licensing.Sample_XamarinForms
 
         protected override void OnStart()
         {
+            new Helper().Run();
         }
 
         protected override void OnSleep()
