@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Net.Http.Headers;
+using System.Net;
 
 
 namespace samplesl.Sample_XamarinForms.Services
@@ -19,20 +21,24 @@ namespace samplesl.Sample_XamarinForms.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Check(Guid id, string licenseSha256, string serverUrl)
+        public Task<bool> Check(Guid licenseKey, Guid productId, string licenseSha256, string serverUrl)
         {
-            if (id == Guid.Empty)
+            if (licenseKey == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(id));
+                throw new ArgumentNullException(nameof(licenseKey));
             }
             throw new NotImplementedException();
         }
 
-        public async Task<string> Register(Guid id, IDictionary<string, string> attributes, string serverUrl)
+        public async Task<RegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl)
         {
-            if (id == Guid.Empty)
+            if (licenseKey == Guid.Empty)
             {
-                throw new ArgumentNullException(nameof(id));
+                throw new ArgumentNullException(nameof(licenseKey));
+            }
+            if (productId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(productId));
             }
             if (attributes == null)
             {
@@ -43,100 +49,53 @@ namespace samplesl.Sample_XamarinForms.Services
                 throw new ArgumentNullException(nameof(serverUrl));
             }
 
-            string license = null;
-
-            try
+            var data = new
             {
-                var data = new { LicenseId = id, Attributes = attributes };
-                var json = JsonSerializer.Serialize(data);
+                LicenseId = licenseKey,
+                ProductId = productId,
+                Attributes = attributes
+            };
 
-                using (var client = CreateHttpClient())
-                using (var request = new HttpRequestMessage(HttpMethod.Post, serverUrl))
-                {
-                    using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
-                    {
-                        request.Content = stringContent;
-
-                        using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
-                        {
-                            response.EnsureSuccessStatusCode();
-                            license = await response.Content.ReadAsStringAsync();
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                license = null;
-            }
-            return license;
+            var json = JsonSerializer.Serialize(data);
+            var result = await PostAsync<RegisterResult>(serverUrl, json);
+            return result;
         }
 
-        private HttpClient CreateHttpClient() // TODO: must reuse client on the server.
+        public async Task<TResult> PostAsync<TResult>(string uri, string data)
+        {
+            if(string.IsNullOrWhiteSpace(uri))
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            HttpClient httpClient = CreateHttpClient();
+
+            var content = new StringContent(data);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+
+            await HandleResponse(response);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            TResult result = await Task.Run(() => JsonSerializer.Deserialize<TResult>(serialized));
+
+            return result;
+        }
+
+        private HttpClient CreateHttpClient() 
         {
             var httpClient = new HttpClient();
             return httpClient;
         }
 
-        public Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey, string appId)
+        private async Task HandleResponse(HttpResponseMessage response)
         {
-            if (license == null)
+            if (!response.IsSuccessStatusCode)
             {
-                throw new ArgumentNullException(nameof(license));
+                var content = await response.Content.ReadAsStringAsync();
+
+                throw new HttpRequestException(content);
             }
-            if (publicKey == null)
-            {
-                throw new ArgumentNullException(nameof(publicKey));
-            }
-            if (string.IsNullOrWhiteSpace(appId))
-            {
-                throw new ArgumentNullException(nameof(appId));
-            }
-
-            var task = Task.Run(() =>
-            {
-                var results = new List<IValidationFailure>();
-
-                try
-                {
-                    var actual = License.Load(license);
-
-                    var failure = new GeneralValidationFailure()
-                    {
-                        Message = "The license is not valid for current device.",
-                        HowToResolve = "Please use license ID to register current installation or a device."
-                    };
-
-                    var validationFailures = actual.Validate()
-                                                   .ExpirationDate()
-                                                   .When(lic => lic.Type == LicenseType.Standard)
-                                                   .And()
-                                                   .Signature(LicenseContants.PublicKey)
-                                                   .And()
-                                                   .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseContants.AppId), StringComparison.OrdinalIgnoreCase), failure)
-                                                   .AssertValidLicense().ToList();
-
-                    foreach (var f in validationFailures)
-                    {
-                        results.Add(f);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // TODO: replace with logger
-                    Console.WriteLine(ex);
-
-                    var exceptionFailure = new GeneralValidationFailure()
-                    {
-                        Message = "Invalid license file.",
-                        HowToResolve = "Please use license ID to register current installation or a device."
-                    };
-
-                    results.Add(exceptionFailure);
-                }
-                return results.AsEnumerable();
-            });
-            return task;
         }
     }
 }

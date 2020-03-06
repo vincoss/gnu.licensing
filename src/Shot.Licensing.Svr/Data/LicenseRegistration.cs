@@ -10,7 +10,7 @@ namespace samplesl.Svr.Data
         public int LicenseRegistrationId { get; set; }
         public Guid LicenseUuid { get; set; }
 
-        public string ProductName { get; set; }
+        public string ProductName { get; set; } // TODO: Guid
         public string LicenseName { get; set; }
         public string LicenseEmail { get; set; }
         public bool IsActive { get; set; } // Blacklist

@@ -1,8 +1,6 @@
-﻿using samplesl.Validation;
+﻿using samplesl.Sample_XamarinForms.Services;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 
@@ -12,11 +10,8 @@ namespace samplesl.Sample_XamarinForms.Interfaces
     {
         Task<bool> HasConnection();
 
-        Task<bool> Check(Guid id, string licenseSha256, string serverUrl);
+        Task<bool> Check(Guid licenseKey, Guid productId, string licenseSha256, string serverUrl);
 
-        Task<string> Register(Guid id, IDictionary<string, string> attributes, string serverUrl);
-
-        Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey, string appId);
-
+        Task<RegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl);
     }
 }

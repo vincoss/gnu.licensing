@@ -10,7 +10,7 @@ using samplesl.Sample_XamarinForms.Interfaces;
 using samplesl.Sample_XamarinForms.Services;
 using System.Xml.Linq;
 using System.Security.Cryptography;
-
+using samplesl.Validation;
 
 namespace samplesl.Sample_XamarinForms
 {
@@ -99,7 +99,7 @@ namespace samplesl.Sample_XamarinForms
 
                 if (string.IsNullOrWhiteSpace(licStr))
                 {
-                    Console.WriteLine("License registration could not complete."); // TODO:
+                    Console.WriteLine("License registration could not complete. Internet access is required."); // TODO:
                     return null;
                 }
 
@@ -256,6 +256,68 @@ namespace samplesl.Sample_XamarinForms
                     LicenseType = LicenseType.Trial;
                 }
             }
+        }
+
+
+        public Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey, string appId)
+        {
+            if (license == null)
+            {
+                throw new ArgumentNullException(nameof(license));
+            }
+            if (publicKey == null)
+            {
+                throw new ArgumentNullException(nameof(publicKey));
+            }
+            if (string.IsNullOrWhiteSpace(appId))
+            {
+                throw new ArgumentNullException(nameof(appId));
+            }
+
+            var task = Task.Run(() =>
+            {
+                var results = new List<IValidationFailure>();
+
+                try
+                {
+                    var actual = License.Load(license);
+
+                    var failure = new GeneralValidationFailure()
+                    {
+                        Message = "The license is not valid for current device.",
+                        HowToResolve = "Please use license Key to register current installation or a device."
+                    };
+
+                    var validationFailures = actual.Validate()
+                                                   .ExpirationDate()
+                                                   .When(lic => lic.Type == LicenseType.Standard)
+                                                   .And()
+                                                   .Signature(LicenseContants.PublicKey)
+                                                   .And()
+                                                   .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseContants.AppId), StringComparison.OrdinalIgnoreCase), failure)
+                                                   .AssertValidLicense().ToList();
+
+                    foreach (var f in validationFailures)
+                    {
+                        results.Add(f);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // TODO: replace with logger
+                    Console.WriteLine(ex);
+
+                    var exceptionFailure = new GeneralValidationFailure()
+                    {
+                        Message = "Invalid license file.",
+                        HowToResolve = "Please use license Key to register current installation or a device."
+                    };
+
+                    results.Add(exceptionFailure);
+                }
+                return results.AsEnumerable();
+            });
+            return task;
         }
 
     }
