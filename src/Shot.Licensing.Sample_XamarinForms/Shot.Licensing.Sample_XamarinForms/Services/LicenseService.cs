@@ -16,18 +16,56 @@ namespace samplesl.Sample_XamarinForms.Services
 {
     public class LicenseService : ILicenseService
     {
-        public Task<bool> HasConnection()
+        public async Task<bool> HasConnection(string serverUrl)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(serverUrl))
+            {
+                throw new ArgumentNullException(nameof(serverUrl));
+            }
+            try
+            {
+                var client = CreateHttpClient();
+                using (var response = await client.GetAsync(serverUrl, HttpCompletionOption.ResponseHeadersRead))
+                {
+                    response.EnsureSuccessStatusCode();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public Task<bool> Check(Guid licenseKey, Guid productId, string licenseSha256, string serverUrl)
+        public async Task<CheckResult> Check(Guid licenseKey, Guid productId, string licenseSha256, string serverUrl)
         {
             if (licenseKey == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(licenseKey));
             }
-            throw new NotImplementedException();
+            if (productId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
+            if (string.IsNullOrWhiteSpace(licenseSha256))
+            {
+                throw new ArgumentNullException(nameof(licenseSha256));
+            }
+            if (string.IsNullOrWhiteSpace(serverUrl))
+            {
+                throw new ArgumentNullException(nameof(serverUrl));
+            }
+
+            var data = new
+            {
+                LicenseId = licenseKey,
+                ProductId = productId,
+                LicenseHash = licenseSha256
+            };
+
+            var json = JsonSerializer.Serialize(data);
+            var result = await PostAsync<CheckResult>(serverUrl, json);
+            return result;
         }
 
         public async Task<RegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl)

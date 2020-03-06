@@ -90,32 +90,32 @@ namespace samplesl.Sample_XamarinForms
                 throw new ArgumentNullException(nameof(licenseKey));
             }
 
-            License license;
+            License license = null;
 
             try
             {
-                var attributes = GetAttributes();
-                var licStr = await _service.Register(licenseKey, attributes, LicenseContants.LicenseServerUrl);
+                //var attributes = GetAttributes();
+                //var licStr = await _service.Register(licenseKey, Guid.Empty, attributes, LicenseContants.LicenseServerUrl);
 
-                if (string.IsNullOrWhiteSpace(licStr))
-                {
-                    Console.WriteLine("License registration could not complete. Internet access is required."); // TODO:
-                    return null;
-                }
+                //if (string.IsNullOrWhiteSpace(licStr))
+                //{
+                //    Console.WriteLine("License registration could not complete. Internet access is required."); // TODO:
+                //    return null;
+                //}
 
-                var path = GetPath();
-                var element = XElement.Parse(licStr);
-                element.Save(path);
+                //var path = GetPath();
+                //var element = XElement.Parse(licStr);
+                //element.Save(path);
 
-                var valid = await ValidateAsync();
+                //var valid = await ValidateAsync();
 
-                if (valid == false)
-                {
-                    return null;
-                }
+                //if (valid == false)
+                //{
+                //    return null;
+                //}
 
-                license = TryGetLicense(path);
-                await SetLicenseKeyAsync(licenseKey.ToString());
+                //license = TryGetLicense(path);
+                //await SetLicenseKeyAsync(licenseKey.ToString());
             }
             catch(Exception ex)
             {
@@ -131,11 +131,11 @@ namespace samplesl.Sample_XamarinForms
             using (var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseContants.PublicKey)))
             using (var license = File.OpenRead(path))
             {
-                var result = await _service.Validate(license, publicKey, null); // TODO: AppIdKey
-                if (result.Any())
-                {
-                    return false;
-                }
+                //var result = await _service.Validate(license, publicKey, null); // TODO: AppIdKey
+                //if (result.Any())
+                //{
+                //    return false;
+                //}
             }
             return true;
         }
@@ -227,17 +227,17 @@ namespace samplesl.Sample_XamarinForms
                 }
 
                 // Let see whether is also valid on license server if has internet connection.
-                if (await _service.HasConnection())
+                if (await _service.HasConnection(LicenseContants.LicenseServerUrl))
                 {
                     var licenseHash = GetHashSHA256File(path);
-                    var check = await _service.Check(licenseKey, licenseHash, LicenseContants.LicenseServerUrl);
+                    //var check = await _service.Check(licenseKey, Guid.Empty, licenseHash, LicenseContants.LicenseServerUrl);
 
-                    if (check == false)
-                    {
-                        await RegisterAsync(licenseKey);
-                    }
+                    //if (check == false)
+                    //{
+                    //    await RegisterAsync(licenseKey);
+                    //}
 
-                    valid = await ValidateAsync();
+                    //valid = await ValidateAsync();
                 }
             }
             catch (Exception ex)

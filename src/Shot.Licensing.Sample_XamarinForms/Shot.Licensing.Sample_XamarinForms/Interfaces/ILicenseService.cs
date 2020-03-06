@@ -8,9 +8,9 @@ namespace samplesl.Sample_XamarinForms.Interfaces
 {
     public interface ILicenseService
     {
-        Task<bool> HasConnection();
+        Task<bool> HasConnection(string serverUrl);
 
-        Task<bool> Check(Guid licenseKey, Guid productId, string licenseSha256, string serverUrl);
+        Task<CheckResult> Check(Guid licenseKey, Guid productId, string licenseSha256, string serverUrl);
 
         Task<RegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl);
     }

@@ -32,10 +32,16 @@ namespace samplesl.Svr.Controllers
 
         // GET: api/License
         [HttpGet]
-        public IEnumerable<string> Get()
+        public void Get()
         {
-            return new string[] { "value1", "value2" };
         }
+
+        //// GET: api/License
+        //[HttpGet]
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         //// GET: api/License/5
         //[HttpGet("{id}", Name = "Get")]
