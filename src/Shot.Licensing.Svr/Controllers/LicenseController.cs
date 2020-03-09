@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using samplesl.Svr.Interface;
 using samplesl.Svr.Models;
 using samplesl.Svr.Services;
+using samplesl.Validation;
 
 namespace samplesl.Svr.Controllers
 {
@@ -52,13 +54,21 @@ namespace samplesl.Svr.Controllers
 
         // POST: api/License
         [HttpPost]
-        public async Task<ActionResult<string>> Post([FromBody] RegisterLicense register)
+        public async Task<ActionResult<LicenseRegisterResult>> Post([FromBody] RegisterLicense register)
         {
             if (register == null)
             {
                 return BadRequest();
             }
-            return await _licenseService.Create(register);
+            var str = await _licenseService.Create(register);
+            var result = new LicenseRegisterResult();
+            result.License = str;
+            result.Failure = new GeneralValidationFailure
+            {
+                Message = nameof(GeneralValidationFailure)
+            };
+
+            return result;
         }
 
         //// PUT: api/License/5
@@ -72,5 +82,12 @@ namespace samplesl.Svr.Controllers
         //public void Delete(int id)
         //{
         //}
+    }
+
+    public class LicenseRegisterResult
+    {
+        public string License { get; set; }
+        public IValidationFailure Failure { get; set; }
+
     }
 }

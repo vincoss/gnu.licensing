@@ -1,4 +1,5 @@
-﻿using samplesl.Sample_XamarinForms.ViewModels;
+﻿using samplesl.Sample_XamarinForms.Services;
+using samplesl.Sample_XamarinForms.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace samplesl.Sample_XamarinForms.Views
         {
             InitializeComponent();
 
-            var model = new LicenseViewModel();
+            var service = new LicenseService();
+            var model = new LicenseViewModel(service);
             BindingContext = model;
         }
 

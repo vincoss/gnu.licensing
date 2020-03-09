@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using samplesl;
-using samplesl.Sample_XamarinForms.Interfaces;
 using samplesl.Sample_XamarinForms.Services;
 using System.Xml.Linq;
 using System.Security.Cryptography;
@@ -14,312 +13,302 @@ using samplesl.Validation;
 
 namespace samplesl.Sample_XamarinForms
 {
-    public class Sample
-    {
-        public async void Activate()
-        {
-            var helper = new Helper();
+    //public class Helper : BaseHelper
+    //{
+    //    private const string LicenseKey = "LicenseKey";
 
-            var result = await helper.RegisterAsync(Guid.NewGuid());
-            if(result == null)
-            {
-                // Show generic error
-                return;
-            }
-            // Key: Guid, Type: Full
-        }
-    }
+    //    public Helper() : base(new BaseLicenseService())
+    //    {
+    //    }
 
-    public class Helper : BaseHelper
-    {
-        private const string LicenseKey = "LicenseKey";
+    //    public override string GetPath()
+    //    {
+    //        return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "License.xml");
+    //    }
 
-        public Helper() : base(new LicenseService())
-        {
-        }
+    //    public override IDictionary<string, string> GetAttributes()
+    //    {
+    //        var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+    //        attributes.Add(LicenseContants.AppId, "todo");
+    //        return attributes;
+    //    }
 
-        public override string GetPath()
-        {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "License.xml");
-        }
+    //    public override Task<string> GetLicenseKeyAsync()
+    //    {
+    //        return SecureStorage.GetAsync(LicenseKey);
+    //    }
 
-        public override IDictionary<string, string> GetAttributes()
-        {
-            var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            attributes.Add(LicenseContants.AppId, "todo");
-            return attributes;
-        }
+    //    public override Task SetLicenseKeyAsync(string key)
+    //    {
+    //        return SecureStorage.SetAsync(LicenseKey, key);
+    //    }
 
-        public override Task<string> GetLicenseKeyAsync()
-        {
-            return SecureStorage.GetAsync(LicenseKey);
-        }
+    //    public  Task<LicenseResult> Validate(Stream license, Stream publicKey)
+    //    {
+    //        if (license == null)
+    //        {
+    //            throw new ArgumentNullException(nameof(license));
+    //        }
+    //        if (publicKey == null)
+    //        {
+    //            throw new ArgumentNullException(nameof(publicKey));
+    //        }
 
-        public override Task SetLicenseKeyAsync(string key)
-        {
-            return SecureStorage.SetAsync(LicenseKey, key);
-        }
-    }
+    //        var task = Task.Run(() =>
+    //        {
+    //            var results = new List<IValidationFailure>();
+    //            License actual;
 
-    public abstract class BaseHelper
-    {
-        private readonly ILicenseService _service;
-        public static LicenseType LicenseType { get; private set; }
+    //            try
+    //            {
+    //                actual = License.Load(license);
 
-        protected BaseHelper(ILicenseService service)
-        {
-            if(service == null)
-            {
-                throw new ArgumentNullException(nameof(service));
-            }
-            _service = service;
-        }
+    //                var failure = new GeneralValidationFailure()
+    //                {
+    //                    Message = "The license is not valid for current device.",
+    //                    HowToResolve = "Please use license Key to register current installation or a device."
+    //                };
 
-        public abstract string GetPath();
+    //                var appId = GetAttributes()[LicenseContants.AppId];
 
-        public abstract Task<string> GetLicenseKeyAsync();
+    //                var validationFailures = actual.Validate()
+    //                                               .ExpirationDate()
+    //                                               .When(lic => lic.Type == LicenseType.Standard)
+    //                                               .And()
+    //                                               .Signature(LicenseContants.PublicKey)
+    //                                               .And()
+    //                                               .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseContants.AppId), StringComparison.OrdinalIgnoreCase), failure)
+    //                                               .AssertValidLicense().ToList();
 
-        public abstract Task SetLicenseKeyAsync(string key);
+    //                foreach (var f in validationFailures)
+    //                {
+    //                    results.Add(f);
+    //                }
 
-        public abstract IDictionary<string, string> GetAttributes();
+    //                return new LicenseResult(results.Any() ? null : actual, null, results);
+    //            }
+    //            catch (Exception ex)
+    //            {
+    //                // TODO: log
 
-        public async Task<License> RegisterAsync(Guid licenseKey)
-        {
-            if (licenseKey == Guid.Empty)
-            {
-                throw new ArgumentNullException(nameof(licenseKey));
-            }
+    //                var exceptionFailure = new GeneralValidationFailure()
+    //                {
+    //                    Message = "Invalid license file.",
+    //                    HowToResolve = "Please use license Key to register current installation or a device."
+    //                };
 
-            License license = null;
+    //                return new LicenseResult(null, ex, new[] { exceptionFailure });
+    //            }
+    //        });
+    //        return task;
+    //    }
+    //}
 
-            try
-            {
-                //var attributes = GetAttributes();
-                //var licStr = await _service.Register(licenseKey, Guid.Empty, attributes, LicenseContants.LicenseServerUrl);
+    //public abstract class BaseHelper
+    //{
+    //    private readonly ILicenseService _service;
+    //    public static LicenseType LicenseType { get; private set; }
 
-                //if (string.IsNullOrWhiteSpace(licStr))
-                //{
-                //    Console.WriteLine("License registration could not complete. Internet access is required."); // TODO:
-                //    return null;
-                //}
+    //    protected BaseHelper(ILicenseService service)
+    //    {
+    //        if(service == null)
+    //        {
+    //            throw new ArgumentNullException(nameof(service));
+    //        }
+    //        _service = service;
+    //    }
 
-                //var path = GetPath();
-                //var element = XElement.Parse(licStr);
-                //element.Save(path);
+    //    public abstract string GetPath();
 
-                //var valid = await ValidateAsync();
+    //    public abstract Task<string> GetLicenseKeyAsync();
 
-                //if (valid == false)
-                //{
-                //    return null;
-                //}
+    //    public abstract Task SetLicenseKeyAsync(string key);
 
-                //license = TryGetLicense(path);
-                //await SetLicenseKeyAsync(licenseKey.ToString());
-            }
-            catch(Exception ex)
-            {
-                throw; // TODO:
-            }
+    //    public abstract IDictionary<string, string> GetAttributes();
 
-            return license;
-        }
+    //    public abstract Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey);
 
-        public async Task<bool> ValidateAsync()
-        {
-            var path = GetPath();
-            using (var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseContants.PublicKey)))
-            using (var license = File.OpenRead(path))
-            {
-                //var result = await _service.Validate(license, publicKey, null); // TODO: AppIdKey
-                //if (result.Any())
-                //{
-                //    return false;
-                //}
-            }
-            return true;
-        }
+    //    public async Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId)
+    //    {
+    //        if (licenseKey == Guid.Empty)
+    //        {
+    //            throw new ArgumentNullException(nameof(licenseKey));
+    //        }
+    //        if (productId == Guid.Empty)
+    //        {
+    //            throw new ArgumentNullException(nameof(productId));
+    //        }
 
-        public  string GetHashSHA256File(string fileName)
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
-            using (var sha256 = new SHA256Managed())
-            using (var stream = new BufferedStream(File.OpenRead(fileName), 100000))
-            {
-                return BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty);
-            }
-        }
+    //        License license;
+    //        try
+    //        {
+    //            var attributes = GetAttributes();
+    //            var result = await _service.Register(licenseKey, productId, attributes, LicenseContants.LicenseServerUrl);
 
-        public Guid TryGetLicenseKeyAsync(string fileName)
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
+    //            if (string.IsNullOrWhiteSpace(result.License))
+    //            {
+    //                Console.WriteLine("License registration could not complete. Internet access is required."); // TODO:
+    //                return null;
+    //            }
 
-            if (File.Exists(fileName) == false)
-            {
-                return Guid.Empty;
-            }
+    //            var path = GetPath();
+    //            var element = XElement.Parse(result.License);
+    //            element.Save(path);
 
-            var id = Guid.Empty;
-            var lic = TryGetLicense(fileName);
-            if(lic != null)
-            {
-                id = lic.Id;
-            }
-            return id;
-        }
+    //            var valid = await ValidateAsync();
 
-        public License TryGetLicense(string fileName)
-        {
-            if (string.IsNullOrWhiteSpace(fileName))
-            {
-                throw new ArgumentNullException(nameof(fileName));
-            }
-            License license = null;
-            try
-            {
-                license = License.Load(File.OpenRead(fileName));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex); // TODO: logger
-            }
-            return license;
-        }
+    //            if (valid == false)
+    //            {
+    //                return null;
+    //            }
 
-        public async Task Run()
-        {
-            var valid = false;
+    //            license = await Get(path);
+    //            await SetLicenseKeyAsync(licenseKey.ToString());
+    //        }
+    //        catch(Exception ex)
+    //        {
+    //            throw; // TODO:
+    //        }
 
-            try
-            {
-                var path = GetPath();
+    //        return license;
+    //    }
 
-                // Get license ID from file if exists.
-                var licenseKey = TryGetLicenseKeyAsync(path);
+    //    public async Task<bool> ValidateAsync()
+    //    {
+    //        var path = GetPath();
+    //        using (var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseContants.PublicKey)))
+    //        using (var license = File.OpenRead(path))
+    //        {
+    //            var result = await Validate(license, publicKey); // TODO: AppIdKey
+    //            if (result.Any())
+    //            {
+    //                return false;
+    //            }
+    //        }
+    //        return true;
+    //    }
 
-                if (licenseKey == Guid.Empty)
-                {
-                    // Get license ID from device store.
-                    var value = await GetLicenseKeyAsync();
+    //    public  string GetHashSHA256File(string fileName)
+    //    {
+    //        if (string.IsNullOrWhiteSpace(fileName))
+    //        {
+    //            throw new ArgumentNullException(nameof(fileName));
+    //        }
+    //        using (var sha256 = new SHA256Managed())
+    //        using (var stream = new BufferedStream(File.OpenRead(fileName), 100000))
+    //        {
+    //            return BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty);
+    //        }
+    //    }
 
-                    if (string.IsNullOrWhiteSpace(value) == false)
-                    {
-                        Guid.TryParse(value, out licenseKey);
-                    }
-                }
+    //    public Guid TryGetLicenseKeyAsync(string fileName)
+    //    {
+    //        if (string.IsNullOrWhiteSpace(fileName))
+    //        {
+    //            throw new ArgumentNullException(nameof(fileName));
+    //        }
 
-                // No license ID or license file. Get license ID from purchase email. If no email use license recovery on the website to get license ID.
-                if (licenseKey == Guid.Empty)
-                {
-                    return;
-                }
+    //        if (File.Exists(fileName) == false)
+    //        {
+    //            return Guid.Empty;
+    //        }
 
-                valid = await ValidateAsync();
-                if (valid)
-                {
-                    LicenseType = LicenseType.Standard;
-                }
+    //        var id = Guid.Empty;
+    //        var lic = TryGetLicense(fileName);
+    //        if(lic != null)
+    //        {
+    //            id = lic.Id;
+    //        }
+    //        return id;
+    //    }
 
-                // Let see whether is also valid on license server if has internet connection.
-                if (await _service.HasConnection(LicenseContants.LicenseServerUrl))
-                {
-                    var licenseHash = GetHashSHA256File(path);
-                    //var check = await _service.Check(licenseKey, Guid.Empty, licenseHash, LicenseContants.LicenseServerUrl);
+    //    public Task<License> Get(string fileName)
+    //    {
+    //        if (string.IsNullOrWhiteSpace(fileName))
+    //        {
+    //            throw new ArgumentNullException(nameof(fileName));
+    //        }
+    //        License license = null;
+    //        try
+    //        {
+    //            license = License.Load(File.OpenRead(fileName));
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Console.WriteLine(ex); // TODO: logger
+    //        }
+    //        return Task.FromResult(license);
+    //    }
 
-                    //if (check == false)
-                    //{
-                    //    await RegisterAsync(licenseKey);
-                    //}
+    //    public async Task Run()
+    //    {
+    //        var valid = false;
 
-                    //valid = await ValidateAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                if (valid)
-                {
-                    LicenseType = LicenseType.Standard;
-                }
-                else
-                {
-                    // Not valid, possible new device ID or installation. Use license UI to get license for the device|installation.
-                    LicenseType = LicenseType.Trial;
-                }
-            }
-        }
+    //        try
+    //        {
+    //            var path = GetPath();
+
+    //            // Get license ID from file if exists.
+    //            var licenseKey = TryGetLicenseKeyAsync(path);
+
+    //            if (licenseKey == Guid.Empty)
+    //            {
+    //                // Get license ID from device store.
+    //                var value = await GetLicenseKeyAsync();
+
+    //                if (string.IsNullOrWhiteSpace(value) == false)
+    //                {
+    //                    Guid.TryParse(value, out licenseKey);
+    //                }
+    //            }
+
+    //            // No license ID or license file. Get license ID from purchase email. If no email use license recovery on the website to get license ID.
+    //            if (licenseKey == Guid.Empty)
+    //            {
+    //                return;
+    //            }
+
+    //            valid = await ValidateAsync();
+    //            if (valid)
+    //            {
+    //                LicenseType = LicenseType.Standard;
+    //            }
+
+    //            // Let see whether is also valid on license server if has internet connection.
+    //            if (await _service.HasConnection(LicenseContants.LicenseServerUrl))
+    //            {
+    //                var licenseHash = GetHashSHA256File(path);
+    //                //var check = await _service.Check(licenseKey, Guid.Empty, licenseHash, LicenseContants.LicenseServerUrl);
+
+    //                //if (check == false)
+    //                //{
+    //                //    await RegisterAsync(licenseKey);
+    //                //}
+
+    //                //valid = await ValidateAsync();
+    //            }
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            Console.WriteLine(ex);
+    //        }
+    //        finally
+    //        {
+    //            if (valid)
+    //            {
+    //                LicenseType = LicenseType.Standard;
+    //            }
+    //            else
+    //            {
+    //                // Not valid, possible new device ID or installation. Use license UI to get license for the device|installation.
+    //                LicenseType = LicenseType.Trial;
+    //            }
+    //        }
+    //    }
 
 
-        public Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey, string appId)
-        {
-            if (license == null)
-            {
-                throw new ArgumentNullException(nameof(license));
-            }
-            if (publicKey == null)
-            {
-                throw new ArgumentNullException(nameof(publicKey));
-            }
-            if (string.IsNullOrWhiteSpace(appId))
-            {
-                throw new ArgumentNullException(nameof(appId));
-            }
+       
 
-            var task = Task.Run(() =>
-            {
-                var results = new List<IValidationFailure>();
-
-                try
-                {
-                    var actual = License.Load(license);
-
-                    var failure = new GeneralValidationFailure()
-                    {
-                        Message = "The license is not valid for current device.",
-                        HowToResolve = "Please use license Key to register current installation or a device."
-                    };
-
-                    var validationFailures = actual.Validate()
-                                                   .ExpirationDate()
-                                                   .When(lic => lic.Type == LicenseType.Standard)
-                                                   .And()
-                                                   .Signature(LicenseContants.PublicKey)
-                                                   .And()
-                                                   .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseContants.AppId), StringComparison.OrdinalIgnoreCase), failure)
-                                                   .AssertValidLicense().ToList();
-
-                    foreach (var f in validationFailures)
-                    {
-                        results.Add(f);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // TODO: replace with logger
-                    Console.WriteLine(ex);
-
-                    var exceptionFailure = new GeneralValidationFailure()
-                    {
-                        Message = "Invalid license file.",
-                        HowToResolve = "Please use license Key to register current installation or a device."
-                    };
-
-                    results.Add(exceptionFailure);
-                }
-                return results.AsEnumerable();
-            });
-            return task;
-        }
-
-    }
+    //}
 
 }

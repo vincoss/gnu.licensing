@@ -1,5 +1,7 @@
-﻿using System;
+﻿using samplesl.Sample_XamarinForms.Services;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,15 +11,22 @@ namespace samplesl.Sample_XamarinForms.ViewModels
     public class LicenseViewModel : BaseViewModel
     {
         private Guid? _key;
+        private readonly ILicenseService _licenseService;
 
-        public LicenseViewModel()
+        public LicenseViewModel(ILicenseService licenseService)
         {
-            ActivateCommand = new Command(OnActivateCommand, OnCanActivateCommand);
+            if (licenseService == null)
+            {
+                throw new ArgumentNullException(nameof(licenseService));
+            }
 
+            _licenseService = licenseService;
+
+            ActivateCommand = new Command(OnActivateCommand, OnCanActivateCommand);
             PropertyChanged += LicenseViewModel_PropertyChanged;
         }
 
-        public override void Initialize()
+        public async override void Initialize()
         {
             try
             {
@@ -31,11 +40,21 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 _key = null;
                 RegisterKey = null;
                 ErrorMessage = null;
-                LicenseType = "Demo";
+                LicenseType = "Demo"; // TODO:
                 LicenseKey = null;
                 ShowError = false;
 
-                // TODO: try to read license file D84BAF7E-F371-4C75-9C10-82EE14FEBEC3
+                var result = await _licenseService.Validate();
+                if(result.Successful)
+                {
+                    LicenseKey = result.License.Id; 
+                    LicenseType = "Full";   // TODO
+                    await _licenseService.SetLicenseKeyAsync(result.License.Id.ToString());
+                }
+                else
+                {
+                    ShowLicenseError(result);
+                }
             }
             finally
             {
@@ -43,9 +62,9 @@ namespace samplesl.Sample_XamarinForms.ViewModels
             }
         }
         
-        #region Events
+        #region Private methods
 
-        private void LicenseViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void LicenseViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(RegisterKey))
             {
@@ -59,7 +78,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
 
                     if (id == Guid.Empty)
                     {
-                        ErrorMessage = "Invalid license key.";
+                        ErrorMessage = "Invalid license key."; // TODO:
                     }
                     _key = id;
                 }
@@ -68,13 +87,31 @@ namespace samplesl.Sample_XamarinForms.ViewModels
             ShowError = ErrorMessage != null;
 
             ((Command)ActivateCommand).ChangeCanExecute();
-        } 
+        }
+
+        private void ShowLicenseError(LicenseResult result)
+        {
+            var sb = new StringBuilder();
+
+            foreach (var f in result.Failures)
+            {
+                sb.AppendLine(f.Message);
+                sb.AppendLine(f.HowToResolve);
+            }
+
+            if (result.Exception != null)
+            {
+                sb.AppendLine(result.Exception.Message); // TODO: generic failure instead
+            }
+
+            ErrorMessage = sb.Length > 0 ? sb.ToString() : null;
+        }
 
         #endregion
 
         #region Command methods
 
-        private void OnActivateCommand()
+        private async void OnActivateCommand()
         {
             try
             {
@@ -83,18 +120,20 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                     return;
                 }
 
-                // TODO: call register _service.Register(_key);
-
-                if (true)
+                IsBusy = true;
+                var result =  await _licenseService.RegisterAsync(_key.Value, LicenseContants.ProductId);
+                if(result.Successful)
                 {
-                    LicenseKey = _key;
-                    LicenseType = "Full";
+                    Initialize();
+                }
+                else
+                {
+                    ShowLicenseError(result);
                 }
             }
             finally
             {
                 IsBusy = false;
-                Initialize();
             }
         }
 
