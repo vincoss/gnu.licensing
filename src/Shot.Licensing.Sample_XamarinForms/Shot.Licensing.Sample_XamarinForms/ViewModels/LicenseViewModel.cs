@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace samplesl.Sample_XamarinForms.ViewModels
@@ -43,11 +44,12 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 LicenseType = "Demo"; // TODO:
                 LicenseKey = null;
                 ShowError = false;
+                AppId = Preferences.Get(LicenseContants.AppId, null);
 
                 var result = await _licenseService.Validate();
                 if(result.Successful)
                 {
-                    LicenseKey = result.License.Id; 
+                    LicenseKey = result.License.Id.ToString(); 
                     LicenseType = "Full";   // TODO
                     await _licenseService.SetLicenseKeyAsync(result.License.Id.ToString());
                 }
@@ -168,8 +170,15 @@ namespace samplesl.Sample_XamarinForms.ViewModels
             set { SetProperty(ref _errorMessage, value); }
         }
 
-        private Guid? _licenseKey;
-        public Guid? LicenseKey
+        private string _appId;
+        public string AppId
+        {
+            get { return _appId; }
+            set { SetProperty(ref _appId, value); }
+        }
+
+        private string _licenseKey;
+        public string LicenseKey
         {
             get { return _licenseKey; }
             set { SetProperty(ref _licenseKey, value); }
