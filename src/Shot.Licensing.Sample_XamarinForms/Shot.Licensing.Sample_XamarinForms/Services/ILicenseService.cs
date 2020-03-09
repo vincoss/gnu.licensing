@@ -14,5 +14,7 @@ namespace samplesl
         Task<LicenseResult> Validate();
 
         Task SetLicenseKeyAsync(string key);
+
+        Task Run();
     }
 }

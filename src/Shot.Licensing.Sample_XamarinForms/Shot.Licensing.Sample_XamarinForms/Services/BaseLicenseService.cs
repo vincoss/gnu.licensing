@@ -215,6 +215,11 @@ namespace samplesl.Sample_XamarinForms.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task Run()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

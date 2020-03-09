@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Xamarin.Essentials;
+using System.Security.Cryptography;
 
 namespace samplesl.Sample_XamarinForms.Services
 {
@@ -17,6 +18,7 @@ namespace samplesl.Sample_XamarinForms.Services
     public class LicenseService : ILicenseService
     {
         private const string LicenseKey = "LicenseKey";
+        public static LicenseType LicenseType { get; private set; }
 
         public string GetPath()
         {
@@ -151,6 +153,122 @@ namespace samplesl.Sample_XamarinForms.Services
                 }
             });
             return task;
+        }
+
+        public async Task Run()
+        {
+            var valid = false;
+
+            try
+            {
+                var path = GetPath();
+
+                // Get license ID from file if exists.
+                var licenseKey = await TryGetLicenseKeyAsync(path);
+
+                if (licenseKey == Guid.Empty)
+                {
+                    // Get license ID from device store.
+                    var value = await GetLicenseKeyAsync();
+
+                    if (string.IsNullOrWhiteSpace(value) == false)
+                    {
+                        Guid.TryParse(value, out licenseKey);
+                    }
+                }
+
+                // No license ID or license file. Get license ID from purchase email. If no email use license recovery on the website to get license ID.
+                if (licenseKey == Guid.Empty)
+                {
+                    return;
+                }
+
+                var result = await Validate();
+                valid = result.Successful;
+
+                // Let see whether is also valid on license server if has internet connection.
+                if (await HasConnection(LicenseContants.LicenseServerUrl))
+                {
+                    //var licenseHash = GetHashSHA256File(path);
+                    //var check = await Check(licenseKey, Guid.Empty, licenseHash, LicenseContants.LicenseServerUrl);
+
+                    //if (check == null || check.an)
+                    //{
+                    //    await RegisterAsync(licenseKey);
+                    //}
+
+                    //valid = await ValidateAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (valid)
+                {
+                    LicenseType = LicenseType.Standard;
+                }
+                else
+                {
+                    // Not valid, possible new device ID or installation. Use license UI to get license for the device|installation.
+                    LicenseType = LicenseType.Trial;
+                }
+            }
+        }
+
+        public async Task<Guid> TryGetLicenseKeyAsync(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+
+            if (File.Exists(fileName) == false)
+            {
+                return Guid.Empty;
+            }
+
+            var id = Guid.Empty;
+            var lic = await Get(fileName);
+            if (lic != null)
+            {
+                id = lic.Id;
+            }
+            return id;
+        }
+
+        public Task<License> Get(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+            License license = null;
+            try
+            {
+                license = License.Load(File.OpenRead(fileName));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex); // TODO: logger
+            }
+            return Task.FromResult(license);
+        }
+
+
+        public string GetHashSHA256File(string fileName)
+        {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                throw new ArgumentNullException(nameof(fileName));
+            }
+            using (var sha256 = new SHA256Managed())
+            using (var stream = new BufferedStream(File.OpenRead(fileName), 100000))
+            {
+                return BitConverter.ToString(sha256.ComputeHash(stream)).Replace("-", string.Empty);
+            }
         }
 
         #region Internal

@@ -7,11 +7,12 @@ using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
+
 namespace samplesl.Sample_XamarinForms.ViewModels
 {
     public class LicenseViewModel : BaseViewModel
     {
-        private Guid? _key;
+        private Guid _key;
         private readonly ILicenseService _licenseService;
 
         public LicenseViewModel(ILicenseService licenseService)
@@ -38,10 +39,10 @@ namespace samplesl.Sample_XamarinForms.ViewModels
 
                 IsBusy = true;
 
-                _key = null;
+                _key = Guid.Empty;
                 RegisterKey = null;
                 ErrorMessage = null;
-                LicenseType = "Demo"; // TODO:
+                LicenseType = LicenseContants.Demo;
                 LicenseKey = null;
                 ShowError = false;
                 AppId = Preferences.Get(LicenseContants.AppId, null);
@@ -49,8 +50,8 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 var result = await _licenseService.Validate();
                 if(result.Successful)
                 {
-                    LicenseKey = result.License.Id.ToString(); 
-                    LicenseType = "Full";   // TODO
+                    LicenseKey = result.License.Id.ToString();
+                    LicenseType = LicenseContants.Full;
                     await _licenseService.SetLicenseKeyAsync(result.License.Id.ToString());
                 }
                 else
@@ -70,7 +71,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
         {
             if (e.PropertyName == nameof(RegisterKey))
             {
-                _key = null;
+                _key = Guid.Empty;
                 ErrorMessage = null;
 
                 if (string.IsNullOrEmpty(RegisterKey) == false)
@@ -123,7 +124,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 }
 
                 IsBusy = true;
-                var result =  await _licenseService.RegisterAsync(_key.Value, LicenseContants.ProductId);
+                var result =  await _licenseService.RegisterAsync(_key, LicenseContants.ProductId);
                 if(result.Successful)
                 {
                     Initialize();
@@ -141,7 +142,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
 
         private bool OnCanActivateCommand()
         {
-            return _key != null && _key != Guid.Empty;
+            return _key != Guid.Empty;
         }
 
         #endregion
