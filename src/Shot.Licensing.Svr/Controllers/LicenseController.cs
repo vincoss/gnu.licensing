@@ -65,7 +65,8 @@ namespace samplesl.Svr.Controllers
             result.License = str;
             result.Failure = new GeneralValidationFailure
             {
-                Message = nameof(GeneralValidationFailure)
+                Message = nameof(GeneralValidationFailure.Message),
+                HowToResolve = nameof(GeneralValidationFailure.HowToResolve)
             };
 
             return result;

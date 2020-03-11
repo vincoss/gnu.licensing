@@ -31,6 +31,11 @@ namespace samplesl.Validation
     public interface IValidationFailure
     {
         /// <summary>
+        /// Gets or sets a code that describes the validation failure.
+        /// </summary>
+        string Code { get; set; }
+
+        /// <summary>
         /// Gets or sets a message that describes the validation failure.
         /// </summary>
         string Message { get; set; }

@@ -31,6 +31,11 @@ namespace samplesl.Validation
     public class LicenseExpiredValidationFailure : IValidationFailure
     {
         /// <summary>
+        /// Gets or sets a code that describes the validation failure.
+        /// </summary>
+        public string Code { get; set; }
+
+        /// <summary>
         /// Gets or sets a message that describes the validation failure.
         /// </summary>
         public string Message { get; set; }

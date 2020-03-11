@@ -29,7 +29,12 @@ namespace samplesl.Validation
     /// Represents a general validation failure.
     /// </summary>
     public class GeneralValidationFailure : IValidationFailure
-    {
+    { 
+        /// <summary>
+        /// Gets or sets a code that describes the validation failure.
+        /// </summary>
+        public string Code { get; set; }
+
         /// <summary>
         /// Gets or sets a message that describes the validation failure.
         /// </summary>

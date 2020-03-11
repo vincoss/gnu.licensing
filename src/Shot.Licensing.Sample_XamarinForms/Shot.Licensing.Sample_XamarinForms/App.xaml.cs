@@ -19,14 +19,15 @@ namespace samplesl.Sample_XamarinForms
 
         protected override void OnStart()
         {
+            // Example: App first start create new app id and store it.
             var id = Preferences.Get(LicenseContants.AppId, null);
             if (string.IsNullOrWhiteSpace(id))
             {
                 Preferences.Set(LicenseContants.AppId, Guid.NewGuid().ToString());
             }
 
-            new LicenseService().Run();
-
+            // Run license service in backgroud, will set Demo|Full version for the app
+            new LicenseService(LicenseService.CreateHttpClient()).Run();
         }
 
         protected override void OnSleep()

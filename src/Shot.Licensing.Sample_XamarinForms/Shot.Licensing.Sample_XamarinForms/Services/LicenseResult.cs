@@ -10,8 +10,12 @@ namespace samplesl.Sample_XamarinForms.Services
     {
         public LicenseResult(License license, Exception exception, IEnumerable<IValidationFailure> failures)
         {
+            if(failures == null)
+            {
+                failures = Enumerable.Empty<IValidationFailure>();
+            }
             License = license;
-            Successful = (exception == null && failures == null || (failures != null && failures.Any() == false));
+            Successful = license != null && exception == null && failures.Any() == false;
             Exception = exception;
             Failures = failures;
         }

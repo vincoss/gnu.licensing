@@ -20,6 +20,13 @@ namespace samplesl.Sample_XamarinForms.Services
         private const string LicenseKey = "LicenseKey";
         public static LicenseType LicenseType { get; private set; }
 
+        private readonly HttpClient _httpClient;
+
+        public LicenseService(HttpClient client)
+        {
+            _httpClient = client;
+        }
+
         public string GetPath()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "License.xml");
@@ -108,8 +115,8 @@ namespace samplesl.Sample_XamarinForms.Services
                     {
                         var notFound = new GeneralValidationFailure()
                         {
-                            Message = "Validation failed.",
-                            HowToResolve = "The licence file is missing, invalid or corrupt."
+                            Message = "Licence file is missing.",
+                            HowToResolve = "Attempt to activate again."
                         };
 
                         return new LicenseResult(null, null, new[] { notFound });
@@ -151,7 +158,7 @@ namespace samplesl.Sample_XamarinForms.Services
                     var exceptionFailure = new GeneralValidationFailure()
                     {
                         Message = "Invalid license file.",
-                        HowToResolve = "Please use license Key to register current installation or a device."
+                        HowToResolve = "Attempt to activate again."
                     };
 
                     return new LicenseResult(null, ex, new[] { exceptionFailure });
@@ -374,11 +381,9 @@ namespace samplesl.Sample_XamarinForms.Services
                 throw new ArgumentNullException(nameof(data));
             }
 
-            HttpClient httpClient = CreateHttpClient();
-
             var content = new StringContent(data);
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-            HttpResponseMessage response = await httpClient.PostAsync(uri, content);
+            HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
 
             await HandleResponse(response);
             string serialized = await response.Content.ReadAsStringAsync();
@@ -392,7 +397,7 @@ namespace samplesl.Sample_XamarinForms.Services
             return result;
         }
 
-        private HttpClient CreateHttpClient()
+        public static HttpClient CreateHttpClient()
         {
             var httpClient = new HttpClient();
             return httpClient;
