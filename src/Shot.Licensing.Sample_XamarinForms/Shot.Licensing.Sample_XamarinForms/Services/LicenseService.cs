@@ -48,6 +48,11 @@ namespace samplesl.Sample_XamarinForms.Services
             return SecureStorage.SetAsync(LicenseKey, key);
         }
 
+        public Guid GetProductKey()
+        {
+            return LicenseContants.ProductId;
+        }
+
         public async Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId)
         {
             if (licenseKey == Guid.Empty)
@@ -183,26 +188,28 @@ namespace samplesl.Sample_XamarinForms.Services
                     return;
                 }
 
-                var result = await Validate();
-                valid = result.Successful;
+                var validationResult = await Validate();
+                valid = validationResult.Successful;
 
                 // Let see whether is also valid on license server if has internet connection.
                 if (await HasConnection(LicenseContants.LicenseServerUrl))
                 {
-                    //var licenseHash = GetHashSHA256File(path);
-                    //var check = await Check(licenseKey, Guid.Empty, licenseHash, LicenseContants.LicenseServerUrl);
+                    var licenseHash = GetHashSHA256File(path);
+                    var productKey = GetProductKey();
+                    var check = await Check(licenseKey, productKey, licenseHash, LicenseContants.LicenseServerUrl);
 
-                    //if (check == null || check.an)
-                    //{
-                    //    await RegisterAsync(licenseKey);
-                    //}
+                    if (check != null)
+                    {
+                        await RegisterAsync(licenseKey, productKey);
+                    }
 
-                    //valid = await ValidateAsync();
+                    validationResult = await Validate();
+                    valid = validationResult.Successful;
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                Console.WriteLine(ex); // TODO:
             }
             finally
             {

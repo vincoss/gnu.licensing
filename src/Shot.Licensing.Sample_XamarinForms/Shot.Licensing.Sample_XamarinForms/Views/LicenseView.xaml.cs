@@ -19,7 +19,9 @@ namespace samplesl.Sample_XamarinForms.Views
             InitializeComponent();
 
             var service = new LicenseService();
-            var model = new LicenseViewModel(service);
+            var ctx = new ApplicationContext();
+
+            var model = new LicenseViewModel(service, ctx);
             BindingContext = model;
         }
 

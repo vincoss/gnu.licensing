@@ -105,7 +105,7 @@ namespace samplesl.Cli
             });
             cmd.AddOption(new Option(new[] { "--expire", "-x" }, "License expire date. Default never.")
             {
-                Argument = new Argument<string>()
+                Argument = new Argument<DateTime>(() => DateTime.MaxValue)
                 {
                     Arity = ArgumentArity.ExactlyOne,
                 }

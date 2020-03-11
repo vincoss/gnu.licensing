@@ -25,6 +25,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "samplesl.Sample_XamarinForm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samplesl.Sample_XamarinForms.UWP", "src\Shot.Licensing.Sample_XamarinForms.UWP\samplesl.Sample_XamarinForms.UWP.csproj", "{916592E9-3027-459A-9186-B91551F4C7EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "samplesl.Sample_XamarinForms.Test", "test\samplesl.Sample_XamarinForms.Test\samplesl.Sample_XamarinForms.Test.csproj", "{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +195,22 @@ Global
 		{916592E9-3027-459A-9186-B91551F4C7EA}.Release|x86.ActiveCfg = Release|x86
 		{916592E9-3027-459A-9186-B91551F4C7EA}.Release|x86.Build.0 = Release|x86
 		{916592E9-3027-459A-9186-B91551F4C7EA}.Release|x86.Deploy.0 = Release|x86
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|ARM.Build.0 = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|x64.Build.0 = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Debug|x86.Build.0 = Debug|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|ARM.Build.0 = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|x64.ActiveCfg = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|x64.Build.0 = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|x86.ActiveCfg = Release|Any CPU
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +222,7 @@ Global
 		{A672CA2E-576D-4CAB-8FCB-884B06D2C930} = {DABCEE42-464B-420F-8D07-A73C2A501F0A}
 		{3D692576-D9C8-406A-ACEA-20FCBCAA0769} = {DABCEE42-464B-420F-8D07-A73C2A501F0A}
 		{916592E9-3027-459A-9186-B91551F4C7EA} = {DABCEE42-464B-420F-8D07-A73C2A501F0A}
+		{30FE09AD-B722-4A7B-A5C3-2F6A07DB81FA} = {0DB40E06-1133-4B03-9189-82952F335119}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ED6533B7-4BAB-4BCC-95D9-141B5F813020}

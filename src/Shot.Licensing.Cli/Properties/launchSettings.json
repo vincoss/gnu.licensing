@@ -1,7 +1,8 @@
 {
   "profiles": {
     "samplesl.Cli": {
-      "commandName": "Project"
+      "commandName": "Project",
+      "commandLineArgs": "license -n test-license -e text@example.com -t standard -s \"C:\\_Data\\GitHub\\sl\\resources\\test.private.xml\" -d c:\\temp\\lic"
     }
   }
 }

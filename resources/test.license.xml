@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<License>
+  <Id>0f1e8f3a-c7e3-4944-8ac5-2db4f9e49773</Id>
+  <Type>Standard</Type>
+  <Expiration>Fri, 31 Dec 9999 13:59:59 GMT</Expiration>
+  <Quantity>1</Quantity>
+  <ProductFeatures />
+  <LicenseAttributes />
+  <Customer>
+    <Name>test-license</Name>
+    <Email>text@example.com</Email>
+  </Customer>
+  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+    <SignedInfo>
+      <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+      <SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256" />
+      <Reference URI="">
+        <Transforms>
+          <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+        </Transforms>
+        <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
+        <DigestValue>mO4WiI8IvXVbDKFnKEJTcTJOSgvyYTD8KoeVohNuLck=</DigestValue>
+      </Reference>
+    </SignedInfo>
+    <SignatureValue>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</SignatureValue>
+  </Signature>
+</License>

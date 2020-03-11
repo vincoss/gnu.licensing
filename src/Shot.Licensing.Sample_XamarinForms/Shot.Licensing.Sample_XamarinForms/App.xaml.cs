@@ -1,4 +1,5 @@
-﻿using samplesl.Sample_XamarinForms.Views;
+﻿using samplesl.Sample_XamarinForms.Services;
+using samplesl.Sample_XamarinForms.Views;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -13,18 +14,19 @@ namespace samplesl.Sample_XamarinForms
         {
             InitializeComponent();
 
-            MainPage = new LicenseView();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
         {
-            //new Helper().Run();
-
             var id = Preferences.Get(LicenseContants.AppId, null);
-            if(string.IsNullOrWhiteSpace(id))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 Preferences.Set(LicenseContants.AppId, Guid.NewGuid().ToString());
             }
+
+            new LicenseService().Run();
+
         }
 
         protected override void OnSleep()

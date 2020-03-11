@@ -14,15 +14,21 @@ namespace samplesl.Sample_XamarinForms.ViewModels
     {
         private Guid _key;
         private readonly ILicenseService _licenseService;
+        private readonly IApplicationContext _ctx;
 
-        public LicenseViewModel(ILicenseService licenseService)
+        public LicenseViewModel(ILicenseService licenseService, IApplicationContext ctx)
         {
             if (licenseService == null)
             {
                 throw new ArgumentNullException(nameof(licenseService));
             }
+            if (ctx == null)
+            {
+                throw new ArgumentNullException(nameof(ctx));
+            }
 
             _licenseService = licenseService;
+            _ctx = ctx;
 
             ActivateCommand = new Command(OnActivateCommand, OnCanActivateCommand);
             PropertyChanged += LicenseViewModel_PropertyChanged;
@@ -45,14 +51,13 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 LicenseType = LicenseContants.Demo;
                 LicenseKey = null;
                 ShowError = false;
-                AppId = Preferences.Get(LicenseContants.AppId, null);
+                AppId = _ctx.GetValueOrDefault(LicenseContants.AppId, null);
 
                 var result = await _licenseService.Validate();
                 if(result.Successful)
                 {
                     LicenseKey = result.License.Id.ToString();
                     LicenseType = LicenseContants.Full;
-                    await _licenseService.SetLicenseKeyAsync(result.License.Id.ToString());
                 }
                 else
                 {
@@ -98,8 +103,8 @@ namespace samplesl.Sample_XamarinForms.ViewModels
 
             foreach (var f in result.Failures)
             {
-                sb.AppendLine(f.Message);
-                sb.AppendLine(f.HowToResolve);
+                sb.AppendLine(f.Message); // TODO: localize
+                sb.AppendLine(f.HowToResolve); // TODO: localize
             }
 
             if (result.Exception != null)
@@ -127,6 +132,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 var result =  await _licenseService.RegisterAsync(_key, LicenseContants.ProductId);
                 if(result.Successful)
                 {
+                    await _licenseService.SetLicenseKeyAsync(result.License.Id.ToString());
                     Initialize();
                 }
                 else

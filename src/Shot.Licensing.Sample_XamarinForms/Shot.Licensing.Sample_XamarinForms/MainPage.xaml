@@ -7,10 +7,8 @@
              x:Class="samplesl.Sample_XamarinForms.MainPage">
 
     <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <Label Text="License Sample" />
+        <Button Text="License" Clicked="Button_Clicked"/>
     </StackLayout>
 
 </ContentPage>
