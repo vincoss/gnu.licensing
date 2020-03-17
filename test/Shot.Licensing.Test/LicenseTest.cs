@@ -14,14 +14,6 @@ namespace samplesl.Test
 {
     public class LicenseTest : BaseLicenseTest
     {
-        [Fact]
-        public async void Sample()
-        {
-            var result = await HasConnection("http://localhost:5000/api/license");
-
-            Assert.True(result);
-        }
-
         public async Task<bool> HasConnection(string serverUrl)
         {
             if (string.IsNullOrWhiteSpace(serverUrl))
