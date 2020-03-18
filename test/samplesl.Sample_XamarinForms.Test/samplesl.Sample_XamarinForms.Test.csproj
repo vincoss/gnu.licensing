@@ -21,8 +21,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Shot.Licensing.Sample_XamarinForms\Shot.Licensing.Sample_XamarinForms\samplesl.Sample_XamarinForms.csproj" />
-  </ItemGroup>
-
 </Project>
