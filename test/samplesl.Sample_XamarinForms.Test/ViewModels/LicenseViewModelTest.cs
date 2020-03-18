@@ -67,8 +67,36 @@ namespace samplesl.Sample_XamarinForms.Test.ViewModels
             Assert.Equal("Message|HowToResolve|Exception|", model.ErrorMessage.Replace("\r\n", "|"));
             Assert.True(model.ShowError);
             Assert.Equal(appId, model.AppId);
+            Assert.Null(model.LicenseKey);
             Assert.Equal("Demo", model.LicenseType);
             Assert.False(model.IsBusy);
+        }
+
+        [Fact]
+        public void OnCanActivateCommand()
+        {
+            var service = Substitute.For<ILicenseService>();
+            var ctx = Substitute.For<IApplicationContext>();
+            var model = new LicenseViewModel(service, ctx);
+
+            model.RegisterKey = Guid.NewGuid().ToString();
+
+            var result = model.ActivateCommand.CanExecute(null);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void ErrorMessageTest()
+        {
+            var service = Substitute.For<ILicenseService>();
+            var ctx = Substitute.For<IApplicationContext>();
+            var model = new LicenseViewModel(service, ctx);
+
+            model.RegisterKey = "fake";
+
+            Assert.Equal("Invalid license key.", model.ErrorMessage);
+            Assert.True(model.ShowError);
         }
     }
 }

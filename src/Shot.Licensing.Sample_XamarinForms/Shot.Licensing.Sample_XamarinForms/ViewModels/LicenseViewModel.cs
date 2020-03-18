@@ -15,7 +15,6 @@ namespace samplesl.Sample_XamarinForms.ViewModels
         private Guid _key;
         private readonly ILicenseService _licenseService;
         private readonly IApplicationContext _ctx;
-
         public LicenseViewModel(ILicenseService licenseService, IApplicationContext ctx)
         {
             if (licenseService == null)
@@ -42,22 +41,23 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 {
                     return;
                 }
-
+                
                 IsBusy = true;
-
+               
                 _key = Guid.Empty;
                 RegisterKey = null;
                 ErrorMessage = null;
-                LicenseType = LicenseContants.Demo;
                 LicenseKey = null;
                 ShowError = false;
+                LicenseType = LicenseContants.Get().ToString();
                 AppId = _ctx.GetValueOrDefault(LicenseContants.AppId, null);
 
                 var result = await _licenseService.Validate();
                 if(result.Successful)
                 {
+                    LicenseContants.Set(AppLicense.Full);
                     LicenseKey = result.License.Id.ToString();
-                    LicenseType = LicenseContants.Full;
+                    LicenseType = LicenseContants.Get().ToString();
                 }
                 else
                 {
@@ -86,13 +86,13 @@ namespace samplesl.Sample_XamarinForms.ViewModels
 
                     if (id == Guid.Empty)
                     {
-                        ErrorMessage = "Invalid license key."; // TODO:
+                        ErrorMessage = "Invalid license key."; // TODO: localize or call result form service
                     }
                     _key = id;
                 }
             }
 
-            ShowError = ErrorMessage != null;
+            ShowError = string.IsNullOrWhiteSpace(ErrorMessage) == false;
 
             ((Command)ActivateCommand).ChangeCanExecute();
         }
@@ -103,6 +103,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
 
             foreach (var f in result.Failures)
             {
+                sb.AppendLine(f.Code); // TODO: localize
                 sb.AppendLine(f.Message); // TODO: localize
                 sb.AppendLine(f.HowToResolve); // TODO: localize
             }
@@ -132,7 +133,8 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 var result =  await _licenseService.RegisterAsync(_key, LicenseContants.ProductId);
                 if(result.Successful)
                 {
-                    await _licenseService.SetLicenseKeyAsync(result.License.Id.ToString());
+                    await _ctx.SetLicenseKeyAsync(result.License.Id.ToString());
+                    LicenseContants.Set(AppLicense.Full);// TODO: remove
                     Initialize();
                 }
                 else
@@ -177,7 +179,16 @@ namespace samplesl.Sample_XamarinForms.ViewModels
             set { SetProperty(ref _errorMessage, value); }
         }
 
+        private bool _showError;
+
+        public bool ShowError
+        {
+            get { return _showError; }
+            set { SetProperty(ref _showError, value); }
+        }
+
         private string _appId;
+
         public string AppId
         {
             get { return _appId; }
@@ -185,6 +196,7 @@ namespace samplesl.Sample_XamarinForms.ViewModels
         }
 
         private string _licenseKey;
+
         public string LicenseKey
         {
             get { return _licenseKey; }
@@ -199,14 +211,6 @@ namespace samplesl.Sample_XamarinForms.ViewModels
             set { SetProperty(ref _licenseType, value); }
         }
 
-        private bool _showError;
-
-        public bool ShowError
-        {
-            get { return _showError; }
-            set { SetProperty(ref _showError, value); }
-        }
-        
         #endregion
     }
 }
