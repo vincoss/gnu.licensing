@@ -113,13 +113,9 @@ namespace samplesl.Sample_XamarinForms.Services
 
                     if (File.Exists(path) == false)
                     {
-                        var notFound = new GeneralValidationFailure()
-                        {
-                            Message = "Licence file is missing.",
-                            HowToResolve = "Attempt to activate again."
-                        };
+                        var nf = FailureStrings.Get(FailureStrings.ACT08Code);
 
-                        return new LicenseResult(null, null, new[] { notFound });
+                        return new LicenseResult(null, null, new[] { nf });
                     }
 
                     using (var stream = File.OpenRead(path))
@@ -127,11 +123,7 @@ namespace samplesl.Sample_XamarinForms.Services
                         actual = License.Load(stream);
                     }
 
-                    var failure = new GeneralValidationFailure()
-                    {
-                        Message = "The license is not valid for current device.",
-                        HowToResolve = "Please use license Key to register current installation or a device."
-                    };
+                    var failure = FailureStrings.Get(FailureStrings.ACT14Code);
 
                     var appId = GetAttributes()[LicenseContants.AppId];
 
@@ -155,13 +147,10 @@ namespace samplesl.Sample_XamarinForms.Services
                 {
                     // TODO: log
 
-                    var exceptionFailure = new GeneralValidationFailure()
-                    {
-                        Message = "Invalid license file.",
-                        HowToResolve = "Attempt to activate again."
-                    };
+                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
 
-                    return new LicenseResult(null, ex, new[] { exceptionFailure });
+                    results.Add(failure);
+                    return new LicenseResult(null, ex, results);
                 }
             });
             return task;

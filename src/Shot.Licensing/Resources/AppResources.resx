@@ -256,18 +256,9 @@
     <value>ACT.15</value>
   </data>
   <data name="ACT15Message" xml:space="preserve">
-    <value>The license is not valid for current device.</value>
-  </data>
-  <data name="ACT15Resolve" xml:space="preserve">
-    <value>Please attempt to activate again.</value>
-  </data>
-  <data name="ACT16Code" xml:space="preserve">
-    <value>ACT.16</value>
-  </data>
-  <data name="ACT16Message" xml:space="preserve">
     <value>License validation failed!</value>
   </data>
-  <data name="ACT16Resolve" xml:space="preserve">
+  <data name="ACT15Resolve" xml:space="preserve">
     <value>If you are still unable to resolve your issue, email to Technical Support.</value>
   </data>
 </root>

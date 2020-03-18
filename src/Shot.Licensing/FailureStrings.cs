@@ -76,10 +76,6 @@ namespace samplesl
         public const string ACT15Message    = "ACT15Message";
         public const string ACT15Resolve    = "ACT15Resolve";
 
-        public const string ACT16Code       = "ACT16Code";
-        public const string ACT16Message    = "ACT16Message";
-        public const string ACT16Resolve    = "ACT16Resolve";
-
         #endregion
 
         #region Public methods
@@ -183,10 +179,6 @@ namespace samplesl
             yield return ACT15Code;
             yield return ACT15Message;
             yield return ACT15Resolve;
-
-            yield return ACT16Code;
-            yield return ACT16Message;
-            yield return ACT16Resolve;
         }
 
         #endregion

@@ -57,11 +57,7 @@ namespace samplesl.Validation
             var validator = validationChainBuilder.StartValidatorChain();
             validator.Validate = license => license.Expiration > DateTime.Now;
 
-            validator.FailureResult = new LicenseExpiredValidationFailure()
-            {
-                Message = "Licensing for this product has expired!",
-                HowToResolve = @"Your license is expired. Please contact your distributor/vendor to renew the license."
-            };
+            validator.FailureResult = FailureStrings.Get(FailureStrings.ACT13Code);
 
             return validationChainBuilder;
         }
@@ -96,11 +92,7 @@ namespace samplesl.Validation
 
 #endif
 
-            validator.FailureResult = new LicenseExpiredValidationFailure()
-            {
-                Message = "Licensing for this product has expired!",
-                HowToResolve = @"Your license is expired. Please contact your distributor/vendor to renew the license."
-            };
+            validator.FailureResult = FailureStrings.Get(FailureStrings.ACT13Code);
 
             return validationChainBuilder;
         }
@@ -135,11 +127,7 @@ namespace samplesl.Validation
             var validator = validationChainBuilder.StartValidatorChain();
             validator.Validate = license => license.VerifySignature(publicKey);
 
-            validator.FailureResult = new InvalidSignatureValidationFailure()
-            {
-                Message = "License signature validation error!",
-                HowToResolve = @"The license signature and data does not match. This usually happens when a license file is corrupted or has been altered."
-            };
+            validator.FailureResult = FailureStrings.Get(FailureStrings.ACT12Code);
 
             return validationChainBuilder;
         }

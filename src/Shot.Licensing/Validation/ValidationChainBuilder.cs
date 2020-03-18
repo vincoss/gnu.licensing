@@ -78,10 +78,7 @@ namespace samplesl.Validation
 
                 if (!validator.Validate(license))
                     yield return validator.FailureResult
-                                 ?? new GeneralValidationFailure
-                                        {
-                                            Message = "License validation failed!"
-                                        };
+                                 ?? FailureStrings.Get(FailureStrings.ACT15Code);
             }
         }
     }

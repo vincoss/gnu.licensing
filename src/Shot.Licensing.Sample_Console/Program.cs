@@ -72,11 +72,7 @@ namespace samplesl.Sample_Console
                 {
                     var actual = License.Load(license);
 
-                    var failure = new GeneralValidationFailure()
-                    {
-                        Message = "The license is not valid for current device.",
-                        HowToResolve = "Please use license ID to register current installation or a device."
-                    };
+                    var failure = FailureStrings.Get(FailureStrings.ACT14Code);
 
                     var validationFailures = actual.Validate()
                                                    .ExpirationDate()
@@ -97,13 +93,9 @@ namespace samplesl.Sample_Console
                     // TODO: replace with logger
                     Console.WriteLine(ex);
 
-                    var exceptionFailure = new GeneralValidationFailure()
-                    {
-                        Message = "Invalid license file.",
-                        HowToResolve = "Please use license ID to register current installation or a device."
-                    };
+                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
 
-                    results.Add(exceptionFailure);
+                    results.Add(failure);
                 }
                 return results.AsEnumerable();
             });
