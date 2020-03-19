@@ -225,6 +225,16 @@ namespace samplesl.Sample_XamarinForms.Services
         {
             throw new NotImplementedException();
         }
+
+        Task<samplesl.LicenseResult> ILicenseService.RegisterAsync(Guid licenseKey, Guid productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<samplesl.LicenseResult> ILicenseService.Validate()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

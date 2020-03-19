@@ -13,14 +13,14 @@ namespace samplesl.Sample_XamarinForms.Test.Services
     public class LicenseServiceTest
     {
         [Fact]
-        public async void Validate_NoLicense()
+        public async void ValidateAsync_NoLicense()
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
 
             var service = new LicenseService(client);
 
-            var result = await service.ValidateNew();
+            var result = await service.ValidateAsync();
 
             Assert.False(result.Successful);
             Assert.Null(result.License);
@@ -29,7 +29,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
         }
 
         [Fact]
-        public async void Validate_Exception()
+        public async void ValidateAsync_Exception()
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
@@ -40,7 +40,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
             {
                 File.WriteAllText(path, "");
 
-                var result = await service.ValidateNew();
+                var result = await service.ValidateAsync();
 
                 Assert.False(result.Successful);
                 Assert.Null(result.License);
@@ -54,7 +54,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
         }
 
         [Fact]
-        public async void Validate_Invalid()
+        public async void ValidateAsync_Invalid()
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
@@ -68,7 +68,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
             {
                 File.WriteAllText(path, File.ReadAllText(dir));
 
-                var result = await service.ValidateNew();
+                var result = await service.ValidateAsync();
 
                 Assert.False(result.Successful);
                 Assert.Null(result.License);
@@ -82,7 +82,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
         }
 
         [Fact]
-        public async void Validate_Valid()
+        public async void ValidateAsync_Valid()
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
@@ -96,7 +96,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
             {
                 File.WriteAllText(path, File.ReadAllText(dir));
 
-                var result = await service.ValidateNew();
+                var result = await service.ValidateAsync();
 
                 Assert.True(result.Successful);
                 Assert.NotNull(result.License);

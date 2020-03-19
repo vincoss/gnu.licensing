@@ -9,8 +9,6 @@ namespace samplesl
 {
     public interface ILicenseService
     {
-        Task<LicenseResult> ValidateNew();
-
         string GetPath();
 
 

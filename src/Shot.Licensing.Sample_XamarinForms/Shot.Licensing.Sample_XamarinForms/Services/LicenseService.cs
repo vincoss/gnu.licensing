@@ -14,53 +14,9 @@ using System.Security.Cryptography;
 
 namespace samplesl.Sample_XamarinForms.Services
 {
-    public class LicenseService : ILicenseService
+    public class LicenseService : Basel, ILicenseService
     {
-        public Task<LicenseResult> ValidateNew()
-        {
-            var task = Task.Run(() =>
-            {
-                var results = new List<IValidationFailure>();
-                License actual = null;
-
-                try
-                {
-                    var path = GetPath();
-
-                    if (File.Exists(path) == false)
-                    {
-                        var nf = FailureStrings.Get(FailureStrings.ACT08Code);
-                        return new LicenseResult(null, null, new[] { nf });
-                    }
-
-                    using (var stream = File.OpenRead(path))
-                    {
-                        actual = License.Load(stream);
-                    }
-
-                    var failures = ValidateInternal(actual);
-
-                    foreach (var f in failures)
-                    {
-                        results.Add(f);
-                    }
-
-                    return new LicenseResult(results.Any() ? null : actual, null, results);
-                }
-                catch (Exception ex)
-                {
-                    // TODO: log
-
-                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
-
-                    results.Add(failure);
-                    return new LicenseResult(null, ex, results);
-                }
-            });
-            return task;
-        }
-
-        protected virtual IEnumerable<IValidationFailure> ValidateInternal(License actual)
+        protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
         {
             var failure = FailureStrings.Get(FailureStrings.ACT14Code);
 
@@ -78,7 +34,16 @@ namespace samplesl.Sample_XamarinForms.Services
             return failures;
         }
 
-        public virtual string GetPath()
+        protected override Stream LicenseOpenRead()
+        {
+            if(File.Exists(GetPath()))
+            {
+                return File.OpenRead(GetPath());
+            }
+            return null;
+        }
+
+        public string GetPath()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "license.xml");
         }
@@ -96,7 +61,45 @@ namespace samplesl.Sample_XamarinForms.Services
             return attributes;
         }
 
+        public async Task<LicenseResult> RegisterAsyncNew(Guid licenseKey, Guid productId)
+        {
+            if (licenseKey == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(licenseKey));
+            }
+            if (productId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
 
+            try
+            {
+                var attributes = GetAttributes();
+                var result = await Register(licenseKey, productId, attributes, LicenseContants.LicenseServerUrl);
+
+                if (string.IsNullOrWhiteSpace(result.License))
+                {
+                    return new LicenseResult(null, null, new[] { result.Failure });
+                }
+
+                var path = GetPath();
+                var element = XElement.Parse(result.License);
+                element.Save(path);
+
+                var validationResult = await ValidateAsync();
+                if (validationResult.Failures.Any())
+                {
+                    return new LicenseResult(null, null, validationResult.Failures);
+                }
+
+                return new LicenseResult(null, null, null);
+            }
+            catch (Exception ex)
+            {
+                return new LicenseResult(null, ex, null);
+                // TODO: log
+            }
+        }
 
 
 
@@ -486,6 +489,17 @@ namespace samplesl.Sample_XamarinForms.Services
                 throw new HttpRequestException(content);
             }
         }
+
+        Task<samplesl.LicenseResult> ILicenseService.RegisterAsync(Guid licenseKey, Guid productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<samplesl.LicenseResult> ILicenseService.Validate()
+        {
+            throw new NotImplementedException();
+        }
+
 
         #endregion
     }
