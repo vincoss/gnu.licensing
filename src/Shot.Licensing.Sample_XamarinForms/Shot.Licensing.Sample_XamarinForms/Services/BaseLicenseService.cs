@@ -220,6 +220,11 @@ namespace samplesl.Sample_XamarinForms.Services
         {
             throw new NotImplementedException();
         }
+
+        public Task<LicenseResult> ValidateNew()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\..\resources\test.public.xml" Link="Data\test.public.xml" />
+    <EmbeddedResource Include="..\..\..\resources\test.public.xml" Link="Data\test.public.xml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,6 +9,11 @@ namespace samplesl
 {
     public interface ILicenseService
     {
+        Task<LicenseResult> ValidateNew();
+
+        string GetPath();
+
+
         Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId);
 
         Task<LicenseResult> Validate();

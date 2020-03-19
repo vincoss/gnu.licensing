@@ -8,7 +8,10 @@
     <Content Include="..\..\resources\test.license.xml" Link="Data\test.license.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\resources\test.public.xml" Link="Data\test.public.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\resources\test.public.xml" Link="Data\test.public.xml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +26,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Shot.Licensing.Sample_XamarinForms\Shot.Licensing.Sample_XamarinForms\Shot.Licensing.Sample_XamarinForms.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

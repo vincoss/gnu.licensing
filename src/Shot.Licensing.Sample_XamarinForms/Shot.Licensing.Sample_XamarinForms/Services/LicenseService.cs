@@ -14,9 +14,109 @@ using System.Security.Cryptography;
 
 namespace samplesl.Sample_XamarinForms.Services
 {
-
     public class LicenseService : ILicenseService
     {
+        public Task<LicenseResult> ValidateNew()
+        {
+            var task = Task.Run(() =>
+            {
+                var results = new List<IValidationFailure>();
+                License actual = null;
+
+                try
+                {
+                    var path = GetPath();
+
+                    if (File.Exists(path) == false)
+                    {
+                        var nf = FailureStrings.Get(FailureStrings.ACT08Code);
+                        return new LicenseResult(null, null, new[] { nf });
+                    }
+
+                    using (var stream = File.OpenRead(path))
+                    {
+                        actual = License.Load(stream);
+                    }
+
+                    var failures = ValidateInternal(actual);
+
+                    foreach (var f in failures)
+                    {
+                        results.Add(f);
+                    }
+
+                    return new LicenseResult(results.Any() ? null : actual, null, results);
+                }
+                catch (Exception ex)
+                {
+                    // TODO: log
+
+                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
+
+                    results.Add(failure);
+                    return new LicenseResult(null, ex, results);
+                }
+            });
+            return task;
+        }
+
+        protected virtual IEnumerable<IValidationFailure> ValidateInternal(License actual)
+        {
+            var failure = FailureStrings.Get(FailureStrings.ACT14Code);
+
+            var appId = GetAttributes()[LicenseContants.AppId];
+
+            var failures = actual.Validate()
+                                        .ExpirationDate()
+                                        .When(lic => lic.Type == LicenseType.Standard)
+                                        .And()
+                                        .Signature(LicenseContants.PublicKey)
+                                        .And()
+                                        .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseContants.AppId), StringComparison.OrdinalIgnoreCase), failure)
+                                        .AssertValidLicense().ToList();
+
+            return failures;
+        }
+
+        public virtual string GetPath()
+        {
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "license.xml");
+        }
+
+        protected virtual IDictionary<string, string> GetAttributes()
+        {
+            var id = Preferences.Get(LicenseContants.AppId, null);
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new InvalidOperationException("Missing app ID");
+            }
+
+            var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            attributes.Add(LicenseContants.AppId, id);
+            return attributes;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private const string LicenseKey = "LicenseKey";
         public static LicenseType LicenseType { get; private set; }
 
@@ -27,23 +127,8 @@ namespace samplesl.Sample_XamarinForms.Services
             _httpClient = client;
         }
 
-        public string GetPath()
-        {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "License.xml");
-        }
 
-        public IDictionary<string, string> GetAttributes()
-        {
-            var id = Preferences.Get(LicenseContants.AppId, null);
-            if(string.IsNullOrWhiteSpace(id))
-            {
-                throw new InvalidOperationException("Missing app ID");
-            }
-
-            var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            attributes.Add(LicenseContants.AppId, id);
-            return attributes;
-        }
+      
 
         public Task<string> GetLicenseKeyAsync()
         {

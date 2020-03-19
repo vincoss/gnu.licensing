@@ -21,7 +21,7 @@ namespace samplesl.Sample_XamarinForms
         public static string PublicKey = new StreamReader(typeof(LicenseContants)
                                                      .Assembly
                                                      .GetManifestResourceStream(
-                                                     "samplesl.Sample_XamarinForms.Data.test.public.xml")).ReadToEnd();
+                                                     "Shot.Licensing.Sample_XamarinForms.Data.test.public.xml")).ReadToEnd();
 
         public static AppLicense Get()
         {
