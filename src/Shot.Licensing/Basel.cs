@@ -5,11 +5,16 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
+using System.Text.Json;
+using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace samplesl
 {
     public abstract class Basel
     {
+        private readonly HttpClient _httpClient;
+
         public Task<LicenseResult> ValidateAsync()
         {
             var task = Task.Run(() =>
@@ -55,5 +60,85 @@ namespace samplesl
         protected abstract IEnumerable<IValidationFailure> ValidateInternal(License actual);
 
         protected abstract Stream LicenseOpenRead();
+
+        protected abstract Stream LicenseOpenWrite();
+
+        #region Http
+
+        public async Task<LicenseRegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl)
+        {
+            if (licenseKey == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(licenseKey));
+            }
+            if (productId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
+            if (attributes == null)
+            {
+                throw new ArgumentNullException(nameof(attributes));
+            }
+            if (string.IsNullOrWhiteSpace(serverUrl))
+            {
+                throw new ArgumentNullException(nameof(serverUrl));
+            }
+
+            var data = new
+            {
+                LicenseId = licenseKey,
+                ProductId = productId,
+                Attributes = attributes
+            };
+
+            var json = JsonSerializer.Serialize(data);
+            var result = await PostAsync<LicenseRegisterResult>(serverUrl, json);
+            return result;
+        }
+
+        public async Task<TResult> PostAsync<TResult>(string uri, string data)
+        {
+            if (string.IsNullOrWhiteSpace(uri))
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+            if (string.IsNullOrWhiteSpace(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            var content = new StringContent(data);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+            HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
+
+            await HandleResponse(response);
+            string serialized = await response.Content.ReadAsStringAsync();
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            TResult result = await Task.Run(() => JsonSerializer.Deserialize<TResult>(serialized, options));
+
+            return result;
+        }
+
+        public static HttpClient CreateHttpClient()
+        {
+            var httpClient = new HttpClient();
+            return httpClient;
+        }
+
+        private async Task HandleResponse(HttpResponseMessage response)
+        {
+            if (!response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+
+                throw new HttpRequestException(content);
+            }
+        }
+
+        #endregion
     }
 }
