@@ -10,11 +10,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\..\resources\invalid-test.license.xml" Link="Data\invalid-test.license.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\resources\test.license.xml" Link="Data\test.license.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="Data\Private.xml" />
     <EmbeddedResource Include="Data\Pulic.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="RichardSzalay.MockHttp" Version="6.0.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
       <PrivateAssets>all</PrivateAssets>

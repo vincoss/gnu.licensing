@@ -8,12 +8,23 @@ using System.IO;
 using System.Text.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Xml.Linq;
+
 
 namespace samplesl
 {
     public abstract class Basel
     {
         private readonly HttpClient _httpClient;
+
+        public Basel(HttpClient httpClient)
+        {
+            if(httpClient == null)
+            {
+                throw new ArgumentNullException(nameof(httpClient));
+            }
+            _httpClient = httpClient; ;
+        }
 
         public Task<LicenseResult> ValidateAsync()
         {
@@ -55,6 +66,56 @@ namespace samplesl
                 }
             });
             return task;
+        }
+
+        public async Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, string url, IDictionary<string, string> attributes)
+        {
+            if (licenseKey == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(licenseKey));
+            }
+            if (productId == Guid.Empty)
+            {
+                throw new ArgumentNullException(nameof(productId));
+            }
+            if(string.IsNullOrWhiteSpace(url))
+            {
+                throw new ArgumentNullException(nameof(url));
+            }
+            if(attributes == null)
+            {
+                attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            try
+            {
+                var result = await Register(licenseKey, productId, attributes, url);
+
+                if (string.IsNullOrWhiteSpace(result.License))
+                {
+                    return new LicenseResult(null, null, new[] { result.Failure });
+                }
+
+                using (var sw = LicenseOpenWrite())
+                {
+                    var element = XElement.Parse(result.License);
+                    element.Save(sw);
+                }
+
+                var validationResult = await ValidateAsync();
+                if (validationResult.Failures.Any())
+                {
+                    return new LicenseResult(null, null, validationResult.Failures);
+                }
+
+                return new LicenseResult(validationResult.License, null, null);
+            }
+            catch (Exception ex)
+            {
+                var failure = FailureStrings.Get(FailureStrings.ACT02Code);
+                return new LicenseResult(null, ex, new[] { failure });
+                // TODO: log
+            }
         }
 
         protected abstract IEnumerable<IValidationFailure> ValidateInternal(License actual);

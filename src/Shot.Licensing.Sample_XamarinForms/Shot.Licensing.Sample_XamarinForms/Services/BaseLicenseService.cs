@@ -211,30 +211,6 @@ namespace samplesl.Sample_XamarinForms.Services
 
         public abstract Task<LicenseResult> Validate();
 
-        public Task SetLicenseKeyAsync(string key)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Run()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<LicenseResult> ValidateNew()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<samplesl.LicenseResult> ILicenseService.RegisterAsync(Guid licenseKey, Guid productId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<samplesl.LicenseResult> ILicenseService.Validate()
-        {
-            throw new NotImplementedException();
-        }
     }
 
 

@@ -11,10 +11,9 @@ namespace samplesl
     {
         string GetPath();
 
+        Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, string url, IDictionary<string, string> attributes);
 
-        Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId);
-
-        Task<LicenseResult> Validate();
+        Task<LicenseResult> ValidateAsync();
 
         Task SetLicenseKeyAsync(string key);
 
