@@ -49,15 +49,15 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 ErrorMessage = null;
                 LicenseKey = null;
                 ShowError = false;
-                LicenseType = LicenseContants.Get().ToString();
-                AppId = _ctx.GetValueOrDefault(LicenseContants.AppId, null);
+                LicenseType = LicenseGlobals.Get().ToString();
+                AppId = _ctx.GetValueOrDefault(LicenseGlobals.AppId, null);
 
-                var result = await _licenseService.Validate();
+                var result = await _licenseService.ValidateAsync();
                 if(result.Successful)
                 {
-                    LicenseContants.Set(AppLicense.Full);
+                    LicenseGlobals.Set(AppLicense.Full);
                     LicenseKey = result.License.Id.ToString();
-                    LicenseType = LicenseContants.Get().ToString();
+                    LicenseType = LicenseGlobals.Get().ToString();
                 }
                 else
                 {
@@ -130,11 +130,11 @@ namespace samplesl.Sample_XamarinForms.ViewModels
                 }
 
                 IsBusy = true;
-                var result =  await _licenseService.RegisterAsync(_key, LicenseContants.ProductId);
+                var result =  await _licenseService.RegisterAsync(_key);
                 if(result.Successful)
                 {
                     await _ctx.SetLicenseKeyAsync(result.License.Id.ToString());
-                    LicenseContants.Set(AppLicense.Full);// TODO: remove
+                    LicenseGlobals.Set(AppLicense.Full);// TODO: remove
                     Initialize();
                 }
                 else

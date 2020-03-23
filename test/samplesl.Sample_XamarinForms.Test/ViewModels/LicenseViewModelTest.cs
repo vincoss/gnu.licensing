@@ -25,8 +25,8 @@ namespace samplesl.Sample_XamarinForms.Test.ViewModels
             var license = License.Load(File.OpenRead(path));
             var validationResult = new LicenseResult(license, null, null);
 
-            service.Validate().Returns(validationResult);
-            ctx.GetValueOrDefault(LicenseContants.AppId, null).Returns(appId);
+            service.ValidateAsync().Returns(validationResult);
+            ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
 
             model.Initialize();
 
@@ -58,13 +58,13 @@ namespace samplesl.Sample_XamarinForms.Test.ViewModels
             };
             var validationResult = new LicenseResult(null, exception, validation);
 
-            service.Validate().Returns(validationResult);
-            ctx.GetValueOrDefault(LicenseContants.AppId, null).Returns(appId);
+            service.ValidateAsync().Returns(validationResult);
+            ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
 
             model.Initialize();
 
             Assert.Null(model.RegisterKey);
-            Assert.Equal("Message|HowToResolve|Exception|", model.ErrorMessage.Replace("\r\n", "|"));
+            Assert.Equal("|Message|HowToResolve|Exception|", model.ErrorMessage.Replace("\r\n", "|"));
             Assert.True(model.ShowError);
             Assert.Equal(appId, model.AppId);
             Assert.Null(model.LicenseKey);

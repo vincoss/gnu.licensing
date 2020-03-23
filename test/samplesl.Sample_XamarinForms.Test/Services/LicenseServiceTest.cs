@@ -121,7 +121,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
             var client = mockHandler.ToHttpClient();
 
             var service = new LicenseService(client);
-            var result = await service.Register(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseContants.LicenseServerUrl);
+            var result = await service.Register(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseGlobals.LicenseServerUrl);
 
             Assert.Equal("200", result.License);
             Assert.Equal("message", result.Failure.Message);
@@ -145,7 +145,7 @@ namespace samplesl.Sample_XamarinForms.Test.Services
                 }
 
                 var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                attributes.Add(LicenseContants.AppId, id);
+                attributes.Add(LicenseGlobals.AppId, id);
                 return attributes;
             }
         }

@@ -18,7 +18,7 @@ namespace samplesl.Sample_XamarinForms
 
         public Task SetLicenseKeyAsync(string key)
         {
-            return SecureStorage.SetAsync(LicenseContants.LicenseKey, key);
+            return SecureStorage.SetAsync(LicenseGlobals.LicenseKey, key);
         }
     }
 }

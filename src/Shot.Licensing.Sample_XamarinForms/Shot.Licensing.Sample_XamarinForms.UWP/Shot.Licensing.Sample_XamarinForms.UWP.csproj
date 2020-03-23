@@ -144,12 +144,12 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9"/>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shot.Licensing.Sample_XamarinForms\Shot.Licensing.Sample_XamarinForms.csproj">
-      <Project>{C87B6B84-E127-4029-97F1-8613F02D0603}</Project>
+      <Project>{e21c9107-eafd-4801-b1d8-0e1ebec44031}</Project>
       <Name>Shot.Licensing.Sample_XamarinForms</Name>
     </ProjectReference>
   </ItemGroup>

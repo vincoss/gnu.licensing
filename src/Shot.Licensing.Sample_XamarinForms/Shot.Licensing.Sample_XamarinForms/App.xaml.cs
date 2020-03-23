@@ -13,15 +13,15 @@ namespace Shot.Licensing.Sample_XamarinForms
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
         {  // Example: App first start create new app id and store it.
-            var id = Preferences.Get(LicenseContants.AppId, null);
+            var id = Preferences.Get(LicenseGlobals.AppId, null);
             if (string.IsNullOrWhiteSpace(id))
             {
-                Preferences.Set(LicenseContants.AppId, Guid.NewGuid().ToString());
+                Preferences.Set(LicenseGlobals.AppId, Guid.NewGuid().ToString());
             }
 
             // Run license service in backgroud, will set Demo|Full version for the app

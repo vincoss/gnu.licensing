@@ -1,10 +1,9 @@
-﻿using samplesl.Sample_XamarinForms.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace samplesl.Sample_XamarinForms.Test
+namespace samplesl.Test
 {
     public class LicenseResultTest
     {

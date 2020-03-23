@@ -1,7 +1,4 @@
-﻿using samplesl.Sample_XamarinForms.Services;
-using samplesl.Validation;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Threading.Tasks;
 
 
@@ -11,7 +8,7 @@ namespace samplesl
     {
         string GetPath();
 
-        Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, string url, IDictionary<string, string> attributes);
+        Task<LicenseResult> RegisterAsync(Guid licenseKey);
 
         Task<LicenseResult> ValidateAsync();
 
