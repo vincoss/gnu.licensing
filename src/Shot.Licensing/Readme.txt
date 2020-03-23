@@ -24,6 +24,7 @@ http request client timeout setting
 if not valid remove the license.xml file
 if http check fail do nothing if license.xml exists not to be removed
 license file might not be valid possible to remove it if tampered
+add translations
 
 ## Testing
 test how to migrate licence between devices, here do some research, must be very easy,
