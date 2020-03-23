@@ -56,14 +56,15 @@ namespace samplesl
         public async void Register_Success()
         {
             var mockHandler = new MockHttpMessageHandler(); var dir = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
-            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+            var readPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+            var writePath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", $"{nameof(Register_Success)}.license.xml");
 
             var data = new
             {
-                License = File.ReadAllText(path)
+                License = File.ReadAllText(readPath)
             };
 
-            var json =  JsonSerializer.Serialize(data);
+            var json = JsonSerializer.Serialize(data);
 
             mockHandler
                 .When("/api/license")
@@ -72,7 +73,7 @@ namespace samplesl
             var client = mockHandler.ToHttpClient();
 
             var service = new TestBasel(client);
-            service.Path = path;
+            service.Path = writePath;
             var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
 
             Assert.True(result.Successful);
@@ -85,7 +86,8 @@ namespace samplesl
         public async void Register_XmlParseTest()
         {
             var mockHandler = new MockHttpMessageHandler(); var dir = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
-            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+            var readPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+            var writePath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", $"{nameof(Register_XmlParseTest)}.license.xml");
 
             var data = new
             {
@@ -101,7 +103,7 @@ namespace samplesl
             var client = mockHandler.ToHttpClient();
 
             var service = new TestBasel(client);
-            service.Path = path;
+            service.Path = writePath;
             var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
 
             Assert.False(result.Successful);
@@ -111,15 +113,146 @@ namespace samplesl
             Assert.Equal("ACT.02", result.Failures.ElementAt(0).Code);
         }
 
+        [Fact]
+        public async void Register_ValidationFailure()
+        {
+            var mockHandler = new MockHttpMessageHandler();
+            var readPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+            var writePath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", $"{nameof(Register_ValidationFailure)}.license.xml");
+
+            var data = new
+            {
+                License = File.ReadAllText(readPath)
+            };
+
+            var json = JsonSerializer.Serialize(data);
+
+            mockHandler
+                .When("/api/license")
+                .Respond("application/json", json);
+
+            var client = mockHandler.ToHttpClient();
+
+            var service = new TestBasel(client);
+            service.Path = writePath;
+            service.Failures = new[]
+            {
+                new GeneralValidationFailure
+                {
+                    Code = "test",
+                    Message = "message",
+                    HowToResolve = "howtoresolve"
+                }
+            };
+
+            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
+
+            Assert.False(result.Successful);
+            Assert.Null(result.License);
+            Assert.Null(result.Exception);
+            Assert.True(result.Failures.Any());
+            Assert.Equal("test", result.Failures.ElementAt(0).Code);
+        }
+
+        [Fact]
+        public async void ValidateAsync_NoLicense()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "none.license.xml");
+
+            var mockHandler = new MockHttpMessageHandler();
+            var client = mockHandler.ToHttpClient();
+
+            var service = new TestBasel(client);
+            service.Path = path;
+
+            var result = await service.ValidateAsync();
+
+            Assert.False(result.Successful);
+            Assert.Null(result.License);
+            Assert.Null(result.Exception);
+            Assert.Equal("ACT.08", result.Failures.ElementAt(0).Code);
+        }
+
+        [Fact]
+        public async void ValidateAsync_Exception()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+
+            var mockHandler = new MockHttpMessageHandler();
+            var client = mockHandler.ToHttpClient();
+            var service = new TestBasel(client);
+            service.Path = path;
+            service.Exception = new Exception("Test");
+
+            var result = await service.ValidateAsync();
+
+            Assert.False(result.Successful);
+            Assert.Null(result.License);
+            Assert.NotNull(result.Exception);
+            Assert.Equal("ACT.09", result.Failures.ElementAt(0).Code);
+        }
+
+        [Fact]
+        public async void ValidateAsync_Invalid()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+
+            var mockHandler = new MockHttpMessageHandler();
+            var client = mockHandler.ToHttpClient();
+            var service = new TestBasel(client);
+            service.Path = path;
+            service.Failures = new[]
+            {
+                new GeneralValidationFailure
+                {
+                    Code = "test",
+                    Message = "message",
+                    HowToResolve = "howtoresolve"
+                }
+            };
+
+            var result = await service.ValidateAsync();
+
+            Assert.False(result.Successful);
+            Assert.Null(result.License);
+            Assert.Null(result.Exception);
+            Assert.Equal("test", result.Failures.ElementAt(0).Code);
+        }
+
+        [Fact]
+        public async void ValidateAsync_Valid()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+
+            var mockHandler = new MockHttpMessageHandler();
+            var client = mockHandler.ToHttpClient();
+            var service = new TestBasel(client);
+            service.Path = path;
+
+            var result = await service.ValidateAsync();
+
+            Assert.True(result.Successful);
+            Assert.NotNull(result.License);
+            Assert.Null(result.Exception);
+            Assert.False(result.Failures.Any());
+        }
+
         class TestBasel : Basel
         {
             public string Path;
+            public IEnumerable<IValidationFailure> Failures = new IValidationFailure[0];
+            public Exception Exception = null;
+
 
             public TestBasel(HttpClient client) : base(client)
             { }
 
             protected override Stream LicenseOpenRead()
             {
+                if(File.Exists(Path) == false)
+                {
+                    return null;
+                }
                 return File.OpenRead(Path);
             }
 
@@ -130,7 +263,11 @@ namespace samplesl
 
             protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
             {
-                return new IValidationFailure[0];
+                if(Exception != null)
+                {
+                    throw Exception;
+                }
+                return Failures;
             }
         }
 

@@ -26,48 +26,6 @@ namespace samplesl
             _httpClient = httpClient; ;
         }
 
-        public Task<LicenseResult> ValidateAsync()
-        {
-            var task = Task.Run(() =>
-            {
-                var results = new List<IValidationFailure>();
-                License actual = null;
-
-                try
-                {
-                    using (var stream = LicenseOpenRead())
-                    {
-                        if (stream == null)
-                        {
-                            var nf = FailureStrings.Get(FailureStrings.ACT08Code);
-                            return new LicenseResult(null, null, new[] { nf });
-                        }
-
-                        actual = License.Load(stream);
-                    }
-
-                    var failures = ValidateInternal(actual);
-
-                    foreach (var f in failures)
-                    {
-                        results.Add(f);
-                    }
-
-                    return new LicenseResult(results.Any() ? null : actual, null, results);
-                }
-                catch (Exception ex)
-                {
-                    // TODO: log
-
-                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
-
-                    results.Add(failure);
-                    return new LicenseResult(null, ex, results);
-                }
-            });
-            return task;
-        }
-
         public async Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, string url, IDictionary<string, string> attributes)
         {
             if (licenseKey == Guid.Empty)
@@ -118,13 +76,59 @@ namespace samplesl
             }
         }
 
+        public Task<LicenseResult> ValidateAsync()
+        {
+            var task = Task.Run(() =>
+            {
+                var results = new List<IValidationFailure>();
+                License actual = null;
+
+                try
+                {
+                    using (var stream = LicenseOpenRead())
+                    {
+                        if (stream == null)
+                        {
+                            var nf = FailureStrings.Get(FailureStrings.ACT08Code);
+                            return new LicenseResult(null, null, new[] { nf });
+                        }
+
+                        actual = License.Load(stream);
+                    }
+
+                    var failures = ValidateInternal(actual);
+
+                    foreach (var f in failures)
+                    {
+                        results.Add(f);
+                    }
+
+                    return new LicenseResult(results.Any() ? null : actual, null, results);
+                }
+                catch (Exception ex)
+                {
+                    // TODO: log
+
+                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
+
+                    results.Add(failure);
+                    return new LicenseResult(null, ex, results);
+                }
+            });
+            return task;
+        }
+
+        #region Abstract methods
+
         protected abstract IEnumerable<IValidationFailure> ValidateInternal(License actual);
 
         protected abstract Stream LicenseOpenRead();
 
-        protected abstract Stream LicenseOpenWrite();
+        protected abstract Stream LicenseOpenWrite(); 
 
-        #region Http
+        #endregion
+
+        #region Http methods
 
         public async Task<LicenseRegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl)
         {
@@ -180,7 +184,6 @@ namespace samplesl
                 PropertyNameCaseInsensitive = true
             };
             TResult result = await Task.Run(() => JsonSerializer.Deserialize<TResult>(serialized, options));
-
             return result;
         }
 
