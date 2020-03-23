@@ -12,7 +12,7 @@ using Xunit;
 
 namespace samplesl
 {
-    public class BaselTest
+    public class BaseLicenseServiceTest
     {
         [Fact]
         public async void Register_ErrorRegister()
@@ -39,7 +39,7 @@ namespace samplesl
 
             var client = mockHandler.ToHttpClient();
 
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = path;
             var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
 
@@ -72,7 +72,7 @@ namespace samplesl
 
             var client = mockHandler.ToHttpClient();
 
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = writePath;
             var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
 
@@ -102,7 +102,7 @@ namespace samplesl
 
             var client = mockHandler.ToHttpClient();
 
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = writePath;
             var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
 
@@ -133,7 +133,7 @@ namespace samplesl
 
             var client = mockHandler.ToHttpClient();
 
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = writePath;
             service.Failures = new[]
             {
@@ -162,7 +162,7 @@ namespace samplesl
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
 
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = path;
 
             var result = await service.ValidateAsync();
@@ -180,7 +180,7 @@ namespace samplesl
 
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = path;
             service.Exception = new Exception("Test");
 
@@ -199,7 +199,7 @@ namespace samplesl
 
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = path;
             service.Failures = new[]
             {
@@ -226,7 +226,7 @@ namespace samplesl
 
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new TestBasel(client);
+            var service = new TestBaseLicenseService(client);
             service.Path = path;
 
             var result = await service.ValidateAsync();
@@ -237,14 +237,14 @@ namespace samplesl
             Assert.False(result.Failures.Any());
         }
 
-        class TestBasel : Basel
+        private class TestBaseLicenseService : BaseLicenseService
         {
             public string Path;
             public IEnumerable<IValidationFailure> Failures = new IValidationFailure[0];
             public Exception Exception = null;
 
 
-            public TestBasel(HttpClient client) : base(client)
+            public TestBaseLicenseService(HttpClient client) : base(client)
             { }
 
             protected override Stream LicenseOpenRead()

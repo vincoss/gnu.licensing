@@ -14,7 +14,7 @@ using System.Security.Cryptography;
 
 namespace samplesl.Sample_XamarinForms.Services
 {
-    public class LicenseService : Basel, ILicenseService
+    public class LicenseService : samplesl.BaseLicenseService, ILicenseService
     {
         public LicenseService(HttpClient client) : base(client)
         {

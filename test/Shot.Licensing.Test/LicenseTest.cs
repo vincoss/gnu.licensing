@@ -14,27 +14,6 @@ namespace samplesl.Test
 {
     public class LicenseTest : BaseLicenseTest
     {
-        public async Task<bool> HasConnection(string serverUrl)
-        {
-            if (string.IsNullOrWhiteSpace(serverUrl))
-            {
-                throw new ArgumentNullException(nameof(serverUrl));
-            }
-            try
-            {
-                var client = new HttpClient();
-                using (var response = await client.GetAsync(serverUrl, System.Net.Http.HttpCompletionOption.ResponseHeadersRead))
-                {
-                    response.EnsureSuccessStatusCode();
-                    return true;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         [Fact]
         public void Can_Generate_And_Validate_Signature_With_Standard_License()
         {
