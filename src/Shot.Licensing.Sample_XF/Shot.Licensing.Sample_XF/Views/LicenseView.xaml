@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="samplesl.Sample_XamarinForms.Views.LicenseView"
+             x:Name="cpLicenseView"
+             Title="License">
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry  Placeholder="Enter license key" Text="{Binding RegisterKey}" />
+            <Button Text="Activate" Command="{Binding ActivateCommand}"
+                    HorizontalOptions="FillAndExpand"/>
+
+            <Label Text="App Id"/>
+            <Entry Text="{Binding AppId}" IsReadOnly="True" />
+
+            <Label Text="License Key"/>
+            <Entry Text="{Binding LicenseKey}" IsReadOnly="True" />
+
+            <Label Text="Type"/>
+            <Entry Text="{Binding LicenseType}" IsReadOnly="True" />
+
+            <Label Text="{Binding ErrorMessage}"
+                   HorizontalOptions="FillAndExpand" TextColor="Red"
+                   IsVisible="{ Binding ShowError}" />
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

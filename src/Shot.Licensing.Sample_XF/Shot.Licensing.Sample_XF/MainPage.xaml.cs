@@ -1,4 +1,5 @@
-﻿using System;
+﻿using samplesl.Sample_XamarinForms.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,6 +17,11 @@ namespace Shot.Licensing.Sample_XF
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            this.Navigation.PushAsync(new LicenseView());
         }
     }
 }
