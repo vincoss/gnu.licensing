@@ -11,6 +11,7 @@ using samplesl.Svr.Models;
 using samplesl.Svr.Services;
 using samplesl.Validation;
 
+
 namespace samplesl.Svr.Controllers
 {
     [Route("api/[controller]")]
@@ -18,43 +19,32 @@ namespace samplesl.Svr.Controllers
     public class LicenseController : ControllerBase
     {
         private readonly ILicenseService _licenseService;
+        private readonly IDataStoreSvr _dataStore;
 
-        public LicenseController() : this(new LicenseService())
-        {
-        }
-
-        protected LicenseController(ILicenseService licenseService)
+        public LicenseController(ILicenseService licenseService, IDataStoreSvr dataStore)
         {
             if(licenseService ==  null)
             {
                 throw new ArgumentNullException(nameof(licenseService));
             }
+            if(dataStore == null)
+            {
+                throw new ArgumentNullException(nameof(dataStore));
+            }
             _licenseService = licenseService;
+            _dataStore = dataStore;
         }
 
-        // GET: api/License
+        // GET: api/license
         [HttpGet]
         public void Get()
         {
+            // Used to check if server is available
         }
 
-        //// GET: api/License
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
-
-        //// GET: api/License/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-
-        // POST: api/License
+        // POST: api/license
         [HttpPost]
-        public async Task<ActionResult<LicenseRegisterResult>> Post([FromBody] RegisterLicense register)
+        public async Task<ActionResult<LicenseRegisterResult>> Post([FromBody] LicenseRegisterRequest register)
         {
             if (register == null)
             {
@@ -71,24 +61,5 @@ namespace samplesl.Svr.Controllers
 
             return result;
         }
-
-        //// PUT: api/License/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
-        //// DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
-    }
-
-    public class LicenseRegisterResult
-    {
-        public string License { get; set; }
-        public IValidationFailure Failure { get; set; }
-
     }
 }

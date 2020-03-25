@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace samplesl.Svr.Models
 {
-    public class RegisterLicense
+    public class LicenseRegisterRequest
     {
         public Guid LicenseId { get; set; }
         public Guid ProductId { get; set; }

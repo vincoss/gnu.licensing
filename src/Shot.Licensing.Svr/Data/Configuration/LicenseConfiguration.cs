@@ -11,12 +11,17 @@ namespace samplesl.Svr.Data.Configuration
                    .HasIndex(x => new { x.LicenseId, x.IsActive }).IsUnique();
 
             builder.HasKey(x => x.LicenseId);
+
+            builder.Property(t => t.LicenseId)
+                .IsRequired()
+                .HasColumnType("INTEGER");
+
             builder.Property(t => t.LicenseUuid)
                   .IsRequired();
 
             builder.Property(t => t.LicenseString)
                    .IsRequired()
-                   .HasColumnType("NVARCHAR(max) COLLATE NOCASE");
+                   .HasColumnType("VARCHAR(max) COLLATE NOCASE");
 
             builder.Property(t => t.Checksum)
                 .IsRequired()

@@ -29,6 +29,7 @@ namespace samplesl.Svr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<ILicenseService, LicenseService>();
             services.AddTransient<IDataStoreSvr, EfDataStoreSvr>();
             services.AddDbContext<EfDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
 
@@ -49,10 +50,8 @@ namespace samplesl.Svr
                 app.UseHsts();
             }
 
-          //  app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();    // TODO:
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

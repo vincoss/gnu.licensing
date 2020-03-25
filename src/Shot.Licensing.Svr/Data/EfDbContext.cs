@@ -16,9 +16,11 @@ namespace samplesl.Svr.Data
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
-        public DbSet<LicenseRegistration> LicenseRegistrations { get; set; }
+        public DbSet<LicenseProduct> Products { get; set; }
 
-        public DbSet<License> Licenses { get; set; }
+        public DbSet<LicenseRegistration> Registrations { get; set; }
+
+      //  public DbSet<License> Licenses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -27,8 +29,9 @@ namespace samplesl.Svr.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new LicenseProductConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseRegistrationConfiguration());
-            modelBuilder.ApplyConfiguration(new LicenseConfiguration());
+            //modelBuilder.ApplyConfiguration(new LicenseConfiguration());
         }
     }
 }

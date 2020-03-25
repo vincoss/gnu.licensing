@@ -6,6 +6,6 @@ namespace samplesl.Svr.Interface
 {
     public interface ILicenseService
     {
-        Task<string> Create(RegisterLicense register);
+        Task<string> Create(LicenseRegisterRequest register);
     }
 }

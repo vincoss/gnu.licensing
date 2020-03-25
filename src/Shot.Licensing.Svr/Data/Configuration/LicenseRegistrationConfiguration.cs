@@ -12,27 +12,37 @@ namespace samplesl.Svr.Data.Configuration
         public void Configure(EntityTypeBuilder<LicenseRegistration> builder)
         {
             builder.ToTable(nameof(LicenseRegistration))
-                  .HasIndex(x => new { x.ProductName, x.LicenseEmail }).IsUnique();
+                  .HasIndex(x => new { x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
+
+            builder.ToTable(nameof(LicenseRegistration))
+                .HasIndex(x => x.LicenseUuid).IsUnique();
 
             builder.HasKey(x => x.LicenseRegistrationId);
-            builder.Property(t => t.LicenseUuid)
-                  .IsRequired();
 
-            builder.Property(t => t.ProductName)
+            builder.Property(t => t.LicenseRegistrationId)
                    .IsRequired()
-                   .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                   .HasColumnType("INTEGER");
+
+            builder.Property(t => t.LicenseUuid)
+                   .IsRequired()
+                   .HasColumnType("VARCHAR(36)");
+
+            builder.Property(t => t.LicenseProductId)
+                   .IsRequired()
+                   .HasColumnType("INTEGER");
 
             builder.Property(t => t.LicenseName)
-                .IsRequired()
-                .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                   .IsRequired()
+                   .HasColumnType("NVARCHAR(256) COLLATE NOCASE");
 
             builder.Property(t => t.LicenseEmail)
-              .IsRequired()
-              .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                   .IsRequired()
+                   .HasColumnType("NVARCHAR(256) COLLATE NOCASE");
 
             builder.Property(t => t.IsActive)
-           .IsRequired()
-           .HasDefaultValue(true);
+                   .IsRequired()
+                   .HasDefaultValue(true)
+                   .HasColumnType("BOOLEAN");
 
             builder.Property(x => x.CreatedDateTimeUtc)
                    .IsRequired()
@@ -40,7 +50,7 @@ namespace samplesl.Svr.Data.Configuration
 
             builder.Property(x => x.CreatedByUser)
                    .IsRequired()
-                   .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                   .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
         }
     }
 }
