@@ -148,6 +148,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Shot.Licensing\samplesl.csproj">
+      <Project>{8961226a-ab93-4080-ac1c-e131a57ae433}</Project>
+      <Name>samplesl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shot.Licensing.Sample_XF\Shot.Licensing.Sample_XF.csproj">
       <Project>{4491A3D8-494A-43BC-AB2C-46AA2BCEED2F}</Project>
       <Name>Shot.Licensing.Sample_XF</Name>

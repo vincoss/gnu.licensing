@@ -28,4 +28,8 @@
     <Folder Include="Data\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Shot.Licensing.Sample_XF\Shot.Licensing.Sample_XF\Shot.Licensing.Sample_XF.csproj" />
+  </ItemGroup>
+
 </Project>
