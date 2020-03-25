@@ -25,10 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Shot.Licensing.Sample_XamarinForms\Shot.Licensing.Sample_XamarinForms\Shot.Licensing.Sample_XamarinForms.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
 
