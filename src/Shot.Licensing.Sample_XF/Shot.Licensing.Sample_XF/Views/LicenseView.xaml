@@ -27,6 +27,7 @@
                    HorizontalOptions="FillAndExpand" TextColor="Red"
                    IsVisible="{ Binding ShowError}" />
 
+            <ActivityIndicator Color="Red" IsRunning="{Binding IsBusy}" />
 
         </StackLayout>
     </ContentPage.Content>

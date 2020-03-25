@@ -129,6 +129,32 @@ namespace samplesl.Sample_XamarinForms.Test.Services
 
         }
 
+        [Fact]
+        public async void Run_Test()
+        {
+            var mockHandler = new MockHttpMessageHandler();
+            var client = mockHandler.ToHttpClient();
+            var service = new TestLicenseService(client);
+            var path = service.GetPath();
+            service.AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B";
+
+            var dir = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
+
+            try
+            {
+                File.WriteAllText(path, File.ReadAllText(dir));
+
+                await service.Run();
+
+                Assert.Equal(AppLicense.Full, LicenseGlobals.Get());
+            }
+            finally
+            {
+                File.Delete(path);
+            }
+        }
+
+
         class TestLicenseService : LicenseService
         {
             public string AppId;

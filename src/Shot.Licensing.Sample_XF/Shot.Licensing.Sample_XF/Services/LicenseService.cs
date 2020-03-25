@@ -77,8 +77,16 @@ namespace samplesl.Sample_XamarinForms.Services
 
         public Task Run()
         {
-            return Task.CompletedTask;
-            // TODO:
+            var task = Task.Run(async() =>
+            {
+                var result = await ValidateAsync();
+                if (result.Successful)
+                {
+                    LicenseGlobals.Set(AppLicense.Full);
+                }
+            });
+
+            return task;
         }
 
         public Task<LicenseResult> RegisterAsync(Guid licenseKey)
