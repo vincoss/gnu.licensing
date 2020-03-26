@@ -10,8 +10,10 @@ namespace samplesl.Svr.Data
         public int LicenseId { get; set; }
 
         [Required]
-        public Guid LicenseUuid { get; set; }
+        public int LicenseRegistrationId { get; set; }
 
+        [Required]
+        public Guid LicenseUuid { get; set; }
 
         [Required]
         public string LicenseString { get; set; }
@@ -22,7 +24,7 @@ namespace samplesl.Svr.Data
         [Required]
         public string ChecksumType { get; set; }
 
-        public bool IsActive { get; set; }
+        public bool? IsActive { get; set; }
 
         [Required]
         public DateTime CreatedDateTimeUtc { get; set; }

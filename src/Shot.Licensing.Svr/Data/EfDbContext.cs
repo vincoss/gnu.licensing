@@ -20,7 +20,7 @@ namespace samplesl.Svr.Data
 
         public DbSet<LicenseRegistration> Registrations { get; set; }
 
-      //  public DbSet<License> Licenses { get; set; }
+        public DbSet<License> Licenses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -31,7 +31,7 @@ namespace samplesl.Svr.Data
         {
             modelBuilder.ApplyConfiguration(new LicenseProductConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseRegistrationConfiguration());
-            //modelBuilder.ApplyConfiguration(new LicenseConfiguration());
+            modelBuilder.ApplyConfiguration(new LicenseConfiguration());
         }
     }
 }

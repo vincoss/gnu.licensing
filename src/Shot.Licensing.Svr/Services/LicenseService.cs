@@ -14,7 +14,7 @@ namespace samplesl.Svr.Services
         public static string PrivateKey;
         static LicenseService()
         {
-            PrivateKey = File.ReadAllText(@"C:\_Data\GitHub\sl\resources\test.private.xml"); // TODO:
+            PrivateKey = File.ReadAllText(@"C:\_Dev\GitHub\FL\shot.licensing\resources\test.private.xml"); // TODO:
         }
 
         public Task<string> Create(LicenseRegisterRequest register)

@@ -12,7 +12,7 @@ namespace samplesl.Svr.Data.Configuration
         public void Configure(EntityTypeBuilder<LicenseRegistration> builder)
         {
             builder.ToTable(nameof(LicenseRegistration))
-                  .HasIndex(x => new { x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
+                  .HasIndex(x => new { x.LicenseRegistrationId, x.LicenseProductId, x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
 
             builder.ToTable(nameof(LicenseRegistration))
                 .HasIndex(x => x.LicenseUuid).IsUnique();
