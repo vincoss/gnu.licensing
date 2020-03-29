@@ -50,7 +50,7 @@ namespace samplesl.Svr
                 app.UseHsts();
             }
 
-           // app.UseHttpsRedirection();    // TODO:
+           //app.UseHttpsRedirection();    // TODO:
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

@@ -16,6 +16,9 @@ namespace samplesl.Svr.Data
         public Guid LicenseUuid { get; set; }
 
         [Required]
+        public Guid ProductUuid { get; set; }
+
+        [Required]
         public string LicenseString { get; set; }
 
         [Required]

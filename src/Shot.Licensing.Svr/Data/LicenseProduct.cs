@@ -19,6 +19,9 @@ namespace samplesl.Svr.Data
         public string ProductDescription { get; set; }
 
         [Required]
+        public string SignKeyName { get; set; }
+
+        [Required]
         public DateTime CreatedDateTimeUtc { get; set; }
 
         [Required]

@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using samplesl.Svr.Interface;
 using samplesl.Svr.Models;
-using samplesl.Svr.Services;
-using samplesl.Validation;
 
 
 namespace samplesl.Svr.Controllers
@@ -44,22 +37,14 @@ namespace samplesl.Svr.Controllers
 
         // POST: api/license
         [HttpPost]
-        public async Task<ActionResult<LicenseRegisterResult>> Post([FromBody] LicenseRegisterRequest register)
+        public async Task<ActionResult<LicenseRegisterResult>> Post([FromBody] LicenseRegisterRequest request)
         {
-            if (register == null)
+            if (request == null)
             {
                 return BadRequest();
             }
-            var str = await _licenseService.Create(register);
-            var result = new LicenseRegisterResult();
-            result.License = str;
-            result.Failure = new GeneralValidationFailure
-            {
-                Message = nameof(GeneralValidationFailure.Message),
-                HowToResolve = nameof(GeneralValidationFailure.HowToResolve)
-            };
 
-            return result;
+            return await _licenseService.CreateAsync(request);
         }
     }
 }

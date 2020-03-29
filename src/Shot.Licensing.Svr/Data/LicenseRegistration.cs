@@ -13,6 +13,9 @@ namespace samplesl.Svr.Data
         public Guid LicenseUuid { get; set; }
 
         [Required]
+        public Guid ProductUuid { get; set; }
+
+        [Required]
         public int LicenseProductId { get; set; }
 
         [Required]
@@ -21,9 +24,14 @@ namespace samplesl.Svr.Data
         [Required]
         public string LicenseEmail { get; set; }
 
+        [Required]
+        public LicenseType LicenseType { get; set; }
+
         public bool? IsActive { get; set; } // Blacklist
 
         public int Quantity { get; set; }
+
+        public DateTime? Expire { get; set; }  
 
         [Required]
         public DateTime CreatedDateTimeUtc { get; set; }

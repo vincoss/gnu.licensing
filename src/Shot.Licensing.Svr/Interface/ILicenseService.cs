@@ -1,4 +1,5 @@
 ﻿using samplesl.Svr.Models;
+using samplesl.Validation;
 using System.Threading.Tasks;
 
 
@@ -6,6 +7,7 @@ namespace samplesl.Svr.Interface
 {
     public interface ILicenseService
     {
-        Task<string> Create(LicenseRegisterRequest register);
+        Task<IValidationFailure> ValidateAsync(LicenseRegisterRequest request);
+        Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request);
     }
 }
