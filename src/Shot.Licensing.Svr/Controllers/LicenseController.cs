@@ -12,20 +12,14 @@ namespace samplesl.Svr.Controllers
     public class LicenseController : ControllerBase
     {
         private readonly ILicenseService _licenseService;
-        private readonly IDataStoreSvr _dataStore;
 
-        public LicenseController(ILicenseService licenseService, IDataStoreSvr dataStore)
+        public LicenseController(ILicenseService licenseService)
         {
             if(licenseService ==  null)
             {
                 throw new ArgumentNullException(nameof(licenseService));
             }
-            if(dataStore == null)
-            {
-                throw new ArgumentNullException(nameof(dataStore));
-            }
             _licenseService = licenseService;
-            _dataStore = dataStore;
         }
 
         // GET: api/license
