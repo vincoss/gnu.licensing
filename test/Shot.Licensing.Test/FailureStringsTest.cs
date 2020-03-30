@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using Xunit;
 
-namespace samplesl.Test
+namespace Shot.Licensing.Test
 {
     public class FailureStringsTest
     {

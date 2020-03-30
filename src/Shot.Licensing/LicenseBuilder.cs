@@ -26,7 +26,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace samplesl
+namespace Shot.Licensing
 {
     /// <summary>
     /// Implementation of the <see cref="ILicenseBuilder"/>, a fluent api

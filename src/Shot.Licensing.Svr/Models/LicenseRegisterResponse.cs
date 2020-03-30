@@ -1,7 +1,7 @@
-﻿using samplesl.Validation;
+﻿using Shot.Licensing.Validation;
 
 
-namespace samplesl.Svr.Models
+namespace Shot.Licensing.Svr.Models
 {
     public class LicenseRegisterResponse
     {

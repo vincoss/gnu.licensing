@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public interface ILicenseService
     {

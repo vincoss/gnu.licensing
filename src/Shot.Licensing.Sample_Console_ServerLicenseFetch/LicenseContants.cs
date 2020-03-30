@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace samplesl.Sample_Console_ServerLicenseFetch
+namespace Shot.Licensing.Sample_Console_ServerLicenseFetch
 {
     public static class LicenseContants
     {
@@ -13,7 +13,7 @@ namespace samplesl.Sample_Console_ServerLicenseFetch
         public static string PublicKey = new StreamReader(typeof(LicenseContants)
                                                      .Assembly
                                                      .GetManifestResourceStream(
-                                                     "samplesl.Sample_Console_ServerLicenseFetch.Data.test.public.xml")).ReadToEnd();
+                                                     "Shot.Licensing.Sample_Console_ServerLicenseFetch.Data.test.public.xml")).ReadToEnd();
 
     }
 }

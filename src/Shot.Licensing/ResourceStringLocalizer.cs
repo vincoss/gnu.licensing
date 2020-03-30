@@ -1,5 +1,5 @@
 ﻿//
-// Copyright © 2003-2020 https://github.com/vincoss/samplesl
+// Copyright © 2003-2020 https://github.com/vincoss/Shot.Licensing
 //
 // Author:
 //  Ferdinand Lukasak
@@ -24,13 +24,13 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-using samplesl.Resources;
+using Shot.Licensing.Resources;
 using System;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public class ResourceStringLocalizer : IStringLocalizer
     {

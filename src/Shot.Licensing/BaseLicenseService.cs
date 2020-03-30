@@ -1,5 +1,5 @@
 ﻿//
-// Copyright © 2003-2020 https://github.com/vincoss/samplesl
+// Copyright © 2003-2020 https://github.com/vincoss/Shot.Licensing
 //
 // Author:
 //  Ferdinand Lukasak
@@ -23,7 +23,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using samplesl.Validation;
+using Shot.Licensing.Validation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -36,7 +36,7 @@ using System.Net.Http.Headers;
 using System.Xml.Linq;
 
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public abstract class BaseLicenseService
     {

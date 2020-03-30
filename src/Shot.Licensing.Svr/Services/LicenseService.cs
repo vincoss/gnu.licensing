@@ -1,18 +1,18 @@
-﻿using samplesl.Svr.Interface;
-using samplesl.Svr.Models;
-using samplesl;
+﻿using Shot.Licensing.Svr.Interface;
+using Shot.Licensing.Svr.Models;
+using Shot.Licensing;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using samplesl.Validation;
-using samplesl.Svr.Data;
+using Shot.Licensing.Validation;
+using Shot.Licensing.Svr.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace samplesl.Svr.Services
+namespace Shot.Licensing.Svr.Services
 {
     public class LicenseService : ILicenseService
     {

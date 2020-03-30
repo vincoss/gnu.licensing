@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace samplesl.Svr.Models
+namespace Shot.Licensing.Svr.Models
 {
     public class LicenseRegisterRequest
     {

@@ -1,4 +1,4 @@
-﻿using samplesl.Sample_XamarinForms.Services;
+﻿using Shot.Licensing.Sample_XamarinForms.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
-namespace samplesl.Sample_XamarinForms.ViewModels
+namespace Shot.Licensing.Sample_XamarinForms.ViewModels
 {
     public class LicenseViewModel : BaseViewModel
     {

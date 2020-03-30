@@ -5,11 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using samplesl;
-using samplesl.Validation;
+using Shot.Licensing;
+using Shot.Licensing.Validation;
 
 
-namespace samplesl.Sample_Console
+namespace Shot.Licensing.Sample_Console
 {
     class Program
     {

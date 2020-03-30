@@ -1,9 +1,9 @@
-﻿using samplesl.Svr.Models;
-using samplesl.Validation;
+﻿using Shot.Licensing.Svr.Models;
+using Shot.Licensing.Validation;
 using System.Threading.Tasks;
 
 
-namespace samplesl.Svr.Interface
+namespace Shot.Licensing.Svr.Interface
 {
     public interface ILicenseService
     {

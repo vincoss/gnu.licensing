@@ -1,6 +1,6 @@
 ﻿using RichardSzalay.MockHttp;
-using samplesl;
-using samplesl.Validation;
+using Shot.Licensing;
+using Shot.Licensing.Validation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,7 +10,7 @@ using System.Text.Json;
 using System.Linq;
 using Xunit;
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public class BaseLicenseServiceTest
     {

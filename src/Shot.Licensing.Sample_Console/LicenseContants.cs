@@ -1,7 +1,7 @@
 ﻿using System.IO;
 
 
-namespace samplesl.Sample_Console
+namespace Shot.Licensing.Sample_Console
 {
     public static class LicenseContants
     {
@@ -10,6 +10,6 @@ namespace samplesl.Sample_Console
         public static string PublicKey = new StreamReader(typeof(LicenseContants)
                                                      .Assembly
                                                      .GetManifestResourceStream(
-                                                     "samplesl.Sample_Console.Data.test.public.xml")).ReadToEnd();
+                                                     "Shot.Licensing.Sample_Console.Data.test.public.xml")).ReadToEnd();
     }
 }

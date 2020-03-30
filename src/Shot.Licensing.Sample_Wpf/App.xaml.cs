@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace samplesl.Sample_Wpf
+namespace Shot.Licensing.Sample_Wpf
 {
     /// <summary>
     /// Interaction logic for App.xaml

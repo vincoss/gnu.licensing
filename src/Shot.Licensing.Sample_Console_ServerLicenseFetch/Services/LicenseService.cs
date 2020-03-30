@@ -6,7 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 
-namespace samplesl.Sample_Console_ServerLicenseFetch.Services
+namespace Shot.Licensing.Sample_Console_ServerLicenseFetch.Services
 {
     public class LicenseService : ILicenseService
     {

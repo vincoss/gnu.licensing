@@ -1,5 +1,5 @@
-﻿using samplesl.Sample_XamarinForms.Services;
-using samplesl.Sample_XamarinForms.ViewModels;
+﻿using Shot.Licensing.Sample_XamarinForms.Services;
+using Shot.Licensing.Sample_XamarinForms.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace samplesl.Sample_XamarinForms.Views
+namespace Shot.Licensing.Sample_XamarinForms.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LicenseView : ContentPage

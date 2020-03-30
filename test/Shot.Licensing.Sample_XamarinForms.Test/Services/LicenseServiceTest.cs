@@ -1,5 +1,5 @@
 ﻿using RichardSzalay.MockHttp;
-using samplesl.Sample_XamarinForms.Services;
+using Shot.Licensing.Sample_XamarinForms.Services;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using Xunit;
 using System.IO;
 using System.Net.Http;
 
-namespace samplesl.Sample_XamarinForms.Test.Services
+namespace Shot.Licensing.Sample_XamarinForms.Test.Services
 {
     public class LicenseServiceTest
     {

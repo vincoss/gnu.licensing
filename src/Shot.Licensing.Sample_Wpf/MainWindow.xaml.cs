@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace samplesl.Sample_Wpf
+namespace Shot.Licensing.Sample_Wpf
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

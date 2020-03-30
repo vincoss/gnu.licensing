@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace samplesl.Svr
+namespace Shot.Licensing.Svr
 {
     public class Program
     {

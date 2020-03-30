@@ -5,14 +5,14 @@ using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using samplesl.Validation;
+using Shot.Licensing.Validation;
 using System.Text.Json;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Xamarin.Essentials;
 using System.Security.Cryptography;
 
-namespace samplesl.Sample_XamarinForms.Services
+namespace Shot.Licensing.Sample_XamarinForms.Services
 {
     public class LicenseService : BaseLicenseService, ILicenseService
     {

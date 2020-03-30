@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using samplesl.Svr.Interface;
-using samplesl.Svr.Models;
+using Shot.Licensing.Svr.Interface;
+using Shot.Licensing.Svr.Models;
 
 
-namespace samplesl.Svr.Controllers
+namespace Shot.Licensing.Svr.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

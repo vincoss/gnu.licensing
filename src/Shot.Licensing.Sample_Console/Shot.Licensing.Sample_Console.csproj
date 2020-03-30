@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shot.Licensing\samplesl.csproj" />
+    <ProjectReference Include="..\Shot.Licensing\Shot.Licensing.csproj" />
   </ItemGroup>
 
   <ItemGroup>

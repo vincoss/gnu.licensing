@@ -1,5 +1,5 @@
-﻿using samplesl.Sample_XamarinForms;
-using samplesl.Sample_XamarinForms.Services;
+﻿using Shot.Licensing.Sample_XamarinForms;
+using Shot.Licensing.Sample_XamarinForms.Services;
 using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;

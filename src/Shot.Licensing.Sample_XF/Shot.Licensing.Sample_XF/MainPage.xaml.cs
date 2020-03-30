@@ -1,4 +1,4 @@
-﻿using samplesl.Sample_XamarinForms.Views;
+﻿using Shot.Licensing.Sample_XamarinForms.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

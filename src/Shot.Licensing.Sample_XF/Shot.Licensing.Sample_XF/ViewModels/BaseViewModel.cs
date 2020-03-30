@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace samplesl.Sample_XamarinForms.ViewModels
+namespace Shot.Licensing.Sample_XamarinForms.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

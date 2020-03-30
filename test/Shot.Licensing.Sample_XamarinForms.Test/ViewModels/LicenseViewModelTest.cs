@@ -1,14 +1,14 @@
-﻿using samplesl.Sample_XamarinForms.Services;
-using samplesl.Sample_XamarinForms.ViewModels;
+﻿using Shot.Licensing.Sample_XamarinForms.Services;
+using Shot.Licensing.Sample_XamarinForms.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using NSubstitute;
 using System.IO;
-using samplesl.Validation;
+using Shot.Licensing.Validation;
 
-namespace samplesl.Sample_XamarinForms.Test.ViewModels
+namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
 {
     public class LicenseViewModelTest
     {

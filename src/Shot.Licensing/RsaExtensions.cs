@@ -1,5 +1,5 @@
 ﻿//
-// Copyright © 2003-2020 https://github.com/vincoss/samplesl
+// Copyright © 2003-2020 https://github.com/vincoss/Shot.Licensing
 //
 // Author:
 //  https://github.com/dotnet/core/issues/874
@@ -29,7 +29,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public static class RsaExtensions
     {

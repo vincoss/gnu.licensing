@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using samplesl.Svr.Data.Configuration;
+using Shot.Licensing.Svr.Data.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace samplesl.Svr.Data
+namespace Shot.Licensing.Svr.Data
 {
     public class EfDbContext : DbContext
     { 
@@ -24,7 +24,7 @@ namespace samplesl.Svr.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // optionsBuilder.UseSqlite(@"Data Source=C:\Temp\Glut\samplesl.db");
+            // optionsBuilder.UseSqlite(@"Data Source=C:\Temp\Glut\Shot.Licensing.db");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

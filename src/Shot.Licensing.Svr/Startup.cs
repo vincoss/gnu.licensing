@@ -14,12 +14,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using samplesl.Svr.Data;
-using samplesl.Svr.Interface;
-using samplesl.Svr.Services;
+using Shot.Licensing.Svr.Data;
+using Shot.Licensing.Svr.Interface;
+using Shot.Licensing.Svr.Services;
 
 
-namespace samplesl.Svr
+namespace Shot.Licensing.Svr
 {
     public class Startup
     {

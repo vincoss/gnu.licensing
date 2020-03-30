@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace samplesl.Test
+namespace Shot.Licensing.Test
 {
     public class LicenseResultTest
     {

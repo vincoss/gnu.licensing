@@ -31,10 +31,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using samplesl;
+using Shot.Licensing;
 
 
-namespace samplesl
+namespace Shot.Licensing
 {
     /// <summary>
     /// A software license

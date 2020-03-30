@@ -26,7 +26,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace samplesl.Validation
+namespace Shot.Licensing.Validation
 {
     internal class ValidationChainBuilder : IStartValidationChain, IValidationChain
     {

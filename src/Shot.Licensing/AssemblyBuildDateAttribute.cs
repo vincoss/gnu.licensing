@@ -26,7 +26,7 @@
 using System;
 using System.Globalization;
 
-namespace samplesl
+namespace Shot.Licensing
 {
     /// <summary>
     /// Defines assembly build date information for an assembly manifest.

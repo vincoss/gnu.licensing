@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace samplesl.Sample_XamarinForms
+namespace Shot.Licensing.Sample_XamarinForms
 {
     public interface IApplicationContext
     {

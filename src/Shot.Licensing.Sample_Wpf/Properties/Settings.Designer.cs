@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace samplesl.Sample_Wpf.Properties
+namespace Shot.Licensing.Sample_Wpf.Properties
 {
 
 

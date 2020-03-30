@@ -32,11 +32,11 @@ test how to migrate licence between devices, here do some research, must be very
 	user can copy licence to many devices but when online it will deatvicate licence for other devices
 
 ## Samples
-Create sample samplesl.Sample_Console
-Create sample samplesl.Sample_Console_ServerLicenseFetch
-Create sample samplesl.Sample_Wpf
-Create sample samplesl.Sample_Website
-Create sample samplesl.Sample_Xamarin
+Create sample Shot.Licensing.Sample_Console
+Create sample Shot.Licensing.Sample_Console_ServerLicenseFetch
+Create sample Shot.Licensing.Sample_Wpf
+Create sample Shot.Licensing.Sample_Website
+Create sample Shot.Licensing.Sample_Xamarin
 
 ## Server
 lincese server & client timeout setting, setting for httpClient timeout
@@ -107,9 +107,9 @@ Content-Type: application/json
 {"LicenseId":"D4248D45-7B4A-4832-A7D1-6AA32A752453","Attributes":{"ClientId":"FAAAEB70-3BCF-4FDC-B67A-5C6B81C316C5"}}
 
 ## Resources
-https://github.com/junian/samplesl
+https://github.com/junian/Shot.Licensing
 https://github.com/dnauck/Portable.Licensing
-https://www.nuget.org/packages/samplesl
+https://www.nuget.org/packages/Shot.Licensing
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-sign-xml-documents-with-digital-signatures
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-verify-the-digital-signatures-of-xml-documents
 

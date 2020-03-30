@@ -25,7 +25,7 @@
 
 using System.Xml.Linq;
 
-namespace samplesl
+namespace Shot.Licensing
 {
     /// <summary>
     /// The customer of a <see cref="License"/>.

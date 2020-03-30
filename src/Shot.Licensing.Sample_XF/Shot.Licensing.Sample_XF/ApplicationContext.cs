@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 
-namespace samplesl.Sample_XamarinForms
+namespace Shot.Licensing.Sample_XamarinForms
 {
     public class ApplicationContext : IApplicationContext
     {

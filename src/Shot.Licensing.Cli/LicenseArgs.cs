@@ -1,10 +1,10 @@
-﻿using samplesl;
+﻿using Shot.Licensing;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 
-namespace samplesl.Cli
+namespace Shot.Licensing.Cli
 {
     public class LicenseArgs
     {

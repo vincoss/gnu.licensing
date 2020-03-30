@@ -1,5 +1,5 @@
 ﻿//
-// Copyright © 2003-2020 https://github.com/vincoss/samplesl
+// Copyright © 2003-2020 https://github.com/vincoss/Shot.Licensing
 //
 // Author:
 //  Ferdinand Lukasak
@@ -23,7 +23,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using samplesl;
+using Shot.Licensing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,7 +33,7 @@ using System.Xml;
 using System.Xml.Linq;
 
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public static class XmlExtensions
     {
@@ -221,7 +221,7 @@ namespace samplesl
                 pss = reader.ReadToEnd();
             }
 
-            var license = samplesl.License.New()
+            var license = Shot.Licensing.License.New()
                        .WithUniqueIdentifier(Guid.NewGuid())
                        .As(type)
                        .ExpiresAt(expire)

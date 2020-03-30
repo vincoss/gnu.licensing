@@ -2,7 +2,7 @@
 using System.IO;
 
 
-namespace samplesl.Sample_XamarinForms
+namespace Shot.Licensing.Sample_XamarinForms
 {
     public enum AppLicense : byte
     {

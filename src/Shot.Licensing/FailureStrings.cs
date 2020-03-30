@@ -1,5 +1,5 @@
 ﻿//
-// Copyright © 2003-2020 https://github.com/vincoss/samplesl
+// Copyright © 2003-2020 https://github.com/vincoss/Shot.Licensing
 //
 // Author:
 //  Ferdinand Lukasak
@@ -26,10 +26,10 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using samplesl.Validation;
+using Shot.Licensing.Validation;
 
 
-namespace samplesl
+namespace Shot.Licensing
 {
     public static class FailureStrings
     {

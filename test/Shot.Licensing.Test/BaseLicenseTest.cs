@@ -5,19 +5,19 @@ using System.IO;
 using System.Text;
 using System.Threading;
 
-namespace samplesl.Test
+namespace Shot.Licensing.Test
 {
     public class BaseLicenseTest
     {
         public static string PublicKey = new StreamReader(typeof(BaseLicenseTest)
                                                      .Assembly
                                                      .GetManifestResourceStream(
-                                                     "samplesl.Test.Data.Pulic.xml")).ReadToEnd();
+                                                     "Shot.Licensing.Test.Data.Pulic.xml")).ReadToEnd();
 
         public static string PrivateKey = new StreamReader(typeof(BaseLicenseTest)
                                                    .Assembly
                                                    .GetManifestResourceStream(
-                                                   "samplesl.Test.Data.Private.xml")).ReadToEnd();
+                                                   "Shot.Licensing.Test.Data.Private.xml")).ReadToEnd();
 
         public static DateTime ConvertToRfc1123(DateTime dateTime)
         {
