@@ -3,8 +3,12 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-
+using Shot.Licensing.Api.Data;
+using Shot.Licensing.Api.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Shot.Licensing.Api
 {
@@ -26,6 +30,18 @@ namespace Shot.Licensing.Api
             {
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
                 var host = CreateHostBuilder(configuration, args).Build();
+
+                Log.Information("Applying migrations ({ApplicationContext})...", AppName);
+                host.MigrateDbContext<EfDbContext>((context, services) =>
+                {
+                    var env = services.GetService<IWebHostEnvironment>();
+                    var logger = services.GetService<ILogger<EfDbContextSeed>>();
+                    var settings = services.GetService<IOptions<AppSettings>>();
+
+                    new EfDbContextSeed()
+                        .SeedAsync(context, env, logger, settings)
+                        .Wait();
+                });
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
                 host.Run();

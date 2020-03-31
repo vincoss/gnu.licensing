@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+
 namespace Shot.Licensing.Api.Data.Configuration
 {
     public class LicenseProductConfiguration : IEntityTypeConfiguration<LicenseProduct>
@@ -33,6 +34,10 @@ namespace Shot.Licensing.Api.Data.Configuration
             builder.Property(t => t.ProductDescription)
                    .IsRequired()
                    .HasColumnType("NVARCHAR(1024) COLLATE NOCASE");
+
+            builder.Property(x => x.SignKeyName)
+                  .IsRequired()
+                  .HasColumnType("VARCHAR(64) COLLATE NOCASE");
 
             builder.Property(x => x.CreatedDateTimeUtc)
                    .IsRequired()

@@ -1,18 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shot.Licensing.Api.Data.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Shot.Licensing.Api.Data
 {
     public class EfDbContext : DbContext
-    { 
+    {
         public EfDbContext(DbContextOptions<EfDbContext> options) : base(options)
         {
-            Database.EnsureCreated();
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
@@ -22,13 +17,10 @@ namespace Shot.Licensing.Api.Data
 
         public DbSet<License> Licenses { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            // optionsBuilder.UseSqlite(@"Data Source=C:\Temp\Glut\Shot.Licensing.db");
-        }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new LicenseProductConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseRegistrationConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseConfiguration());

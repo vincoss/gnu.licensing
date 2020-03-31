@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Shot.Licensing.Api.Data.Configuration
 {
@@ -30,6 +27,10 @@ namespace Shot.Licensing.Api.Data.Configuration
             builder.Property(t => t.LicenseUuid)
                    .IsRequired()
                    .HasColumnType("VARCHAR(36)");
+
+            builder.Property(t => t.ProductUuid)
+                .IsRequired()
+                .HasColumnType("VARCHAR(36)");
 
             builder.Property(t => t.LicenseString)
                    .IsRequired()

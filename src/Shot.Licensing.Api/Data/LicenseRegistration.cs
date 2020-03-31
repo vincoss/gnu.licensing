@@ -8,15 +8,15 @@ namespace Shot.Licensing.Api.Data
     {
         [Key]
         public int LicenseRegistrationId { get; set; }
-        
+
+        [Required]
+        public int LicenseProductId { get; set; }
+
         [Required]
         public Guid LicenseUuid { get; set; }
 
         [Required]
         public Guid ProductUuid { get; set; }
-
-        [Required]
-        public int LicenseProductId { get; set; }
 
         [Required]
         public string LicenseName { get; set; }

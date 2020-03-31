@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Shot.Licensing.Api.Data.Configuration
 {
@@ -23,13 +20,17 @@ namespace Shot.Licensing.Api.Data.Configuration
                    .IsRequired()
                    .HasColumnType("INTEGER");
 
-            builder.Property(t => t.LicenseUuid)
-                   .IsRequired()
-                   .HasColumnType("VARCHAR(36)");
-
             builder.Property(t => t.LicenseProductId)
                    .IsRequired()
                    .HasColumnType("INTEGER");
+
+            builder.Property(t => t.LicenseUuid)
+                   .IsRequired()
+                   .HasColumnType("VARCHAR(36)");
+            
+            builder.Property(t => t.ProductUuid)
+                   .IsRequired()
+                   .HasColumnType("VARCHAR(36)");
 
             builder.Property(t => t.LicenseName)
                    .IsRequired()
@@ -40,9 +41,12 @@ namespace Shot.Licensing.Api.Data.Configuration
                    .HasColumnType("NVARCHAR(256) COLLATE NOCASE");
 
             builder.Property(t => t.IsActive)
-                   .IsRequired()
-                   .HasDefaultValue(true)
-                   .HasColumnType("BOOLEAN");
+                .IsRequired()
+                .HasDefaultValue(true)
+                .HasColumnType("BOOLEAN");
+
+            builder.Property(t => t.Expire)
+                   .HasColumnType("DATETIME");
 
             builder.Property(x => x.CreatedDateTimeUtc)
                    .IsRequired()
