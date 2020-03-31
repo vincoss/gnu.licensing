@@ -1,16 +1,16 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
+
 
 namespace Shot.Licensing.Api
 {
+    /// <summary>
+    /// https://localhost:443/api/license
+    /// </summary>
     public class Program
     {
         public static readonly string Namespace = typeof(Program).Namespace;
@@ -29,6 +29,8 @@ namespace Shot.Licensing.Api
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
                 host.Run();
+
+                Log.Information("Started web host ({ApplicationContext})...", AppName);
 
                 return 0;
             }
@@ -50,17 +52,20 @@ namespace Shot.Licensing.Api
                     webBuilder
                       .CaptureStartupErrors(false)
                       .UseStartup<Startup>()
+                      .UseContentRoot(Directory.GetCurrentDirectory())
                       .UseConfiguration(configuration)
-                      .UseSerilog();
+                      .UseSerilog()
+                      .UseUrls("https://*:443");
                 });
 
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
             var cfg = new LoggerConfiguration()
-                .ReadFrom.Configuration(configuration)
+                .MinimumLevel.Verbose()
                 .Enrich.WithProperty("ApplicationContext", AppName)
                 .Enrich.FromLogContext()
-                .WriteTo.Console();
+                .WriteTo.Console()
+                .ReadFrom.Configuration(configuration);
 
             return cfg.CreateLogger();
         }
@@ -70,6 +75,7 @@ namespace Shot.Licensing.Api
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("hostsettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
 
             return builder.Build();

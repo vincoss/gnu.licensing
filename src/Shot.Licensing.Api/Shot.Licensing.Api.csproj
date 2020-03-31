@@ -24,6 +24,12 @@
     <ProjectReference Include="..\Shot.Licensing\Shot.Licensing.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="hostsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 
 
 </Project>
