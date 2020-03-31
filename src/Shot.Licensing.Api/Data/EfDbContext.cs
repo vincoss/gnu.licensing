@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shot.Licensing.Svr.Data.Configuration;
+using Shot.Licensing.Api.Data.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Shot.Licensing.Svr.Data
+namespace Shot.Licensing.Api.Data
 {
     public class EfDbContext : DbContext
     { 

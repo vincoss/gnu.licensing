@@ -1,5 +1,5 @@
-﻿using Shot.Licensing.Svr.Interface;
-using Shot.Licensing.Svr.Models;
+﻿using Shot.Licensing.Api.Interface;
+using Shot.Licensing.Api.Models;
 using Shot.Licensing;
 using System;
 using System.Linq;
@@ -8,11 +8,11 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Shot.Licensing.Validation;
-using Shot.Licensing.Svr.Data;
+using Shot.Licensing.Api.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Shot.Licensing.Svr.Services
+namespace Shot.Licensing.Api.Services
 {
     public class LicenseService : ILicenseService
     {

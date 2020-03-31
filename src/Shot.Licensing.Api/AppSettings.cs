@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shot.Licensing.Svr
+namespace Shot.Licensing.Api
 {
     public class AppSettings
     {

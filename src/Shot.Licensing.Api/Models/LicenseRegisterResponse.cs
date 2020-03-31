@@ -1,7 +1,7 @@
 ﻿using Shot.Licensing.Validation;
 
 
-namespace Shot.Licensing.Svr.Models
+namespace Shot.Licensing.Api.Models
 {
     public class LicenseRegisterResponse
     {

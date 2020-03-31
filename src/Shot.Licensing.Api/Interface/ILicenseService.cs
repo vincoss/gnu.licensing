@@ -1,9 +1,9 @@
-﻿using Shot.Licensing.Svr.Models;
+﻿using Shot.Licensing.Api.Models;
 using Shot.Licensing.Validation;
 using System.Threading.Tasks;
 
 
-namespace Shot.Licensing.Svr.Interface
+namespace Shot.Licensing.Api.Interface
 {
     public interface ILicenseService
     {

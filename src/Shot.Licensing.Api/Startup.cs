@@ -14,12 +14,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Shot.Licensing.Svr.Data;
-using Shot.Licensing.Svr.Interface;
-using Shot.Licensing.Svr.Services;
+using Shot.Licensing.Api.Data;
+using Shot.Licensing.Api.Interface;
+using Shot.Licensing.Api.Services;
 
 
-namespace Shot.Licensing.Svr
+namespace Shot.Licensing.Api
 {
     public class Startup
     {
@@ -35,7 +35,7 @@ namespace Shot.Licensing.Svr
         {
             services.AddControllers()
                     .Services
-                    .AddHealthChecks(Configuration) // TODO: configure
+                    .AddHealthChecks(Configuration)
                     .AddHttpClientServices(Configuration)
                     .AddCustomMvc(Configuration);
         }
@@ -50,18 +50,9 @@ namespace Shot.Licensing.Svr
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
             }
 
-            var pathBase = Configuration["PATH_BASE"];
-
-            if (!string.IsNullOrEmpty(pathBase))
-            {
-                app.UsePathBase(pathBase);
-            }
-
-            //app.UseHttpsRedirection();    // TODO:
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
 

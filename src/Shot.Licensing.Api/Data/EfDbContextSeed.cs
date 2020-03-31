@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Shot.Licensing.Svr.Data
+namespace Shot.Licensing.Api.Data
 {
     public class EfDbContextSeed
     {

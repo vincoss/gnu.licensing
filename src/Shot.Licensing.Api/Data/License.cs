@@ -2,13 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Shot.Licensing.Svr.Data
+namespace Shot.Licensing.Api.Data
 {
-    public class LicenseRegistration
+    public class License
     {
         [Key]
+        public int LicenseId { get; set; }
+
+        [Required]
         public int LicenseRegistrationId { get; set; }
-        
+
         [Required]
         public Guid LicenseUuid { get; set; }
 
@@ -16,27 +19,26 @@ namespace Shot.Licensing.Svr.Data
         public Guid ProductUuid { get; set; }
 
         [Required]
-        public int LicenseProductId { get; set; }
+        public string LicenseString { get; set; }
 
         [Required]
-        public string LicenseName { get; set; }
+        public string Checksum { get; set; }
 
         [Required]
-        public string LicenseEmail { get; set; }
+        public string ChecksumType { get; set; }
 
-        [Required]
-        public LicenseType LicenseType { get; set; }
-
-        public bool? IsActive { get; set; } // Blacklist
-
-        public int Quantity { get; set; }
-
-        public DateTime? Expire { get; set; }  
+        public bool? IsActive { get; set; }
 
         [Required]
         public DateTime CreatedDateTimeUtc { get; set; }
 
         [Required]
+        public DateTime ModifiedDateTimeUtc { get; set; }
+
+        [Required]
         public string CreatedByUser { get; set; }
+
+        [Required]
+        public string ModifiedByUser { get; set; }
     }
 }
