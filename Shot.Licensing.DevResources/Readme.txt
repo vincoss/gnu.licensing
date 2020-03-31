@@ -2,7 +2,6 @@
 ## Task (TODO)
 app.UseSwagger() for the API doc
 demo seed data
-table relationship
 
 
 ## Enable SSL on localhost|help

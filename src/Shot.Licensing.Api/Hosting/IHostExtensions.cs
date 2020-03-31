@@ -5,15 +5,12 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Polly;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Shot.Licensing.Api.Hosting
 {
     public static class IHostExtensions
     {
-
         public static IHost MigrateDbContext<TContext>(this IHost webHost, Action<TContext, IServiceProvider> seeder) where TContext : DbContext
         {
             using (var scope = webHost.Services.CreateScope())

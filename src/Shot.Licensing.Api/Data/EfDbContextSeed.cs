@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace Shot.Licensing.Api.Data
 {
@@ -17,13 +16,14 @@ namespace Shot.Licensing.Api.Data
 
             try
             {
-                //var contentRootPath = env.ContentRootPath;
-                //var webroot = env.WebRootPath;
+                var contentRootPath = env.ContentRootPath;
+                var webroot = env.WebRootPath;
 
-                //if (!context.Products.Any())
-                //{
-                //    await context.SaveChangesAsync();
-                //}
+                if (!context.Products.Any())
+                {
+                    // TODO: seed
+                    await context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {

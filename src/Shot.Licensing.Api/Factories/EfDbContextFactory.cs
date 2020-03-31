@@ -2,11 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Shot.Licensing.Api.Data;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 namespace Shot.Licensing.Api.Factories
@@ -17,7 +13,7 @@ namespace Shot.Licensing.Api.Factories
         {
             var config = new ConfigurationBuilder()
                .SetBasePath(Path.Combine(Directory.GetCurrentDirectory()))
-               .AddJsonFile("appsettings.json")
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                .AddEnvironmentVariables()
                .Build();
 

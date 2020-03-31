@@ -47,80 +47,80 @@ namespace Shot.Licensing.Api.Services
 
         public Task<IValidationFailure> ValidateAsync(LicenseRegisterRequest request)
         {
-            //if(request == null)
-            //{
-            //    throw new ArgumentNullException(nameof(request));
-            //}
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
 
-            //if (request.LicenseId == Guid.Empty)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
-            //}
-            //if (request.ProductId == Guid.Empty)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
-            //}
+            if (request.LicenseId == Guid.Empty)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
+            }
+            if (request.ProductId == Guid.Empty)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
+            }
 
-            //var registration = _context.Registrations.SingleOrDefault(x => x.LicenseUuid == request.LicenseId);
+            var registration = _context.Registrations.SingleOrDefault(x => x.LicenseUuid == request.LicenseId);
 
-            //if(registration == null)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
-            //}
+            if (registration == null)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
+            }
 
-            //if(registration.ProductUuid != request.ProductId)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
-            //}
+            if (registration.ProductUuid != request.ProductId)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
+            }
 
-            //if(registration.IsActive == null || registration.IsActive.Value == false)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
-            //}
+            if (registration.IsActive == null || registration.IsActive.Value == false)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
+            }
 
-            //if(registration.Expire <= DateTime.UtcNow)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT07Code));
-            //}
+            if (registration.Expire <= DateTime.UtcNow)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT07Code));
+            }
 
-            //if (IsLicenseAlreadyActivated(request.LicenseId))
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT06Code));
-            //}
+            if (IsLicenseAlreadyActivated(request.LicenseId))
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT06Code));
+            }
 
-            //if(LicenseGetUsage(request.LicenseId) >= registration.Quantity)
-            //{
-            //    return Task.FromResult(FailureStrings.Get(FailureStrings.ACT10Code));
-            //}
+            if (LicenseGetUsage(request.LicenseId) >= registration.Quantity)
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT10Code));
+            }
 
             // ACT06Code
             return Task.FromResult<IValidationFailure>(null);
         }
 
-        //public bool IsValidLicenseId(Guid licenseId)
-        //{
-        //    return _context.Registrations.Any(x => x.LicenseUuid == licenseId);
-        //}
+        public bool IsValidLicenseId(Guid licenseId)
+        {
+            return _context.Registrations.Any(x => x.LicenseUuid == licenseId);
+        }
 
-        //public bool IsValidLicenseProductId(Guid licenseId, Guid productId)
-        //{
-        //    return _context.Registrations.Any(x => x.LicenseUuid == licenseId && x.ProductUuid == productId);
-        //}
+        public bool IsValidLicenseProductId(Guid licenseId, Guid productId)
+        {
+            return _context.Registrations.Any(x => x.LicenseUuid == licenseId && x.ProductUuid == productId);
+        }
 
-        //public bool IsLicenseCancelled(Guid licenseId)
-        //{
-        //    return _context.Registrations.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive == false);
-        //}
+        public bool IsLicenseCancelled(Guid licenseId)
+        {
+            return _context.Registrations.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive == false);
+        }
 
-        //public bool IsLicenseAlreadyActivated(Guid licenseId)
-        //{
-        //    return _context.Licenses.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
-        //}
+        public bool IsLicenseAlreadyActivated(Guid licenseId)
+        {
+            return _context.Licenses.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
+        }
 
-        //public int LicenseGetUsage(Guid licenseId)
-        //{
-        //    return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
-        //}
+        public int LicenseGetUsage(Guid licenseId)
+        {
+            return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
+        }
 
 
         public async Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request)

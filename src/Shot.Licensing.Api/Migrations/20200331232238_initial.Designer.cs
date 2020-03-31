@@ -9,7 +9,7 @@ using Shot.Licensing.Api.Data;
 namespace Shot.Licensing.Api.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20200331065429_initial")]
+    [Migration("20200331232238_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
