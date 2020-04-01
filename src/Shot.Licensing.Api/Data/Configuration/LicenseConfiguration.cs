@@ -11,8 +11,8 @@ namespace Shot.Licensing.Api.Data.Configuration
             builder.ToTable(nameof(License))
                    .HasIndex(x => new { x.LicenseId, x.IsActive }).IsUnique();
 
-            builder.ToTable(nameof(License))
-                  .HasIndex(x => x.LicenseUuid).IsUnique();
+            //builder.ToTable(nameof(License))
+            //      .HasIndex(x => x.LicenseUuid).IsUnique(); // TODO: license Uuid can be multiple times if quanity and not active
 
             builder.HasKey(x => x.LicenseId);
 

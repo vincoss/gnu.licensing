@@ -38,7 +38,7 @@ namespace Shot.Licensing.Api.Controllers
                 return BadRequest();
             }
 
-            return await _licenseService.CreateAsync(request);
+            return await _licenseService.CreateAsync(request, User.Identity.Name);
         }
     }
 }

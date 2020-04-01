@@ -72,12 +72,6 @@ namespace Shot.Licensing.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_License_LicenseUuid",
-                table: "License",
-                column: "LicenseUuid",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_License_LicenseId_IsActive",
                 table: "License",
                 columns: new[] { "LicenseId", "IsActive" },

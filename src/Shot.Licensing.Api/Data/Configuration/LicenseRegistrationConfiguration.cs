@@ -12,7 +12,7 @@ namespace Shot.Licensing.Api.Data.Configuration
                   .HasIndex(x => new { x.LicenseRegistrationId, x.LicenseProductId, x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
 
             builder.ToTable(nameof(LicenseRegistration))
-                .HasIndex(x => x.LicenseUuid).IsUnique();
+                .HasIndex(x => new { x.LicenseUuid }).IsUnique();
 
             builder.HasKey(x => x.LicenseRegistrationId);
 

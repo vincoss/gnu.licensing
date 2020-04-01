@@ -9,7 +9,7 @@ using Shot.Licensing.Api.Data;
 namespace Shot.Licensing.Api.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20200331232238_initial")]
+    [Migration("20200401065918_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -66,9 +66,6 @@ namespace Shot.Licensing.Api.Migrations
                         .HasColumnType("VARCHAR(36)");
 
                     b.HasKey("LicenseId");
-
-                    b.HasIndex("LicenseUuid")
-                        .IsUnique();
 
                     b.HasIndex("LicenseId", "IsActive")
                         .IsUnique();

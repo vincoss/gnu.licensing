@@ -12,16 +12,11 @@ using Shot.Licensing.Api.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
+
 namespace Shot.Licensing.Api.Services
 {
     public class LicenseService : ILicenseService
     {
-        public static string PrivateKey;
-        static LicenseService()
-        {
-            PrivateKey = File.ReadAllText(@"C:\_Dev\GitHub\FL\shot.licensing\resources\test.private.xml"); // TODO:
-        }
-
         private readonly EfDbContext _context;
         private readonly ILogger<LicenseService> _logger;
         private readonly IOptionsSnapshot<AppSettings> _options;
@@ -78,7 +73,7 @@ namespace Shot.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
             }
 
-            if (registration.Expire <= DateTime.UtcNow)
+            if (registration.Expire != null && registration.Expire <= DateTime.UtcNow)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT07Code));
             }
@@ -93,41 +88,18 @@ namespace Shot.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT10Code));
             }
 
-            // ACT06Code
             return Task.FromResult<IValidationFailure>(null);
         }
 
-        public bool IsValidLicenseId(Guid licenseId)
-        {
-            return _context.Registrations.Any(x => x.LicenseUuid == licenseId);
-        }
-
-        public bool IsValidLicenseProductId(Guid licenseId, Guid productId)
-        {
-            return _context.Registrations.Any(x => x.LicenseUuid == licenseId && x.ProductUuid == productId);
-        }
-
-        public bool IsLicenseCancelled(Guid licenseId)
-        {
-            return _context.Registrations.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive == false);
-        }
-
-        public bool IsLicenseAlreadyActivated(Guid licenseId)
-        {
-            return _context.Licenses.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
-        }
-
-        public int LicenseGetUsage(Guid licenseId)
-        {
-            return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
-        }
-
-
-        public async Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request)
+        public async Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request, string userName)
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
+            }
+            if(string.IsNullOrWhiteSpace(userName))
+            {
+                throw new ArgumentNullException(nameof(userName));
             }
 
             try
@@ -141,7 +113,11 @@ namespace Shot.Licensing.Api.Services
                     };
                 }
 
-                var str = await Create(request, null, null);
+                var product = _context.Products.Single(x => x.ProductUuid == request.ProductId);
+                var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseId);
+                var str = await CreateLicense(request, registration, product);
+
+                await CreateLicenseRecord(registration, str, userName);
 
                 var result = new LicenseRegisterResult();
                 result.License = str;
@@ -164,7 +140,7 @@ namespace Shot.Licensing.Api.Services
             }
         }
 
-        private Task<string> Create(LicenseRegisterRequest request, LicenseRegistration registration, LicenseProduct product)
+        private Task<string> CreateLicense(LicenseRegisterRequest request, LicenseRegistration registration, LicenseProduct product)
         {
             var task = Task.Run(() =>
             {
@@ -185,10 +161,46 @@ namespace Shot.Licensing.Api.Services
             return task;
         }
 
+        private async Task<int> CreateLicenseRecord(LicenseRegistration registration, string str, string userName)
+        {
+
+            var license = new Shot.Licensing.Api.Data.License
+            {
+                LicenseRegistrationId = registration.LicenseRegistrationId,
+                LicenseUuid = registration.LicenseUuid,
+                ProductUuid = registration.ProductUuid,
+                LicenseString = str,
+                Checksum = Utils.GetSha256HashFromString(str),
+                ChecksumType = Utils.ChecksumType,
+                IsActive = true,
+                CreatedDateTimeUtc = DateTime.UtcNow,
+                ModifiedDateTimeUtc = DateTime.UtcNow,
+                CreatedByUser = userName,
+                ModifiedByUser = userName
+            };
+
+            _context.Licenses.Add(license);
+            return await _context.SaveChangesAsync();
+        }
+
         private string SignKeyGet(string name)
         {
             var path = Path.Combine(_options.Value.SignKeyPath, name);
             return File.ReadAllText(path);
         }
+
+        #region Private methods
+
+        private bool IsLicenseAlreadyActivated(Guid licenseId)
+        {
+            return _context.Licenses.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
+        }
+
+        private int LicenseGetUsage(Guid licenseId)
+        {
+            return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
+        }
+
+        #endregion
     }
 }

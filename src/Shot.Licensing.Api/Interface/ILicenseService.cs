@@ -8,6 +8,6 @@ namespace Shot.Licensing.Api.Interface
     public interface ILicenseService
     {
         Task<IValidationFailure> ValidateAsync(LicenseRegisterRequest request);
-        Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request);
+        Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request, string userName);
     }
 }

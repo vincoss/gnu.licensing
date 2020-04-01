@@ -7,6 +7,9 @@ export licence
 import licence
 verify licence
 
+## Database
+license registration, LicenseUuid and ProductUuid must be unique
+
 ## Client
 +build public key into the app already
 license on client store in the root directory or secureStore
@@ -39,6 +42,7 @@ Create sample Shot.Licensing.Sample_Website
 Create sample Shot.Licensing.Sample_Xamarin
 
 ## Server
+ACT00Code, ACT01Code not used
 lincese server & client timeout setting, setting for httpClient timeout
 see balsamique license request email if user needs to re-fetch license email. send same email as for registration.
 Licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID

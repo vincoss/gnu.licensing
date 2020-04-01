@@ -65,9 +65,6 @@ namespace Shot.Licensing.Api.Migrations
 
                     b.HasKey("LicenseId");
 
-                    b.HasIndex("LicenseUuid")
-                        .IsUnique();
-
                     b.HasIndex("LicenseId", "IsActive")
                         .IsUnique();
 

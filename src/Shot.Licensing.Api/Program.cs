@@ -69,9 +69,9 @@ namespace Shot.Licensing.Api
                       .CaptureStartupErrors(false)
                       .UseStartup<Startup>()
                       .UseContentRoot(Directory.GetCurrentDirectory())
+                      .UseUrls("https://*:443")
                       .UseConfiguration(configuration)
-                      .UseSerilog()
-                      .UseUrls("https://*:443");
+                      .UseSerilog();
                 });
 
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)

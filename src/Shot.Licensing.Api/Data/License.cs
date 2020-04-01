@@ -27,7 +27,7 @@ namespace Shot.Licensing.Api.Data
         [Required]
         public string ChecksumType { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool? IsActive { get; set; } = true;
 
         [Required]
         public DateTime CreatedDateTimeUtc { get; set; }
