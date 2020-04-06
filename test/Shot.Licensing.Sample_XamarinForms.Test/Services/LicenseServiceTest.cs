@@ -8,6 +8,7 @@ using Xunit;
 using System.IO;
 using System.Net.Http;
 using System.Text.Json;
+using Shot.Licensing.Validation;
 
 namespace Shot.Licensing.Sample_XamarinForms.Test.Services
 {
@@ -118,7 +119,12 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.Services
             var response = new LicenseRegisterResult
             {
                 License = "200",
-                Failure = null
+                Failure = new GeneralValidationFailure
+                {
+                    Code = "code",
+                    Message = "message",
+                    HowToResolve = "how-to-resolve"
+                }
             };
 
             var str = JsonSerializer.Serialize(response);
@@ -133,7 +139,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.Services
             var result = await service.Register(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseGlobals.LicenseServerUrl);
 
             Assert.Equal("200", result.License);
-            Assert.Null(result.Failure);
+            Assert.Equal("code", result.Failure.Code);
 
         }
 

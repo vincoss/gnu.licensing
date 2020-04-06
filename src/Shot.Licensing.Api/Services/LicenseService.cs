@@ -107,7 +107,7 @@ namespace Shot.Licensing.Api.Services
                 {
                     return new LicenseRegisterResult
                     {
-                        Failure = failure
+                        Failure = (GeneralValidationFailure)failure
                     };
                 }
 
@@ -128,7 +128,7 @@ namespace Shot.Licensing.Api.Services
 
                 return new LicenseRegisterResult
                 {
-                    Failure = FailureStrings.Get(FailureStrings.ACT11Code)
+                    Failure = (GeneralValidationFailure)FailureStrings.Get(FailureStrings.ACT11Code)
                 };
             }
         }

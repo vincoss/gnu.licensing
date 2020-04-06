@@ -33,7 +33,6 @@ namespace Shot.Licensing
     public class LicenseRegisterResult
     {
         public string License { get; set; }
-        public IValidationFailure Failure { get; set; }
-
+        public GeneralValidationFailure Failure { get; set; }
     }
 }

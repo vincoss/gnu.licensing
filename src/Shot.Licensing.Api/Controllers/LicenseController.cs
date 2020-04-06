@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Shot.Licensing.Api.Interface;
@@ -38,7 +39,7 @@ namespace Shot.Licensing.Api.Controllers
                 return BadRequest();
             }
 
-            return await _licenseService.CreateAsync(request, User.Identity.Name);
+            return  await _licenseService.CreateAsync(request, string.IsNullOrWhiteSpace(User.Identity.Name) ? Environment.UserName: User.Identity.Name);
         }
     }
 }

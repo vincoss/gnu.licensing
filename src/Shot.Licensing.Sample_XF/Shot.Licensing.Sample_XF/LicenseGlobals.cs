@@ -13,7 +13,7 @@ namespace Shot.Licensing.Sample_XamarinForms
     public static class LicenseGlobals
     {
         private static AppLicense _appLicense;
-        public static Guid ProductId = new Guid("6E7CCB7E-4940-4EAB-9D3A-FF48E72A0CA9"); // Example
+        public static Guid ProductId = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"); // Example
         public const string AppId = "AppId";
         public const string LicenseKey = "LicenseKey";
         public const string LicenseServerUrl = "http://localhost:5000/api/license";

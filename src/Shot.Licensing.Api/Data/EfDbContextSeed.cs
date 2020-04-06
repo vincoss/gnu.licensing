@@ -19,10 +19,9 @@ namespace Shot.Licensing.Api.Data
                 var contentRootPath = env.ContentRootPath;
                 var webroot = env.WebRootPath;
 
-                if (!context.Products.Any())
+                if (context.Products.Any() == false && settings.Value.UseCustomizationData)
                 {
-                    // TODO: seed
-                    await context.SaveChangesAsync();
+                    DemoSeedData(context);
                 }
             }
             catch (Exception ex)
@@ -36,6 +35,43 @@ namespace Shot.Licensing.Api.Data
                     await SeedAsync(context, env, logger, settings, retryForAvaiability);
                 }
             }
+        }
+
+        private void DemoSeedData(EfDbContext context)
+        {
+            var productUuid = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2");
+            var licenseUuid = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89");
+
+            var product = new LicenseProduct
+            {
+                ProductUuid = productUuid,
+                ProductName = "Demo-Product",
+                ProductDescription = "Demo-Product-Description",
+                SignKeyName = "test.private.xml",
+                CreatedDateTimeUtc = DateTime.UtcNow,
+                CreatedByUser = "test-user"
+            };
+
+            context.Products.Add(product);
+            context.SaveChanges();
+
+            var registration = new LicenseRegistration
+            {
+                LicenseProductId = product.LicenseProductId,
+                LicenseUuid = licenseUuid,
+                ProductUuid = product.ProductUuid,
+                LicenseName = "Demo-User",
+                LicenseEmail = "Demo-User-Email",
+                LicenseType = LicenseType.Standard,
+                IsActive = true,
+                Quantity = 5,
+                Expire = null,
+                CreatedDateTimeUtc = DateTime.UtcNow,
+                CreatedByUser = "test-user"
+            };
+
+            context.Registrations.Add(registration);
+            context.SaveChanges();
         }
     }
 }
