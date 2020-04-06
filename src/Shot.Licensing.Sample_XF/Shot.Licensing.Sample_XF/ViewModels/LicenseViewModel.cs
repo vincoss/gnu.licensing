@@ -58,6 +58,7 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
                     LicenseGlobals.Set(AppLicense.Full);
                     LicenseKey = result.License.Id.ToString();
                     LicenseType = LicenseGlobals.Get().ToString();
+                    ShowActivated = true;
                 }
                 else
                 {
@@ -135,6 +136,7 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
                 {
                     await _ctx.SetLicenseKeyAsync(result.License.Id.ToString());
                     LicenseGlobals.Set(AppLicense.Full);// TODO: remove
+                    IsBusy = false;
                     Initialize();
                 }
                 else
@@ -209,6 +211,14 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
         {
             get { return _licenseType; }
             set { SetProperty(ref _licenseType, value); }
+        }
+
+        private bool _showActivated;
+
+        public bool ShowActivated
+        {
+            get { return _showActivated; }
+            set { SetProperty(ref _showActivated, value); }
         }
 
         #endregion

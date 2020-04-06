@@ -25,8 +25,13 @@
 
             <Label Text="{Binding ErrorMessage}"
                    HorizontalOptions="FillAndExpand" TextColor="Red"
-                   IsVisible="{ Binding ShowError}" />
+                   IsVisible="{Binding ShowError}" />
 
+            <StackLayout IsVisible="{Binding ShowActivated}">
+                <BoxView HeightRequest="50" WidthRequest="50" BackgroundColor="Green" HorizontalOptions="Center"/>
+                <Label Text="Product Activated!" HorizontalOptions="Center"/>
+            </StackLayout>
+            
             <ActivityIndicator Color="Red" IsRunning="{Binding IsBusy}" />
 
         </StackLayout>
