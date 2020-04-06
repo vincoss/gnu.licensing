@@ -7,6 +7,7 @@ using System.Text;
 using Xunit;
 using System.IO;
 using System.Net.Http;
+using System.Text.Json;
 
 namespace Shot.Licensing.Sample_XamarinForms.Test.Services
 {
@@ -114,9 +115,17 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.Services
         {
             var mockHandler = new MockHttpMessageHandler();
 
+            var response = new LicenseRegisterResult
+            {
+                License = "200",
+                Failure = null
+            };
+
+            var str = JsonSerializer.Serialize(response);
+
             mockHandler
                 .When("/api/license")
-                .Respond("application/json", @"{""license"":""200"",""failure"":{""message"":""message"",""howToResolve"":""howToResolve""}}");
+                .Respond("application/json", str);
 
             var client = mockHandler.ToHttpClient();
 
@@ -124,8 +133,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.Services
             var result = await service.Register(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseGlobals.LicenseServerUrl);
 
             Assert.Equal("200", result.License);
-            Assert.Equal("message", result.Failure.Message);
-            Assert.Equal("howToResolve", result.Failure.HowToResolve);
+            Assert.Null(result.Failure);
 
         }
 

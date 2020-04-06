@@ -14,6 +14,7 @@ namespace Shot.Licensing.Api
 {
     /// <summary>
     /// https://localhost:443/api/license
+    /// https://localhost:443/hc
     /// </summary>
     public class Program
     {

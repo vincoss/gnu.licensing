@@ -17,12 +17,16 @@ namespace Shot.Licensing.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
+            if(configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using NSubstitute;
-
+using System.IO;
 
 namespace Shot.Licensing.Api.Services
 {
@@ -379,6 +379,156 @@ namespace Shot.Licensing.Api.Services
             }
         }
 
+        [Fact]
+        public async void CreateAsync_NotValid()
+        {
+            var options = Substitute.For<IOptionsSnapshot<AppSettings>>();
+            var logger = new LoggerFactory().CreateLogger<LicenseService>();
+
+            // In-memory database only exists while the connection is open
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    context.Database.EnsureCreated();
+                    var service = new LicenseService(context, logger, options);
+
+                    var request = new LicenseRegisterRequest();
+
+                    var result = await service.CreateAsync(request, "test-user");
+
+                    Assert.Equal("ACT.03", result.Failure.Code);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [Fact]
+        public async void CreateAsync_Exeption()
+        {
+            var options = Substitute.For<IOptionsSnapshot<AppSettings>>();
+            var logger = Substitute.For<ILogger<LicenseService>>();
+
+            // In-memory database only exists while the connection is open
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    context.Database.EnsureCreated();
+                    var service = new LicenseService(context, logger, options);
+
+                    var product = CreateProduct();
+                    context.Add(product);
+                    context.SaveChanges();
+
+                    var registration = CreateRegistration(product);
+                    registration.Quantity = 1;
+                    context.Add(registration);
+                    context.SaveChanges();
+
+
+                    var request = new LicenseRegisterRequest
+                    {
+                        LicenseId = registration.LicenseUuid,
+                        ProductId = registration.ProductUuid
+                    };
+
+                    var result = await service.CreateAsync(request, "test-user");
+
+                    Assert.Equal("ACT.11", result.Failure.Code);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [Fact]
+        public async void CreateAsync()
+        {
+            var options = Substitute.For<IOptionsSnapshot<AppSettings>>();
+            var logger = Substitute.For<ILogger<LicenseService>>();
+
+            var settings = new AppSettings
+            {
+                SignKeyPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data")
+            };
+
+            options.Value.Returns(settings);
+
+            // In-memory database only exists while the connection is open
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    context.Database.EnsureCreated();
+                    var service = new LicenseService(context, logger, options);
+
+                    var product = CreateProduct();
+                    context.Add(product);
+                    context.SaveChanges();
+
+                    var registration = CreateRegistration(product);
+                    registration.Quantity = 1;
+                    context.Add(registration);
+                    context.SaveChanges();
+
+
+                    var request = new LicenseRegisterRequest
+                    {
+                        LicenseId = registration.LicenseUuid,
+                        ProductId = registration.ProductUuid
+                    };
+
+                    var result = await service.CreateAsync(request, "test-user");
+                    var licenseRecord = await context.Licenses.SingleAsync(x => x.LicenseUuid == registration.LicenseUuid);
+
+                    Assert.Null(result.Failure);
+                    Assert.NotNull(result.License);
+                    Assert.NotNull(licenseRecord);
+                    Assert.Equal(1, licenseRecord.LicenseId);
+                    Assert.Equal(registration.LicenseRegistrationId, licenseRecord.LicenseRegistrationId);
+                    Assert.Equal(registration.LicenseUuid, licenseRecord.LicenseUuid);
+                    Assert.Equal(registration.ProductUuid, licenseRecord.ProductUuid);
+                    Assert.NotNull(licenseRecord.LicenseString);
+                    Assert.NotNull(licenseRecord.Checksum);
+                    Assert.Equal(Utils.ChecksumType, licenseRecord.ChecksumType);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         private LicenseProduct CreateProduct()
         {
             return new LicenseProduct
@@ -386,7 +536,7 @@ namespace Shot.Licensing.Api.Services
                 ProductUuid = Guid.NewGuid(),
                 ProductName = "test-product",
                 ProductDescription = "test-description",
-                SignKeyName = "test-sign-key-name",
+                SignKeyName = "test.private.xml",
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"
             };
@@ -398,7 +548,7 @@ namespace Shot.Licensing.Api.Services
             {
                 LicenseProductId = product.LicenseProductId,
                 LicenseUuid = Guid.NewGuid(),
-                ProductUuid = Guid.NewGuid(),
+                ProductUuid = product.ProductUuid,
                 LicenseName  = "test-name",
                 LicenseEmail = "test-email",
                 LicenseType = LicenseType.Standard,

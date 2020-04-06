@@ -1,12 +1,11 @@
-﻿using Shot.Licensing.Api.Interface;
+﻿
+using Shot.Licensing.Api.Interface;
 using Shot.Licensing.Api.Models;
-using Shot.Licensing;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Shot.Licensing.Validation;
 using Shot.Licensing.Api.Data;
 using Microsoft.Extensions.Logging;
@@ -78,14 +77,13 @@ namespace Shot.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT07Code));
             }
 
-            if (IsLicenseAlreadyActivated(request.LicenseId))
-            {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT06Code));
-            }
-
             if (LicenseGetUsage(request.LicenseId) >= registration.Quantity)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT10Code));
+            }
+            if (IsLicenseAlreadyActivated(request.LicenseId))
+            {
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT06Code));
             }
 
             return Task.FromResult<IValidationFailure>(null);
@@ -121,11 +119,6 @@ namespace Shot.Licensing.Api.Services
 
                 var result = new LicenseRegisterResult();
                 result.License = str;
-                result.Failure = new GeneralValidationFailure
-                {
-                    Message = nameof(GeneralValidationFailure.Message),
-                    HowToResolve = nameof(GeneralValidationFailure.HowToResolve)
-                };
 
                 return result;
             }
@@ -163,7 +156,6 @@ namespace Shot.Licensing.Api.Services
 
         private async Task<int> CreateLicenseRecord(LicenseRegistration registration, string str, string userName)
         {
-
             var license = new Shot.Licensing.Api.Data.License
             {
                 LicenseRegistrationId = registration.LicenseRegistrationId,
