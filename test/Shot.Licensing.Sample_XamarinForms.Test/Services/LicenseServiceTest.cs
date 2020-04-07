@@ -185,7 +185,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.Services
                 }
 
                 var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-                attributes.Add(LicenseGlobals.AppIdKey, id);
+                attributes.Add(LicenseGlobals.AppId, id);
                 return attributes;
             }
         }

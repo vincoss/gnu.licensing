@@ -20,7 +20,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Services
         {
             var failure = FailureStrings.Get(FailureStrings.ACT14Code);
 
-            var appId = GetAttributes()[LicenseGlobals.AppIdKey];
+            var appId = GetAttributes()[LicenseGlobals.AppId];
 
             var failures = actual.Validate()
                                         .ExpirationDate()
@@ -28,7 +28,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Services
                                         .And()
                                         .Signature(LicenseGlobals.PublicKey)
                                         .And()
-                                        .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseGlobals.AppIdKey), StringComparison.OrdinalIgnoreCase), failure)
+                                        .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseGlobals.AppId), StringComparison.OrdinalIgnoreCase), failure)
                                         .AssertValidLicense().ToList();
 
             return failures;
@@ -55,14 +55,14 @@ namespace Shot.Licensing.Sample_XamarinForms.Services
 
         protected virtual IDictionary<string, string> GetAttributes()
         {
-            var id = Preferences.Get(LicenseGlobals.AppIdKey, null);
+            var id = Preferences.Get(LicenseGlobals.AppId, null);
             if (string.IsNullOrWhiteSpace(id))
             {
                 throw new InvalidOperationException("Missing app ID");
             }
 
             var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            attributes.Add(LicenseGlobals.AppIdKey, id);
+            attributes.Add(LicenseGlobals.AppId, id);
             return attributes;
         }
 

@@ -26,7 +26,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
             var validationResult = new LicenseResult(license, null, null);
 
             service.ValidateAsync().Returns(validationResult);
-            ctx.GetValueOrDefault(LicenseGlobals.AppIdKey, null).Returns(appId);
+            ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
 
             model.Initialize();
 
@@ -59,7 +59,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
             var validationResult = new LicenseResult(null, exception, validation);
 
             service.ValidateAsync().Returns(validationResult);
-            ctx.GetValueOrDefault(LicenseGlobals.AppIdKey, null).Returns(appId);
+            ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
 
             model.Initialize();
 

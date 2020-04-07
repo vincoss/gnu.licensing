@@ -13,7 +13,10 @@ namespace Shot.Licensing.Sample_Console
 {
     class Program
     {
-        const string AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B"; // This one is to lock the license to particular machine or software installation.
+        /// <summary>
+        /// NOTE: This one is to lock the license to particular machine or software installation. Create unique Id when the software is installed or first time started.
+        /// </summary>
+        const string AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B";
 
         static void Main(string[] args)
         {
@@ -33,9 +36,11 @@ namespace Shot.Licensing.Sample_Console
             var directory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             var licensePath = Path.Combine(directory, "data", $"license.xml");
             
-            using(var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseContants.PublicKey)))
+            using(var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseGlobals.PublicKey)))
             using(var license = File.OpenRead(licensePath))
             {
+                Console.WriteLine("Validating license.");
+
                 var results = await Validate(license, publicKey);
 
                 if (results.Any())
@@ -48,7 +53,7 @@ namespace Shot.Licensing.Sample_Console
                 }
                 else
                 {
-                    Console.WriteLine("Device is licensed.");
+                    Console.WriteLine("Device is licensed. (Full)");
                 }
             }
         }
@@ -78,9 +83,9 @@ namespace Shot.Licensing.Sample_Console
                                                    .ExpirationDate()
                                                    .When(lic => lic.Type == LicenseType.Standard)
                                                    .And()
-                                                   .Signature(LicenseContants.PublicKey)
+                                                   .Signature(LicenseGlobals.PublicKey)
                                                    .And()
-                                                   .AssertThat(x => string.Equals(AppId, x.AdditionalAttributes.Get(LicenseContants.AppId), StringComparison.OrdinalIgnoreCase), failure)
+                                                   .AssertThat(x => string.Equals(AppId, x.AdditionalAttributes.Get(LicenseGlobals.AppId), StringComparison.OrdinalIgnoreCase), failure)
                                                    .AssertValidLicense().ToList();
 
                     foreach (var f in validationFailures)
