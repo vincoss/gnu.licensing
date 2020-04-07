@@ -39,12 +39,9 @@ namespace Shot.Licensing.Api.Data
 
         private void DemoSeedData(EfDbContext context)
         {
-            var productUuid = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2");
-            var licenseUuid = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89");
-
             var product = new LicenseProduct
             {
-                ProductUuid = productUuid,
+                ProductUuid = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"),
                 ProductName = "Demo-Product",
                 ProductDescription = "Demo-Product-Description",
                 SignKeyName = "test.private.xml",
@@ -58,13 +55,13 @@ namespace Shot.Licensing.Api.Data
             var registration = new LicenseRegistration
             {
                 LicenseProductId = product.LicenseProductId,
-                LicenseUuid = licenseUuid,
+                LicenseUuid = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89"),
                 ProductUuid = product.ProductUuid,
                 LicenseName = "Demo-User",
                 LicenseEmail = "Demo-User-Email",
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
-                Quantity = 5,
+                Quantity = 2,
                 Expire = null,
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"

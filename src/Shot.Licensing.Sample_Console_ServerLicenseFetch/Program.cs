@@ -11,9 +11,12 @@ using Shot.Licensing.Validation;
 
 namespace Shot.Licensing.Sample_Console_ServerLicenseFetch
 {
+    /// <summary>
+    /// NOTE: Ensure that the 'Shot.Licensing.Api' service is running.
+    /// </summary>
     class Program
     {
-        static readonly string MachineName = Environment.MachineName;
+        public static readonly string MachineName = Environment.MachineName;
 
         static void Main(string[] args)
         {
@@ -35,98 +38,31 @@ namespace Shot.Licensing.Sample_Console_ServerLicenseFetch
             */
 
             // User got license from purchase or regisration.
-            var licenseId = "6F32D1AF-1E09-4D3C-87AE-0D5C22EB96C8";
-
-            // Machine attributes to be embedded into the license.
-            var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            attributes.Add(LicenseContants.MachineName, MachineName);
+            var licenseId = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89");
 
             // Get a license file from the server.
-            var service = new LicenseService();
-            var licenseStr = await service.Register(licenseId, attributes, LicenseContants.LicenseServerUrl);
-            var directory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var licensePath = Path.Combine(directory, $"license.xml");
+            var service = new LicenseService(BaseLicenseService.CreateHttpClient());
+            var result = await service.RegisterAsync(licenseId);
 
-            // License could not be generated, or server is not available
-            if (string.IsNullOrWhiteSpace(licenseStr))
+            if(result.Successful)
             {
-                Console.WriteLine("Could not register a license");
-                return;
+                Console.WriteLine(service.GetPath());
+                Console.WriteLine("Device is licensed.");
             }
-
-           // Got license so save it somehwere
-            var element = XElement.Parse(licenseStr);
-            element.Save(licensePath);
-
-            // Validate license
-            using (var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseContants.PublicKey)))
-            using (var license = File.OpenRead(licensePath))
+            else
             {
-                var results = await Validate(license, publicKey);
-
-                if (results.Any())
+                foreach (var f in result.Failures)
                 {
-                    foreach (var r in results)
-                    {
-                        Console.WriteLine(r.Message);
-                        Console.WriteLine(r.HowToResolve);
-                    }
+                    Console.WriteLine(f.Code);
+                    Console.WriteLine(f.Message);
+                    Console.WriteLine(f.HowToResolve);
                 }
-                else
+
+                if (result.Exception != null)
                 {
-                    Console.WriteLine("Device is licensed.");
+                    Console.WriteLine(result.Exception);
                 }
             }
         }
-
-        public Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey)
-        {
-            if (license == null)
-            {
-                throw new ArgumentNullException(nameof(license));
-            }
-            if (publicKey == null)
-            {
-                throw new ArgumentNullException(nameof(publicKey));
-            }
-
-            var task = Task.Run(() =>
-            {
-                var results = new List<IValidationFailure>();
-
-                try
-                {
-                    var actual = License.Load(license);
-
-                    var failure = FailureStrings.Get(FailureStrings.ACT14Code);
-
-                    var validationFailures = actual.Validate()
-                                                   .ExpirationDate()
-                                                   .When(lic => lic.Type == LicenseType.Standard)
-                                                   .And()
-                                                   .Signature(LicenseContants.PublicKey)
-                                                   .And()
-                                                   .AssertThat(x => string.Equals(MachineName, x.AdditionalAttributes.Get(LicenseContants.MachineName), StringComparison.OrdinalIgnoreCase), failure)
-                                                   .AssertValidLicense().ToList();
-
-                    foreach (var f in validationFailures)
-                    {
-                        results.Add(f);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // TODO: replace with logger
-                    Console.WriteLine(ex);
-
-                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
-
-                    results.Add(failure);
-                }
-                return results.AsEnumerable();
-            });
-            return task;
-        }
-
     }
 }

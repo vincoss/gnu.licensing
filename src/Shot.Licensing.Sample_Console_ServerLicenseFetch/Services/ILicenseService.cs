@@ -10,6 +10,12 @@ namespace Shot.Licensing.Sample_Console_ServerLicenseFetch.Services
 {
     public interface ILicenseService
     {
-        Task<string> Register(string licenseRequest, IDictionary<string, string> attributes, string serverUrl);
+        string GetPath();
+
+        Task<LicenseResult> RegisterAsync(Guid licenseKey);
+
+        Task<LicenseResult> ValidateAsync();
+
+        Task Run();
     }
 }

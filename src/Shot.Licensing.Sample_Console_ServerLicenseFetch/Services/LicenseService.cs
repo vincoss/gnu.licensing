@@ -1,63 +1,81 @@
-﻿using System;
+﻿using Shot.Licensing.Validation;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Text.Json;
+using System.Linq;
+using System.IO;
 using System.Threading.Tasks;
 
 
 namespace Shot.Licensing.Sample_Console_ServerLicenseFetch.Services
 {
-    public class LicenseService : ILicenseService
+    public class LicenseService : BaseLicenseService, ILicenseService
     {
-        public async Task<string> Register(string licenseRequest, IDictionary<string, string> attributes, string serverUrl)
+        public LicenseService(HttpClient client) : base(client)
         {
-            if (string.IsNullOrWhiteSpace(licenseRequest))
-            {
-                throw new ArgumentNullException(nameof(licenseRequest));
-            }
-            if (attributes == null)
-            {
-                throw new ArgumentNullException(nameof(attributes));
-            }
-            if (string.IsNullOrWhiteSpace(serverUrl))
-            {
-                throw new ArgumentNullException(nameof(serverUrl));
-            }
-
-            string license = null;
-            
-            try
-            {
-                var data = new { LicenseId = licenseRequest, Attributes = attributes };
-                var json = JsonSerializer.Serialize(data);
-
-                using (var client = CreateHttpClient())
-                using (var request = new HttpRequestMessage(HttpMethod.Post, serverUrl))
-                {
-                    using (var stringContent = new StringContent(json, Encoding.UTF8, "application/json"))
-                    {
-                        request.Content = stringContent;
-
-                        using (var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead))
-                        {
-                            response.EnsureSuccessStatusCode();
-                            license = await response.Content.ReadAsStringAsync();
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                license = null;
-            }
-            return license;
         }
 
-        private HttpClient CreateHttpClient() // TODO: must reuse client on the server.
+        protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
         {
-            var httpClient = new HttpClient();
-            return httpClient;
+            var failure = FailureStrings.Get(FailureStrings.ACT14Code);
+
+            var appId = GetAttributes()[LicenseGlobals.MachineName];
+
+            var failures = actual.Validate()
+                                        .ExpirationDate()
+                                        .When(lic => lic.Type == LicenseType.Standard)
+                                        .And()
+                                        .Signature(LicenseGlobals.PublicKey)
+                                        .And()
+                                        .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseGlobals.MachineName), StringComparison.OrdinalIgnoreCase), failure)
+                                        .AssertValidLicense().ToList();
+
+            return failures;
+        }
+
+        protected override Stream LicenseOpenRead()
+        {
+            if (File.Exists(GetPath()))
+            {
+                return File.OpenRead(GetPath());
+            }
+            return null;
+        }
+
+        protected override Stream LicenseOpenWrite()
+        {
+            return File.Open(GetPath(), FileMode.Create);
+        }
+
+        public string GetPath()
+        {
+            return Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "license.xml");
+        }
+
+        protected virtual IDictionary<string, string> GetAttributes()
+        {
+            var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            attributes.Add(LicenseGlobals.MachineName, Environment.MachineName);
+            return attributes;
+        }
+
+        public Task Run()
+        {
+            var task = Task.Run(async () =>
+            {
+                var result = await ValidateAsync();
+                if (result.Successful)
+                {
+                    LicenseGlobals.Set(AppLicense.Full);
+                }
+            });
+
+            return task;
+        }
+
+        public Task<LicenseResult> RegisterAsync(Guid licenseKey)
+        {
+            return RegisterAsync(licenseKey, LicenseGlobals.ProductId, LicenseGlobals.LicenseServerUrl, GetAttributes());
         }
     }
 }
