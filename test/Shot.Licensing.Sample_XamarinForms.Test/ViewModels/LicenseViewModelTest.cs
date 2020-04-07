@@ -26,16 +26,16 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
             var validationResult = new LicenseResult(license, null, null);
 
             service.ValidateAsync().Returns(validationResult);
-            ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
+            ctx.GetValueOrDefault(LicenseGlobals.AppIdKey, null).Returns(appId);
 
             model.Initialize();
 
             Assert.Null(model.RegisterKey);
             Assert.Null(model.ErrorMessage);
             Assert.False(model.ShowError);
-            Assert.Equal(appId, model.AppId);
+            Assert.Equal("Product Name - Full", model.Description);
             Assert.Equal(license.Id.ToString(), model.LicenseKey);
-            Assert.Equal("Full", model.LicenseType);
+            Assert.True(model.ShowActivated);
             Assert.False(model.IsBusy);
         }
 
@@ -59,16 +59,16 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
             var validationResult = new LicenseResult(null, exception, validation);
 
             service.ValidateAsync().Returns(validationResult);
-            ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
+            ctx.GetValueOrDefault(LicenseGlobals.AppIdKey, null).Returns(appId);
 
             model.Initialize();
 
             Assert.Null(model.RegisterKey);
             Assert.Equal("|Message|HowToResolve|Exception|", model.ErrorMessage.Replace("\r\n", "|"));
             Assert.True(model.ShowError);
-            Assert.Equal(appId, model.AppId);
+            Assert.Equal("Product Name - Demo", model.Description);
             Assert.Null(model.LicenseKey);
-            Assert.Equal("Demo", model.LicenseType);
+            Assert.False(model.ShowActivated);
             Assert.False(model.IsBusy);
         }
 
@@ -84,6 +84,20 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
             var result = model.ActivateCommand.CanExecute(null);
 
             Assert.True(result);
+        }
+
+        [Fact]
+        public void OnActivateCommand_Ok()
+        {
+            var service = Substitute.For<ILicenseService>();
+            var ctx = Substitute.For<IApplicationContext>();
+            var model = new LicenseViewModel(service, ctx);
+        }
+
+        [Fact]
+        public void OnActivateCommand_Error()
+        {
+            Assert.True(false, "TODO:");
         }
 
         [Fact]

@@ -12,8 +12,6 @@ namespace Shot.Licensing
 
         Task<LicenseResult> ValidateAsync();
 
-        Task SetLicenseKeyAsync(string key);
-
         Task Run();
     }
 }

@@ -1,10 +1,7 @@
-﻿using Shot.Licensing.Sample_XamarinForms.Services;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
@@ -15,6 +12,7 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
         private Guid _key;
         private readonly ILicenseService _licenseService;
         private readonly IApplicationContext _ctx;
+
         public LicenseViewModel(ILicenseService licenseService, IApplicationContext ctx)
         {
             if (licenseService == null)
@@ -49,21 +47,21 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
                 ErrorMessage = null;
                 LicenseKey = null;
                 ShowError = false;
-                LicenseType = LicenseGlobals.Get().ToString();
-                AppId = _ctx.GetValueOrDefault(LicenseGlobals.AppId, null);
+                LicenseGlobals.Set(AppLicense.Demo);
+                Description = $"Product Name - {LicenseGlobals.Get()}";
 
                 var result = await _licenseService.ValidateAsync();
                 if(result.Successful)
                 {
                     LicenseGlobals.Set(AppLicense.Full);
                     LicenseKey = result.License.Id.ToString();
-                    LicenseType = LicenseGlobals.Get().ToString();
                     ShowActivated = true;
                 }
                 else
                 {
                     ShowLicenseError(result);
                 }
+                Description = $"Product Name - {LicenseGlobals.Get()}";
             }
             finally
             {
@@ -104,9 +102,9 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
 
             foreach (var f in result.Failures)
             {
-                sb.AppendLine(f.Code); // TODO: localize
-                sb.AppendLine(f.Message); // TODO: localize
-                sb.AppendLine(f.HowToResolve); // TODO: localize
+                sb.AppendLine(f.Code);          // TODO: localize
+                sb.AppendLine(f.Message);       // TODO: localize
+                sb.AppendLine(f.HowToResolve);  // TODO: localize
             }
 
             if (result.Exception != null)
@@ -131,11 +129,13 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
                 }
 
                 IsBusy = true;
+                
                 var result =  await _licenseService.RegisterAsync(_key);
+                
                 if(result.Successful)
                 {
                     await _ctx.SetLicenseKeyAsync(result.License.Id.ToString());
-                    LicenseGlobals.Set(AppLicense.Full);// TODO: remove
+                    LicenseGlobals.Set(AppLicense.Full);
                     IsBusy = false;
                     Initialize();
                 }
@@ -189,12 +189,12 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
             set { SetProperty(ref _showError, value); }
         }
 
-        private string _appId;
+        private string _description;
 
-        public string AppId
+        public string Description
         {
-            get { return _appId; }
-            set { SetProperty(ref _appId, value); }
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
         }
 
         private string _licenseKey;
@@ -203,14 +203,6 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
         {
             get { return _licenseKey; }
             set { SetProperty(ref _licenseKey, value); }
-        }
-
-        private string _licenseType;
-
-        public string LicenseType
-        {
-            get { return _licenseType; }
-            set { SetProperty(ref _licenseType, value); }
         }
 
         private bool _showActivated;

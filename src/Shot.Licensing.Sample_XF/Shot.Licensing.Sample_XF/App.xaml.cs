@@ -19,14 +19,14 @@ namespace Shot.Licensing.Sample_XF
         protected override void OnStart()
         {
             // Example: App first start create new app id and store it.
-            var id = Preferences.Get(LicenseGlobals.AppId, null);
+            var id = Preferences.Get(LicenseGlobals.AppIdKey, null);
             if (string.IsNullOrWhiteSpace(id))
             {
-                Preferences.Set(LicenseGlobals.AppId, Guid.NewGuid().ToString());
+                Preferences.Set(LicenseGlobals.AppIdKey, Guid.NewGuid().ToString());
             }
 
-            // Run license service in backgroud, will set Demo|Full version for the app
-            new LicenseService(LicenseService.CreateHttpClient()).Run();
+            // Run license service in the backgroud, will set Demo|Full version for the app
+            new LicenseService(BaseLicenseService.CreateHttpClient()).Run();
         }
 
         protected override void OnSleep()

@@ -14,7 +14,7 @@ namespace Shot.Licensing.Sample_XamarinForms
     {
         private static AppLicense _appLicense;
         public static Guid ProductId = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"); // Example
-        public const string AppId = "AppId";
+        public const string AppIdKey = "AppId";
         public const string LicenseKey = "LicenseKey";
         public const string LicenseServerUrl = "http://localhost:5000/api/license";
 

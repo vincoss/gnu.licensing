@@ -9,30 +9,29 @@
              Title="License">
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="5">
             <Entry  Placeholder="Enter license key" Text="{Binding RegisterKey}" />
             <Button Text="Activate" Command="{Binding ActivateCommand}"
                     HorizontalOptions="FillAndExpand"/>
 
-            <Label Text="App Id"/>
-            <Entry Text="{Binding AppId}" IsReadOnly="True" />
+            <Label Text="Description"/>
+            <Entry Text="{Binding Description}" IsReadOnly="True" />
 
             <Label Text="License Key"/>
             <Entry Text="{Binding LicenseKey}" IsReadOnly="True" />
 
-            <Label Text="Type"/>
-            <Entry Text="{Binding LicenseType}" IsReadOnly="True" />
-
             <Label Text="{Binding ErrorMessage}"
-                   HorizontalOptions="FillAndExpand" TextColor="Red"
+                   HorizontalOptions="FillAndExpand" 
+                   TextColor="Red"
                    IsVisible="{Binding ShowError}" />
 
-            <StackLayout IsVisible="{Binding ShowActivated}">
-                <BoxView HeightRequest="50" WidthRequest="50" BackgroundColor="Green" HorizontalOptions="Center"/>
-                <Label Text="Product Activated!" HorizontalOptions="Center"/>
+            <StackLayout IsVisible="{Binding ShowActivated}" BackgroundColor="#009933">
+                <Label Text="Activated" 
+                       HorizontalOptions="Center" Margin="5"
+                       FontSize="Title" TextColor="WhiteSmoke"/>
             </StackLayout>
             
-            <ActivityIndicator Color="Red" IsRunning="{Binding IsBusy}" />
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
 
         </StackLayout>
     </ContentPage.Content>
