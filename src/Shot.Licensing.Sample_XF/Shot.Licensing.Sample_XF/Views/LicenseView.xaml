@@ -17,6 +17,9 @@
             <Label Text="Description"/>
             <Entry Text="{Binding Description}" IsReadOnly="True" />
 
+            <Label Text="Licensed to"/>
+            <Entry Text="{Binding LicensedTo}" IsReadOnly="True" />
+
             <Label Text="License Key"/>
             <Entry Text="{Binding LicenseKey}" IsReadOnly="True" />
 

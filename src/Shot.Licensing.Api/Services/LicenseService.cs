@@ -77,10 +77,11 @@ namespace Shot.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT07Code));
             }
 
-            if (LicenseGetUsage(request.LicenseId) >= registration.Quantity)
+            if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseId) >= registration.Quantity)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT10Code));
             }
+
             if (IsLicenseAlreadyActivated(request.LicenseId))
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT06Code));

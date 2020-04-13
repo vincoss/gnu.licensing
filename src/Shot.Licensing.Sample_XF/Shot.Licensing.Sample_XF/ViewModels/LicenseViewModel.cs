@@ -55,6 +55,7 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
                 {
                     LicenseGlobals.Set(AppLicense.Full);
                     LicenseKey = result.License.Id.ToString();
+                    LicensedTo = result.License.Customer.Name;
                     ShowActivated = true;
                 }
                 else
@@ -196,6 +197,14 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
             set { SetProperty(ref _description, value); }
         }
 
+        private string _licensedTo;
+
+        public string LicensedTo
+        {
+            get { return _licensedTo; }
+            set { SetProperty(ref _licensedTo, value); }
+        }
+
         private string _licenseKey;
 
         public string LicenseKey
@@ -211,7 +220,7 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
             get { return _showActivated; }
             set { SetProperty(ref _showActivated, value); }
         }
-
+        
         #endregion
     }
 }
