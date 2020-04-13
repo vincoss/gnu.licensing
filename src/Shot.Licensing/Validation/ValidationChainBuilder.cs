@@ -78,7 +78,7 @@ namespace Shot.Licensing.Validation
 
                 if (!validator.Validate(license))
                     yield return validator.FailureResult
-                                 ?? FailureStrings.Get(FailureStrings.ACT15Code);
+                                 ?? FailureStrings.Get(FailureStrings.VAL05Code);
             }
         }
     }

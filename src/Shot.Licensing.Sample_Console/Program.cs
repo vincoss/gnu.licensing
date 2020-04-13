@@ -77,7 +77,7 @@ namespace Shot.Licensing.Sample_Console
                 {
                     var actual = License.Load(license);
 
-                    var failure = FailureStrings.Get(FailureStrings.ACT14Code);
+                    var failure = FailureStrings.Get(FailureStrings.VAL04Code);
 
                     var validationFailures = actual.Validate()
                                                    .ExpirationDate()
@@ -98,7 +98,7 @@ namespace Shot.Licensing.Sample_Console
                     // TODO: replace with logger
                     Console.WriteLine(ex);
 
-                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
+                    var failure = FailureStrings.Get(FailureStrings.VAL01Code);
 
                     results.Add(failure);
                 }

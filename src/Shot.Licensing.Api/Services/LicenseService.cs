@@ -74,12 +74,12 @@ namespace Shot.Licensing.Api.Services
 
             if (registration.Expire != null && registration.Expire <= DateTime.UtcNow)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT07Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
             }
 
             if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseId) >= registration.Quantity)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT10Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
             }
 
             if (IsLicenseAlreadyActivated(request.LicenseId))
@@ -129,7 +129,7 @@ namespace Shot.Licensing.Api.Services
 
                 return new LicenseRegisterResult
                 {
-                    Failure = (GeneralValidationFailure)FailureStrings.Get(FailureStrings.ACT11Code)
+                    Failure = (GeneralValidationFailure)FailureStrings.Get(FailureStrings.ACT06Code)
                 };
             }
         }

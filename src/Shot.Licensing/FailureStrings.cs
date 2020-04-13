@@ -65,41 +65,29 @@ namespace Shot.Licensing
         public const string ACT06Message    = "ACT06Message";
         public const string ACT06Resolve    = "ACT06Resolve";
 
-        public const string ACT07Code       = "ACT07Code";
-        public const string ACT07Message    = "ACT07Message";
-        public const string ACT07Resolve    = "ACT07Resolve";
+        public const string VAL00Code       = "VAL00Code";
+        public const string VAL00Message    = "VAL00Message";
+        public const string VAL00Resolve    = "VAL00Resolve";
 
-        public const string ACT08Code       = "ACT08Code";
-        public const string ACT08Message    = "ACT08Message";
-        public const string ACT08Resolve    = "ACT08Resolve";
+        public const string VAL01Code       = "VAL01Code";
+        public const string VAL01Message    = "VAL01Message";
+        public const string VAL01Resolve    = "VAL01Resolve";
 
-        public const string ACT09Code       = "ACT09Code";
-        public const string ACT09Message    = "ACT09Message";
-        public const string ACT09Resolve    = "ACT09Resolve";
+        public const string VAL02Code       = "VAL02Code";
+        public const string VAL02Message    = "VAL02Message";
+        public const string VAL02Resolve    = "VAL02Resolve";
 
-        public const string ACT10Code       = "ACT10Code";
-        public const string ACT10Message    = "ACT10Message";
-        public const string ACT10Resolve    = "ACT10Resolve";
+        public const string VAL03Code       = "VAL03Code";
+        public const string VAL03Message    = "VAL03Message";
+        public const string VAL03Resolve    = "VAL03Resolve";
 
-        public const string ACT11Code       = "ACT11Code";
-        public const string ACT11Message    = "ACT11Message";
-        public const string ACT11Resolve    = "ACT11Resolve";
+        public const string VAL04Code       = "VAL04Code";
+        public const string VAL04Message    = "VAL04Message";
+        public const string VAL04Resolve    = "VAL04Resolve";
 
-        public const string ACT12Code       = "ACT12Code";
-        public const string ACT12Message    = "ACT12Message";
-        public const string ACT12Resolve    = "ACT12Resolve";
-
-        public const string ACT13Code       = "ACT13Code";
-        public const string ACT13Message    = "ACT13Message";
-        public const string ACT13Resolve    = "ACT13Resolve";
-
-        public const string ACT14Code       = "ACT14Code";
-        public const string ACT14Message    = "ACT14Message";
-        public const string ACT14Resolve    = "ACT14Resolve";
-
-        public const string ACT15Code       = "ACT15Code";
-        public const string ACT15Message    = "ACT15Message";
-        public const string ACT15Resolve    = "ACT15Resolve";
+        public const string VAL05Code       = "VAL05Code";
+        public const string VAL05Message    = "VAL05Message";
+        public const string VAL05Resolve    = "VAL05Resolve";
 
         #endregion
 
@@ -169,42 +157,30 @@ namespace Shot.Licensing
             yield return ACT06Message;
             yield return ACT06Resolve;
 
-            yield return ACT07Code;
-            yield return ACT07Message;
-            yield return ACT07Resolve;
+            yield return VAL00Code;
+            yield return VAL00Message;
+            yield return VAL00Resolve;
 
-            yield return ACT08Code;
-            yield return ACT08Message;
-            yield return ACT08Resolve;
+            yield return VAL01Code;
+            yield return VAL01Message;
+            yield return VAL01Resolve;
 
-            yield return ACT09Code;
-            yield return ACT09Message;
-            yield return ACT09Resolve;
+            yield return VAL02Code;
+            yield return VAL02Message;
+            yield return VAL02Resolve;
 
-            yield return ACT10Code;
-            yield return ACT10Message;
-            yield return ACT10Resolve;
+            yield return VAL03Code;
+            yield return VAL03Message;
+            yield return VAL03Resolve;
 
-            yield return ACT11Code;
-            yield return ACT11Message;
-            yield return ACT11Resolve;
+            yield return VAL04Code;
+            yield return VAL04Message;
+            yield return VAL04Resolve;
 
-            yield return ACT12Code;
-            yield return ACT12Message;
-            yield return ACT12Resolve;
-
-            yield return ACT13Code;
-            yield return ACT13Message;
-            yield return ACT13Resolve;
-
-            yield return ACT14Code;
-            yield return ACT14Message;
-            yield return ACT14Resolve;
-
-            yield return ACT15Code;
-            yield return ACT15Message;
-            yield return ACT15Resolve;
-        }
+            yield return VAL05Code;
+            yield return VAL05Message;
+            yield return VAL05Resolve;
+    }
 
         #endregion
     }

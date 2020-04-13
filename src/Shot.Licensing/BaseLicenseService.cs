@@ -114,7 +114,7 @@ namespace Shot.Licensing
                     {
                         if (stream == null)
                         {
-                            var nf = FailureStrings.Get(FailureStrings.ACT08Code);
+                            var nf = FailureStrings.Get(FailureStrings.VAL00Code);
                             return new LicenseResult(null, null, new[] { nf });
                         }
 
@@ -134,7 +134,7 @@ namespace Shot.Licensing
                 {
                     // TODO: log
 
-                    var failure = FailureStrings.Get(FailureStrings.ACT09Code);
+                    var failure = FailureStrings.Get(FailureStrings.VAL01Code);
 
                     results.Add(failure);
                     return new LicenseResult(null, ex, results);

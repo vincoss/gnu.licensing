@@ -57,7 +57,7 @@ namespace Shot.Licensing.Validation
             var validator = validationChainBuilder.StartValidatorChain();
             validator.Validate = license => license.Expiration > DateTime.Now;
 
-            validator.FailureResult = FailureStrings.Get(FailureStrings.ACT13Code);
+            validator.FailureResult = FailureStrings.Get(FailureStrings.VAL03Code);
 
             return validationChainBuilder;
         }
@@ -92,7 +92,7 @@ namespace Shot.Licensing.Validation
 
 #endif
 
-            validator.FailureResult = FailureStrings.Get(FailureStrings.ACT13Code);
+            validator.FailureResult = FailureStrings.Get(FailureStrings.VAL03Code);
 
             return validationChainBuilder;
         }
@@ -127,7 +127,7 @@ namespace Shot.Licensing.Validation
             var validator = validationChainBuilder.StartValidatorChain();
             validator.Validate = license => license.VerifySignature(publicKey);
 
-            validator.FailureResult = FailureStrings.Get(FailureStrings.ACT12Code);
+            validator.FailureResult = FailureStrings.Get(FailureStrings.VAL02Code);
 
             return validationChainBuilder;
         }

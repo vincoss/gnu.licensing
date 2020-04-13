@@ -17,7 +17,7 @@ namespace Shot.Licensing.Sample_Console_ServerLicenseFetch.Services
 
         protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
         {
-            var failure = FailureStrings.Get(FailureStrings.ACT14Code);
+            var failure = FailureStrings.Get(FailureStrings.VAL04Code);
 
             var appId = GetAttributes()[LicenseGlobals.MachineName];
 

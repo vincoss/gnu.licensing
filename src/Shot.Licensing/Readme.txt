@@ -28,6 +28,13 @@ if not valid remove the license.xml file
 if http check fail do nothing if license.xml exists not to be removed
 license file might not be valid possible to remove it if tampered
 add translations
+overused licensing ACT05Code
+	https://techcommunity.microsoft.com/t5/ask-the-performance-team/2012-r2-license-server-issuing-built-in-overused-cals-for-2008/ba-p/375635
+	note each check can write info about the app license then increment something and can see whether license is used on many devices over time
+	can collect on device some info each time app starts then send to the server
+		last time started
+		use counters
+	then from those information we can determined wheter uses the APP on multiple devices same time and flag and overused or make it inactive
 
 ## Testing
 test how to migrate licence between devices, here do some research, must be very easy,
@@ -48,6 +55,10 @@ see balsamique license request email if user needs to re-fetch license email. se
 Licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID
 possible use license API to retrieve an license again by email and sent an email then, use original request data
 add the the licensing dll from nuget after publish, cli too
+remove the registered licenses
+	return UI page with list of devices to easy manage, must enter email, and license ID
+	problem is that user can get email from license, must sent the page to the user email address
+	or send access token then user can access management page
 
 ## Server UI
 see teamcity licence for the UI
