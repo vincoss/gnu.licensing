@@ -170,7 +170,7 @@ namespace Shot.Licensing
             Assert.False(result.Successful);
             Assert.Null(result.License);
             Assert.Null(result.Exception);
-            Assert.Equal("ACT.08", result.Failures.ElementAt(0).Code);
+            Assert.Equal("VAL.00", result.Failures.ElementAt(0).Code);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace Shot.Licensing
             Assert.False(result.Successful);
             Assert.Null(result.License);
             Assert.NotNull(result.Exception);
-            Assert.Equal("ACT.09", result.Failures.ElementAt(0).Code);
+            Assert.Equal("VAL.01", result.Failures.ElementAt(0).Code);
         }
 
         [Fact]

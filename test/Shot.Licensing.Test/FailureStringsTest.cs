@@ -14,8 +14,8 @@ namespace Shot.Licensing.Test
            var actual = FailureStrings.Get(FailureStrings.ACT00Code);
 
             Assert.Equal("ACT.00", actual.Code);
-            Assert.Equal("If you receive one of these activation errors with your business product.", actual.Message);
-            Assert.Equal("Email to Technical Support.", actual.HowToResolve);
+            Assert.Equal("Activation failed.", actual.Message);
+            Assert.Equal("Your product is having trouble connecting with License servers.", actual.HowToResolve);
         }
 
         [Fact]

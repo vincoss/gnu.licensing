@@ -89,15 +89,63 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.ViewModels
         [Fact]
         public void OnActivateCommand_Ok()
         {
+            var path = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "data", "test.license.xml");
+
             var service = Substitute.For<ILicenseService>();
             var ctx = Substitute.For<IApplicationContext>();
             var model = new LicenseViewModel(service, ctx);
+
+            var license = License.Load(File.OpenRead(path));
+            var licenseResult = new LicenseResult(license, null, null);
+
+            service.RegisterAsync(Arg.Any<Guid>()).Returns(licenseResult);
+            service.ValidateAsync().Returns(licenseResult);
+
+            var key = new Guid("ae8cdf5f-26b3-4e2f-8e68-6ecc2e73720f");
+            model.RegisterKey = key.ToString();
+
+            model.ActivateCommand.Execute(null);
+
+            service.Received().RegisterAsync(key);
+            service.Received().ValidateAsync();
+            ctx.Received().SetLicenseKeyAsync(key.ToString());
+            Assert.Equal(AppLicense.Full, LicenseGlobals.Get());
+            Assert.False(model.IsBusy);
         }
 
         [Fact]
         public void OnActivateCommand_Error()
         {
-            Assert.True(false, "TODO:");
+            var service = Substitute.For<ILicenseService>();
+            var ctx = Substitute.For<IApplicationContext>();
+            var model = new LicenseViewModel(service, ctx);
+
+            var exception = new Exception("Exception");
+            var validation = new[]
+            {
+                new GeneralValidationFailure
+                {
+                    Message = "Message",
+                    HowToResolve = "HowToResolve"
+                }
+            };
+            var licenseResult = new LicenseResult(null, exception, validation);
+            service.RegisterAsync(Arg.Any<Guid>()).Returns(licenseResult);
+            service.ValidateAsync().Returns(licenseResult);
+
+            model.Initialize();
+
+            var key = new Guid("ae8cdf5f-26b3-4e2f-8e68-6ecc2e73720f");
+            model.RegisterKey = key.ToString();
+
+            model.ActivateCommand.Execute(null);
+
+            service.Received().RegisterAsync(key);
+            ctx.DidNotReceive().SetLicenseKeyAsync(Arg.Any<string>());
+            Assert.Equal(AppLicense.Demo, LicenseGlobals.Get());
+            Assert.Equal("|Message|HowToResolve|Exception|", model.ErrorMessage.Replace("\r\n", "|"));
+            Assert.True(model.ShowError);
+            Assert.False(model.IsBusy);
         }
 
         [Fact]
