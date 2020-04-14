@@ -8,49 +8,48 @@ import licence
 verify licence
 
 ## Database
-license registration, LicenseUuid and ProductUuid must be unique
++license registration, LicenseUuid and ProductUuid must be unique
 
-## Client
+## Client App
 +build public key into the app already
-license on client store in the root directory or secureStore
-	root directory is good (there is some reason for that)
-	secure store if user install and uninstall app no need to get new license
-License.xml (name as)
-test install uninstall, how it affect, lic, pwd and other
-shall be able transfer licence from device to device, user can use license ID to get new one from server.
++license on client store in the root directory or secureStore
++	root directory is good (there is some reason for that)
++	secure store if user install and uninstall app no need to get new license
++license.xml name as
++shall be able transfer licence from device to device, user can use license ID to get new one from server. Its personal licese so for now user can use on many devices.
++user must be able to use registration email that was sent with licence to add new device
++device_id can be used as AppId as a custom attribute
++display license information
+
 always check for licence when there is internet connectivity. no connectivity and has existing then ok
 	at least one time a day
-user must be able to use registration email that was sent with licence to add new device
-device_id can be used with apikey as a custom attribute, line rhinoLicensing user request licence then we send it to them
-display license information
-http request client timeout setting
+https request client timeout setting
 if not valid remove the license.xml file
 if http check fail do nothing if license.xml exists not to be removed
 license file might not be valid possible to remove it if tampered
-add translations
 overused licensing ACT05Code
-	https://techcommunity.microsoft.com/t5/ask-the-performance-team/2012-r2-license-server-issuing-built-in-overused-cals-for-2008/ba-p/375635
 	note each check can write info about the app license then increment something and can see whether license is used on many devices over time
 	can collect on device some info each time app starts then send to the server
 		last time started
 		use counters
 	then from those information we can determined wheter uses the APP on multiple devices same time and flag and overused or make it inactive
 
+## Localization
+add translations for he error messages
+
 ## Testing
 test how to migrate licence between devices, here do some research, must be very easy,
-	just ping server with license key, and device id, see rhino licencing
+	just ping server with license key, and additional attributes, include license hash if exists
 	user can copy licence to many devices but when online it will deatvicate licence for other devices
+test install uninstall, how it affect, lic, pwd and other
 
 ## Samples
-Create sample Shot.Licensing.Sample_Console
-Create sample Shot.Licensing.Sample_Console_ServerLicenseFetch
-Create sample Shot.Licensing.Sample_Wpf
-Create sample Shot.Licensing.Sample_Website
-Create sample Shot.Licensing.Sample_Xamarin
++Create sample Shot.Licensing.Sample_Console
++Create sample Shot.Licensing.Sample_Console_ServerLicenseFetch
++Create sample Shot.Licensing.Sample_Xamarin
 
 ## Server
-ACT00Code, ACT01Code not used
-lincese server & client timeout setting, setting for httpClient timeout
+license server & client timeout setting, setting for httpClient timeout
 see balsamique license request email if user needs to re-fetch license email. send same email as for registration.
 Licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID
 possible use license API to retrieve an license again by email and sent an email then, use original request data
@@ -62,24 +61,25 @@ remove the registered licenses
 
 ## Server UI
 see teamcity licence for the UI
-all dates to UTC
-License Keys Black-Listing
-	Any license key can be blacklisted, which means it won't be accepted by  even if it is valid.
-licence API
-SqlIte database, stand alone app
++all dates to UTC
++License Keys Black-Listing
++	Any license key can be blacklisted, which means it won't be accepted by  even if it is valid.
++	Registration IsValid to false
++licence API
++SqlIte database, stand alone app
 generate licence|deactivate|activate|
-licence database
-generate license from request
++licence database
++generate license from request
 check license
 need some ui to show info
 private key store somewhere
-Always HTTPS
-container, configure that, with ssl
++Always HTTPS
+docker container, configure that, with ssl
 Licencing API
 	Get server licence
 	Get app licence
 lincense UI to view|generate licence|deactivate|activate
-licence server API should be stand alose server with Sqlite database to store licences for all products
++licence server API should be stand alose server with Sqlite database to store licences for all products
 keys store multiple by name and private|public key
 	name is for the app or key store,
 	lic must store used name for the reference
@@ -99,19 +99,9 @@ if quanity = 1
 if quanity > 1
 	multiple can be active at a time
 
-CreateDateTimeUtc
-
-Not used for volume license) device ID not to be used
+Not used for volume license) device ID not to be used. Why???
 
 Hi With the volume license, there is no check on the uid of the machine. that means it can be activated infinitely many machines.
-
-http://ellipter.com/contact/
-https://www.codeproject.com/Articles/996001/A-Ready-To-Use-Software-Licensing-Solution-in-Csha?fid=1897432&df=90&mpp=25&sort=Position&spc=Relaxed&prof=True&view=Normal&fr=76#xx0xx
-
-
-## Localization
-need to localize build in messages InvalidSignatureValidationFailure
-
 
 ## Example Fiddler compose to register license
 
@@ -127,9 +117,4 @@ https://github.com/dnauck/Portable.Licensing
 https://www.nuget.org/packages/Shot.Licensing
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-sign-xml-documents-with-digital-signatures
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-verify-the-digital-signatures-of-xml-documents
-
-
-
-
-	
 
