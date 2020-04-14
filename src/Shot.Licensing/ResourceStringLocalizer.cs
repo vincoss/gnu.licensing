@@ -51,7 +51,7 @@ namespace Shot.Licensing
 #if DEBUG
                 throw new ArgumentException($"Key '{key}' was not found in resources '{ResourceId}' for culture '{CultureInfo.CurrentCulture}'.");
 #else
-                translation = key; // HACK: returns the key, which GETS DISPLAYED TO THE USER
+                translation = key; // TODO: returns the key
 #endif
             }
             return translation;
