@@ -9,7 +9,7 @@ using Shot.Licensing.Api.Data;
 namespace Shot.Licensing.Api.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20200406033316_initial")]
+    [Migration("20200414035952_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,9 +24,8 @@ namespace Shot.Licensing.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Checksum")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                    b.Property<string>("AttributesChecksum")
+                        .HasColumnType("NVARCHAR");
 
                     b.Property<string>("ChecksumType")
                         .IsRequired()
@@ -44,6 +43,13 @@ namespace Shot.Licensing.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BOOLEAN")
                         .HasDefaultValue(true);
+
+                    b.Property<string>("LicenseAttributes")
+                        .HasColumnType("NVARCHAR COLLATE NOCASE");
+
+                    b.Property<string>("LicenseChecksum")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR");
 
                     b.Property<int>("LicenseRegistrationId")
                         .HasColumnType("INTEGER");

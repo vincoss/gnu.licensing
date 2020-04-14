@@ -33,8 +33,8 @@ namespace Shot.Licensing.Api
         {
             services.AddControllers(options =>
                     {
-                  //      options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-                        //options.Filters.Add(typeof(RestrictHttpsAttribute));
+                        options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+                        options.Filters.Add(typeof(RestrictHttpsAttribute)); // TODO: disable for easy testing
                     })
                     .Services
                     .AddHealthChecks(Configuration)

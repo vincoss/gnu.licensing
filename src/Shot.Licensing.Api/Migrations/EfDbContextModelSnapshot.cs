@@ -22,9 +22,8 @@ namespace Shot.Licensing.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Checksum")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                    b.Property<string>("AttributesChecksum")
+                        .HasColumnType("NVARCHAR");
 
                     b.Property<string>("ChecksumType")
                         .IsRequired()
@@ -42,6 +41,13 @@ namespace Shot.Licensing.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BOOLEAN")
                         .HasDefaultValue(true);
+
+                    b.Property<string>("LicenseAttributes")
+                        .HasColumnType("NVARCHAR COLLATE NOCASE");
+
+                    b.Property<string>("LicenseChecksum")
+                        .IsRequired()
+                        .HasColumnType("NVARCHAR");
 
                     b.Property<int>("LicenseRegistrationId")
                         .HasColumnType("INTEGER");

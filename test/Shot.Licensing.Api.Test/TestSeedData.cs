@@ -55,7 +55,7 @@ namespace Shot.Licensing.Api
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 LicenseString = "license-string",
-                Checksum = "checksum",
+                LicenseChecksum = "checksum",
                 ChecksumType = "sha256",
                 IsActive = true,
                 CreatedDateTimeUtc = createdDate,

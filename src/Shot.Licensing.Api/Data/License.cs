@@ -21,8 +21,12 @@ namespace Shot.Licensing.Api.Data
         [Required]
         public string LicenseString { get; set; }
 
+        public string LicenseAttributes { get; set; }
+
         [Required]
-        public string Checksum { get; set; }
+        public string LicenseChecksum { get; set; }
+
+        public string AttributesChecksum { get; set; }
 
         [Required]
         public string ChecksumType { get; set; }

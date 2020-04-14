@@ -62,6 +62,7 @@ namespace Shot.Licensing.Sample_XamarinForms.ViewModels
                 {
                     ShowLicenseError(result);
                 }
+                Description = $"Product Name - {LicenseGlobals.Get()}";
             }
             finally
             {

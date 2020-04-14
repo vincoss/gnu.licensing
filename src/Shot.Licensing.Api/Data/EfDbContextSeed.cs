@@ -42,8 +42,8 @@ namespace Shot.Licensing.Api.Data
             var product = new LicenseProduct
             {
                 ProductUuid = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"),
-                ProductName = "Demo-Product",
-                ProductDescription = "Demo-Product-Description",
+                ProductName = "Demo-Product-(Full License)",
+                ProductDescription = "Demo-Product-Description-(Full License)",
                 SignKeyName = "test.private.xml",
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"

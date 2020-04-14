@@ -9,6 +9,9 @@
     <Content Include="..\..\resources\test.private.xml" Link="Data\test.private.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\resources\test.public.xml" Link="Data\test.public.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

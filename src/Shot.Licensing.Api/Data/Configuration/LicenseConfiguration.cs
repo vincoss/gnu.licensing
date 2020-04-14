@@ -11,9 +11,6 @@ namespace Shot.Licensing.Api.Data.Configuration
             builder.ToTable(nameof(License))
                    .HasIndex(x => new { x.LicenseId, x.IsActive }).IsUnique();
 
-            //builder.ToTable(nameof(License))
-            //      .HasIndex(x => x.LicenseUuid).IsUnique(); // TODO: license Uuid can be multiple times if quanity and not active
-
             builder.HasKey(x => x.LicenseId);
 
             builder.Property(t => t.LicenseId)
@@ -36,9 +33,15 @@ namespace Shot.Licensing.Api.Data.Configuration
                    .IsRequired()
                    .HasColumnType("NVARCHAR COLLATE NOCASE");
 
-            builder.Property(t => t.Checksum)
+            builder.Property(t => t.LicenseAttributes)
+                   .HasColumnType("NVARCHAR COLLATE NOCASE");
+
+            builder.Property(t => t.LicenseChecksum)
                 .IsRequired()
-                .HasColumnType("VARCHAR(64) COLLATE NOCASE");
+                .HasColumnType("NVARCHAR");
+
+            builder.Property(t => t.AttributesChecksum)
+                .HasColumnType("NVARCHAR");
 
             builder.Property(t => t.ChecksumType)
               .IsRequired()

@@ -10,7 +10,7 @@ using Shot.Licensing.Validation;
 using Shot.Licensing.Api.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-
+using System.Text.Json;
 
 namespace Shot.Licensing.Api.Services
 {
@@ -48,28 +48,28 @@ namespace Shot.Licensing.Api.Services
 
             if (request.LicenseId == Guid.Empty)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT01Code));
             }
             if (request.ProductId == Guid.Empty)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
 
             var registration = _context.Registrations.SingleOrDefault(x => x.LicenseUuid == request.LicenseId);
 
             if (registration == null)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT01Code));
             }
 
             if (registration.ProductUuid != request.ProductId)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
 
             if (registration.IsActive == null || registration.IsActive.Value == false)
             {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
+                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
             }
 
             if (registration.Expire != null && registration.Expire <= DateTime.UtcNow)
@@ -77,14 +77,9 @@ namespace Shot.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
             }
 
-            if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseId) >= registration.Quantity)
+            if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseId) >= registration.Quantity)   // TODO:
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
-            }
-
-            if (IsLicenseAlreadyActivated(request.LicenseId))
-            {
-                return Task.FromResult(FailureStrings.Get(FailureStrings.ACT06Code));
             }
 
             return Task.FromResult<IValidationFailure>(null);
@@ -112,11 +107,20 @@ namespace Shot.Licensing.Api.Services
                     };
                 }
 
+                string attributesJson = null;
+                string attributesChecksum = null;
+
+                if(request.Attributes != null && request.Attributes.Any())
+                {
+                    attributesJson = JsonSerializer.Serialize(request.Attributes);
+                    attributesChecksum = Utils.GetSha256HashFromString(attributesJson);
+                }
+
                 var product = _context.Products.Single(x => x.ProductUuid == request.ProductId);
                 var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseId);
                 var str = await CreateLicense(request, registration, product);
 
-                await CreateLicenseRecord(registration, str, userName);
+                await CreateLicenseRecord(registration, str, attributesJson, attributesChecksum, userName);
 
                 var result = new LicenseRegisterResult();
                 result.License = str;
@@ -145,7 +149,7 @@ namespace Shot.Licensing.Api.Services
                      .As(registration.LicenseType)
                      .ExpiresAt(registration.Expire == null ? DateTime.MaxValue : registration.Expire.Value)
                      .WithMaximumUtilization(registration.Quantity)
-                     .LicensedTo(registration.LicenseName, registration.LicenseEmail)
+                     .LicensedTo(registration.LicenseName, registration.LicenseEmail, (c) => c.Company = registration.LicenseName)
                      .WithAdditionalAttributes(request.Attributes != null ? request.Attributes : new Dictionary<string, string>())
                      .CreateAndSignWithPrivateKey(key);
 
@@ -155,7 +159,7 @@ namespace Shot.Licensing.Api.Services
             return task;
         }
 
-        private async Task<int> CreateLicenseRecord(LicenseRegistration registration, string str, string userName)
+        private async Task<int> CreateLicenseRecord(LicenseRegistration registration, string str, string attributesJson, string attributesChecksum, string userName)
         {
             var license = new Shot.Licensing.Api.Data.License
             {
@@ -163,7 +167,9 @@ namespace Shot.Licensing.Api.Services
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 LicenseString = str,
-                Checksum = Utils.GetSha256HashFromString(str),
+                LicenseAttributes = attributesJson,
+                AttributesChecksum = attributesChecksum,
+                LicenseChecksum = Utils.GetSha256HashFromString(str),
                 ChecksumType = Utils.ChecksumType,
                 IsActive = true,
                 CreatedDateTimeUtc = DateTime.UtcNow,
@@ -183,11 +189,6 @@ namespace Shot.Licensing.Api.Services
         }
 
         #region Private methods
-
-        private bool IsLicenseAlreadyActivated(Guid licenseId)
-        {
-            return _context.Licenses.Any(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
-        }
 
         private int LicenseGetUsage(Guid licenseId)
         {
