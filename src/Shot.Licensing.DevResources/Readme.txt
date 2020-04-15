@@ -11,3 +11,9 @@ dotnet dev-certs https --trust
 add-migration initial -verbose
 remove-migration
 add-migration initial -Context EfDbContext
+
+## Resources
+
+Icon
+https://www.compart.com/en/unicode/U+1F765
+https://onlineunicodetools.com/convert-unicode-to-image

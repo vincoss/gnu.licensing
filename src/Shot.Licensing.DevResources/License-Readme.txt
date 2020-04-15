@@ -112,7 +112,7 @@ Content-Type: application/json
 {"LicenseId":"D4248D45-7B4A-4832-A7D1-6AA32A752453","Attributes":{"ClientId":"FAAAEB70-3BCF-4FDC-B67A-5C6B81C316C5"}}
 
 ## Resources
-https://github.com/junian/Shot.Licensing
+https://github.com/junian/standard.Licensing
 https://github.com/dnauck/Portable.Licensing
 https://www.nuget.org/packages/Shot.Licensing
 https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-sign-xml-documents-with-digital-signatures
