@@ -16,7 +16,7 @@ namespace Shot.Licensing.Sample_Console_ServerLicenseFetch
         private static AppLicense _appLicense;
         public static Guid ProductId = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"); // Example
         public const string MachineName = "MachineName";
-        public const string LicenseServerUrl = "http://localhost:5000/api/license";
+        public const string LicenseServerUrl = "https://localhost/api/license";
 
         public static string PublicKey = new StreamReader(typeof(LicenseGlobals)
                                                      .Assembly
