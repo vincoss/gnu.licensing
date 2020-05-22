@@ -3,9 +3,6 @@
 +create cli project
 +find additional documentation (at home)
 +generate public and private key
-export licence
-import licence
-verify licence
 
 ## Database
 +license registration, LicenseUuid and ProductUuid must be unique
@@ -23,9 +20,9 @@ verify licence
 
 always check for licence when there is internet connectivity. no connectivity and has existing then ok
 	at least one time a day
-https request client timeout setting
+https request client timeout setting 120 seconds max
 if not valid remove the license.xml file
-if http check fail do nothing if license.xml exists not to be removed
+if https check fail do nothing if license.xml exists not to be removed
 license file might not be valid possible to remove it if tampered
 overused licensing ACT05Code
 	note each check can write info about the app license then increment something and can see whether license is used on many devices over time
@@ -58,6 +55,7 @@ remove the registered licenses
 	return UI page with list of devices to easy manage, must enter email, and license ID
 	problem is that user can get email from license, must sent the page to the user email address
 	or send access token then user can access management page
+health check
 
 ## Server UI
 see teamcity licence for the UI
