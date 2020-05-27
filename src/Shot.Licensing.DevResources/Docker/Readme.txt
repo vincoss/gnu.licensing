@@ -4,6 +4,9 @@ https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
 https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-docker/manage-windows-dockerfile
 https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-3.1&tabs=windows
 https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-3.1
+https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md
+https://github.com/dotnet/dotnet-docker/blob/master/samples/host-aspnetcore-https.md
+https://www.vivienfabing.com/docker/2019/10/03/docker-aspnetcore-container-and-https.html
 
 NOTE:
 The samples are written for cmd.exe.

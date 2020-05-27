@@ -1,6 +1,11 @@
 ﻿
 ## Task (TODO)
-app.UseSwagger() for the API doc
+## Documentation for the API
+Create dev documentation for API (Swager)
+	https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-3.1
+	app.UseSwagger() for the API doc
+
+
 add check for the product registration that the sign key exists on specified path, that shall be on statup, or health check
 shall not make request to favicon.ico
 	[16:19:30 INF] Request starting HTTP/2 GET https://172.31.249.240/favicon.ico
