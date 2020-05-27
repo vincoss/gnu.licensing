@@ -4,7 +4,7 @@ This project is derived from [Standard.Licensing](https://github.com/junian/stan
 
 ### Projects
 
-Shot.Licensing	is class library for license generation and validation.  
+Shot.Licensing is class library for license generation and validation.  
 Shot.Licensing.Cli is command line tool to generete license file and sign keys.  
 Shot.Licensing.Api is open-source and cross-platform framework license generation, distribution and management.  
 

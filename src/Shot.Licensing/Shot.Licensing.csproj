@@ -2,11 +2,32 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Ferdinand Lukasak</Authors>
+    <Company>Ferdinand Lukasak</Company>
+    <Description>A class library for easy software licensing. Flexible and easy to use.</Description>
+    <Copyright>Copyright © 2006-2020 Ferdinand Lukasak and Contributors</Copyright>
+    <PackageProjectUrl>http://shot.licensing.github.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vincoss/shot.licensing</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>licensing;portable</PackageTags>
+    <PackageReleaseNotes>https://github.com/vincoss/shot.licensing/releases</PackageReleaseNotes>
+    <NeutralLanguage>(None)</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
     <PackageReference Include="System.Text.Json" Version="4.7.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Shot.Licensing.DevResources\img\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
