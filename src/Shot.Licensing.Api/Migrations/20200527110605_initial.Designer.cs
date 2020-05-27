@@ -9,14 +9,14 @@ using Shot.Licensing.Api.Data;
 namespace Shot.Licensing.Api.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20200414035952_initial")]
+    [Migration("20200527110605_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3");
+                .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("Shot.Licensing.Api.Data.License", b =>
                 {

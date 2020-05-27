@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.DependencyInjection;
 using Shot.Licensing.Api.Data;
 using Shot.Licensing.Api.Infrastructure.Filters;
 using Shot.Licensing.Api.Interface;
@@ -51,7 +52,7 @@ namespace Shot.Licensing.Api
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions() // TODO:
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse

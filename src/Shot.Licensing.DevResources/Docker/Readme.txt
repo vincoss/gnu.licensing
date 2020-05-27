@@ -11,17 +11,17 @@ https://www.vivienfabing.com/docker/2019/10/03/docker-aspnetcore-container-and-h
 NOTE:
 The samples are written for cmd.exe.
 
-## Build
-docker build --no-cache -t vincoss/shotlicapisvr:1.0.0 .
+## Build & tag
+docker build --no-cache -t vincoss/shotlicapisvr:1.0.0-windows-nanoserver .
 
-## Tag image (before publish to docker hub)
+## Tag image (before publish to docker hub) if not done yet
 docker image tag vincoss/shotlicapisvr:1.0.0 vincoss/shotlicapisvr:1.0.0-windows-nanoserver
 
 ## Push to docker hub
 docker image push vincoss/shotlicapisvr:1.0.0-windows-nanoserver
 
 ## Run
-docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -v shotLicData:C:/Shot-Licensing/Data vincoss/shotlicapisvr:1.0.0-windows-nanoserver
+docker run -it --rm -p 8001:44395 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -v shotLicData:C:/Shot-Licensing/Data vincoss/shotlicapisvr:1.0.0-windows-nanoserver
 
 ## Error logs
 docker logs --tail 50 --follow --timestamps shotlicapisvr

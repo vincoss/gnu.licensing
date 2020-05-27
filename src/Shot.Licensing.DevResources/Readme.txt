@@ -26,6 +26,9 @@ dotnet dev-certs https --clean
 dotnet dev-certs https --trust
 dotnet user-secrets -p src\Shot.Licensing.Api\Shot.Licensing.Api.csproj set "Kestrel:Certificates:Password" "todo-Pass@word1"
 
+## Publish
+https://docs.microsoft.com/en-us/dotnet/core/rid-catalog
+
 ## Resources
 
 Icon

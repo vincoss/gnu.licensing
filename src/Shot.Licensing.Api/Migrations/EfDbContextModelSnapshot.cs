@@ -14,7 +14,7 @@ namespace Shot.Licensing.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.3");
+                .HasAnnotation("ProductVersion", "3.1.4");
 
             modelBuilder.Entity("Shot.Licensing.Api.Data.License", b =>
                 {
