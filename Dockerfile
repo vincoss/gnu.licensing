@@ -15,4 +15,4 @@ EXPOSE ${HTTPS_PORT}
 
 VOLUME C:/Shot.Licensing/Data
 
-ENTRYPOINT ["dotnet", "Shot.Licensing.Api.exe"]
+ENTRYPOINT ["dotnet", "Shot.Licensing.Api.dll"]
