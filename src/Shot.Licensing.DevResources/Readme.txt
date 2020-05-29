@@ -4,7 +4,7 @@
 Create dev documentation for API (Swager)
 	https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-3.1
 	app.UseSwagger() for the API doc
-
+API should not request for /favicon.ico
 
 add check for the product registration that the sign key exists on specified path, that shall be on statup, or health check
 shall not make request to favicon.ico

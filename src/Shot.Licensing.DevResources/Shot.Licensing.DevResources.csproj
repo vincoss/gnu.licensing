@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <None Include="..\..\Dockerfile" Link="Docker\Dockerfile" />
+    <None Include="..\..\Dockerfile.ubuntu-x64" Link="Docker\Dockerfile.ubuntu-x64" />
   </ItemGroup>
 
 </Project>
