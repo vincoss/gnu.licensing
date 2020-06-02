@@ -11,7 +11,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>licensing;portable</PackageTags>
     <PackageReleaseNotes>https://github.com/vincoss/shot.licensing/releases</PackageReleaseNotes>
-    <NeutralLanguage>(None)</NeutralLanguage>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>

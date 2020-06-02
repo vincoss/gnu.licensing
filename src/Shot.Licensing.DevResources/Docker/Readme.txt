@@ -8,25 +8,29 @@ https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https
 https://github.com/dotnet/dotnet-docker/blob/master/samples/host-aspnetcore-https.md
 https://www.vivienfabing.com/docker/2019/10/03/docker-aspnetcore-container-and-https.html
 https://docs.microsoft.com/en-us/aspnet/core/security/docker-https?view=aspnetcore-3.1
+https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
 
 NOTE:
 The samples are written for cmd.exe.
 
 ## Build & tag
-docker build --no-cache -t vincoss/shotlicapisvr:1.0.0-windows-nanoserver .
+docker build --no-cache -t vincoss/shotlicapisvr:1.0.0-windows .
 docker build -f Dockerfile.ubuntu-x64 --no-cache -t vincoss/shotlicapisvr:1.0.0-bionic .
 
 ## Tag image (before publish to docker hub) if not done yet
-docker image tag vincoss/shotlicapisvr:1.0.0 vincoss/shotlicapisvr:1.0.0-windows-nanoserver
+docker image tag vincoss/shotlicapisvr:1.0.0 vincoss/shotlicapisvr:1.0.0-windows
 
 ## Push to docker hub
-docker image push vincoss/shotlicapisvr:1.0.0-windows-nanoserver
+docker image push vincoss/shotlicapisvr:1.0.0-windows
 
 ## Run
-docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -v shotLicData:C:/Shot-Licensing/Data vincoss/shotlicapisvr:1.0.0-windows-nanoserver
-docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Shot.Licensing.Api.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v shotLicData:C:/Shot-Licensing/Data vincoss/shotlicapisvr:1.0.0-windows-nanoserver
+docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -v shotLicData:C:/Shot.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
+docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Shot.Licensing.Api.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v shotLicData:C:/Shot.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
 
-docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 vincoss/shotlicapisvr:1.0.0-windows-nanoserver
+## Run Windows using Linux contaners
+docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Shot.Licensing.Api.pfx -v "%USERPROFILE%\.aspnet\https:/https/" vincoss/shotlicapisvr:1.0.0-bionic
+
+docker run -it --rm -p 8001:443 --name shotlicapisvr -h shotapi --ip 10.1.2.3 vincoss/shotlicapisvr:1.0.0-windows
 
 ## Error logs
 docker logs --tail 50 --follow --timestamps shotlicapisvr
@@ -45,3 +49,7 @@ https://localhost/api/license
 https://shotapi/api/license
 https://localhost:8001/api/license
 https://{ip-here}/api/license
+
+
+docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
+docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp

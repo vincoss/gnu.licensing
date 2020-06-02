@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:55018",
-      "sslPort": 0
+      "applicationUrl": "http://localhost:59860",
+      "sslPort": 44373
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json",
@@ -18,7 +18,7 @@
       }
     },
     "Shot.Licensing.Api": {
-      "commandName": "Project",
+      "commandName": "Executable",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",
       "environmentVariables": {

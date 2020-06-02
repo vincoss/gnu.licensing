@@ -1,5 +1,5 @@
 # base image
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS runtime
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
 
 ARG HTTPS_PORT=443
 ARG SHOT_LICENSING_API_HOME=/inetpub/wwwroot/shot.licensing.api

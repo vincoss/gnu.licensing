@@ -1,7 +1,11 @@
 ﻿
 ## Fiddler post request example
 
-POST https://localhost/api/license HTTP/1.1
+POST https://localhost:8001/api/license HTTP/1.1
 Content-Type: application/json
 
-{ "licenseId": "7036C9C6-E043-4E0F-AC51-1E1B3639AF8C", "productId": "77ECA0DC-0F65-4372-835B-899509A758A9" }
+{ "licenseId": "D65321D5-B0F9-477D-828A-086F30E2BF89", "productId": "C3F80BD7-9618-48F6-8250-65D113F9AED2", "attributes": "" }
+
+{
+"request": { "licenseId": "D65321D5-B0F9-477D-828A-086F30E2BF89", "productId": "C3F80BD7-9618-48F6-8250-65D113F9AED2", "attributes": "" }
+}

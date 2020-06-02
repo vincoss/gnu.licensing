@@ -77,11 +77,14 @@ namespace Shot.Licensing.Api
 
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
+            var logFilePath = configuration["Serilog:FileLogPath"];
+
             var cfg = new LoggerConfiguration()
                 .MinimumLevel.Verbose()
                 .Enrich.WithProperty("ApplicationContext", AppName)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
+                .WriteTo.File(logFilePath, shared: true)
                 .ReadFrom.Configuration(configuration);
 
             return cfg.CreateLogger();
