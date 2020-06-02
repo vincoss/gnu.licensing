@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Shot.Licensing.Api\Shot.Licensing.Api.csproj" />
+  </ItemGroup>
+
 </Project>
