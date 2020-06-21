@@ -1,0 +1,77 @@
+https://keygen.sh/pricing/
+https://hackernoon.com/0-to-2000-mrr-in-one-month-lessons-learned-9f6d11ad60ae
+https://cs.uwaterloo.ca/~echrzano/all.htm#6.6
+https://cs.uwaterloo.ca/~echrzano/all.htm#20570:%201Head:%207.7%20lmreread
+https://media.3ds.com/support/simulia/public/flexlm108/EndUser/chap7.htm
+file:///C:/Users/Ferdinand/Downloads/chap6.htm
+https://imedea.uib-csic.es/master/cambioglobal/Modulo_V_cod101615/matlab_7_4/win32/help/base/install/pc/f2-46589.html
+https://cs.uwaterloo.ca/~echrzano/all.htm#6.4
+https://imedea.uib-csic.es/master/cambioglobal/Modulo_V_cod101615/matlab_7_4/win32/help/base/install/pc/f2-46589.html
+
+
+dotnet Shot.Licensing.Cli.dll license -n test-license -e text@example.com -t standard -a "AppId=B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B" -s "C:\_Data\GitHub\sl\resources\test.private.xml" -d c:\temp\lic
+
+add recover license url on help section
+add license server urls
+
+B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B
+
+check result
+	true
+	false
+	null (disabled | http error | server error
+
+put (from client)
+id, attributes, attributesHash
+or
+id, lic-hash
+
+server
+find by id
+	no 	exists create new one return lic
+	yes	exists
+		xml
+			single and hash match					return	true	make it active all other not active (this shall be done on license generation) ensure is active
+			single and hash no mach					return 	false
+			multiple and one match hash 			return 	true	make it active all other not active
+			multiple and more match hash			return 	true	make it active all other not active
+			multiple and hash no match				return	false	make it not active all other not active
+		
+is active
+is multiple
+
+post (get initial)
+put	(id, attibutes)
+find(email address)
+
+
+##
+add key
+is valid guid
+activate click
+save
+has file
+	set Preferences.Set(key)
+	validate
+	apply
+	show
+		AppId
+		Product:		Some Name
+		License Key:	FFAB9BCF-C1CB-452A-85C9-38F455E2B373
+		Type: 			Full
+		Name:			Not to display privacy issues
+		Email:			Not to display privacy issues
+no file
+	show error
+	
+https://support.eset.com/en/kb6996-resolve-act-or-ecp-errors-during-activation-business-users
+https://support.eset.com/en/kb332-ports-and-addresses-required-to-use-your-eset-product-with-a-third-party-firewall#services
+https://stackoverflow.com/questions/36197823/c-how-to-store-and-check-a-generated-license-key
+
+
+
+		
+
+	
+
+
