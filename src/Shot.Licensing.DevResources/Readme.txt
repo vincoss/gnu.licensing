@@ -2,11 +2,6 @@
 ## Task 
 
 search for TODO
-
-## Documentation for the API
-Create dev documentation for API (Swager)
-	https://docs.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger?view=aspnetcore-3.1
-	app.UseSwagger() for the API doc
 	
 ## Enable SSL on localhost|help
 dotnet dev-certs https --help
