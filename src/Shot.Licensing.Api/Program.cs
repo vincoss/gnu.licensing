@@ -13,8 +13,8 @@ using Microsoft.Extensions.Options;
 namespace Shot.Licensing.Api
 {
     /// <summary>
-    /// https://localhost:443/api/license
-    /// https://localhost:443/hc
+    /// https://localhost/api/license
+    /// https://localhost/hc
     /// </summary>
     public class Program
     {
@@ -23,7 +23,7 @@ namespace Shot.Licensing.Api
 
         public static int Main(string[] args)
         {
-            var configuration = GetConfiguration();
+            var configuration = GetConfiguration(args);
 
             Log.Logger = CreateSerilogLogger(configuration);
 
@@ -69,10 +69,18 @@ namespace Shot.Licensing.Api
                     webBuilder
                       .CaptureStartupErrors(false)
                       .UseStartup<Startup>()
-                      .UseContentRoot(Directory.GetCurrentDirectory())
+                      .UseContentRoot(AppContext.BaseDirectory)
                       .UseUrls("https://*:443")
                       .UseConfiguration(configuration)
                       .UseSerilog();
+                })
+                 .ConfigureHostConfiguration((cfg) =>
+                 {
+                     cfg.AddConfiguration(configuration);
+                 })
+                .ConfigureAppConfiguration((hostingContext, cfg) =>
+                {
+                    cfg.AddConfiguration(configuration);
                 });
 
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
@@ -90,13 +98,14 @@ namespace Shot.Licensing.Api
             return cfg.CreateLogger();
         }
 
-        private static IConfiguration GetConfiguration()
+        private static IConfiguration GetConfiguration(string[] args)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("hostsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .AddCommandLine(args);
 
             return builder.Build();
         }
