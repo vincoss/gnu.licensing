@@ -42,6 +42,9 @@ remove the registered licenses
 	problem is that user can get email from license, must sent the page to the user email address
 	or send access token then user can access management page
 +health check
+add recover license url on help section
+	must emapil license like Balsamique
+add license server urls
 
 ## Server UI
 see teamcity licence for the UI
@@ -84,6 +87,7 @@ overused licensing ACT05Code
 
 ## Nice to have
 license server & client timeout setting, setting for httpClient timeout, default is ok
+
 
 ## Resources
 https://github.com/junian/standard.Licensing
