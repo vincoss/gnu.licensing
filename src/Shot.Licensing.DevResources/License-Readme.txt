@@ -18,19 +18,6 @@
 +device_id can be used as AppId as a custom attribute
 +display license information
 
-always check for licence when there is internet connectivity. no connectivity and has existing then ok
-	at least one time a day
-https request client timeout setting 120 seconds max
-if not valid remove the license.xml file
-if https check fail do nothing if license.xml exists not to be removed
-license file might not be valid possible to remove it if tampered
-overused licensing ACT05Code
-	note each check can write info about the app license then increment something and can see whether license is used on many devices over time
-	can collect on device some info each time app starts then send to the server
-		last time started
-		use counters
-	then from those information we can determined wheter uses the APP on multiple devices same time and flag and overused or make it inactive
-
 ## Localization
 add translations for he error messages
 
@@ -46,7 +33,6 @@ test install uninstall, how it affect, lic, pwd and other
 +Create sample Shot.Licensing.Sample_Xamarin
 
 ## Server
-license server & client timeout setting, setting for httpClient timeout
 see balsamique license request email if user needs to re-fetch license email. send same email as for registration.
 Licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID
 possible use license API to retrieve an license again by email and sent an email then, use original request data
@@ -55,7 +41,7 @@ remove the registered licenses
 	return UI page with list of devices to easy manage, must enter email, and license ID
 	problem is that user can get email from license, must sent the page to the user email address
 	or send access token then user can access management page
-health check
++health check
 
 ## Server UI
 see teamcity licence for the UI
@@ -70,44 +56,34 @@ generate licence|deactivate|activate|
 +generate license from request
 check license
 need some ui to show info
-private key store somewhere
 +Always HTTPS
++licence server API should be stand alose server with Sqlite database to store licences for all products
 docker container, configure that, with ssl
 Licencing API
 	Get server licence
 	Get app licence
 lincense UI to view|generate licence|deactivate|activate
-+licence server API should be stand alose server with Sqlite database to store licences for all products
 keys store multiple by name and private|public key
 	name is for the app or key store,
-	lic must store used name for the reference
+	lic must store used name for the reference, what is this about?
+	encrypt keys
+	private key store somewhere
 
-## Temp
-1. check lic on machine
-	exists no demo
-	yes valid no demo
-	yes vallid full
-2. check on server
-	if has connection
-		if not valid remove or switch to demo 
-3. note server might have only one active licence if not a volume license
+## Check Lic on App tasks (APP specific)
+always check for licence when there is internet connectivity. no connectivity and has existing then ok
+	at least one time a day
+if not valid remove the license.xml file, this only if http check was successful
+if https check fail do nothing if license.xml exists not to be removed
+license file might not be valid possible to remove it if tampered
+overused licensing ACT05Code
+	note each check can write info about the app license then increment something and can see whether license is used on many devices over time
+	can collect on device some info each time app starts then send to the server
+		last time started
+		use counters
+	then from those information we can determined wheter uses the APP on multiple devices same time and flag and overused or make it inactive
 
-if quanity = 1
-	only one can be active at a time
-if quanity > 1
-	multiple can be active at a time
-
-Not used for volume license) device ID not to be used. Why???
-
-Hi With the volume license, there is no check on the uid of the machine. that means it can be activated infinitely many machines.
-
-## Example Fiddler compose to register license
-
-POST https://localhost:5001/api/license HTTP/1.1
-Host: localhost:5001
-Content-Type: application/json
-
-{"LicenseId":"D4248D45-7B4A-4832-A7D1-6AA32A752453","Attributes":{"ClientId":"FAAAEB70-3BCF-4FDC-B67A-5C6B81C316C5"}}
+## Nice to have
+license server & client timeout setting, setting for httpClient timeout, default is ok
 
 ## Resources
 https://github.com/junian/standard.Licensing

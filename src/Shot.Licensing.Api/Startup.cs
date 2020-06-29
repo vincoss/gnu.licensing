@@ -51,7 +51,7 @@ namespace Shot.Licensing.Api
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/hc", new HealthCheckOptions() // TODO:
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
@@ -64,8 +64,9 @@ namespace Shot.Licensing.Api
     {
         public static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHealthChecks()
+            services.AddHealthChecks() // TODO: .RequireAuthorization();
                 .AddCheck("self", () => HealthCheckResult.Healthy())
+                .AddCheck<SignKeyHealthCheck>("license-sign-key-check", tags: new[] { "sign-key" })
                 .AddSqlite(sqliteConnectionString: configuration.GetConnectionString("EfDbContext"))
                 .AddUrlGroup(new Uri(configuration["SvrUrlHC"]), name: "shot-svr-check", tags: new string[] { "shot.svr" });
 
@@ -84,6 +85,7 @@ namespace Shot.Licensing.Api
         {
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
+            services.AddSingleton<SignKeyHealthCheck>();
 
             return services;
         }

@@ -8,13 +8,12 @@ https://imedea.uib-csic.es/master/cambioglobal/Modulo_V_cod101615/matlab_7_4/win
 https://cs.uwaterloo.ca/~echrzano/all.htm#6.4
 https://imedea.uib-csic.es/master/cambioglobal/Modulo_V_cod101615/matlab_7_4/win32/help/base/install/pc/f2-46589.html
 
-
+## Cli example
 dotnet Shot.Licensing.Cli.dll license -n test-license -e text@example.com -t standard -a "AppId=B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B" -s "C:\_Data\GitHub\sl\resources\test.private.xml" -d c:\temp\lic
 
 add recover license url on help section
 add license server urls
 
-B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B
 
 check result
 	true
