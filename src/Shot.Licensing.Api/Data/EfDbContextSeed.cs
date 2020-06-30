@@ -26,12 +26,11 @@ namespace Shot.Licensing.Api.Data
             }
             catch (Exception ex)
             {
+                logger.LogError(ex, "EXCEPTION ERROR while migrating {DbContextName}", nameof(EfDbContext));
+
                 if (retryForAvaiability < 10)
                 {
                     retryForAvaiability++;
-
-                    logger.LogError(ex, "EXCEPTION ERROR while migrating {DbContextName}", nameof(EfDbContext));
-
                     await SeedAsync(context, env, logger, settings, retryForAvaiability);
                 }
             }

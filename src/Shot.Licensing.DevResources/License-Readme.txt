@@ -21,12 +21,6 @@
 ## Localization
 add translations for he error messages
 
-## Testing
-test how to migrate licence between devices, here do some research, must be very easy,
-	just ping server with license key, and additional attributes, include license hash if exists
-	user can copy licence to many devices but when online it will deatvicate licence for other devices
-test install uninstall, how it affect, lic, pwd and other
-
 ## Samples
 +Create sample Shot.Licensing.Sample_Console
 +Create sample Shot.Licensing.Sample_Console_ServerLicenseFetch
@@ -84,6 +78,10 @@ overused licensing ACT05Code
 		last time started
 		use counters
 	then from those information we can determined wheter uses the APP on multiple devices same time and flag and overused or make it inactive
+test how to migrate licence between devices, here do some research, must be very easy,
+	just ping server with license key, and additional attributes, include license hash if exists
+	user can copy licence to many devices but when online it will deatvicate licence for other devices
+test install uninstall, how it affect, lic, pwd and other
 
 ## Nice to have
 license server & client timeout setting, setting for httpClient timeout, default is ok
