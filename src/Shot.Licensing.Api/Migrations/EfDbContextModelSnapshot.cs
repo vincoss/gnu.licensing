@@ -14,7 +14,7 @@ namespace Shot.Licensing.Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4");
+                .HasAnnotation("ProductVersion", "3.1.5");
 
             modelBuilder.Entity("Shot.Licensing.Api.Data.License", b =>
                 {
@@ -135,8 +135,7 @@ namespace Shot.Licensing.Api.Migrations
                     b.Property<DateTime?>("Expire")
                         .HasColumnType("DATETIME");
 
-                    b.Property<bool?>("IsActive")
-                        .IsRequired()
+                    b.Property<bool>("IsActive")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("BOOLEAN")
                         .HasDefaultValue(true);

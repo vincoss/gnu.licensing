@@ -207,8 +207,11 @@ namespace Shot.Licensing.Api.Services
                     context.SaveChanges();
 
                     var registration = CreateRegistration(product);
-                    registration.IsActive = false;
                     context.Add(registration);
+                    context.SaveChanges();
+
+                    registration.IsActive = false;
+                    context.Update(registration);
                     context.SaveChanges();
 
                     var request = new LicenseRegisterRequest

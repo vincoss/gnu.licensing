@@ -26,9 +26,9 @@ namespace Shot.Licensing.Api.Controllers
         /// Check if api is available.
         /// </summary>
         [HttpGet]
-        public IActionResult Get()
+        public void Get()
         {
-            return Ok();  // Used to check if server is available
+            // Used to check if server is available
         }
 
         /// <summary>

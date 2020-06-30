@@ -27,7 +27,7 @@ namespace Shot.Licensing.Api.Data
         [Required]
         public LicenseType LicenseType { get; set; }
 
-        public bool? IsActive { get; set; } // Blacklist
+        public bool IsActive { get; set; } // Blacklist
 
         public int Quantity { get; set; }
 

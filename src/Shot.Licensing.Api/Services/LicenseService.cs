@@ -67,7 +67,7 @@ namespace Shot.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
 
-            if (registration.IsActive == null || registration.IsActive.Value == false)
+            if (registration.IsActive == false)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
             }
