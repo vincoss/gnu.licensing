@@ -56,7 +56,9 @@ namespace Shot.Licensing.Test
                 foreach (var c in cultures)
                 {
                     var ci  = new CultureInfo(c);
+                    CultureInfo.CurrentCulture = ci;
                     CultureInfo.DefaultThreadCurrentCulture = ci;
+                    Thread.CurrentThread.CurrentUICulture = ci;
 
                     foreach (var key in FailureStrings.GetKeys())
                     {
