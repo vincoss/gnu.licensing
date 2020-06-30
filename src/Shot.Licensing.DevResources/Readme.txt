@@ -6,6 +6,7 @@ publish to docker, linux, linuxArm, windows
 publish to nuget
 create documentation docker
 create repo documentation
+sign assembly
 	
 ## Enable SSL on localhost|help
 dotnet dev-certs https --help

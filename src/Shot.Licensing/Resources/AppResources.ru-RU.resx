@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ACT00Code" xml:space="preserve">
+    <value>ACT.00</value>
+  </data>
+  <data name="ACT00Message" xml:space="preserve">
+    <value>Activation failed.</value>
+  </data>
+  <data name="ACT00Resolve" xml:space="preserve">
+    <value>Your product is having trouble connecting with License servers.</value>
+  </data>
+  <data name="ACT01Code" xml:space="preserve">
+    <value>ACT.01</value>
+  </data>
+  <data name="ACT01Message" xml:space="preserve">
+    <value>Активация не удалась / Неверный лицензионный ключ.</value>
+  </data>
+  <data name="ACT01Resolve" xml:space="preserve">
+    <value>Введите или скопируйте / вставьте лицензионный ключ в свой продукт, как он написан.</value>
+  </data>
+  <data name="ACT02Code" xml:space="preserve">
+    <value>ACT.02</value>
+  </data>
+  <data name="ACT02Message" xml:space="preserve">
+    <value>Ключ активации используется для другого продукта.</value>
+  </data>
+  <data name="ACT02Resolve" xml:space="preserve">
+    <value>Убедитесь, что вы загрузили правильный продукт для приобретенной вами лицензии.</value>
+  </data>
+  <data name="ACT03Code" xml:space="preserve">
+    <value>ACT.03</value>
+  </data>
+  <data name="ACT03Message" xml:space="preserve">
+    <value>Ошибка активации - аннулирована лицензия.</value>
+  </data>
+  <data name="ACT03Resolve" xml:space="preserve">
+    <value>Убедитесь, что вы активируете, используя самый последний лицензионный ключ.</value>
+  </data>
+  <data name="ACT04Code" xml:space="preserve">
+    <value>ACT.04</value>
+  </data>
+  <data name="ACT04Message" xml:space="preserve">
+    <value>Активация не удалось.</value>
+  </data>
+  <data name="ACT04Resolve" xml:space="preserve">
+    <value>Активация не удалась, потому что срок действия лицензии, которую вы пытаетесь активировать, уже истек.</value>
+  </data>
+  <data name="ACT05Code" xml:space="preserve">
+    <value>ACT.05</value>
+  </data>
+  <data name="ACT05Message" xml:space="preserve">
+    <value>Ваша лицензия перегружена.</value>
+  </data>
+  <data name="ACT05Resolve" xml:space="preserve">
+    <value>Когда лицензия больше не используется, попробуйте активировать снова.</value>
+  </data>
+  <data name="ACT06Code" xml:space="preserve">
+    <value>ACT.06</value>
+  </data>
+  <data name="ACT06Message" xml:space="preserve">
+    <value>Внутренняя ошибка.</value>
+  </data>
+  <data name="ACT06Resolve" xml:space="preserve">
+    <value>Если вы все еще не можете решить вашу проблему, напишите в службу технической поддержки.</value>
+  </data>
+  <data name="VAL00Code" xml:space="preserve">
+    <value>VAL.00</value>
+  </data>
+  <data name="VAL00Message" xml:space="preserve">
+    <value>Файл лицензии отсутствует.</value>
+  </data>
+  <data name="VAL00Resolve" xml:space="preserve">
+    <value>Попытайтесь активировать снова.</value>
+  </data>
+  <data name="VAL01Code" xml:space="preserve">
+    <value>VAL.01</value>
+  </data>
+  <data name="VAL01Message" xml:space="preserve">
+    <value>Проверка не удалась.</value>
+  </data>
+  <data name="VAL01Resolve" xml:space="preserve">
+    <value>Файл лицензии недействителен или поврежден.</value>
+  </data>
+  <data name="VAL02Code" xml:space="preserve">
+    <value>VAL.02</value>
+  </data>
+  <data name="VAL02Message" xml:space="preserve">
+    <value>Ошибка проверки подписи лицензии.</value>
+  </data>
+  <data name="VAL02Resolve" xml:space="preserve">
+    <value>Подпись лицензии и данные не совпадают. Это обычно происходит, когда файл лицензии поврежден или был изменен.</value>
+  </data>
+  <data name="VAL03Code" xml:space="preserve">
+    <value>VAL.03</value>
+  </data>
+  <data name="VAL03Message" xml:space="preserve">
+    <value>Лицензия для этого продукта истекла.</value>
+  </data>
+  <data name="VAL03Resolve" xml:space="preserve">
+    <value>Срок действия вашей лицензии истек. Пожалуйста, свяжитесь с вашим дистрибьютором / продавцом, чтобы продлить лицензию.</value>
+  </data>
+  <data name="VAL04Code" xml:space="preserve">
+    <value>VAL.04</value>
+  </data>
+  <data name="VAL04Message" xml:space="preserve">
+    <value>Лицензия не действительна для текущего устройства.</value>
+  </data>
+  <data name="VAL04Resolve" xml:space="preserve">
+    <value>Пожалуйста, попробуйте активировать снова.</value>
+  </data>
+  <data name="VAL05Code" xml:space="preserve">
+    <value>VAL.05</value>
+  </data>
+  <data name="VAL05Message" xml:space="preserve">
+    <value>Проверка лицензии не удалась!</value>
+  </data>
+  <data name="VAL05Resolve" xml:space="preserve">
+    <value>Если вы все еще не можете решить вашу проблему, напишите в службу технической поддержки.</value>
+  </data>
+</root>

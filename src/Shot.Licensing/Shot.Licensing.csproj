@@ -2,10 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- NuGet -->
+    <IsPackable>true</IsPackable>
+    <PackageDescription>
+      .NET Compiler Platform ("Roslyn") support for C#, Microsoft.CodeAnalysis.CSharp.dll.
+    </PackageDescription>
     <Authors>Ferdinand Lukasak</Authors>
     <Company>Ferdinand Lukasak</Company>
     <Description>A class library for easy software licensing. Flexible and easy to use.</Description>
-    <Copyright>Copyright © 2006-2020 Ferdinand Lukasak and Contributors</Copyright>
+    <Copyright>Copyright © Ferdinand Lukasak and Contributors</Copyright>
     <PackageProjectUrl>http://shot.licensing.github.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/vincoss/shot.licensing</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,6 +28,11 @@
     <PackageReference Include="System.Text.Json" Version="4.7.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\AppResources.resx" GenerateSource="true" />
+    <EmbeddedResource Update="Resources\AppResources.ru-RU.resx" GenerateSource="true"/>
+  </ItemGroup>
+  
   <ItemGroup>
     <None Include="..\Shot.Licensing.DevResources\img\logo.png">
       <Pack>True</Pack>

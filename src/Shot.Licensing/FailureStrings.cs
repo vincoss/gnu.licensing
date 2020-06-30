@@ -27,14 +27,15 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Shot.Licensing.Validation;
-
+using System.Collections.Concurrent;
+using System.Resources;
+using System.Reflection;
+using System.Globalization;
 
 namespace Shot.Licensing
 {
     public static class FailureStrings
     {
-        private static IStringLocalizer _localizer = new ResourceStringLocalizer();
-
         #region Keys
 
         public const string ACT00Code       = "ACT00Code";
@@ -104,27 +105,16 @@ namespace Shot.Licensing
                 throw new InvalidOperationException($"Code '{code}' not found.");
             }
 
-            // TODO: cache those generated failures
-
             var c = code.Replace("Code", "");
             var m = $"{c}Message";
             var r = $"{c}Resolve";
 
             return new GeneralValidationFailure
             {
-                Code = _localizer[code],
-                Message = _localizer[m],
-                HowToResolve = _localizer[r],
+                Code = Translate(code),
+                Message = Translate(m),
+                HowToResolve = Translate(r),
             };
-        }
-
-        public static void SetLocalizer(IStringLocalizer localizer)
-        {
-            if (localizer == null)
-            {
-                throw new ArgumentNullException(nameof(localizer));
-            }
-            _localizer = localizer;
         }
 
         public static IEnumerable<string> GetKeys()
@@ -183,5 +173,24 @@ namespace Shot.Licensing
     }
 
         #endregion
+
+        private static readonly string ResourceId = "Shot.Licensing.Resources.AppResources";
+        static readonly Lazy<ResourceManager> ResMgr = new Lazy<ResourceManager>(
+        () => new ResourceManager(ResourceId, IntrospectionExtensions.GetTypeInfo(typeof(FailureStrings)).Assembly));
+
+        private static string Translate(string key)
+        {
+            if (string.IsNullOrWhiteSpace(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            var translation = ResMgr.Value.GetString(key);
+            if (translation == null)
+            {
+                throw new ArgumentException($"Key '{key}' was not found in resources '{ResourceId}' for culture '{CultureInfo.CurrentCulture}'.");
+            }
+            return translation;
+        }
     }
 }

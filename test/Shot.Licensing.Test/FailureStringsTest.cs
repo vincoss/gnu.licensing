@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Xunit;
+using System.Globalization;
+using System.Threading;
 
 namespace Shot.Licensing.Test
 {
@@ -35,6 +37,39 @@ namespace Shot.Licensing.Test
                 var actual = FailureStrings.Get(key);
 
                 Assert.NotNull(actual);
+            }
+        }
+
+        [Fact]
+        public void AllCultures()
+        {
+            var original = CultureInfo.DefaultThreadCurrentCulture;
+
+            try
+            {
+                var cultures = new[]
+                {
+                    //"en-US",
+                    "ru-RU"
+                };
+
+                foreach (var c in cultures)
+                {
+                    var ci  = new CultureInfo(c);
+                    CultureInfo.DefaultThreadCurrentCulture = ci;
+
+                    foreach (var key in FailureStrings.GetKeys())
+                    {
+                        var actual = FailureStrings.Get(key);
+
+                        Assert.NotNull(actual);
+                    }
+                }
+            }
+            finally
+            {
+                CultureInfo.DefaultThreadCurrentCulture = original;
+
             }
         }
     }
