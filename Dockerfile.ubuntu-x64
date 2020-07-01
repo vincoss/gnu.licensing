@@ -2,17 +2,17 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS runtime
 
 ARG HTTPS_PORT=443
-ARG SHOT_LICENSING_API_HOME=/inetpub/wwwroot/shot.licensing.api
+ARG APP_HOME=/var/app
 
-WORKDIR ${SHOT_LICENSING_API_HOME}
+WORKDIR ${APP_HOME}
 COPY ["/src/Shot.Licensing.Api/bin/Release/netcoreapp3.1/publish/linux-x64/.", "./"]
 
-ENV HOME ${SHOT_LICENSING_API_HOME}
+ENV HOME ${APP_HOME}
 ENV NAME shotlicapisvr
 
 # Make ports available to the world outside this container for main web interface
 EXPOSE ${HTTPS_PORT}
 
-VOLUME /var/Shot.Licensing/Data
+VOLUME /var/appdata
 
 ENTRYPOINT ["./Shot.Licensing.Api"]
