@@ -28,7 +28,6 @@
 
 ## Server
 see balsamique license request email if user needs to re-fetch license email. send same email as for registration.
-Licencing use for API key that will have pairs what can sync get|post. The APi key is from licence ID
 possible use license API to retrieve an license again by email and sent an email then, use original request data
 add the the licensing dll from nuget after publish, cli too
 remove the registered licenses
