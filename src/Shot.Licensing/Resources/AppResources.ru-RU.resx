@@ -121,10 +121,10 @@
     <value>ACT.00</value>
   </data>
   <data name="ACT00Message" xml:space="preserve">
-    <value>Activation failed.</value>
+    <value>Активация не удалось.</value>
   </data>
   <data name="ACT00Resolve" xml:space="preserve">
-    <value>Your product is having trouble connecting with License servers.</value>
+    <value>У вашего продукта проблемы с подключением к серверам лицензий.</value>
   </data>
   <data name="ACT01Code" xml:space="preserve">
     <value>ACT.01</value>

@@ -44,5 +44,14 @@ namespace Shot.Licensing.Validation
         /// Gets or sets a message that describes how to recover from the validation failure.
         /// </summary>
         public string HowToResolve { get; set; }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(Code))
+            {
+                return base.ToString();
+            }
+            return $"{Code} {Message} {HowToResolve}";
+        }
     }
 }

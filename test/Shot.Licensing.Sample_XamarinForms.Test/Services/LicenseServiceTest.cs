@@ -158,7 +158,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Test.Services
             {
                 File.WriteAllText(path, File.ReadAllText(dir));
 
-                await service.Run();
+                await service.RunAsync();
 
                 Assert.Equal(AppLicense.Full, LicenseGlobals.Get());
             }

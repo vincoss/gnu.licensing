@@ -49,18 +49,17 @@ namespace Shot.Licensing.Test
             {
                 var cultures = new[]
                 {
-                    //"en-US",
+                    "en-US",
                     "ru-RU"
                 };
 
                 foreach (var c in cultures)
                 {
                     var ci  = new CultureInfo(c);
-                    CultureInfo.CurrentCulture = ci;
                     CultureInfo.DefaultThreadCurrentCulture = ci;
                     Thread.CurrentThread.CurrentUICulture = ci;
 
-                    foreach (var key in FailureStrings.GetKeys())
+                    foreach (var key in FailureStrings.GetKeys().Where(x => x.EndsWith("Code")))
                     {
                         var actual = FailureStrings.Get(key);
 

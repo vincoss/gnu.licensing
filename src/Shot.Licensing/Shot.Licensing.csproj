@@ -30,11 +30,10 @@
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\AppResources.resx" GenerateSource="true">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+      <Generator></Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\AppResources.ru-RU.resx" GenerateSource="true">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator></Generator>
     </EmbeddedResource>
   </ItemGroup>
   
@@ -43,14 +42,6 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Compile Update="Resources\AppResources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>AppResources.resx</DependentUpon>
-    </Compile>
   </ItemGroup>
 
 </Project>

@@ -26,7 +26,7 @@ namespace Shot.Licensing.Sample_XF
             }
 
             // Run license service in the backgroud, will set Demo|Full version for the app
-            new LicenseService(BaseLicenseService.CreateHttpClient()).Run();
+            new LicenseService(BaseLicenseService.CreateHttpClient()).RunAsync();
         }
 
         protected override void OnSleep()

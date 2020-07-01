@@ -19,7 +19,7 @@
 +display license information
 
 ## Localization
-add translations for he error messages
++add translations for the error messages
 
 ## Samples
 +Create sample Shot.Licensing.Sample_Console

@@ -170,7 +170,7 @@ namespace Shot.Licensing
             yield return VAL05Code;
             yield return VAL05Message;
             yield return VAL05Resolve;
-    }
+        }
 
         #endregion
 

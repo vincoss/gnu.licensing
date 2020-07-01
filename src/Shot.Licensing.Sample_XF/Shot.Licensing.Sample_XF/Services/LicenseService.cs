@@ -66,7 +66,7 @@ namespace Shot.Licensing.Sample_XamarinForms.Services
             return attributes;
         }
 
-        public Task Run()
+        public Task RunAsync()
         {
             var task = Task.Run(async() =>
             {
