@@ -13,9 +13,12 @@ https://hub.docker.com/_/microsoft-dotnet-core-aspnet/
 NOTE:
 The samples are written for cmd.exe.
 
+## Cmd
+cd to solution root
+
 ## Build & tag
 docker build --no-cache -t vincoss/shotlicapisvr:1.0.0-windows .
-docker build -f Dockerfile.ubuntu-x64 --no-cache -t vincoss/shotlicapisvr:1.0.0-bionic .
+docker build -f src/Shot.Licensing.DevResources/Docker/Dockerfile.ubuntu-x64 --no-cache -t vincoss/shotlicapisvr:1.0.0-bionic .
 
 ## Tag image (before publish to docker hub) if not done yet
 docker image tag vincoss/shotlicapisvr:1.0.0 vincoss/shotlicapisvr:1.0.0-windows
@@ -46,6 +49,8 @@ dotnet dev-certs https --trust
 ##------------------------------------------------ Test
 
 ## Browse
+https://localhost/api/license
+https://localhost:8002/api/license
 https://172.17.0.2:8002/api/license
 https://shotapi/api/license
 https://localhost:8001/api/license
