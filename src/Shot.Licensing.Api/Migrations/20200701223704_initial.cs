@@ -63,6 +63,7 @@ namespace Shot.Licensing.Api.Migrations
                     LicenseEmail = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
                     LicenseType = table.Column<int>(nullable: false),
                     IsActive = table.Column<bool>(type: "BOOLEAN", nullable: false, defaultValue: true),
+                    Comment = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     Expire = table.Column<DateTime>(type: "DATETIME", nullable: true),
                     CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false),

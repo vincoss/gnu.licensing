@@ -7,6 +7,9 @@ publish to nuget
 create documentation docker
 create repo documentation
 sign assembly
+svr (prl) (web) api to create projects
+svr (prl) (web) license requests
+
 	
 ## Enable SSL on localhost|help
 dotnet dev-certs https --help

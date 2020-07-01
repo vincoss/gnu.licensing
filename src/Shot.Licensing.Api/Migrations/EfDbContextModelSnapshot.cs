@@ -125,6 +125,9 @@ namespace Shot.Licensing.Api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
                         .HasColumnType("NVARCHAR(64) COLLATE NOCASE");

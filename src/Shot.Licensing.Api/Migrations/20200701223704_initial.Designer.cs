@@ -9,7 +9,7 @@ using Shot.Licensing.Api.Data;
 namespace Shot.Licensing.Api.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20200630030026_initial")]
+    [Migration("20200701223704_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -126,6 +126,9 @@ namespace Shot.Licensing.Api.Migrations
                     b.Property<int>("LicenseRegistrationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
