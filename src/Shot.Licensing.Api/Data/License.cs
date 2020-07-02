@@ -10,9 +10,6 @@ namespace Shot.Licensing.Api.Data
         public int LicenseId { get; set; }
 
         [Required]
-        public int LicenseRegistrationId { get; set; }
-
-        [Required]
         public Guid LicenseUuid { get; set; }
 
         [Required]

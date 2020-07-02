@@ -13,7 +13,6 @@ namespace Shot.Licensing.Api.Migrations
                 {
                     LicenseId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LicenseRegistrationId = table.Column<int>(type: "INTEGER", nullable: false),
                     LicenseUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false),
                     ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false),
                     LicenseString = table.Column<string>(type: "NVARCHAR COLLATE NOCASE", nullable: false),
@@ -38,11 +37,11 @@ namespace Shot.Licensing.Api.Migrations
                 {
                     LicenseProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false),
+                    ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("859b61f4-6ee5-4b19-b3d8-259421726ef2")),
                     ProductName = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
                     ProductDescription = table.Column<string>(type: "NVARCHAR(1024) COLLATE NOCASE", nullable: false),
                     SignKeyName = table.Column<string>(type: "VARCHAR(64) COLLATE NOCASE", nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 7, 2, 5, 5, 37, 834, DateTimeKind.Utc).AddTicks(3311)),
                     CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },
                 constraints: table =>
@@ -56,8 +55,7 @@ namespace Shot.Licensing.Api.Migrations
                 {
                     LicenseRegistrationId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LicenseProductId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LicenseUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false),
+                    LicenseUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("d9ced311-0533-4d64-8bd7-0b2288999a6b")),
                     ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false),
                     LicenseName = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
                     LicenseEmail = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
@@ -66,7 +64,7 @@ namespace Shot.Licensing.Api.Migrations
                     Comment = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
                     Expire = table.Column<DateTime>(type: "DATETIME", nullable: true),
-                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false),
+                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 7, 2, 5, 5, 37, 838, DateTimeKind.Utc).AddTicks(1422)),
                     CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },
                 constraints: table =>
@@ -105,9 +103,9 @@ namespace Shot.Licensing.Api.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LicenseRegistration_LicenseRegistrationId_LicenseProductId_LicenseName_LicenseEmail_IsActive",
+                name: "IX_LicenseRegistration_LicenseRegistrationId_LicenseName_LicenseEmail_IsActive",
                 table: "LicenseRegistration",
-                columns: new[] { "LicenseRegistrationId", "LicenseProductId", "LicenseName", "LicenseEmail", "IsActive" },
+                columns: new[] { "LicenseRegistrationId", "LicenseName", "LicenseEmail", "IsActive" },
                 unique: true);
         }
 

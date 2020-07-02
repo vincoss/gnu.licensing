@@ -9,7 +9,7 @@ using Shot.Licensing.Api.Data;
 namespace Shot.Licensing.Api.Migrations
 {
     [DbContext(typeof(EfDbContext))]
-    [Migration("20200701223704_initial")]
+    [Migration("20200702050538_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,9 +51,6 @@ namespace Shot.Licensing.Api.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR");
 
-                    b.Property<int>("LicenseRegistrationId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("LicenseString")
                         .IsRequired()
                         .HasColumnType("NVARCHAR COLLATE NOCASE");
@@ -90,7 +87,9 @@ namespace Shot.Licensing.Api.Migrations
                         .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
 
                     b.Property<DateTime>("CreatedDateTimeUtc")
-                        .HasColumnType("DATETIME");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DATETIME")
+                        .HasDefaultValue(new DateTime(2020, 7, 2, 5, 5, 37, 834, DateTimeKind.Utc).AddTicks(3311));
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -101,7 +100,9 @@ namespace Shot.Licensing.Api.Migrations
                         .HasColumnType("NVARCHAR(256) COLLATE NOCASE");
 
                     b.Property<Guid>("ProductUuid")
-                        .HasColumnType("VARCHAR(36)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("VARCHAR(36)")
+                        .HasDefaultValue(new Guid("859b61f4-6ee5-4b19-b3d8-259421726ef2"));
 
                     b.Property<string>("SignKeyName")
                         .IsRequired()
@@ -135,7 +136,9 @@ namespace Shot.Licensing.Api.Migrations
                         .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
 
                     b.Property<DateTime>("CreatedDateTimeUtc")
-                        .HasColumnType("DATETIME");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("DATETIME")
+                        .HasDefaultValue(new DateTime(2020, 7, 2, 5, 5, 37, 838, DateTimeKind.Utc).AddTicks(1422));
 
                     b.Property<DateTime?>("Expire")
                         .HasColumnType("DATETIME");
@@ -153,14 +156,13 @@ namespace Shot.Licensing.Api.Migrations
                         .IsRequired()
                         .HasColumnType("NVARCHAR(256) COLLATE NOCASE");
 
-                    b.Property<int>("LicenseProductId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("LicenseType")
                         .HasColumnType("INTEGER");
 
                     b.Property<Guid>("LicenseUuid")
-                        .HasColumnType("VARCHAR(36)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("VARCHAR(36)")
+                        .HasDefaultValue(new Guid("d9ced311-0533-4d64-8bd7-0b2288999a6b"));
 
                     b.Property<Guid>("ProductUuid")
                         .HasColumnType("VARCHAR(36)");
@@ -173,7 +175,7 @@ namespace Shot.Licensing.Api.Migrations
                     b.HasIndex("LicenseUuid")
                         .IsUnique();
 
-                    b.HasIndex("LicenseRegistrationId", "LicenseProductId", "LicenseName", "LicenseEmail", "IsActive")
+                    b.HasIndex("LicenseRegistrationId", "LicenseName", "LicenseEmail", "IsActive")
                         .IsUnique();
 
                     b.ToTable("LicenseRegistration");

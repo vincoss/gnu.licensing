@@ -53,7 +53,6 @@ namespace Shot.Licensing.Api.Data
 
             var registration = new LicenseRegistration
             {
-                LicenseProductId = product.LicenseProductId,
                 LicenseUuid = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89"),
                 ProductUuid = product.ProductUuid,
                 LicenseName = "Demo-User",

@@ -33,7 +33,6 @@ namespace Shot.Licensing.Api
 
             var registration = new LicenseRegistration
             {
-                LicenseProductId = product.LicenseProductId,
                 LicenseUuid = Guid.NewGuid(),
                 ProductUuid = product.ProductUuid,
                 LicenseName = "test-name",
@@ -51,7 +50,6 @@ namespace Shot.Licensing.Api
 
             var license = new Shot.Licensing.Api.Data.License
             {
-                LicenseRegistrationId = registration.LicenseRegistrationId,
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 LicenseString = "license-string",

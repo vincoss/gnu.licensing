@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+using System;
 
 namespace Shot.Licensing.Api.Data.Configuration
 {
@@ -25,6 +25,7 @@ namespace Shot.Licensing.Api.Data.Configuration
 
             builder.Property(t => t.ProductUuid)
                    .IsRequired()
+                   .HasDefaultValue(Guid.NewGuid())
                    .HasColumnType("VARCHAR(36)");
 
             builder.Property(t => t.ProductName)
@@ -41,6 +42,7 @@ namespace Shot.Licensing.Api.Data.Configuration
 
             builder.Property(x => x.CreatedDateTimeUtc)
                    .IsRequired()
+                   .HasDefaultValue(DateTime.UtcNow)
                    .HasColumnType("DATETIME");
 
             builder.Property(x => x.CreatedByUser)

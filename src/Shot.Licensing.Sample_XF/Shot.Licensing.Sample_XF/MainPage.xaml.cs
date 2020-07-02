@@ -17,6 +17,8 @@ namespace Shot.Licensing.Sample_XF
         public MainPage()
         {
             InitializeComponent();
+
+            ePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         }
 
         private void Button_Clicked(object sender, EventArgs e)

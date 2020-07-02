@@ -214,8 +214,14 @@ namespace Shot.Licensing
 
         public static HttpClient CreateHttpClient()
         {
-            var httpClient = new HttpClient();
-            return httpClient;
+#if DEBUG   // TODO:
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient dclient = new HttpClient(clientHandler);
+            return dclient;
+#endif
+            HttpClient client = new HttpClient();
+            return client;
         }
 
         private async Task HandleResponse(HttpResponseMessage response)

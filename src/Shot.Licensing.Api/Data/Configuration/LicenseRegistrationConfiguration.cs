@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
+using System;
 
 namespace Shot.Licensing.Api.Data.Configuration
 {
@@ -9,7 +9,7 @@ namespace Shot.Licensing.Api.Data.Configuration
         public void Configure(EntityTypeBuilder<LicenseRegistration> builder)
         {
             builder.ToTable(nameof(LicenseRegistration))
-                  .HasIndex(x => new { x.LicenseRegistrationId, x.LicenseProductId, x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
+                  .HasIndex(x => new { x.LicenseRegistrationId, x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
 
             builder.ToTable(nameof(LicenseRegistration))
                 .HasIndex(x => new { x.LicenseUuid }).IsUnique();
@@ -20,12 +20,9 @@ namespace Shot.Licensing.Api.Data.Configuration
                    .IsRequired()
                    .HasColumnType("INTEGER");
 
-            builder.Property(t => t.LicenseProductId)
-                   .IsRequired()
-                   .HasColumnType("INTEGER");
-
             builder.Property(t => t.LicenseUuid)
                    .IsRequired()
+                   .HasDefaultValue(Guid.NewGuid())
                    .HasColumnType("VARCHAR(36)");
             
             builder.Property(t => t.ProductUuid)
@@ -50,6 +47,7 @@ namespace Shot.Licensing.Api.Data.Configuration
 
             builder.Property(x => x.CreatedDateTimeUtc)
                    .IsRequired()
+                   .HasDefaultValue(DateTime.UtcNow)
                    .HasColumnType("DATETIME");
 
             builder.Property(x => x.CreatedByUser)

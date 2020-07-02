@@ -17,10 +17,6 @@ namespace Shot.Licensing.Api.Data.Configuration
                 .IsRequired()
                 .HasColumnType("INTEGER");
 
-            builder.Property(t => t.LicenseRegistrationId)
-             .IsRequired()
-             .HasColumnType("INTEGER");
-
             builder.Property(t => t.LicenseUuid)
                    .IsRequired()
                    .HasColumnType("VARCHAR(36)");

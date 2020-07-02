@@ -474,7 +474,6 @@ namespace Shot.Licensing.Api.Services
                     Assert.NotNull(result.License);
                     Assert.NotNull(licenseRecord);
                     Assert.Equal(1, licenseRecord.LicenseId);
-                    Assert.Equal(registration.LicenseRegistrationId, licenseRecord.LicenseRegistrationId);
                     Assert.Equal(registration.LicenseUuid, licenseRecord.LicenseUuid);
                     Assert.Equal(registration.ProductUuid, licenseRecord.ProductUuid);
                     Assert.NotNull(licenseRecord.LicenseString);
@@ -538,7 +537,6 @@ namespace Shot.Licensing.Api.Services
         {
             return new LicenseRegistration
             {
-                LicenseProductId = product.LicenseProductId,
                 LicenseUuid = Guid.NewGuid(),
                 ProductUuid = product.ProductUuid,
                 LicenseName  = "test-name",
@@ -556,7 +554,6 @@ namespace Shot.Licensing.Api.Services
         {
             return new Data.License
             {
-                LicenseRegistrationId = registration.LicenseRegistrationId,
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 LicenseString = "license",

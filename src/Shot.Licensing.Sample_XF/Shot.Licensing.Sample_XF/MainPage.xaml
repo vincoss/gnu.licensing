@@ -9,6 +9,7 @@
     <StackLayout>
         <Label Text="License Sample" />
         <Button Text="License" Clicked="Button_Clicked"/>
+        <Entry x:Name="ePath" IsReadOnly="True"/>
     </StackLayout>
 
 </ContentPage>

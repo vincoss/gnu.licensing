@@ -163,7 +163,6 @@ namespace Shot.Licensing.Api.Services
         {
             var license = new Shot.Licensing.Api.Data.License
             {
-                LicenseRegistrationId = registration.LicenseRegistrationId,
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 LicenseString = str,
