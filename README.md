@@ -1,4 +1,4 @@
-# ![Logo](/src/Warthog.DevResources/img/logo.png?raw=true)  Warthog
+# ![Logo](/logo.png?raw=true)  Warthog
 
 This project is derived from [Standard.Licensing](https://github.com/junian/standard.Licensing) and [Portable.Licensing](https://github.com/dnauck/Portable.Licensing/) library. The purpose of this fork is to add support for license file generation and license server API to manage and distribute licenses.
 
