@@ -5,14 +5,14 @@
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
     <PackageDescription>
-      .NET Compiler Platform ("Roslyn") support for C#, Microsoft.CodeAnalysis.CSharp.dll.
+      A class library for easy software licensing. Flexible and easy to use. Warthog.dll
     </PackageDescription>
     <Authors>Ferdinand Lukasak</Authors>
     <Company>Ferdinand Lukasak</Company>
     <Description>A class library for easy software licensing. Flexible and easy to use.</Description>
     <Copyright>Copyright © Ferdinand Lukasak and Contributors</Copyright>
     <PackageProjectUrl>http://warthog.github.com</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/vincoss/warthot</RepositoryUrl>
+    <RepositoryUrl>https://github.com/vincoss/warthog</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>licensing;portable</PackageTags>
     <PackageReleaseNotes>https://github.com/vincoss/warthog/releases</PackageReleaseNotes>
@@ -38,7 +38,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Include="..\Warthog.DevResources\img\logo.png">
+    <None Include="..\..\logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
