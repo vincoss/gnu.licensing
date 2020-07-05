@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Warthog.Sample_XamarinForms.Views.LicenseView"
+             x:Name="cpLicenseView"
+             Title="License">
+    
+    <ContentPage.Content>
+        <StackLayout Margin="5">
+            <Entry  Placeholder="Enter license key" Text="{Binding RegisterKey}" />
+            <Button Text="Activate" Command="{Binding ActivateCommand}"
+                    HorizontalOptions="FillAndExpand"/>
+
+            <Label Text="Description"/>
+            <Entry Text="{Binding Description}" IsReadOnly="True" />
+
+            <Label Text="Licensed to"/>
+            <Entry Text="{Binding LicensedTo}" IsReadOnly="True" />
+
+            <Label Text="License Key"/>
+            <Entry Text="{Binding LicenseKey}" IsReadOnly="True" />
+
+            <Label Text="{Binding ErrorMessage}"
+                   HorizontalOptions="FillAndExpand" 
+                   TextColor="Red"
+                   IsVisible="{Binding ShowError}" />
+
+            <StackLayout IsVisible="{Binding ShowActivated}" BackgroundColor="#009933">
+                <Label Text="Activated" 
+                       HorizontalOptions="Center" Margin="5"
+                       FontSize="Title" TextColor="WhiteSmoke"/>
+            </StackLayout>
+            
+            <ActivityIndicator IsRunning="{Binding IsBusy}" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
