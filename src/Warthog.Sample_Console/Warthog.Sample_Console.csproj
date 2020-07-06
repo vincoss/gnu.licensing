@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\..\resources\test.license.xml" Link="Data\test.license.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="..\..\resources\test.public.xml" Link="Data\test.public.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -18,12 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Warthog\Warthog.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Data\license.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

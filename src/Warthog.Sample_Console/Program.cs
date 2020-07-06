@@ -34,7 +34,7 @@ namespace Warthog.Sample_Console
             */
 
             var directory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var licensePath = Path.Combine(directory, "data", $"license.xml");
+            var licensePath = Path.Combine(directory, "data", $"test.license.xml");
             
             using(var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseGlobals.PublicKey)))
             using(var license = File.OpenRead(licensePath))
