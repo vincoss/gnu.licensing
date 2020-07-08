@@ -4,18 +4,15 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
-    <Title>Gnu.Licensing Licensing</Title>
-    <Summary>
-      Licensing Framework for .Net Standard
-    </Summary>
+    <Title>Gnu.Licensing</Title>
     <PackageDescription>
-      A class library for easy software licensing. Flexible and easy to use. Gnu.Licensing.dll
+      A class library for easy software licensing .Net Standard. Flexible and easy to use.
     </PackageDescription>
     <Authors>Ferdinand Lukasak</Authors>
     <Company>Ferdinand Lukasak</Company>
     <Description>A class library for easy software licensing. Flexible and easy to use.</Description>
     <Copyright>Copyright © Ferdinand Lukasak and Contributors</Copyright>
-    <PackageProjectUrl>http://gnu.licensing.github.com</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/vincoss/gnu.licensing</PackageProjectUrl>
     <RepositoryUrl>https://github.com/vincoss/gnu.licensing</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>licensing;portable</PackageTags>
