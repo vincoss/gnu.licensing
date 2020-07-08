@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <!-- NuGet -->
+    <IsPackable>true</IsPackable>
+    <Title>Gnu.Licensing Licensing</Title>
+    <Summary>
+      Licensing Framework for .Net Standard
+    </Summary>
+    <PackageDescription>
+      A class library for easy software licensing. Flexible and easy to use. Gnu.Licensing.dll
+    </PackageDescription>
+    <Authors>Ferdinand Lukasak</Authors>
+    <Company>Ferdinand Lukasak</Company>
+    <Description>A class library for easy software licensing. Flexible and easy to use.</Description>
+    <Copyright>Copyright © Ferdinand Lukasak and Contributors</Copyright>
+    <PackageProjectUrl>http://gnu.licensing.github.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vincoss/gnu.licensing</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>licensing;portable</PackageTags>
+    <PackageReleaseNotes>https://github.com/vincoss/gnu.licensing/releases</PackageReleaseNotes>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>logo.png</PackageIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>Gnu.Licensing.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.Xml" Version="4.7.0" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\AppResources.resx" GenerateSource="true">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AppResources.ru-RU.resx" GenerateSource="true">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Include="..\..\logo.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
