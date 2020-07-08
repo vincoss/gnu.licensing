@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <!-- NuGet -->
     <IsPackable>true</IsPackable>
+    <Title>Warthog Licensing</Title>
+    <Summary>
+      Licensing Framework for .Net Standard
+    </Summary>
     <PackageDescription>
       A class library for easy software licensing. Flexible and easy to use. Warthog.dll
     </PackageDescription>
@@ -18,7 +22,7 @@
     <PackageReleaseNotes>https://github.com/vincoss/warthog/releases</PackageReleaseNotes>
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>logo.png</PackageIcon>
     <SignAssembly>true</SignAssembly>
