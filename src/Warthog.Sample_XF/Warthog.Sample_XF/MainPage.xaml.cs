@@ -1,10 +1,10 @@
-﻿using Warthog.Sample_XamarinForms.Views;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Warthog.Sample_XamarinForms.Views;
 using Xamarin.Forms;
 
 namespace Warthog.Sample_XF

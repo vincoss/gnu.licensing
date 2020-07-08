@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="372ddc23-0010-4a21-a3b2-c5d44fe8c29e"
-    Publisher="CN=331d0cd8-8636-4daf-a951-cf685067a242"
+    Name="3d831f96-27ec-4a5b-a8fe-b8f55afdca94"
+    Publisher="CN=af38c2a2-e130-4ac2-8f72-32c668bee963"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Warthog.Sample_XF.UWP</DisplayName>
-    <PublisherDisplayName>331d0cd8-8636-4daf-a951-cf685067a242</PublisherDisplayName>
+    <PublisherDisplayName>af38c2a2-e130-4ac2-8f72-32c668bee963</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -30,7 +30,7 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="Warthog_XF.UWP.App">
+      EntryPoint="Warthog.Sample_XF.UWP.App">
       <uap:VisualElements
         DisplayName="Warthog.Sample_XF.UWP"
         Square150x150Logo="Assets\Square150x150Logo.png"

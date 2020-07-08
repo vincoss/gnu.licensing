@@ -5,15 +5,16 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B478D056-37F5-4934-A189-69571A6D7918}</ProjectGuid>
+    <ProjectGuid>{DEA3E370-F16B-4D16-8D45-CB7A6DC7A9F4}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Shot.Licensing.Sample_XF.iOS</RootNamespace>
+    <RootNamespace>Warthog.Sample_XF.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>Shot.Licensing.Sample_XF.iOS</AssemblyName>
+    <AssemblyName>Warthog.Sample_XF.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <ProvisioningType>automatic</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -122,13 +123,13 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Shot.Licensing.Sample_XF\Warthog.Sample_XF.csproj">
-      <Project>{D4B9EDED-FBD2-48E0-8648-D537ED88D0F6}</Project>
+    <ProjectReference Include="..\Warthog.Sample_XF\Warthog.Sample_XF.csproj">
+      <Project>{A2F5C3A1-6CAD-41C2-86BF-B8D9E4F95AD2}</Project>
       <Name>Warthog.Sample_XF</Name>
     </ProjectReference>
   </ItemGroup>

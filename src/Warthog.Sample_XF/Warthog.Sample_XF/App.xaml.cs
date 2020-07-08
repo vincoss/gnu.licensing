@@ -1,6 +1,6 @@
-﻿using Warthog.Sample_XamarinForms;
+﻿using System;
+using Warthog.Sample_XamarinForms;
 using Warthog.Sample_XamarinForms.Services;
-using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -17,7 +17,7 @@ namespace Warthog.Sample_XF
         }
 
         protected override void OnStart()
-        {
+        { 
             // Example: App first start create new app id and store it.
             var id = Preferences.Get(LicenseGlobals.AppId, null);
             if (string.IsNullOrWhiteSpace(id))

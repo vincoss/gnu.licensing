@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{60876F3F-6531-478D-AAC2-4169E5FC5CDE}</ProjectGuid>
+    <ProjectGuid>{233DB473-CB53-4F8C-A18E-BB10D596A001}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Warthog.Sample_XF.UWP</RootNamespace>
@@ -143,9 +143,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1080" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.1.9" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Warthog\Warthog.csproj">
@@ -153,7 +153,7 @@
       <Name>Warthog</Name>
     </ProjectReference>
     <ProjectReference Include="..\Warthog.Sample_XF\Warthog.Sample_XF.csproj">
-      <Project>{45c80cce-4b1f-426f-bb59-8f58389aed9e}</Project>
+      <Project>{A2F5C3A1-6CAD-41C2-86BF-B8D9E4F95AD2}</Project>
       <Name>Warthog.Sample_XF</Name>
     </ProjectReference>
   </ItemGroup>
