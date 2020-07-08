@@ -15,7 +15,7 @@ namespace Warthog.Sample_Console_ServerLicenseFetch.Services
         {
         }
 
-        protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
+        protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
         {
             var failure = FailureStrings.Get(FailureStrings.VAL04Code);
 
@@ -30,7 +30,7 @@ namespace Warthog.Sample_Console_ServerLicenseFetch.Services
                                         .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseGlobals.MachineName), StringComparison.OrdinalIgnoreCase), failure)
                                         .AssertValidLicense().ToList();
 
-            return failures;
+            return Task.FromResult(failures.AsEnumerable());
         }
 
         protected override Stream LicenseOpenRead()

@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Linq;
 using Xunit;
+using System.Threading.Tasks;
 
 namespace Warthog
 {
@@ -261,13 +262,13 @@ namespace Warthog
                 return File.Open(Path, FileMode.Create);
             }
 
-            protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
+            protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
             {
                 if(Exception != null)
                 {
                     throw Exception;
                 }
-                return Failures;
+                return Task.FromResult(Failures);
             }
         }
 

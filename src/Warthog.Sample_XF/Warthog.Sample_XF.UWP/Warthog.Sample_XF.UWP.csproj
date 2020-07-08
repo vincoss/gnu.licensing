@@ -7,8 +7,8 @@
     <ProjectGuid>{60876F3F-6531-478D-AAC2-4169E5FC5CDE}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shot.Licensing.Sample_XF.UWP</RootNamespace>
-    <AssemblyName>Shot.Licensing.Sample_XF.UWP</AssemblyName>
+    <RootNamespace>Warthog.Sample_XF.UWP</RootNamespace>
+    <AssemblyName>Warthog.Sample_XF.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.16299.0</TargetPlatformVersion>
@@ -148,6 +148,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Warthog\Warthog.csproj">
+      <Project>{dd5e69dc-af3d-486c-b9e4-28a2fbf1a7b1}</Project>
+      <Name>Warthog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Warthog.Sample_XF\Warthog.Sample_XF.csproj">
       <Project>{45c80cce-4b1f-426f-bb59-8f58389aed9e}</Project>
       <Name>Warthog.Sample_XF</Name>

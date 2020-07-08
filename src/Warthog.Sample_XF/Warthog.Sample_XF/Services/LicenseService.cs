@@ -16,7 +16,7 @@ namespace Warthog.Sample_XamarinForms.Services
         {
         }
 
-        protected override IEnumerable<IValidationFailure> ValidateInternal(License actual)
+        protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
         {
             var failure = FailureStrings.Get(FailureStrings.VAL04Code);
 
@@ -31,7 +31,7 @@ namespace Warthog.Sample_XamarinForms.Services
                                         .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseGlobals.AppId), StringComparison.OrdinalIgnoreCase), failure)
                                         .AssertValidLicense().ToList();
 
-            return failures;
+            return Task.FromResult(failures.AsEnumerable());
         }
 
         protected override Stream LicenseOpenRead()

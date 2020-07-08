@@ -103,7 +103,7 @@ namespace Warthog
 
         public Task<LicenseResult> ValidateAsync()
         {
-            var task = Task.Run(() =>
+            var task = Task.Run(async() =>
             {
                 var results = new List<IValidationFailure>();
                 License actual = null;
@@ -121,7 +121,7 @@ namespace Warthog
                         actual = License.Load(stream);
                     }
 
-                    var failures = ValidateInternal(actual);
+                    var failures = await ValidateInternal(actual);
 
                     foreach (var f in failures)
                     {
@@ -145,7 +145,7 @@ namespace Warthog
 
         #region Abstract methods
 
-        protected abstract IEnumerable<IValidationFailure> ValidateInternal(License actual);
+        protected abstract Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual);
 
         protected abstract Stream LicenseOpenRead();
 
