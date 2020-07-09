@@ -5,16 +5,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Gnu.Licensing.Api.Data;
-using Gnu.Licensing.Api.Hosting;
+using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Svr.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Gnu.Licensing.Api
+namespace Gnu.Licensing.Svr
 {
     /// <summary>
     /// https://localhost/api/license
     /// https://localhost/hc
+    /// https://localhost/swagger/v1/swagger.json
+    /// https://localhost/swagger
     /// </summary>
     public class Program
     {

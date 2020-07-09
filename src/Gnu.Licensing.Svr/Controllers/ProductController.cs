@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Gnu.Licensing.Api.ViewModels;
-using Gnu.Licensing.Api.Interface;
-using Gnu.Licensing.Api.Models;
+using Gnu.Licensing.Svr.ViewModels;
+using Gnu.Licensing.Svr.Interface;
+using Gnu.Licensing.Svr.Models;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 
-namespace Gnu.Licensing.Api.Controllers
+namespace Gnu.Licensing.Svr.Controllers
 {
     [ApiController]
     [Route("api/product")]

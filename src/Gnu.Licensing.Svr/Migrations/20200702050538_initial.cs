@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Gnu.Licensing.Api.Migrations
+namespace Gnu.Licensing.Svr.Migrations
 {
     public partial class initial : Migration
     {

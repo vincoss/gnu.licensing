@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Gnu.Licensing.Api.Models
+namespace Gnu.Licensing.Svr.Models
 {
     public class LicenseRegisterRequest
     {

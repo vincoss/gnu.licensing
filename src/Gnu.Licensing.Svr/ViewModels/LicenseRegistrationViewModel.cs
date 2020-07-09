@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Api.ViewModels
+namespace Gnu.Licensing.Svr.ViewModels
 {
     public class LicenseRegistrationViewModel
     {

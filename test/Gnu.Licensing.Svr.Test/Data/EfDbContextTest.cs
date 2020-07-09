@@ -4,7 +4,7 @@ using System;
 using System.IO;
 using Xunit;
 
-namespace Gnu.Licensing.Api.Data
+namespace Gnu.Licensing.Svr.Data
 {
     public class EfDbContextTest
     {

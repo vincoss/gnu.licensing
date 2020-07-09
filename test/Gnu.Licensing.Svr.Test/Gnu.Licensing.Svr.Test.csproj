@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Gnu.Licensing.Api</RootNamespace>
+    <RootNamespace>Gnu.Licensing.Svr</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

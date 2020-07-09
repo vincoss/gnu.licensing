@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Gnu.Licensing.Api.Data;
-using Gnu.Licensing.Api.Interface;
-using Gnu.Licensing.Api.Models;
+using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Svr.Interface;
+using Gnu.Licensing.Svr.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ using NSubstitute;
 using System.IO;
 using Gnu.Licensing.Validation;
 
-namespace Gnu.Licensing.Api.Services
+namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseServiceTest
     {
@@ -550,7 +550,7 @@ namespace Gnu.Licensing.Api.Services
             };
         }
 
-        private Gnu.Licensing.Api.Data.License CreateLicense(LicenseRegistration registration)
+        private Gnu.Licensing.Svr.Data.License CreateLicense(LicenseRegistration registration)
         {
             return new Data.License
             {

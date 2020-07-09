@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Api.Data
+namespace Gnu.Licensing.Svr.Data
 {
     public class EfDbContextSeed
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace Gnu.Licensing.Api.ViewModels
+namespace Gnu.Licensing.Svr.ViewModels
 {
     public class LicenseProductViewModel
     {

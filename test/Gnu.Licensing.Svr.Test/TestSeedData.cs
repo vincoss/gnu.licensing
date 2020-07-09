@@ -1,10 +1,10 @@
-﻿using Gnu.Licensing.Api.Data;
+﻿using Gnu.Licensing.Svr.Data;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Gnu.Licensing.Api
+namespace Gnu.Licensing.Svr
 {
     public class TestSeedData
     {
@@ -48,7 +48,7 @@ namespace Gnu.Licensing.Api
             context.Registrations.AddRange(registration);
             context.SaveChanges();
 
-            var license = new Gnu.Licensing.Api.Data.License
+            var license = new Gnu.Licensing.Svr.Data.License
             {
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,

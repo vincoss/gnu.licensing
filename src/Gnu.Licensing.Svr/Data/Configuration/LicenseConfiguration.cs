@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Gnu.Licensing.Api.Data.Configuration
+namespace Gnu.Licensing.Svr.Data.Configuration
 {
     public class LicenseConfiguration : IEntityTypeConfiguration<License>
     {

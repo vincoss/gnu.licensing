@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Gnu.Licensing.Api.Data
+namespace Gnu.Licensing.Svr.Data
 {
     public class LicenseProduct
     {

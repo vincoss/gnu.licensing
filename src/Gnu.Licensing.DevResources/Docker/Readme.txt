@@ -29,10 +29,10 @@ docker image push vincoss/shotlicapisvr:1.0.0-bionic
 
 ## Run
 docker run -it --rm -p 8001:443 --name shotlicapisvr -v shotLicData:C:/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
-docker run -it --rm -p 8001:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Api.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v shotLicData:C:/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
+docker run -it --rm -p 8001:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Svr.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v shotLicData:C:/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
 
 ## Run Windows using Linux contaners
-docker run -it --rm -p 8002:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Api.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/shot-licensing:/var/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-bionic
+docker run -it --rm -p 8002:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Svr.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/shot-licensing:/var/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-bionic
 
 docker run -it --rm -p 8001:443 --name shotlicapisvr vincoss/shotlicapisvr:1.0.0-bionic
 
@@ -43,7 +43,7 @@ docker logs --tail 50 --follow --timestamps shotlicapisvr
 docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" shotlicapisvr
 
 ## Create developer HTTPS certificate
-dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\Gnu.Licensing.Api.pfx" -p p@ssword
+dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\Gnu.Licensing.Svr.pfx" -p p@ssword
 dotnet dev-certs https --trust
 
 ##------------------------------------------------ Test

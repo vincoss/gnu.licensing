@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 
-namespace Gnu.Licensing.Api.Services
+namespace Gnu.Licensing.Svr.Services
 {
     public static class Utils
     {

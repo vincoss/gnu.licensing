@@ -1,14 +1,14 @@
 ﻿using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Gnu.Licensing.Api.Data;
-using Gnu.Licensing.Api.ViewModels;
+using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Svr.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Gnu.Licensing.Api.Services
+namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseRegistrationServiceTest
     {

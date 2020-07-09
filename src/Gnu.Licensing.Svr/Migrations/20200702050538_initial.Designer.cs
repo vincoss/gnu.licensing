@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Gnu.Licensing.Api.Data;
+using Gnu.Licensing.Svr.Data;
 
-namespace Gnu.Licensing.Api.Migrations
+namespace Gnu.Licensing.Svr.Migrations
 {
     [DbContext(typeof(EfDbContext))]
     [Migration("20200702050538_initial")]
@@ -18,7 +18,7 @@ namespace Gnu.Licensing.Api.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.5");
 
-            modelBuilder.Entity("Gnu.Licensing.Api.Data.License", b =>
+            modelBuilder.Entity("Gnu.Licensing.Svr.Data.License", b =>
                 {
                     b.Property<int>("LicenseId")
                         .ValueGeneratedOnAdd()
@@ -76,7 +76,7 @@ namespace Gnu.Licensing.Api.Migrations
                     b.ToTable("License");
                 });
 
-            modelBuilder.Entity("Gnu.Licensing.Api.Data.LicenseProduct", b =>
+            modelBuilder.Entity("Gnu.Licensing.Svr.Data.LicenseProduct", b =>
                 {
                     b.Property<int>("LicenseProductId")
                         .ValueGeneratedOnAdd()
@@ -122,7 +122,7 @@ namespace Gnu.Licensing.Api.Migrations
                     b.ToTable("LicenseProduct");
                 });
 
-            modelBuilder.Entity("Gnu.Licensing.Api.Data.LicenseRegistration", b =>
+            modelBuilder.Entity("Gnu.Licensing.Svr.Data.LicenseRegistration", b =>
                 {
                     b.Property<int>("LicenseRegistrationId")
                         .ValueGeneratedOnAdd()

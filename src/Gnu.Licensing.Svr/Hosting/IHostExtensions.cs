@@ -7,7 +7,7 @@ using Polly;
 using System;
 
 
-namespace Gnu.Licensing.Api.Hosting
+namespace Gnu.Licensing.Svr.Hosting
 {
     public static class IHostExtensions
     {

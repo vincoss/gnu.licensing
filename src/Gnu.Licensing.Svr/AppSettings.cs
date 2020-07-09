@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Gnu.Licensing.Api
+namespace Gnu.Licensing.Svr
 {
     public class AppSettings
     {

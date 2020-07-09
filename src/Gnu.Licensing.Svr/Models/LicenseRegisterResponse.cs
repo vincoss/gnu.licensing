@@ -1,7 +1,7 @@
 ﻿using Gnu.Licensing.Validation;
 
 
-namespace Gnu.Licensing.Api.Models
+namespace Gnu.Licensing.Svr.Models
 {
     public class LicenseRegisterResponse
     {

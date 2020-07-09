@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
-using Gnu.Licensing.Api.Data;
-using Gnu.Licensing.Api.Interface;
-using Gnu.Licensing.Api.ViewModels;
+using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Svr.Interface;
+using Gnu.Licensing.Svr.ViewModels;
 using System;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Api.Services
+namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseRegistrationService : ILicenseRegistrationService
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Gnu.Licensing.Api.Data.Configuration;
+using Gnu.Licensing.Svr.Data.Configuration;
 
 
-namespace Gnu.Licensing.Api.Data
+namespace Gnu.Licensing.Svr.Data
 {
     public class EfDbContext : DbContext
     {

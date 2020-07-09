@@ -5,7 +5,7 @@ ARG HTTPS_PORT=443
 ARG APP_HOME=/var/app
 
 WORKDIR ${APP_HOME}
-COPY ["/src/Gnu.Licensing.Api/bin/Release/netcoreapp3.1/publish/linux-x64/.", "./"]
+COPY ["/src/Gnu.Licensing.Svr/bin/Release/netcoreapp3.1/publish/linux-x64/.", "./"]
 
 ENV HOME ${APP_HOME}
 ENV NAME shotlicapisvr
@@ -15,4 +15,4 @@ EXPOSE ${HTTPS_PORT}
 
 VOLUME /var/appdata
 
-ENTRYPOINT ["./Gnu.Licensing.Api"]
+ENTRYPOINT ["./Gnu.Licensing.Svr"]

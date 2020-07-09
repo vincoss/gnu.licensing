@@ -4,14 +4,14 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
-using Gnu.Licensing.Api.Data;
+using Gnu.Licensing.Svr.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Xunit;
 
-namespace Gnu.Licensing.Api.Services
+namespace Gnu.Licensing.Svr.Services
 {
     public class SignKeyHealthCheckTest
     {

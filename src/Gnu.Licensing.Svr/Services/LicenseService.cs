@@ -1,18 +1,18 @@
 ﻿
-using Gnu.Licensing.Api.Interface;
-using Gnu.Licensing.Api.Models;
+using Gnu.Licensing.Svr.Interface;
+using Gnu.Licensing.Svr.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Gnu.Licensing.Validation;
-using Gnu.Licensing.Api.Data;
+using Gnu.Licensing.Svr.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
 
-namespace Gnu.Licensing.Api.Services
+namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseService : ILicenseService
     {
@@ -161,7 +161,7 @@ namespace Gnu.Licensing.Api.Services
 
         private async Task<int> CreateLicenseRecord(LicenseRegistration registration, string str, string attributesJson, string attributesChecksum, string userName)
         {
-            var license = new Gnu.Licensing.Api.Data.License
+            var license = new Gnu.Licensing.Svr.Data.License
             {
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,

@@ -1,4 +1,4 @@
 ﻿{
-  "Environment": ""
-  //"urls": "https://*:8001;"
+  "Environment": "Development",
+  "urls": "https://*;"
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Gnu.Licensing.Api.Infrastructure.Filters
+namespace Gnu.Licensing.Svr.Infrastructure.Filters
 {
     public class JsonErrorResponse
     {

@@ -12,7 +12,7 @@ using Gnu.Licensing.Validation;
 namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch
 {
     /// <summary>
-    /// NOTE: Ensure that the 'Gnu.Licensing.Api' service is running.
+    /// NOTE: Ensure that the 'Gnu.Licensing.Svr' service is running.
     /// </summary>
     class Program
     {

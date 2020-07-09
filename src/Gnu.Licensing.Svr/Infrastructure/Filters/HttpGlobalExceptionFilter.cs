@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Gnu.Licensing.Api.Infrastructure.ActionResults;
+using Gnu.Licensing.Svr.Infrastructure.ActionResults;
 using System.Net;
 
 
 
-namespace Gnu.Licensing.Api.Infrastructure.Filters
+namespace Gnu.Licensing.Svr.Infrastructure.Filters
 {
     public partial class HttpGlobalExceptionFilter : IExceptionFilter
     {

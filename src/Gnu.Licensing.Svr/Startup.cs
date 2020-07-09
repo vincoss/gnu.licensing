@@ -7,13 +7,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Gnu.Licensing.Api.Data;
-using Gnu.Licensing.Api.Infrastructure.Filters;
-using Gnu.Licensing.Api.Interface;
-using Gnu.Licensing.Api.Services;
+using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Svr.Infrastructure.Filters;
+using Gnu.Licensing.Svr.Interface;
+using Gnu.Licensing.Svr.Services;
 
 
-namespace Gnu.Licensing.Api
+namespace Gnu.Licensing.Svr
 {
     public class Startup
     {
@@ -34,7 +34,6 @@ namespace Gnu.Licensing.Api
             services.AddControllers(options =>
                     {
                         options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-                        options.Filters.Add(typeof(RestrictHttpsAttribute)); // TODO: disable for easy testing
                     })
                     .Services
                     .AddHealthChecks(Configuration)
@@ -52,10 +51,11 @@ namespace Gnu.Licensing.Api
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gnu.Licensing.Api V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gnu.Licensing.Svr V1");
             });
 
             app.UseRouting();
+            //app.UseAuthorization(); // TODO:
 
             app.UseEndpoints(endpoints =>
             {
@@ -65,7 +65,7 @@ namespace Gnu.Licensing.Api
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });
+                });// TODO:.RequireAuthorization();
             });
         }
     }
@@ -74,7 +74,7 @@ namespace Gnu.Licensing.Api
     {
         public static IServiceCollection AddHealthChecks(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddHealthChecks() // TODO: .RequireAuthorization();
+            services.AddHealthChecks()
                 .AddCheck("self", () => HealthCheckResult.Healthy())
                 .AddCheck<SignKeyHealthCheck>("license-sign-key-check", tags: new[] { "sign-key" })
                 .AddSqlite(sqliteConnectionString: configuration.GetConnectionString("EfDbContext"))
@@ -95,7 +95,7 @@ namespace Gnu.Licensing.Api
         {
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
-            services.AddSingleton<SignKeyHealthCheck>();
+            services.AddScoped<SignKeyHealthCheck>();
 
             return services;
         }
