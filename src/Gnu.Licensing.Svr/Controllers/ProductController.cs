@@ -5,10 +5,11 @@ using Gnu.Licensing.Svr.ViewModels;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.Models;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gnu.Licensing.Svr.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/product")]
     public class ProductController : Controller

@@ -11,7 +11,8 @@ using Gnu.Licensing.Svr.Data;
 using Gnu.Licensing.Svr.Infrastructure.Filters;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.Services;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
 
 namespace Gnu.Licensing.Svr
 {
@@ -31,16 +32,39 @@ namespace Gnu.Licensing.Svr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/account/signin";
+                options.LogoutPath = "/account/signout";
+                options.AccessDeniedPath = "/account/accessdenied";
+                options.ReturnUrlParameter = "/home/";
+            })
+            .AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+
+                options.ClientId = googleAuthNSection["ClientId"];
+                options.ClientSecret = googleAuthNSection["ClientSecret"];
+            });
+
             services.AddControllers(options =>
-                    {
-                        options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-                    })
-                    .Services
-                    .AddHealthChecks(Configuration)
-                    .AddHttpClientServices(Configuration)
-                    .AddCustomMvc(Configuration);
+            {
+                options.Filters.Add(typeof(HttpGlobalExceptionFilter));
+            })
+            .Services
+            .AddHealthChecks(Configuration)
+            .AddHttpClientServices(Configuration)
+            .AddCustomMvc(Configuration);
 
             services.AddSwaggerGen();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,17 +79,19 @@ namespace Gnu.Licensing.Svr
             });
 
             app.UseRouting();
-            //app.UseAuthorization(); // TODO:
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                });// TODO:.RequireAuthorization();
+                }).RequireAuthorization();
             });
         }
     }
