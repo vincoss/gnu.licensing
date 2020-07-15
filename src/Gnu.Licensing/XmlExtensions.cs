@@ -34,6 +34,9 @@ using System.Xml.Linq;
 
 namespace Gnu.Licensing
 {
+    /// <summary>
+    /// https://docs.microsoft.com/en-us/dotnet/standard/security/how-to-verify-the-digital-signatures-of-xml-documents
+    /// </summary>
     public static class XmlExtensions
     {
         public static XmlDocument ToXmlDocument(this XElement element)
