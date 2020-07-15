@@ -9,6 +9,8 @@ namespace Gnu.Licensing.Sample_XF
 {
     public partial class App : Application
     {
+        public IApplicationContext ApplicationContext = new ApplicationContext();
+
         public App()
         {
             InitializeComponent();
@@ -17,16 +19,12 @@ namespace Gnu.Licensing.Sample_XF
         }
 
         protected override void OnStart()
-        {  
-            // Example: App first start create new app id and store it.
-            var id = Preferences.Get(LicenseGlobals.AppId, null);
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                Preferences.Set(LicenseGlobals.AppId, Guid.NewGuid().ToString());
-            }
+        {
+            // Example: App first start create new app id and store it. Then use it with license attributes.
+            ApplicationContext.GetAppId();
 
             // Run license service in the backgroud, will set Demo|Full version for the app
-            new LicenseService(BaseLicenseService.CreateHttpClient()).RunAsync();
+            new LicenseService(ApplicationContext, BaseLicenseService.CreateHttpClient()).RunAsync();
         }
 
         protected override void OnSleep()

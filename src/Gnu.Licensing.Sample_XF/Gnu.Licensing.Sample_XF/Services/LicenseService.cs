@@ -10,58 +10,15 @@ using Xamarin.Essentials;
 
 namespace Gnu.Licensing.Sample_XamarinForms.Services
 {
-    public interface IBaseLicense
-    {
-        Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, string url, IDictionary<string, string> attributes);
-        Task<LicenseResult> ValidateAsync();
-    }
-
-    public class LicService
-    {
-        private readonly IBaseLicense _impl;
-
-        public LicService(IBaseLicense impl)
-        {
-            _impl = impl;
-        }
-
-        public Task RunAsync()
-        {
-            var task = Task.Run(async () =>
-            {
-                var result = await _impl.ValidateAsync();
-                if (result.Successful)
-                {
-                    LicenseGlobals.Set(AppLicense.Full);
-                }
-            });
-
-            return task;
-        }
-
-        public Task<LicenseResult> RegisterAsync(Guid licenseKey)
-        {
-            return _impl.RegisterAsync(licenseKey, LicenseGlobals.ProductId, LicenseGlobals.LicenseServerUrl, GetAttributes());
-        }
-
-        public IDictionary<string, string> GetAttributes()
-        {
-            var id = Preferences.Get(LicenseGlobals.AppId, null);
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                throw new InvalidOperationException("Missing app ID");
-            }
-
-            var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            attributes.Add(LicenseGlobals.AppId, id);
-            return attributes;
-        }
-    }
-
     public class LicenseService : BaseLicenseService, ILicenseService
     {
-        public LicenseService(HttpClient client) : base(client)
+        private readonly IApplicationContext _actx;
+
+        public LicenseService(IApplicationContext actx, HttpClient client) : base(client)
         {
+            if (actx == null) throw new ArgumentNullException(nameof(actx));
+
+            _actx = actx;
         }
 
         protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
@@ -103,12 +60,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
 
         protected virtual IDictionary<string, string> GetAttributes()
         {
-            var id = Preferences.Get(LicenseGlobals.AppId, null);
-            if (string.IsNullOrWhiteSpace(id))
-            {
-                throw new InvalidOperationException("Missing app ID");
-            }
-
+            var id = _actx.GetAppId();
             var attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             attributes.Add(LicenseGlobals.AppId, id);
             return attributes;

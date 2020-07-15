@@ -18,8 +18,8 @@ namespace Gnu.Licensing.Sample_XamarinForms.Views
         {
             InitializeComponent();
 
-            var service = new LicenseService(LicenseService.CreateHttpClient());
             var ctx = new ApplicationContext();
+            var service = new LicenseService(ctx, LicenseService.CreateHttpClient());
 
             var model = new LicenseViewModel(service, ctx);
             BindingContext = model;

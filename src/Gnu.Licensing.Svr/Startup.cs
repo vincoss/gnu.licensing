@@ -32,25 +32,25 @@ namespace Gnu.Licensing.Svr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(options =>
-            {
-                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            })
-            .AddCookie(options =>
-            {
-                options.LoginPath = "/account/signin";
-                options.LogoutPath = "/account/signout";
-                options.AccessDeniedPath = "/account/accessdenied";
-                options.ReturnUrlParameter = "/home/";
-            })
-            .AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            //})
+            //.AddCookie(options =>
+            //{
+            //    options.LoginPath = "/account/signin";
+            //    options.LogoutPath = "/account/signout";
+            //    options.AccessDeniedPath = "/account/accessdenied";
+            //    options.ReturnUrlParameter = "/home/";
+            //})
+            //.AddGoogle(options =>
+            //{
+            //    IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
 
-                options.ClientId = googleAuthNSection["ClientId"];
-                options.ClientSecret = googleAuthNSection["ClientSecret"];
-            });
+            //    options.ClientId = googleAuthNSection["ClientId"];
+            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //});
 
             services.AddControllers(options =>
             {
@@ -79,8 +79,8 @@ namespace Gnu.Licensing.Svr
             });
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

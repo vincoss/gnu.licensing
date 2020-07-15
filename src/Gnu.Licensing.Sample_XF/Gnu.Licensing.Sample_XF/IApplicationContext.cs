@@ -9,5 +9,6 @@ namespace Gnu.Licensing.Sample_XamarinForms
     {
         string GetValueOrDefault(string key, string defaultValue);
         Task SetLicenseKeyAsync(string key);
+        string GetAppId();
     }
 }

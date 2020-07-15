@@ -6,10 +6,15 @@
              mc:Ignorable="d"
              x:Class="Gnu.Licensing.Sample_XF.MainPage">
 
-    <StackLayout>
+    <StackLayout Margin="5">
         <Label Text="License Sample" />
+        <Label Text="To register license for this app use example license key below. Ensure that 'Gnu.Licensing.Svr' is running."/>
+        
         <Button Text="License" Clicked="Button_Clicked"/>
+        <Label Text="App and License Path"/>
         <Entry x:Name="ePath" IsReadOnly="True"/>
+        <Label Text="Example license ID"/>
+        <Entry Text="D65321D5-B0F9-477D-828A-086F30E2BF89" IsReadOnly="True"/>
     </StackLayout>
 
 </ContentPage>

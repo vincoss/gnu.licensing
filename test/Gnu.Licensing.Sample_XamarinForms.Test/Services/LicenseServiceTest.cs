@@ -9,6 +9,8 @@ using System.IO;
 using System.Net.Http;
 using System.Text.Json;
 using Gnu.Licensing.Validation;
+using NSubstitute;
+using Gnu.Licensing.Sample_XF;
 
 namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
 {
@@ -20,7 +22,11 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
 
-            var service = new LicenseService(client);
+            var actx = Substitute.For<IApplicationContext>();
+            var appId = Guid.NewGuid().ToString();
+            actx.GetAppId().Returns(appId);
+
+            var service = new LicenseService(actx, client);
 
             var result = await service.ValidateAsync();
 
@@ -35,7 +41,13 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new LicenseService(client);
+            
+            var actx = Substitute.For<IApplicationContext>();
+            var appId = Guid.NewGuid().ToString();
+            actx.GetAppId().Returns(appId);
+
+            var service = new LicenseService(actx, client);
+
             var path = service.GetPath();
 
             try
@@ -60,7 +72,12 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new TestLicenseService(client);
+            
+            var actx = Substitute.For<IApplicationContext>();
+            var appId = Guid.NewGuid().ToString();
+            actx.GetAppId().Returns(appId);
+
+            var service = new TestLicenseService(actx, client);
             var path = service.GetPath();
             service.AppId = "2EEB2CE7-0A1E-442D-BF0B-BB074A3DCFB6";
 
@@ -88,7 +105,12 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new TestLicenseService(client);
+
+            var actx = Substitute.For<IApplicationContext>();
+            var appId = Guid.NewGuid().ToString();
+            actx.GetAppId().Returns(appId);
+
+            var service = new TestLicenseService(actx, client);
             var path = service.GetPath();
             service.AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B";
 
@@ -134,8 +156,13 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
                 .Respond("application/json", str);
 
             var client = mockHandler.ToHttpClient();
+            
+            var actx = Substitute.For<IApplicationContext>();
+            var appId = Guid.NewGuid().ToString();
+            actx.GetAppId().Returns(appId);
 
-            var service = new LicenseService(client);
+            var service = new LicenseService(actx, client);
+
             var result = await service.Register(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseGlobals.LicenseServerUrl);
 
             Assert.Equal("200", result.License);
@@ -148,7 +175,12 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
         {
             var mockHandler = new MockHttpMessageHandler();
             var client = mockHandler.ToHttpClient();
-            var service = new TestLicenseService(client);
+
+            var actx = Substitute.For<IApplicationContext>();
+            var appId = Guid.NewGuid().ToString();
+            actx.GetAppId().Returns(appId);
+
+            var service = new TestLicenseService(actx, client);
             var path = service.GetPath();
             service.AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B";
 
@@ -173,7 +205,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
         {
             public string AppId;
 
-            public TestLicenseService(HttpClient client) : base(client)
+            public TestLicenseService(IApplicationContext actx, HttpClient client) : base(actx, client)
             { }
 
             protected override IDictionary<string, string> GetAttributes()
