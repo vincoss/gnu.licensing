@@ -11,6 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\..\resources\Gnu.Licensing.pfx.txt" Link="Data\Gnu.Licensing.pfx.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\resources\invalid-test.license.xml" Link="Data\invalid-test.license.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

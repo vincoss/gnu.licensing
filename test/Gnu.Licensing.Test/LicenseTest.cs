@@ -14,12 +14,14 @@ namespace Gnu.Licensing.Test
 {
     public class LicenseTest : BaseLicenseTest
     {
+        public LicenseTest()
+        {
+            SetupCertificate();
+        }
+
         [Fact]
         public void Can_Generate_And_Validate_Signature_With_Standard_License()
         {
-            var prk = PrivateKey;
-            var puk = PublicKey;
-
             var license = License.New()
                        .WithUniqueIdentifier(Guid.NewGuid())
                        .As(LicenseType.Standard)
@@ -36,7 +38,7 @@ namespace Gnu.Licensing.Test
                        {
                            { "Version", "1.0.0.0" }
                        })
-                       .CreateAndSignWithPrivateKey(prk);
+                       .CreateAndSign(CertificateSearch);
 
             Assert.NotNull(license);
             Assert.NotNull(license.Signature);
@@ -47,7 +49,7 @@ namespace Gnu.Licensing.Test
             Assert.Equal(1, license.Quantity);
             Assert.NotNull(license.ProductFeatures);
             Assert.NotNull(license.Customer);
-            Assert.True(license.VerifySignature(puk));
+            Assert.True(license.VerifySignature());
             Assert.Equal(ConvertToRfc1123(DateTime.MaxValue), license.Expiration);
             Assert.Equal("1.0.0.0", license.AdditionalAttributes.Get("Version"));
         }
@@ -56,7 +58,7 @@ namespace Gnu.Licensing.Test
         public void Can_Generate_And_Validate_Signature_With_Empty_License()
         {
             var license = License.New()
-                                 .CreateAndSignWithPrivateKey(PrivateKey);
+                                 .CreateAndSign(CertificateSearch);
 
             Assert.NotNull(license);
             Assert.NotNull(license.Signature);
@@ -68,7 +70,7 @@ namespace Gnu.Licensing.Test
             Assert.Equal(0, license.Quantity);
             Assert.Null(license.ProductFeatures);
             Assert.Null(license.Customer);
-            Assert.True(license.VerifySignature(PublicKey));
+            Assert.True(license.VerifySignature());
             Assert.Equal(ConvertToRfc1123(DateTime.MaxValue), license.Expiration);
         }
 
@@ -93,11 +95,11 @@ namespace Gnu.Licensing.Test
                                  .WithProductFeatures(productFeatures)
                                  .LicensedTo(customerName, customerEmail)
                                  .ExpiresAt(expirationDate)
-                                 .CreateAndSignWithPrivateKey(PrivateKey);
+                                 .CreateAndSign(CertificateSearch);
 
             Assert.NotNull(license);
             Assert.NotNull(license.Signature);
-            Assert.True(license.VerifySignature(PublicKey));
+            Assert.True(license.VerifySignature());
 
             // validate xml
             var xmlElement = XElement.Parse(license.ToString(), LoadOptions.None);
@@ -111,7 +113,7 @@ namespace Gnu.Licensing.Test
             var hackedLicense = License.Load(xmlElement.ToString());
 
             // verify signature
-            Assert.False(hackedLicense.VerifySignature(PublicKey));
+            Assert.False(hackedLicense.VerifySignature());
 
             Assert.NotNull(hackedLicense);
             Assert.NotNull(hackedLicense.Signature);
@@ -144,7 +146,7 @@ namespace Gnu.Licensing.Test
                      {
                            { "Version", "1.0.0.0" }
                      })
-                     .CreateAndSignWithPrivateKey(PrivateKey);
+                     .CreateAndSign(CertificateSearch);
 
                 using (var fileStream = File.Create(path))
                 {
@@ -161,7 +163,7 @@ namespace Gnu.Licensing.Test
                                             .ExpirationDate()
                                             .When(lic => lic.Type == LicenseType.Trial)
                                             .And()
-                                            .Signature(PublicKey)
+                                            .Signature()
                                             .AssertValidLicense().ToList();
 
                 Assert.False(validationFailures.Any());
@@ -190,7 +192,7 @@ namespace Gnu.Licensing.Test
                      {
                            { "Version", "1.0.0.0" }
                      })
-                     .CreateAndSignWithPrivateKey(PrivateKey);
+                     .CreateAndSign(CertificateSearch);
 
                 using (var fileStream = File.Create(path))
                 {
@@ -213,7 +215,7 @@ namespace Gnu.Licensing.Test
                                             .ExpirationDate()
                                             .When(lic => lic.Type == LicenseType.Standard)
                                             .And()
-                                            .Signature(PublicKey)
+                                            .Signature()
                                             .And()
                                             .AssertThat(x => x.AdditionalAttributes.Get("Version") == "1.0.0.1", failure)
                                             .AssertValidLicense().ToList();

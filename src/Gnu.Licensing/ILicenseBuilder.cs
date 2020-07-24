@@ -115,11 +115,10 @@ namespace Gnu.Licensing
         ILicenseBuilder WithAdditionalAttributes(Action<LicenseAttributes> configureAdditionalAttributes);
 
         /// <summary>
-        /// Create and sign a new <see cref="License"/> with the specified
-        /// private encryption key.
+        /// Compute a signature and sign this <see cref="License"/> with the provided key.
         /// </summary>
-        /// <param name="privateKey">The private encryption key for the signature.</param>
+        /// <param name="signingCredentialSearch">The search string to find signing certificate.</param>
         /// <returns>The signed <see cref="License"/>.</returns>
-        License CreateAndSignWithPrivateKey(string privateKey);
+        License CreateAndSign(string signingCredentialSearch);
     }
 }

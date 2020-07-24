@@ -18,10 +18,6 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch
         public const string MachineName = "MachineName";
         public const string LicenseServerUrl = "https://localhost/api/license";
 
-        public static string PublicKey = new StreamReader(typeof(LicenseGlobals)
-                                                     .Assembly
-                                                     .GetManifestResourceStream(
-                                                     "Gnu.Licensing.Sample_Console_ServerLicenseFetch.Data.test.public.xml")).ReadToEnd();
         public static AppLicense Get()
         {
             return _appLicense;

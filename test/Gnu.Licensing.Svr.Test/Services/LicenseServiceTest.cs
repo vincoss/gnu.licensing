@@ -495,7 +495,7 @@ namespace Gnu.Licensing.Svr.Services
                                        .ExpirationDate()
                                        .When(lic => lic.Type == LicenseType.Standard)
                                        .And()
-                                       .Signature(PublicKey)
+                                       .Signature()
                                        .And()
                                        .AssertThat(x => string.Equals(request.Attributes["AppId"], x.AdditionalAttributes.Get("AppId"), StringComparison.OrdinalIgnoreCase), failure)
                                        .AssertValidLicense().ToList();

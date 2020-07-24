@@ -36,12 +36,11 @@ namespace Gnu.Licensing.Sample_Console
             var directory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
             var licensePath = Path.Combine(directory, "data", $"test.license.xml");
             
-            using(var publicKey = new MemoryStream(Encoding.UTF8.GetBytes(LicenseGlobals.PublicKey)))
             using(var license = File.OpenRead(licensePath))
             {
                 Console.WriteLine("Validating license.");
 
-                var results = await Validate(license, publicKey);
+                var results = await Validate(license);
 
                 if (results.Any())
                 {
@@ -58,15 +57,11 @@ namespace Gnu.Licensing.Sample_Console
             }
         }
 
-        public Task<IEnumerable<IValidationFailure>> Validate(Stream license, Stream publicKey)
+        public Task<IEnumerable<IValidationFailure>> Validate(Stream license)
         {
             if (license == null)
             {
                 throw new ArgumentNullException(nameof(license));
-            }
-            if (publicKey == null)
-            {
-                throw new ArgumentNullException(nameof(publicKey));
             }
 
             var task = Task.Run(() =>
@@ -83,7 +78,7 @@ namespace Gnu.Licensing.Sample_Console
                                                    .ExpirationDate()
                                                    .When(lic => lic.Type == LicenseType.Standard)
                                                    .And()
-                                                   .Signature(LicenseGlobals.PublicKey)
+                                                   .Signature()
                                                    .And()
                                                    .AssertThat(x => string.Equals(AppId, x.AdditionalAttributes.Get(LicenseGlobals.AppId), StringComparison.OrdinalIgnoreCase), failure)
                                                    .AssertValidLicense().ToList();

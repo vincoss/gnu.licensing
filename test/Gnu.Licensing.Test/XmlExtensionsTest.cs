@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -11,54 +12,34 @@ namespace Gnu.Licensing.Test
 {
     public class XmlExtensionsTest : BaseLicenseTest
     {
-        [Fact]
-        public void GenerateKeys()
-        {
-            var key = RSA.Create(4096);
-            var puk = key.ToXmlString(false);
-            var pri = key.ToXmlString(true);
-
-            var dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var pukf = Path.Combine(dir, $"{ nameof(GenerateKeys)}.public.xml");
-            var prif = Path.Combine(dir, $"{nameof(GenerateKeys)}.private.xml");
-
-            File.WriteAllText(pukf, puk, Encoding.UTF8);
-            File.WriteAllText(prif, pri, Encoding.UTF8);
-        }
-
+        /// <summary>
+        /// https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.xml.signedxml.signature?view=dotnet-plat-ext-3.1
+        /// </summary>
         [Fact]
         public void SignXml()
         {
-            var dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var path = Path.Combine(dir, $"{nameof(SignXml)}.xml");
+            var path = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            var dataPath = Path.Combine(path, "Data", "test.xml");
 
             try
             {
-                new XElement("license").Save(path);
+                SetupCertificate();
+
+                new XElement(nameof(SignXml)).Save(dataPath);
                 var xmlDoc = new XmlDocument();
                 xmlDoc.PreserveWhitespace = true;
-                xmlDoc.Load(path);
+                xmlDoc.Load(dataPath);
 
-                using (var rsaKey = RSA.Create())
-                {
-                    rsaKey.FromXmlString(PrivateKey);
-                    xmlDoc.SignXml(rsaKey);
-                    xmlDoc.Save(path);
+                var cert = XmlExtensions.GetCertificate("CN=Gnu.Licensing", StoreName.My, StoreLocation.CurrentUser);
+                XmlExtensions.SignXml(xmlDoc, cert);
 
-                    var result = xmlDoc.VerifyXml(rsaKey);
-                }
+                bool result = XmlExtensions.VerifyXmlFile(xmlDoc);
 
-                using (var rsaKey = RSA.Create())
-                {
-                    rsaKey.FromXmlString(PublicKey);
-                    var result = xmlDoc.VerifyXml(rsaKey);
-
-                    Assert.True(result);
-                }
+                Assert.True(result);
             }
             finally
             {
-                  File.Delete(path);
+                File.Delete(dataPath);
             }
         }
     }

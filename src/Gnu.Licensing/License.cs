@@ -27,6 +27,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
@@ -194,30 +195,28 @@ namespace Gnu.Licensing
         /// <summary>
         /// Compute a signature and sign this <see cref="License"/> with the provided key.
         /// </summary>
-        /// <param name="privateKey">The private key in xml string format to compute the signature.</param>
-        public void Sign(string privateKey)
+        /// <param name="signingCredentialSearch">The search string to find signing certificate.</param>
+        public void Sign(string signingCredentialSearch)
         {
-            using (var rsa = RSA.Create())
+            if(string.IsNullOrWhiteSpace(signingCredentialSearch))
             {
-                rsa.FromXmlString(privateKey);
-                var signature = _xmlData.ToXmlDocument().GetXmlDigitalSignature(rsa);
-                _xmlData.Add(signature.ToXElement());
+                throw new ArgumentNullException(nameof(signingCredentialSearch));
             }
+
+            var cert = XmlExtensions.GetCertificate(signingCredentialSearch);
+            var doc = _xmlData.ToXmlDocument();
+            var signature = doc.GetXmlSignature(cert);
+            _xmlData.Add(signature.ToXElement());
         }
 
         /// <summary>
-        /// Determines whether the <see cref="License.Signature"/> property verifies for the specified key.
+        /// Determines whether the <see cref="License.Signature"/> property verifies
         /// </summary>
-        /// <param name="publicKey">The public key in xml string format to verify the <see cref="License.Signature"/>.</param>
         /// <returns>true if the <see cref="License.Signature"/> verifies; otherwise false.</returns>
-        public bool VerifySignature(string publicKey)
+        public bool VerifySignature()
         {
-            using (var rsa = RSA.Create())
-            {
-                // rsa.FromXmlString(publicKey);
-                RsaExtensions.FromXmlString2(rsa, publicKey);
-                return _xmlData.ToXmlDocument().VerifyXml(rsa);
-            }
+            var doc = _xmlData.ToXmlDocument();
+            return XmlExtensions.VerifyXmlFile(doc);
         }
 
         /// <summary>

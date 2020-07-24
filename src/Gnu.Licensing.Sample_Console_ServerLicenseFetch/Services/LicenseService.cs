@@ -25,7 +25,7 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
                                         .ExpirationDate()
                                         .When(lic => lic.Type == LicenseType.Standard)
                                         .And()
-                                        .Signature(LicenseGlobals.PublicKey)
+                                        .Signature()
                                         .And()
                                         .AssertThat(x => string.Equals(appId, x.AdditionalAttributes.Get(LicenseGlobals.MachineName), StringComparison.OrdinalIgnoreCase), failure)
                                         .AssertValidLicense().ToList();

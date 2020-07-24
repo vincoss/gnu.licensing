@@ -18,11 +18,6 @@ namespace Gnu.Licensing.Sample_XamarinForms
         public const string LicenseKey = "LicenseKey";
         public const string LicenseServerUrl = "https://localhost/api/license";
 
-        public static string PublicKey = new StreamReader(typeof(LicenseGlobals)
-                                                     .Assembly
-                                                     .GetManifestResourceStream(
-                                                     "Gnu.Licensing.Sample_XF.Data.test.public.xml")).ReadToEnd();
-
         public static AppLicense Get()
         {
             return _appLicense;

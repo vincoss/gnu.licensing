@@ -119,13 +119,12 @@ namespace Gnu.Licensing.Validation
         /// Validates the <see cref="License.Signature"/>.
         /// </summary>
         /// <param name="validationChain">The current <see cref="IStartValidationChain"/>.</param>
-        /// <param name="publicKey">The public product key to validate the signature..</param>
         /// <returns>An instance of <see cref="IStartValidationChain"/>.</returns>
-        public static IValidationChain Signature(this IStartValidationChain validationChain, string publicKey)
+        public static IValidationChain Signature(this IStartValidationChain validationChain)
         {
             var validationChainBuilder = (validationChain as ValidationChainBuilder);
             var validator = validationChainBuilder.StartValidatorChain();
-            validator.Validate = license => license.VerifySignature(publicKey);
+            validator.Validate = license => license.VerifySignature();
 
             validator.FailureResult = FailureStrings.Get(FailureStrings.VAL02Code);
 

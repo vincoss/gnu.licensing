@@ -61,7 +61,7 @@ namespace Gnu.Licensing.Svr.Services
 
                     var lic = License.New()
                         .WithUniqueIdentifier(Guid.NewGuid())
-                        .CreateAndSignWithPrivateKey(key);
+                        .CreateAndSign(key);
 
                     data.Add(productName, $"Key: {keyName}, valid.");
                 }

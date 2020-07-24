@@ -151,7 +151,7 @@ namespace Gnu.Licensing.Svr.Services
                      .WithMaximumUtilization(registration.Quantity)
                      .LicensedTo(registration.LicenseName, registration.LicenseEmail, (c) => c.Company = registration.LicenseName)
                      .WithAdditionalAttributes(request.Attributes != null ? request.Attributes : new Dictionary<string, string>())
-                     .CreateAndSignWithPrivateKey(key);
+                     .CreateAndSign(key);
 
                 return license.ToString();
             });
