@@ -11,7 +11,6 @@ Gnu.Licensing.Cli is command line tool to generete license file and sign keys.
 To install Gnu.Licensing via [NuGet](http://www.nuget.org), run the following command in the Package Manager Console.
 ```
 Install-Package Gnu.Licensing
-Install-Package Gnu.Licensing.Cli
 ```
 
 ### Credits
