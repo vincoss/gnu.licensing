@@ -8,7 +8,7 @@ namespace Gnu.Licensing.Cli
 {
     public class LicenseArgs
     {
-        public FileInfo Sign { get; set; }
+        public string Sign { get; set; }
         public DirectoryInfo Directory { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
