@@ -11,7 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="..\..\..\resources\test.public.xml" Link="Data\test.public.xml" />
+    <Compile Remove="Data\**" />
+    <EmbeddedResource Remove="Data\**" />
+    <None Remove="Data\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,9 +23,5 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Gnu.Licensing\Gnu.Licensing.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Data\" />
   </ItemGroup>
 </Project>
