@@ -391,6 +391,7 @@ namespace Gnu.Licensing.Svr.Services
                     var service = new LicenseService(context, logger, options);
 
                     var product = CreateProduct();
+                    product.SignKeyName = "";
                     context.Add(product);
                     context.SaveChanges();
 
@@ -399,11 +400,10 @@ namespace Gnu.Licensing.Svr.Services
                     context.Add(registration);
                     context.SaveChanges();
 
-
                     var request = new LicenseRegisterRequest
                     {
                         LicenseId = registration.LicenseUuid,
-                        ProductId = registration.ProductUuid
+                        ProductId = product.ProductUuid
                     };
 
                     var result = await service.CreateAsync(request, "test-user");
@@ -457,7 +457,6 @@ namespace Gnu.Licensing.Svr.Services
                     context.Add(registration);
                     context.SaveChanges();
 
-
                     var request = new LicenseRegisterRequest
                     {
                         LicenseId = registration.LicenseUuid,
@@ -468,6 +467,7 @@ namespace Gnu.Licensing.Svr.Services
                     request.Attributes.Add("AppId", "app-id-0001");
 
                     var result = await service.CreateAsync(request, "test-user");
+                    var lic = context.Licenses.ToArray();
                     var licenseRecord = await context.Licenses.SingleAsync(x => x.LicenseUuid == registration.LicenseUuid);
 
                     Assert.Null(result.Failure);
@@ -527,7 +527,7 @@ namespace Gnu.Licensing.Svr.Services
                 ProductUuid = Guid.NewGuid(),
                 ProductName = "test-product",
                 ProductDescription = "test-description",
-                SignKeyName = "test.private.xml",
+                SignKeyName = "CN=Gnu.Licensing",
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"
             };

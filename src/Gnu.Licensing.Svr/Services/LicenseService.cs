@@ -142,8 +142,6 @@ namespace Gnu.Licensing.Svr.Services
         {
             var task = Task.Run(() =>
             {
-                var key = SignKeyGet(product.SignKeyName);
-
                 var license = License.New()
                      .WithUniqueIdentifier(registration.LicenseUuid)
                      .As(registration.LicenseType)
@@ -151,7 +149,7 @@ namespace Gnu.Licensing.Svr.Services
                      .WithMaximumUtilization(registration.Quantity)
                      .LicensedTo(registration.LicenseName, registration.LicenseEmail, (c) => c.Company = registration.LicenseName)
                      .WithAdditionalAttributes(request.Attributes != null ? request.Attributes : new Dictionary<string, string>())
-                     .CreateAndSign(key);
+                     .CreateAndSign(product.SignKeyName);
 
                 return license.ToString();
             });
@@ -179,12 +177,6 @@ namespace Gnu.Licensing.Svr.Services
 
             _context.Licenses.Add(license);
             return await _context.SaveChangesAsync();
-        }
-
-        private string SignKeyGet(string name)
-        {
-            var path = Path.Combine(_options.Value.SignKeyPath, name);
-            return File.ReadAllText(path);
         }
 
         #region Private methods

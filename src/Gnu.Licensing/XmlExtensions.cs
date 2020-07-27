@@ -63,60 +63,6 @@ namespace Gnu.Licensing
             return XElement.Parse(element.OuterXml);
         }
 
-        public static void Generate(string toName, string toEmail, LicenseType type, DateTime expire, int volume, IDictionary<string, string> features, IDictionary<string, string> attributes, string signingCredentialSearch, DirectoryInfo destination)
-        {
-            if (string.IsNullOrWhiteSpace(toName))
-            {
-                throw new ArgumentNullException(nameof(toName));
-            }
-            if (string.IsNullOrWhiteSpace(toEmail))
-            {
-                throw new ArgumentNullException(nameof(toEmail));
-            }
-            if (expire <= DateTime.Now)
-            {
-                throw new ArgumentException(nameof(expire));
-            }
-            if (volume <= 0)
-            {
-                throw new ArgumentException(nameof(volume));
-            }
-            if (features == null)
-            {
-                features = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            }
-            if (attributes == null)
-            {
-                attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            }
-            if (string.IsNullOrWhiteSpace(signingCredentialSearch))
-            {
-                throw new ArgumentNullException(nameof(signingCredentialSearch));
-            }
-            if (destination == null)
-            {
-                throw new ArgumentNullException(nameof(destination));
-            }
-
-            var license = Gnu.Licensing.License.New()
-                       .WithUniqueIdentifier(Guid.NewGuid())
-                       .As(type)
-                       .ExpiresAt(expire)
-                       .WithMaximumUtilization(volume)
-                       .WithProductFeatures(features)
-                       .WithAdditionalAttributes(attributes)
-                       .LicensedTo(toName, toEmail)
-                       .CreateAndSign(signingCredentialSearch);
-
-            var fileName = $"{license.Id}.xml";
-            var path = Path.Combine(destination.FullName, fileName);
-            using (var writer = File.CreateText(path))
-            {
-                var xmlElement = XElement.Parse(license.ToString(), LoadOptions.None);
-                xmlElement.Save(writer);
-            }
-        }
-
         public static void SignXml(XmlDocument document, X509Certificate2 certificate)
         {
             if(document == null)
@@ -209,10 +155,11 @@ namespace Gnu.Licensing
             signedXml.LoadXml((XmlElement)nodeList[0]);
 
             // Check the signature and return the result.
-            return signedXml.CheckSignature();
+            var result = signedXml.CheckSignature();
+            return result;
         }
 
-        public static X509Certificate2 GetCertificate(string signingCredentialSearch, StoreName storeName = StoreName.Root, StoreLocation storeLocation = StoreLocation.LocalMachine)
+        public static X509Certificate2 GetCertificate(string signingCredentialSearch, StoreName storeName = StoreName.My, StoreLocation storeLocation = StoreLocation.LocalMachine)
         {
             if (string.IsNullOrWhiteSpace(signingCredentialSearch))
             {
@@ -222,7 +169,10 @@ namespace Gnu.Licensing
             using (var store = new X509Store(storeName, storeLocation))
             {
                 store.Open(OpenFlags.ReadOnly);
-                var cert = store.Certificates.OfType<X509Certificate2>().AsEnumerable()
+
+                var items = store.Certificates.OfType<X509Certificate2>().AsEnumerable().ToArray();
+
+                var cert = items
                     .FirstOrDefault(c => c.Subject.IndexOf(signingCredentialSearch, StringComparison.OrdinalIgnoreCase) >= 0);
 
                 if(cert == null)

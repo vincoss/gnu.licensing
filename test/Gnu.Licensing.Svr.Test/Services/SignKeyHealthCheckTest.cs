@@ -118,7 +118,7 @@ namespace Gnu.Licensing.Svr.Services
                 ProductUuid = Guid.NewGuid(),
                 ProductName = "test-product",
                 ProductDescription = "test-description",
-                SignKeyName = "test.private.xml",
+                SignKeyName = "CN=Gnu.Licensing",
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"
             };

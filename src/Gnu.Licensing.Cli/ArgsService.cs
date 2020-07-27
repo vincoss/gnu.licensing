@@ -28,46 +28,11 @@ namespace Gnu.Licensing.Cli
         {
             var cmd = new Command("license", "Create license.");
             
-            cmd.AddOption(new Option(new[] { "--name", "-n" }, "Licensed to name.")
+            cmd.AddOption(new Option(new[] { "--license key", "-k" }, "License key.")
             {
-                Argument = new Argument<string>()
+                Argument = new Argument<Guid>()
                 {
                     Arity = ArgumentArity.ExactlyOne,
-                }
-            });
-            cmd.AddOption(new Option(new[] { "--email", "-e" }, "Licensed to email.")
-            {
-                Argument = new Argument<string>()
-                {
-                    Arity = ArgumentArity.ExactlyOne,
-                }
-            });
-            cmd.AddOption(new Option(new[] { "--type", "-t" }, $"License type. Default: {LicenseType.Standard}. Available types: <{LicenseType.Trial},{LicenseType.Standard}>.")
-            {
-                Argument = new Argument<LicenseType>(() => LicenseType.Standard)
-                {
-                    Arity = ArgumentArity.ExactlyOne,
-                }
-            });
-            cmd.AddOption(new Option(new[] { "--expire", "-x" }, "License expire date. Default never.")
-            {
-                Argument = new Argument<DateTime>(() => DateTime.MaxValue)
-                {
-                    Arity = ArgumentArity.ExactlyOne,
-                }
-            });
-            cmd.AddOption(new Option(new[] { "--volume", "-v" }, "Maximum utilization of the license. Default 1.")
-            {
-                Argument = new Argument<int>(() => 1)
-                {
-                    Arity = ArgumentArity.ExactlyOne,
-                }
-            });
-            cmd.AddOption(new Option(new[] { "--features", "-f" }, "Product features.")
-            {
-                Argument = new Argument<string>()
-                {
-                    Arity = ArgumentArity.ZeroOrMore,
                 }
             });
             cmd.AddOption(new Option(new[] { "--additional", "-a" }, "Additional attributes.")
@@ -75,13 +40,6 @@ namespace Gnu.Licensing.Cli
                 Argument = new Argument<string>()
                 {
                     Arity = ArgumentArity.ZeroOrMore,
-                }
-            });
-            cmd.AddOption(new Option(new[] { "--sign", "-s" }, "Sign key credential search. CN=Gnu.Licensing")
-            {
-                Argument = new Argument<string>()
-                {
-                    Arity = ArgumentArity.ExactlyOne,
                 }
             });
             cmd.AddOption(new Option(new[] { "--directory", "-d" }, "Output directory.")
@@ -93,10 +51,9 @@ namespace Gnu.Licensing.Cli
             });
             cmd.Handler = CommandHandler.Create<LicenseArgs>((args) =>
             {
-                var featureAttributes = AddVariable(args.Features ?? Array.Empty<string>());
                 var aditionalAttributes = AddVariable(args.Additional ?? Array.Empty<string>());
 
-                XmlExtensions.Generate(args.Name, args.Email, args.Type, args.Expire, args.Volume, featureAttributes, aditionalAttributes, args.Sign, args.Directory);
+              //  XmlExtensions.Generate(args.LicenseId, aditionalAttributes, args.Directory);
 
                 Console.WriteLine("Created license.");
 

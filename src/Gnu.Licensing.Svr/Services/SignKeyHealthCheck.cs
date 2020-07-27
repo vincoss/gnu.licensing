@@ -56,12 +56,9 @@ namespace Gnu.Licensing.Svr.Services
                     productName = product.ProductName;
                     keyName = product.SignKeyName;
 
-                    var path = Path.Combine(_options.Value.SignKeyPath, keyName);
-                    var key = File.ReadAllText(path);
-
                     var lic = License.New()
                         .WithUniqueIdentifier(Guid.NewGuid())
-                        .CreateAndSign(key);
+                        .CreateAndSign(keyName);
 
                     data.Add(productName, $"Key: {keyName}, valid.");
                 }

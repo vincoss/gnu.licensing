@@ -101,7 +101,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.ViewModels
             service.RegisterAsync(Arg.Any<Guid>()).Returns(licenseResult);
             service.ValidateAsync().Returns(licenseResult);
 
-            var key = new Guid("ae8cdf5f-26b3-4e2f-8e68-6ecc2e73720f");
+            var key = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89");
             model.RegisterKey = key.ToString();
 
             model.ActivateCommand.Execute(null);

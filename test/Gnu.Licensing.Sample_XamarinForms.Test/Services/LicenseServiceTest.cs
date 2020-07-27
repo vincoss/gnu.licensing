@@ -107,12 +107,12 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
             var client = mockHandler.ToHttpClient();
 
             var actx = Substitute.For<IApplicationContext>();
-            var appId = Guid.NewGuid().ToString();
-            actx.GetAppId().Returns(appId);
+            var appId = new Guid("ae8cdf5f-26b3-4e2f-8e68-6ecc2e73720f");
+            actx.GetAppId().Returns(appId.ToString());
 
             var service = new TestLicenseService(actx, client);
             var path = service.GetPath();
-            service.AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B";
+            service.AppId = appId.ToString();
 
             var dir = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.license.xml");
 

@@ -6,25 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Data\Private.xml" />
-    <None Remove="Data\Pulic.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="..\..\resources\Gnu.Licensing.pfx.txt" Link="Data\Gnu.Licensing.pfx.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\resources\invalid-test.license.xml" Link="Data\invalid-test.license.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\resources\test.license.xml" Link="Data\test.license.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Data\Private.xml" />
-    <EmbeddedResource Include="Data\Pulic.xml" />
   </ItemGroup>
 
   <ItemGroup>

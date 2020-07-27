@@ -177,9 +177,13 @@ namespace Gnu.Licensing
         /// </summary>
         /// <param name="signingCredentialSearch">The search string to find signing certificate.</param>
         /// <returns>The signed <see cref="License"/>.</returns>
-        public License CreateAndSign(string privateKey)
+        public License CreateAndSign(string signingCredentialSearch)
         {
-            license.Sign(privateKey);
+            if(string.IsNullOrWhiteSpace(signingCredentialSearch))
+            {
+                throw new ArgumentNullException(nameof(signingCredentialSearch));
+            }
+            license.Sign(signingCredentialSearch);
             return license;
         }
     }
