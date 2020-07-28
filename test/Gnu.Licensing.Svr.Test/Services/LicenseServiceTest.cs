@@ -425,7 +425,6 @@ namespace Gnu.Licensing.Svr.Services
 
             var settings = new AppSettings
             {
-                SignKeyPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data")
             };
 
             options.Value.Returns(settings);

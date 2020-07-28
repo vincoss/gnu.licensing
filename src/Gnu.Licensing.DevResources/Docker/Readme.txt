@@ -17,36 +17,35 @@ The samples are written for cmd.exe.
 cd to solution root
 
 ## Build & tag
-docker build --no-cache -t vincoss/shotlicapisvr:1.0.0-windows .
-docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.ubuntu-x64 --no-cache -t vincoss/shotlicapisvr:1.0.0-bionic .
-docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.ubuntu-arm --no-cache -t vincoss/shotlicapisvr:1.0.0-bionic-arm .
+docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile --no-cache -t vincoss/gnulicapisvr:1.0.0-windows .
+docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.ubuntu-x64 --no-cache -t vincoss/gnulicapisvr:1.0.0-bionic .
+docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.ubuntu-arm --no-cache -t vincoss/gnulicapisvr:1.0.0-bionic-arm .
 
 ## Tag image (before publish to docker hub) if not done yet
-docker image tag vincoss/shotlicapisvr:1.0.0 vincoss/shotlicapisvr:1.0.0-windows
+docker image tag vincoss/gnulicapisvr:1.0.0 vincoss/gnulicapisvr:1.0.0-windows
 
 ## Push to docker hub
-docker image push vincoss/shotlicapisvr:1.0.0-windows
-docker image push vincoss/shotlicapisvr:1.0.0-bionic
-docker image push vincoss/shotlicapisvr:1.0.0-bionic-arm
+docker image push vincoss/gnulicapisvr:1.0.0-windows
+docker image push vincoss/gnulicapisvr:1.0.0-bionic
+docker image push vincoss/gnulicapisvr:1.0.0-bionic-arm
 
 ## Run
-docker run -it --rm -p 8001:443 --name shotlicapisvr -v shotLicData:C:/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
-docker run -it --rm -p 8001:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Svr.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v shotLicData:C:/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-windows
+docker run -it --rm -p 8001:443 --name gnulicapisvr -v shotLicData:C:/Gnu.Licensing/Data vincoss/gnulicapisvr:1.0.0-windows
+docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v c:/temp/gnu-licensing:c:/var/appdata vincoss/gnulicapisvr:1.0.0-windows
 
 ## Run Windows using Linux contaners
-docker run -it --rm -p 8002:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Svr.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/shot-licensing:/var/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-bionic
-docker run -it --rm -p 8002:443 --name shotlicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="p@ssword" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.Svr.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/shot-licensing:/var/Gnu.Licensing/Data vincoss/shotlicapisvr:1.0.0-bionic
+docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/gnu-licensing:/var/appdata vincoss/gnulicapisvr:1.0.0-bionic
 
-docker run -it --rm -p 8001:443 --name shotlicapisvr vincoss/shotlicapisvr:1.0.0-bionic
 
 ## Error logs
-docker logs --tail 50 --follow --timestamps shotlicapisvr
+docker logs --tail 50 --follow --timestamps gnulicapisvr
 
 ## Show running container IP
-docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" shotlicapisvr
+docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" gnulicapisvr
+docker exec -it gnulicapisvr bash
 
 ## Create developer HTTPS certificate
-dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\Gnu.Licensing.Svr.pfx" -p p@ssword
+dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\Gnu.Licensing.pfx" -p Pass@word1
 dotnet dev-certs https --trust
 
 ##------------------------------------------------ Test
