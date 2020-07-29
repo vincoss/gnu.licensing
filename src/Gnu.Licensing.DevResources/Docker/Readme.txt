@@ -36,7 +36,6 @@ docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://
 ## Run Windows using Linux contaners
 docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/gnu-licensing:/var/appdata vincoss/gnulicapisvr:1.0.0-bionic
 
-
 ## Error logs
 docker logs --tail 50 --follow --timestamps gnulicapisvr
 
@@ -47,6 +46,9 @@ docker exec -it gnulicapisvr bash
 ## Create developer HTTPS certificate
 dotnet dev-certs https -ep "%USERPROFILE%\.aspnet\https\Gnu.Licensing.pfx" -p Pass@word1
 dotnet dev-certs https --trust
+
+## Switch
+-d detaches the process and runs it in the background.
 
 ##------------------------------------------------ Test
 
