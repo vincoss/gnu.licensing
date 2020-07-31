@@ -1,4 +1,5 @@
-﻿using Gnu.Licensing.Sample_XamarinForms.Views;
+﻿using Gnu.Licensing.Sample_XamarinForms;
+using Gnu.Licensing.Sample_XamarinForms.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace Gnu.Licensing.Sample_XF
             InitializeComponent();
 
             ePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            eLicUrl.Text = LicenseGlobals.LicenseServerUrl;
         }
 
         private void Button_Clicked(object sender, EventArgs e)

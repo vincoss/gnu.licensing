@@ -13,6 +13,8 @@
         <Button Text="License" Clicked="Button_Clicked"/>
         <Label Text="App and License Path"/>
         <Entry x:Name="ePath" IsReadOnly="True"/>
+        <Label Text="License Server URL"/>
+        <Entry x:Name="eLicUrl" IsReadOnly="True"/>
         <Label Text="Example license ID"/>
         <Entry Text="D65321D5-B0F9-477D-828A-086F30E2BF89" IsReadOnly="True"/>
     </StackLayout>
