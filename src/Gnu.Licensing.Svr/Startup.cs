@@ -122,6 +122,7 @@ namespace Gnu.Licensing.Svr
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
             services.AddScoped<SignKeyHealthCheck>();
+            services.AddTransient<ICertificateService, CertificateService>();
 
             return services;
         }
