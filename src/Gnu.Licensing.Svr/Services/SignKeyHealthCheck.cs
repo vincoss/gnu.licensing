@@ -68,7 +68,7 @@ namespace Gnu.Licensing.Svr.Services
             catch(Exception ex)
             {
                 _logger.LogError(ex, nameof(CheckHealthAsync));
-                data.Add(productName, $"Key: {keyName}, invalid or corrupted, Please generate new sign key.");
+                data.Add(productName, $"Search key: {keyName}, invalid, corrupted missing, Install the certificate.");
                 return Task.FromResult(HealthCheckResult.Unhealthy(message, ex, data));
             }
         }

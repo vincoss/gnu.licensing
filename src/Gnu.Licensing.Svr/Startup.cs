@@ -14,6 +14,7 @@ using Gnu.Licensing.Svr.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
 
+
 namespace Gnu.Licensing.Svr
 {
     public class Startup
@@ -32,6 +33,7 @@ namespace Gnu.Licensing.Svr
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // TODO:
             //services.AddAuthentication(options =>
             //{
             //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -79,7 +81,7 @@ namespace Gnu.Licensing.Svr
             });
 
             app.UseRouting();
-            //app.UseAuthentication();
+            //app.UseAuthentication(); // TODO:
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
