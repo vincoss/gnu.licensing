@@ -27,8 +27,8 @@ User-Agent: Fiddler
 Host: localhost
 
 ## Install Certificate
-POST https://localhost/api/certificate HTTP/1.1
-Host: localhost
+POST https://localhost:8002/api/certificate HTTP/1.1
+Host: localhost:8002
 Content-Type: application/json
 
 {"Name":"Gnu.Licensing.pfx.txt", "Password":"Pass@word1", "Thumbprint":"947bf5472c8fd3d11d6227b2bbba589cd60e3973"}

@@ -40,7 +40,7 @@ namespace Gnu.Licensing.Svr
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
                 Quantity = 1,
-                Expire = null,
+                ExpireUtc = null,
                 CreatedDateTimeUtc = createdDate,
                 CreatedByUser = user
             };

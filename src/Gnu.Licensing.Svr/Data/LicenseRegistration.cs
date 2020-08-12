@@ -30,7 +30,7 @@ namespace Gnu.Licensing.Svr.Data
 
         public int Quantity { get; set; }
 
-        public DateTime? Expire { get; set; }  
+        public DateTime? ExpireUtc { get; set; }  
 
         [Required]
         public DateTime CreatedDateTimeUtc { get; set; }

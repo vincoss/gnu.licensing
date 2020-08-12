@@ -104,7 +104,7 @@ namespace Gnu.Licensing
                 throw new InvalidOperationException($"Certificate does not have private key. {certificate}");
             }
 
-            var key = certificate.PrivateKey;
+            var key = certificate.GetRSAPrivateKey();
 
             var signedXml = new SignedXml(document);
             signedXml.SigningKey = key;
@@ -159,7 +159,7 @@ namespace Gnu.Licensing
             return result;
         }
 
-        public static X509Certificate2 GetCertificate(string signingCredentialSearch, StoreName storeName = StoreName.My, StoreLocation storeLocation = StoreLocation.LocalMachine)
+        public static X509Certificate2 GetCertificate(string signingCredentialSearch, StoreName storeName = StoreName.My, StoreLocation storeLocation = StoreLocation.CurrentUser)
         {
             if (string.IsNullOrWhiteSpace(signingCredentialSearch))
             {

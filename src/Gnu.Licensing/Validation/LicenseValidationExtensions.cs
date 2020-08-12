@@ -55,7 +55,7 @@ namespace Gnu.Licensing.Validation
         {
             var validationChainBuilder = (validationChain as ValidationChainBuilder);
             var validator = validationChainBuilder.StartValidatorChain();
-            validator.Validate = license => license.Expiration > DateTime.Now;
+            validator.Validate = license => license.ExpirationUtc > DateTime.UtcNow;
 
             validator.FailureResult = FailureStrings.Get(FailureStrings.VAL03Code);
 
@@ -64,7 +64,7 @@ namespace Gnu.Licensing.Validation
 
         /// <summary>
         /// Check whether the product build date of the provided assemblies
-        /// exceeded the <see cref="License.Expiration"/> date.
+        /// exceeded the <see cref="License.ExpirationUtc"/> date.
         /// </summary>
         /// <param name="validationChain">The current <see cref="IStartValidationChain"/>.</param>
         /// <param name="assemblies">The list of assemblies to check.</param>
@@ -80,7 +80,7 @@ namespace Gnu.Licensing.Validation
                     asm =>
                     asm.GetCustomAttributes(typeof (AssemblyBuildDateAttribute), false)
                        .Cast<AssemblyBuildDateAttribute>()
-                       .All(a => a.BuildDate < license.Expiration));
+                       .All(a => a.BuildDateUtc < license.ExpirationUtc));
 
 #else
 
@@ -88,7 +88,7 @@ namespace Gnu.Licensing.Validation
                     asm =>
                     asm.GetCustomAttributes<AssemblyBuildDateAttribute>()
                        .Cast<AssemblyBuildDateAttribute>()
-                       .All(a => a.BuildDate < license.Expiration));
+                       .All(a => a.BuildDateUtc < license.ExpirationUtc));
 
 #endif
 

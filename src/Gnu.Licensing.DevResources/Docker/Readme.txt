@@ -17,7 +17,7 @@ The samples are written for cmd.exe.
 cd to solution root
 
 ## Build & tag
-docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile --no-cache -t vincoss/gnulicapisvr:1.0.0-windows .
+docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.win-x64 --no-cache -t vincoss/gnulicapisvr:1.0.0-windows .
 docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.ubuntu-x64 --no-cache -t vincoss/gnulicapisvr:1.0.0-bionic .
 docker build -f src/Gnu.Licensing.DevResources/Docker/Dockerfile.ubuntu-arm --no-cache -t vincoss/gnulicapisvr:1.0.0-bionic-arm .
 
@@ -30,11 +30,11 @@ docker image push vincoss/gnulicapisvr:1.0.0-bionic
 docker image push vincoss/gnulicapisvr:1.0.0-bionic-arm
 
 ## Run
-docker run -it --rm -p 8001:443 --name gnulicapisvr -v shotLicData:C:/Gnu.Licensing/Data vincoss/gnulicapisvr:1.0.0-windows
-docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v c:/temp/gnu-licensing:c:/var/appdata vincoss/gnulicapisvr:1.0.0-windows
+docker run -it --rm -p 8002:443 --name gnulicapisvr -v shotLicData:C:/Gnu.Licensing/Data vincoss/gnulicapisvr:1.0.0-windows
+docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v c:/var/appdata:c:/var/appdata vincoss/gnulicapisvr:1.0.0-windows
 
 ## Run Windows using Linux contaners
-docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/temp/gnu-licensing:/var/appdata vincoss/gnulicapisvr:1.0.0-bionic
+docker run -it --rm -p 8002:443 --name gnulicapisvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/var/appdata:/var/appdata vincoss/gnulicapisvr:1.0.0-bionic
 
 ## Error logs
 docker logs --tail 50 --follow --timestamps gnulicapisvr
@@ -57,9 +57,8 @@ https://localhost/api/license
 https://localhost:8002/api/license
 https://172.17.0.2:8002/api/license
 https://shotapi/api/license
-https://localhost:8001/api/license
 https://{ip-here}/api/license
 
 
 docker pull mcr.microsoft.com/dotnet/core/samples:aspnetapp
-docker run --rm -it -p 8000:80 -p 8001:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8001 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp
+docker run --rm -it -p 8000:80 -p 8002:443 -e ASPNETCORE_URLS="https://+;http://+" -e ASPNETCORE_HTTPS_PORT=8002 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ mcr.microsoft.com/dotnet/core/samples:aspnetapp

@@ -50,16 +50,16 @@ namespace Gnu.Licensing
         /// Initializes a new instance of the <see cref="AssemblyBuildDateAttribute"/> class
         /// with the specified build date string.
         /// </summary>
-        /// <param name="buildDateString">The build date of the assembly.</param>
-        public AssemblyBuildDateAttribute(string buildDateString)
+        /// <param name="buildDateStringUtc">The build date of the assembly.</param>
+        public AssemblyBuildDateAttribute(string buildDateStringUtc)
         {
-            buildDate = DateTime.Parse(buildDateString, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+            buildDate = DateTime.Parse(buildDateStringUtc, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
         }
 
         /// <summary>
         /// Gets the assembly build date.
         /// </summary>
-        public DateTime BuildDate
+        public DateTime BuildDateUtc
         {
             get { return buildDate; }
         }

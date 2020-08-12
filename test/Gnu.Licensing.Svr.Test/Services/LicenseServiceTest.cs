@@ -258,7 +258,7 @@ namespace Gnu.Licensing.Svr.Services
                     context.SaveChanges();
 
                     var registration = CreateRegistration(product);
-                    registration.Expire = DateTime.UtcNow.AddDays(-5);
+                    registration.ExpireUtc = DateTime.UtcNow.AddDays(-5);
                     context.Add(registration);
                     context.SaveChanges();
 
@@ -452,7 +452,7 @@ namespace Gnu.Licensing.Svr.Services
                     var expireDate = DateTime.UtcNow.AddDays(1);
                     var registration = CreateRegistration(product);
                     registration.Quantity = 2;
-                    registration.Expire = expireDate;
+                    registration.ExpireUtc = expireDate;
                     context.Add(registration);
                     context.SaveChanges();
 
@@ -505,7 +505,7 @@ namespace Gnu.Licensing.Svr.Services
                     // License
                     Assert.Equal(request.LicenseId, license.Id);
                     Assert.Equal(registration.LicenseType, license.Type);
-                    Assert.Equal(expireDate.ToString("yyyyMMdd"), license.Expiration.ToString("yyyyMMdd"));
+                    Assert.Equal(expireDate.ToString("yyyyMMdd"), license.ExpirationUtc.ToString("yyyyMMdd"));
                     Assert.Equal(2, license.Quantity);
                     Assert.Equal(registration.LicenseName, license.Customer.Name);
                     Assert.Equal(registration.LicenseEmail, license.Customer.Email);
@@ -543,7 +543,7 @@ namespace Gnu.Licensing.Svr.Services
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
                 Quantity = 1,
-                Expire = null,
+                ExpireUtc = null,
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"
             };

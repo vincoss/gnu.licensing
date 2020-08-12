@@ -69,11 +69,11 @@ namespace Gnu.Licensing
         /// <summary>
         /// Sets the expiration date of the <see cref="License"/>.
         /// </summary>
-        /// <param name="date">The expiration date of the <see cref="License"/>.</param>
+        /// <param name="utcDate">The expiration date of the <see cref="License"/>.</param>
         /// <returns>The <see cref="ILicenseBuilder"/>.</returns>
-        public ILicenseBuilder ExpiresAt(DateTime date)
+        public ILicenseBuilder ExpiresAt(DateTime utcDate)
         {
-            license.Expiration = date.ToUniversalTime();
+            license.ExpirationUtc = utcDate;
             return this;
         }
 

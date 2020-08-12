@@ -72,7 +72,7 @@ namespace Gnu.Licensing.Svr.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT03Code));
             }
 
-            if (registration.Expire != null && registration.Expire <= DateTime.UtcNow)
+            if (registration.ExpireUtc != null && registration.ExpireUtc <= DateTime.UtcNow)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
             }
@@ -142,16 +142,25 @@ namespace Gnu.Licensing.Svr.Services
         {
             var task = Task.Run(() =>
             {
-                var license = License.New()
-                     .WithUniqueIdentifier(registration.LicenseUuid)
-                     .As(registration.LicenseType)
-                     .ExpiresAt(registration.Expire == null ? DateTime.MaxValue : registration.Expire.Value)
-                     .WithMaximumUtilization(registration.Quantity)
-                     .LicensedTo(registration.LicenseName, registration.LicenseEmail, (c) => c.Company = registration.LicenseName)
-                     .WithAdditionalAttributes(request.Attributes != null ? request.Attributes : new Dictionary<string, string>())
-                     .CreateAndSign(product.SignKeyName);
+                try
+                {
+                    var license = License.New()
+                    .WithUniqueIdentifier(registration.LicenseUuid)
+                    .As(registration.LicenseType)
+                    .ExpiresAt(registration.ExpireUtc == null ? DateTime.MaxValue : registration.ExpireUtc.Value)
+                    .WithMaximumUtilization(registration.Quantity)
+                    .LicensedTo(registration.LicenseName, registration.LicenseEmail, (c) => c.Company = registration.LicenseName)
+                    .WithAdditionalAttributes(request.Attributes != null ? request.Attributes : new Dictionary<string, string>())
+                    .CreateAndSign(product.SignKeyName);
 
-                return license.ToString();
+                    return license.ToString();
+                }
+                catch(Exception ex)
+                {
+                    _logger.LogError(ex, ex.Message);
+
+                    throw;
+                }
             });
 
             return task;

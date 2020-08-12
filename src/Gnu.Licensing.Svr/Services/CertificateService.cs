@@ -30,8 +30,8 @@ namespace Gnu.Licensing.Svr.Services
                 throw new FileNotFoundException($"File not found: {path}");
             }
 
-            using (var store = new X509Store(StoreLocation.CurrentUser))
-            using (var certificate = new X509Certificate2(path, password, X509KeyStorageFlags.DefaultKeySet))
+            using (var store = new X509Store(StoreName.My, StoreLocation.CurrentUser))
+            using (var certificate = new X509Certificate2(path, password, X509KeyStorageFlags.DefaultKeySet | X509KeyStorageFlags.PersistKeySet))
             {
                 store.Open(OpenFlags.ReadWrite);
                 store.Add(certificate);

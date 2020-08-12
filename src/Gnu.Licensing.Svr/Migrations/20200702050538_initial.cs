@@ -63,7 +63,7 @@ namespace Gnu.Licensing.Svr.Migrations
                     IsActive = table.Column<bool>(type: "BOOLEAN", nullable: false, defaultValue: true),
                     Comment = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false),
-                    Expire = table.Column<DateTime>(type: "DATETIME", nullable: true),
+                    ExpireUtc = table.Column<DateTime>(type: "DATETIME", nullable: true),
                     CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 7, 2, 5, 5, 37, 838, DateTimeKind.Utc).AddTicks(1422)),
                     CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },

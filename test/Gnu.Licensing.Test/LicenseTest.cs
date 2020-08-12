@@ -9,6 +9,7 @@ using System.Text;
 using Gnu.Licensing.Validation;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Globalization;
 
 namespace Gnu.Licensing.Test
 {
@@ -50,7 +51,7 @@ namespace Gnu.Licensing.Test
             Assert.NotNull(license.ProductFeatures);
             Assert.NotNull(license.Customer);
             Assert.True(license.VerifySignature());
-            Assert.Equal(ConvertToRfc1123(DateTime.MaxValue), license.Expiration);
+            Assert.Equal(ConvertToRfc1123(DateTime.MaxValue.ToUniversalTime()), license.ExpirationUtc);
             Assert.Equal("1.0.0.0", license.AdditionalAttributes.Get("Version"));
         }
 
@@ -71,7 +72,7 @@ namespace Gnu.Licensing.Test
             Assert.Null(license.ProductFeatures);
             Assert.Null(license.Customer);
             Assert.True(license.VerifySignature());
-            Assert.Equal(ConvertToRfc1123(DateTime.MaxValue), license.Expiration);
+            Assert.Equal(ConvertToRfc1123(DateTime.MaxValue), license.ExpirationUtc);
         }
 
         [Fact]
@@ -80,7 +81,7 @@ namespace Gnu.Licensing.Test
             var licenseId = Guid.NewGuid();
             var customerName = "Ferdinand Lukasak";
             var customerEmail = "max@mustermann.tld";
-            var expirationDate = DateTime.Now.AddYears(1);
+            var expirationDate = DateTime.UtcNow.AddYears(1);
             var productFeatures = new Dictionary<string, string>
                                       {
                                           {"Sales Module", "yes"},
@@ -125,7 +126,7 @@ namespace Gnu.Licensing.Test
             Assert.Equal(customerEmail, hackedLicense.Customer.Email);
             Assert.Equal(customerName, hackedLicense.Customer.Name);
             Assert.Equal(customerEmail, hackedLicense.Customer.Email);
-            Assert.Equal(ConvertToRfc1123(expirationDate), hackedLicense.Expiration);
+            Assert.Equal(ConvertToRfc1123(expirationDate), hackedLicense.ExpirationUtc);
         }
 
         [Fact]
@@ -139,7 +140,7 @@ namespace Gnu.Licensing.Test
                 var license = License.New()
                      .WithUniqueIdentifier(Guid.NewGuid())
                      .As(LicenseType.Trial)
-                     .ExpiresAt(DateTime.Now.AddDays(10))
+                     .ExpiresAt(DateTime.UtcNow.AddDays(10))
                      .WithMaximumUtilization(1)
                      .LicensedTo(nameof(ValidateLicenseTest), $"{nameof(ValidateLicenseTest)}k@example.com")
                      .WithAdditionalAttributes(new Dictionary<string, string>
@@ -185,7 +186,7 @@ namespace Gnu.Licensing.Test
                 var license = License.New()
                      .WithUniqueIdentifier(Guid.NewGuid())
                      .As(LicenseType.Trial)
-                     .ExpiresAt(DateTime.Now.AddDays(10))
+                     .ExpiresAt(DateTime.UtcNow.AddDays(10))
                      .WithMaximumUtilization(1)
                      .LicensedTo(nameof(ValidateLicenseTest), $"{nameof(ValidateLicenseTest)}k@example.com")
                      .WithAdditionalAttributes(new Dictionary<string, string>
@@ -226,6 +227,14 @@ namespace Gnu.Licensing.Test
             {
                 RobustDelete(path);
             }
+        }
+
+        [Fact]
+        public void DateParseTest()
+        {
+            var str = "Fri, 31 Dec 9999 23:59:59 GMT";
+
+            var date = DateTime.ParseExact(str, "r", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
         }
     }
 }

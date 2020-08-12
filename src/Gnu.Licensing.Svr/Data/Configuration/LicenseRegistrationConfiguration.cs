@@ -42,7 +42,7 @@ namespace Gnu.Licensing.Svr.Data.Configuration
                 .HasDefaultValue(true)
                 .HasColumnType("BOOLEAN");
 
-            builder.Property(t => t.Expire)
+            builder.Property(t => t.ExpireUtc)
                    .HasColumnType("DATETIME");
 
             builder.Property(x => x.CreatedDateTimeUtc)

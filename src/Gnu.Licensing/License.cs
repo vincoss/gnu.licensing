@@ -164,23 +164,23 @@ namespace Gnu.Licensing
                 return new LicenseAttributes(xmlElement, "Attribute");
             }
         }
+       
 
         /// <summary>
         /// Gets or sets the expiration date of this <see cref="License"/>.
         /// Use this property to set the expiration date for a trial license
         /// or the expiration of support & subscription updates for a standard license.
         /// </summary>
-        public DateTime Expiration
+        public DateTime ExpirationUtc
         {
             get
             {
-                return
-                    DateTime.ParseExact(
-                        GetTag("Expiration") ??
-                        DateTime.MaxValue.ToUniversalTime().ToString("r", CultureInfo.InvariantCulture)
-                        , "r", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+                return DateTime.ParseExact(
+                    GetTag("Expiration") ??
+                    DateTime.MaxValue.ToString("r", CultureInfo.InvariantCulture)
+                    , "r", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
             }
-            set { if (!IsSigned) SetTag("Expiration", value.ToUniversalTime().ToString("r", CultureInfo.InvariantCulture)); }
+            set { if (!IsSigned) SetTag("Expiration", value.ToString("r", CultureInfo.InvariantCulture)); }
         }
 
         /// <summary>

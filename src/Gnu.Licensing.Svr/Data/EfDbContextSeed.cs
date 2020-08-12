@@ -60,7 +60,7 @@ namespace Gnu.Licensing.Svr.Data
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
                 Quantity = 2,
-                Expire = null,
+                ExpireUtc = null,
                 CreatedDateTimeUtc = DateTime.UtcNow,
                 CreatedByUser = "test-user"
             };
