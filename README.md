@@ -5,12 +5,19 @@ This project is derived from [Standard.Licensing](https://github.com/junian/stan
 ### Projects
 
 Gnu.Licensing is class library for license generation and validation.  
-Gnu.Licensing.Cli is command line tool to generete license file and sign keys.  
 
 ### Installation
-To install Gnu.Licensing via [NuGet](http://www.nuget.org), run the following command in the Package Manager Console.
+To install Gnu.Licensing via [NuGet](https://www.nuget.org/packages/Gnu.Licensing), run the following command in the Package Manager Console.
 ```
 Install-Package Gnu.Licensing
+```
+
+### Docker Gnu.Licensing.Svr
+To pull Gnu.License.Svr via [Docker](https://hub.docker.com/r/vincoss/gnulicensesvr), run the following command in the Command Line or Powershell
+```
+docker pull vincoss/gnulicensesvr:1.0.0-windows
+docker pull vincoss/gnulicensesvr:1.0.0-bionic
+docker pull vincoss/gnulicensesvr:1.0.0-bionic-arm
 ```
 
 ### Credits
