@@ -51,7 +51,7 @@ namespace Gnu.Licensing.Test
             Assert.NotNull(license.ProductFeatures);
             Assert.NotNull(license.Customer);
             Assert.True(license.VerifySignature());
-            Assert.Equal(ConvertToRfc1123(DateTime.MaxValue.ToUniversalTime()), license.ExpirationUtc);
+            Assert.Equal(ConvertToRfc1123(DateTime.MaxValue), license.ExpirationUtc);
             Assert.Equal("1.0.0.0", license.AdditionalAttributes.Get("Version"));
         }
 

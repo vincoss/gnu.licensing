@@ -30,7 +30,7 @@ docker image push vincoss/gnulicensesvr:1.0.0-bionic
 docker image push vincoss/gnulicensesvr:1.0.0-bionic-arm
 
 ## Run
-docker run -it --rm -p 1999:443 --name gnulicensesvr -v shotLicData:C:/Gnu.Licensing/Data vincoss/gnulicensesvr:1.0.0-windows
+docker run -it --rm -p 1999:443 --name gnulicensesvr -v c:/var/appdata:c:/var/appdata vincoss/gnulicensesvr:1.0.0-windows
 docker run -it --rm -p 1999:443 --name gnulicensesvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=1999 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%/.aspnet/https:C:/https/" -v c:/var/appdata:c:/var/appdata vincoss/gnulicensesvr:1.0.0-windows
 
 ## Run Windows using Linux contaners

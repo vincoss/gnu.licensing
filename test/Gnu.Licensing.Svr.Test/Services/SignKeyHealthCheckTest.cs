@@ -99,7 +99,7 @@ namespace Gnu.Licensing.Svr.Services
 
                     Assert.Equal(HealthStatus.Unhealthy, result.Status);
                     Assert.Equal("The sign-key task is finished.", result.Description);
-                    Assert.Equal($"Key: {product.SignKeyName}, invalid or corrupted, Please generate new sign key.", result.Data[product.ProductName]);
+                    Assert.Equal("Search key: aaa, invalid, corrupted missing, Install the certificate.", result.Data[product.ProductName]);
                     Assert.NotNull(result.Exception);
                 }
             }

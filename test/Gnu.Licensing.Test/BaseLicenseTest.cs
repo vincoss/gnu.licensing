@@ -15,8 +15,8 @@ namespace Gnu.Licensing.Test
         public static DateTime ConvertToRfc1123(DateTime dateTime)
         {
             return DateTime.ParseExact(
-                dateTime.ToUniversalTime().ToString("r", CultureInfo.InvariantCulture)
-                , "r", CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal);
+                dateTime.ToString("r", CultureInfo.InvariantCulture)
+                , "r", CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal);
         }
 
         public static void RobustDelete(string path)
