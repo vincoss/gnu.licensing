@@ -35,6 +35,7 @@ docker run -it --rm -p 1999:443 --name gnulicensesvr -e ASPNETCORE_URLS="https:/
 
 ## Run Windows using Linux contaners
 docker run -it --rm -p 1999:443 --name gnulicensesvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=1999 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/var/appdata:/var/appdata vincoss/gnulicensesvr:1.0.0-bionic
+docker run -it --rm -p 1999:443 --name gnulicensesvr -e ASPNETCORE_URLS="https://+" -e ASPNETCORE_HTTPS_PORT=1999 -e ASPNETCORE_Kestrel__Certificates__Default__Password="Pass@word1" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/Gnu.Licensing.pfx -v "%USERPROFILE%\.aspnet\https:/https/" -v c:/var/appdata:/var/appdata vincoss/gnulicensesvr:1.0.0-bionic-arm
 
 ## Error logs
 docker logs --tail 50 --follow --timestamps gnulicensesvr
