@@ -216,7 +216,12 @@ namespace Gnu.Licensing
         {
 #if DEBUG   // TODO:
             HttpClientHandler clientHandler = new HttpClientHandler();
-            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            clientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+            {
+                if (cert.Issuer.Equals("CN=localhost"))
+                    return true;
+                return errors == System.Net.Security.SslPolicyErrors.None;
+            };
             HttpClient dclient = new HttpClient(clientHandler);
             return dclient;
 #endif
