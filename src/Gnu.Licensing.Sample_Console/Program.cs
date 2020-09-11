@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using Gnu.Licensing;
 using Gnu.Licensing.Validation;
 
 
@@ -16,7 +13,7 @@ namespace Gnu.Licensing.Sample_Console
         /// <summary>
         /// NOTE: This one is to lock the license to particular machine or software installation. Create unique Id when the software is installed or first time started.
         /// </summary>
-        const string AppId = "B3BCC7E4-6FC8-4CD7-A640-F50B1E5FC95B";
+        const string AppId = "ae8cdf5f-26b3-4e2f-8e68-6ecc2e73720f";
 
         static void Main(string[] args)
         {
@@ -34,7 +31,7 @@ namespace Gnu.Licensing.Sample_Console
             */
 
             var directory = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var licensePath = Path.Combine(directory, "data", $"test.license.xml");
+            var licensePath = Path.Combine(directory, "data", "test.license.xml");
             
             using(var license = File.OpenRead(licensePath))
             {
