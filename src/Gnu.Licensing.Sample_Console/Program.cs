@@ -37,7 +37,7 @@ namespace Gnu.Licensing.Sample_Console
             {
                 Console.WriteLine("Validating license.");
 
-                var results = await Validate(license);
+                var results = await ValidateAsync(license);
 
                 if (results.Any())
                 {
@@ -54,7 +54,7 @@ namespace Gnu.Licensing.Sample_Console
             }
         }
 
-        public Task<IEnumerable<IValidationFailure>> Validate(Stream license)
+        public Task<IEnumerable<IValidationFailure>> ValidateAsync(Stream license)
         {
             if (license == null)
             {

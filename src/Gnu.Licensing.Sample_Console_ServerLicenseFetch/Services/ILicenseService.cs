@@ -16,6 +16,6 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
 
         Task<LicenseResult> ValidateAsync();
 
-        Task Run();
+        Task RunAsync();
     }
 }

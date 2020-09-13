@@ -118,9 +118,9 @@ namespace Gnu.Licensing.Svr.Services
 
                 var product = _context.Products.Single(x => x.ProductUuid == request.ProductId);
                 var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseId);
-                var str = await CreateLicense(request, registration, product);
+                var str = await CreateLicenseAsync(request, registration, product);
 
-                await CreateLicenseRecord(registration, str, attributesJson, attributesChecksum, userName);
+                await CreateLicenseRecordAsync(registration, str, attributesJson, attributesChecksum, userName);
 
                 var result = new LicenseRegisterResult();
                 result.License = str;
@@ -138,7 +138,7 @@ namespace Gnu.Licensing.Svr.Services
             }
         }
 
-        private Task<string> CreateLicense(LicenseRegisterRequest request, LicenseRegistration registration, LicenseProduct product)
+        private Task<string> CreateLicenseAsync(LicenseRegisterRequest request, LicenseRegistration registration, LicenseProduct product)
         {
             var task = Task.Run(() =>
             {
@@ -166,7 +166,7 @@ namespace Gnu.Licensing.Svr.Services
             return task;
         }
 
-        private async Task<int> CreateLicenseRecord(LicenseRegistration registration, string str, string attributesJson, string attributesChecksum, string userName)
+        private async Task<int> CreateLicenseRecordAsync(LicenseRegistration registration, string str, string attributesJson, string attributesChecksum, string userName)
         {
             var license = new Gnu.Licensing.Svr.Data.License
             {

@@ -7,6 +7,6 @@ namespace Gnu.Licensing.Svr.Interface
 {
     public interface ILicenseRegistrationService
     {
-        Task<Guid> Create(LicenseRegistrationViewModel model, string createdByUser);
+        Task<Guid> CreateAsync(LicenseRegistrationViewModel model, string createdByUser);
     }
 }

@@ -132,7 +132,7 @@ namespace Gnu.Licensing
                         actual = License.Load(stream);
                     }
 
-                    var failures = await ValidateInternal(actual);
+                    var failures = await ValidateInternalAsync(actual);
 
                     foreach (var f in failures)
                     {
@@ -156,7 +156,7 @@ namespace Gnu.Licensing
 
         #region Abstract methods
 
-        protected abstract Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual);
+        protected abstract Task<IEnumerable<IValidationFailure>> ValidateInternalAsync(License actual);
 
         protected abstract Stream LicenseOpenRead();
 

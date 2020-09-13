@@ -15,7 +15,7 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
         {
         }
 
-        protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
+        protected override Task<IEnumerable<IValidationFailure>> ValidateInternalAsync(License actual)
         {
             var failure = FailureStrings.Get(FailureStrings.VAL04Code);
 
@@ -59,7 +59,7 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
             return attributes;
         }
 
-        public Task Run()
+        public Task RunAsync()
         {
             var task = Task.Run(async () =>
             {

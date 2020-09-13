@@ -32,7 +32,7 @@ namespace Gnu.Licensing.Svr.Controllers
                 return BadRequest(model);
             }
 
-            await _productService.Create(model, "todo");
+            await _productService.CreateAsync(model, "todo");
 
             return Ok();
         }

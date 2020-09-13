@@ -40,7 +40,7 @@ namespace Gnu.Licensing.Svr.Services
                         SignKeyName = "test-key"
                     };
 
-                    var result = await service.Create(model, Environment.UserName);
+                    var result = await service.CreateAsync(model, Environment.UserName);
 
                     Assert.False(result == Guid.Empty);
                 }

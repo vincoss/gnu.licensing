@@ -21,7 +21,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
             _actx = actx;
         }
 
-        protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
+        protected override Task<IEnumerable<IValidationFailure>> ValidateInternalAsync(License actual)
         {
             var failure = FailureStrings.Get(FailureStrings.VAL04Code);
 

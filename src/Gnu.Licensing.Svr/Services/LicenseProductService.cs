@@ -24,7 +24,7 @@ namespace Gnu.Licensing.Svr.Services
             _logger = logger;
         }
 
-        public async Task<Guid> Create(LicenseProductViewModel model, string createdByUser)
+        public async Task<Guid> CreateAsync(LicenseProductViewModel model, string createdByUser)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
             if (string.IsNullOrWhiteSpace(createdByUser)) throw new ArgumentNullException(nameof(createdByUser));

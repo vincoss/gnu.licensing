@@ -42,7 +42,7 @@ namespace Gnu.Licensing.Svr.Services
                         SignKeyName = "test-key"
                     };
 
-                    var productUuid = await productService.Create(product, Environment.UserName);
+                    var productUuid = await productService.CreateAsync(product, Environment.UserName);
 
                     var registration = new LicenseRegistrationViewModel
                     {
@@ -53,7 +53,7 @@ namespace Gnu.Licensing.Svr.Services
                         Quantity = 1,
                     };
 
-                    var licenseUuid = await registrationService.Create(registration, Environment.UserName);
+                    var licenseUuid = await registrationService.CreateAsync(registration, Environment.UserName);
 
                     Assert.False(productUuid == Guid.Empty);
                     Assert.False(licenseUuid == Guid.Empty);

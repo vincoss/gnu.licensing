@@ -262,7 +262,7 @@ namespace Gnu.Licensing
                 return File.Open(Path, FileMode.Create);
             }
 
-            protected override Task<IEnumerable<IValidationFailure>> ValidateInternal(License actual)
+            protected override Task<IEnumerable<IValidationFailure>> ValidateInternalAsync(License actual)
             {
                 if(Exception != null)
                 {
