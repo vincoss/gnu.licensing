@@ -163,7 +163,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.Services
 
             var service = new LicenseService(actx, client);
 
-            var result = await service.Register(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseGlobals.LicenseServerUrl);
+            var result = await service.RegisterHttpAsync(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>(), LicenseGlobals.LicenseServerUrl);
 
             Assert.Equal("200", result.License);
             Assert.Equal("code", result.Failure.Code);

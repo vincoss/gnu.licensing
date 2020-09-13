@@ -111,7 +111,7 @@ namespace Gnu.Licensing
             Assert.Null(result.License);
             Assert.NotNull(result.Exception);
             Assert.True(result.Failures.Any());
-            Assert.Equal("ACT.02", result.Failures.ElementAt(0).Code);
+            Assert.Equal("VAL.01", result.Failures.ElementAt(0).Code);
         }
 
         [Fact]

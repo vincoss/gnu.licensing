@@ -61,44 +61,55 @@ namespace Gnu.Licensing
             {
                 throw new ArgumentNullException(nameof(productId));
             }
-            if(string.IsNullOrWhiteSpace(url))
+            if (string.IsNullOrWhiteSpace(url))
             {
                 throw new ArgumentNullException(nameof(url));
             }
-            if(attributes == null)
+            if (attributes == null)
             {
                 attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             }
 
+            LicenseRegisterResult result = null;
+
             try
             {
-                var result = await Register(licenseKey, productId, attributes, url);
+                result = await RegisterHttpAsync(licenseKey, productId, attributes, url);
+            }
+            catch (Exception ex)
+            {
+                var failure = FailureStrings.Get(FailureStrings.ACT00Code);
+                return new LicenseResult(null, ex, new[] { failure });
+                // TODO: log
+            }
 
-                if (string.IsNullOrWhiteSpace(result.License))
-                {
-                    return new LicenseResult(null, null, new[] { result.Failure });
-                }
+            if (string.IsNullOrWhiteSpace(result.License))
+            {
+                return new LicenseResult(null, null, new[] { result.Failure });
+            }
 
+            try
+            {
                 using (var sw = LicenseOpenWrite())
                 {
                     var element = XElement.Parse(result.License);
                     element.Save(sw);
                 }
-
-                var validationResult = await ValidateAsync();
-                if (validationResult.Failures.Any())
-                {
-                    return new LicenseResult(null, null, validationResult.Failures);
-                }
-
-                return new LicenseResult(validationResult.License, null, null);
             }
             catch (Exception ex)
             {
-                var failure = FailureStrings.Get(FailureStrings.ACT02Code);
+                var failure = FailureStrings.Get(FailureStrings.VAL01Code);
                 return new LicenseResult(null, ex, new[] { failure });
                 // TODO: log
             }
+
+            var validationResult = await ValidateAsync();
+            if (validationResult.Failures.Any())
+            {
+                return new LicenseResult(null, null, validationResult.Failures);
+            }
+
+            return new LicenseResult(validationResult.License, null, null);
         }
 
         public Task<LicenseResult> ValidateAsync()
@@ -155,7 +166,7 @@ namespace Gnu.Licensing
 
         #region Http methods
 
-        public async Task<LicenseRegisterResult> Register(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl)
+        public async Task<LicenseRegisterResult> RegisterHttpAsync(Guid licenseKey, Guid productId, IDictionary<string, string> attributes, string serverUrl)
         {
             if (licenseKey == Guid.Empty)
             {
@@ -182,11 +193,11 @@ namespace Gnu.Licensing
             };
 
             var json = JsonSerializer.Serialize(data);
-            var result = await PostAsync<LicenseRegisterResult>(serverUrl, json);
+            var result = await PostHttpAsync<LicenseRegisterResult>(serverUrl, json);
             return result;
         }
 
-        public async Task<TResult> PostAsync<TResult>(string uri, string data)
+        public async Task<TResult> PostHttpAsync<TResult>(string uri, string data)
         {
             if (string.IsNullOrWhiteSpace(uri))
             {
