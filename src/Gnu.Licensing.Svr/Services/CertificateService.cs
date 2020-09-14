@@ -39,7 +39,7 @@ namespace Gnu.Licensing.Svr.Services
                 var certificates = store.Certificates.Find(X509FindType.FindByThumbprint, thumbprint, false);
                 if (certificates.Count <= 0)
                 {
-                    throw new InvalidOperationException("Unable to validate certificate was added to store.");
+                    throw new InvalidOperationException($"Unable to validate certificate was added to store. Thumbprint: {thumbprint}");
                 }
 
                 store.Close();
