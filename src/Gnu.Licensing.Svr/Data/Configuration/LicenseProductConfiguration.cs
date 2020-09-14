@@ -28,6 +28,10 @@ namespace Gnu.Licensing.Svr.Data.Configuration
                    .HasDefaultValue(Guid.NewGuid())
                    .HasColumnType("VARCHAR(36)");
 
+            builder.Property(t => t.CompanyId)
+                 .IsRequired()
+                 .HasColumnType("INTEGER");
+
             builder.Property(t => t.ProductName)
                    .IsRequired()
                    .HasColumnType("NVARCHAR(256) COLLATE NOCASE");

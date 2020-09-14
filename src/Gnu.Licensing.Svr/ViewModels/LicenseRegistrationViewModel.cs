@@ -8,6 +8,7 @@ namespace Gnu.Licensing.Svr.ViewModels
 {
     public class LicenseRegistrationViewModel
     {
+        public int CompanyId { get; set; }
         public Guid ProductUuid { get; set; }
         public string LicenseName { get; set; }
         public string LicenseEmail { get; set; }

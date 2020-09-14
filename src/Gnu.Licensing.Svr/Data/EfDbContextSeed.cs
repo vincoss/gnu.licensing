@@ -38,14 +38,28 @@ namespace Gnu.Licensing.Svr.Data
 
         private void DemoSeedData(EfDbContext context)
         {
+            var userName = "test-user";
+            var createdDate = DateTime.UtcNow;
+
+            var company = new LicenseCompany
+            {
+                CompanyUuid = new Guid("A8AD667E-8DDC-4819-914F-55AA9B6CD50B"),
+                CompanyName = "Demo-Company",
+                CreatedByUser = userName,
+                CreatedDateTimeUtc = createdDate
+            };
+            context.Companies.Add(company);
+            context.SaveChanges();
+
             var product = new LicenseProduct
             {
+                CompanyId = company.LicenseCompanyId,
                 ProductUuid = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"),
                 ProductName = "Demo-Product-(Full License)",
                 ProductDescription = "Demo-Product-Description-(Full License)",
                 SignKeyName = "CN=Gnu.Licensing",
-                CreatedDateTimeUtc = DateTime.UtcNow,
-                CreatedByUser = "test-user"
+                CreatedDateTimeUtc = createdDate,
+                CreatedByUser = userName
             };
 
             context.Products.Add(product);
@@ -55,14 +69,15 @@ namespace Gnu.Licensing.Svr.Data
             {
                 LicenseUuid = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89"),
                 ProductUuid = product.ProductUuid,
+                CompanyId = company.LicenseCompanyId,
                 LicenseName = "Demo-User",
                 LicenseEmail = "Demo-User-Email",
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
                 Quantity = 2,
                 ExpireUtc = null,
-                CreatedDateTimeUtc = DateTime.UtcNow,
-                CreatedByUser = "test-user"
+                CreatedDateTimeUtc = createdDate,
+                CreatedByUser = userName
             };
 
             context.Registrations.Add(registration);

@@ -34,6 +34,7 @@ namespace Gnu.Licensing.Svr.Services
 
             var registration = new LicenseRegistration
             {
+                CompanyId = model.CompanyId,
                 ProductUuid = model.ProductUuid,
                 LicenseName = model.LicenseName,
                 LicenseEmail = model.LicenseEmail,

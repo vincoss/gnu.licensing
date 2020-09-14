@@ -46,23 +46,23 @@ namespace Gnu.Licensing.Svr.Services
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.LicenseId == Guid.Empty)
+            if (request.LicenseUuid == Guid.Empty)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT01Code));
             }
-            if (request.ProductId == Guid.Empty)
+            if (request.ProductUuid == Guid.Empty)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
 
-            var registration = _context.Registrations.SingleOrDefault(x => x.LicenseUuid == request.LicenseId);
+            var registration = _context.Registrations.SingleOrDefault(x => x.LicenseUuid == request.LicenseUuid);
 
             if (registration == null)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT01Code));
             }
 
-            if (registration.ProductUuid != request.ProductId)
+            if (registration.ProductUuid != request.ProductUuid)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
@@ -77,7 +77,7 @@ namespace Gnu.Licensing.Svr.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
             }
 
-            if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseId) >= registration.Quantity)   // TODO:
+            if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseUuid) >= registration.Quantity)   // TODO:
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
             }
@@ -116,8 +116,8 @@ namespace Gnu.Licensing.Svr.Services
                     attributesChecksum = Utils.GetSha256HashFromString(attributesJson);
                 }
 
-                var product = _context.Products.Single(x => x.ProductUuid == request.ProductId);
-                var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseId);
+                var product = _context.Products.Single(x => x.ProductUuid == request.ProductUuid);
+                var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseUuid);
                 var str = await CreateLicenseAsync(request, registration, product);
 
                 await CreateLicenseRecordAsync(registration, str, attributesJson, attributesChecksum, userName);

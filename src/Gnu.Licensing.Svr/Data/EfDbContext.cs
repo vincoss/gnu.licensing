@@ -11,6 +11,8 @@ namespace Gnu.Licensing.Svr.Data
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
+        public DbSet<LicenseCompany> Companies { get; set; }
+
         public DbSet<LicenseProduct> Products { get; set; }
 
         public DbSet<LicenseRegistration> Registrations { get; set; }
@@ -21,6 +23,7 @@ namespace Gnu.Licensing.Svr.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.ApplyConfiguration(new LicenseCompanyConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseProductConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseRegistrationConfiguration());
             modelBuilder.ApplyConfiguration(new LicenseConfiguration());

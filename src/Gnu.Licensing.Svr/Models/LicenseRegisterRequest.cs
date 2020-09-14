@@ -6,8 +6,8 @@ namespace Gnu.Licensing.Svr.Models
 {
     public class LicenseRegisterRequest
     {
-        public Guid LicenseId { get; set; }
-        public Guid ProductId { get; set; }
+        public Guid LicenseUuid { get; set; }
+        public Guid ProductUuid { get; set; }
         public IDictionary<string, string> Attributes { get; set; }
     }
 }

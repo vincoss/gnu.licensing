@@ -16,6 +16,9 @@ namespace Gnu.Licensing.Svr.Data
         public Guid ProductUuid { get; set; }
 
         [Required]
+        public int CompanyId { get; set; }
+
+        [Required]
         public string LicenseString { get; set; }
 
         public string LicenseAttributes { get; set; }

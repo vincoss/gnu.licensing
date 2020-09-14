@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -12,6 +11,9 @@ namespace Gnu.Licensing.Svr.Data
 
         [Required]
         public Guid ProductUuid { get; set; }
+        
+        [Required]
+        public int CompanyId { get; set; }
 
         [Required]
         public string ProductName { get; set; }

@@ -23,7 +23,11 @@ namespace Gnu.Licensing.Svr.Data.Configuration
 
             builder.Property(t => t.ProductUuid)
                 .IsRequired()
-                .HasColumnType("VARCHAR(36)");
+                .HasColumnType("INTEGER");
+
+            builder.Property(t => t.CompanyId)
+               .IsRequired()
+               .HasColumnType("INTEGER");
 
             builder.Property(t => t.LicenseString)
                    .IsRequired()

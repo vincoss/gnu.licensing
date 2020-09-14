@@ -73,7 +73,7 @@ namespace Gnu.Licensing.Svr.Services
                     var service = new LicenseService(context, logger, options);
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = Guid.NewGuid()
+                        LicenseUuid = Guid.NewGuid()
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -119,8 +119,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = Guid.NewGuid(),
-                        ProductId = Guid.NewGuid()
+                        LicenseUuid = Guid.NewGuid(),
+                        ProductUuid = Guid.NewGuid()
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -166,8 +166,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = registration.LicenseUuid,
-                        ProductId = Guid.NewGuid()
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = Guid.NewGuid()
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -216,8 +216,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = registration.LicenseUuid,
-                        ProductId = registration.ProductUuid
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = registration.ProductUuid
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -264,8 +264,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = registration.LicenseUuid,
-                        ProductId = registration.ProductUuid
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = registration.ProductUuid
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -318,8 +318,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = registration.LicenseUuid,
-                        ProductId = registration.ProductUuid
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = registration.ProductUuid
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -402,8 +402,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = registration.LicenseUuid,
-                        ProductId = product.ProductUuid
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = product.ProductUuid
                     };
 
                     var result = await service.CreateAsync(request, "test-user");
@@ -458,8 +458,8 @@ namespace Gnu.Licensing.Svr.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseId = registration.LicenseUuid,
-                        ProductId = registration.ProductUuid,
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = registration.ProductUuid,
                         Attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     };
 
@@ -503,7 +503,7 @@ namespace Gnu.Licensing.Svr.Services
                     Assert.False(failures.Any());
 
                     // License
-                    Assert.Equal(request.LicenseId, license.Id);
+                    Assert.Equal(request.LicenseUuid, license.Id);
                     Assert.Equal(registration.LicenseType, license.Type);
                     Assert.Equal(expireDate.ToString("yyyyMMdd"), license.ExpirationUtc.ToString("yyyyMMdd"));
                     Assert.Equal(2, license.Quantity);
