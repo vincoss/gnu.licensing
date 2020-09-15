@@ -172,6 +172,7 @@ namespace Gnu.Licensing.Svr.Services
             {
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
+                CompanyId = registration.CompanyId,
                 LicenseString = str,
                 LicenseAttributes = attributesJson,
                 AttributesChecksum = attributesChecksum,
