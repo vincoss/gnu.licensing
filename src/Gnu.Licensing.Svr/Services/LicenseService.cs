@@ -77,7 +77,7 @@ namespace Gnu.Licensing.Svr.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT04Code));
             }
 
-            if (registration.Quantity > 1 && LicenseGetUsage(request.LicenseUuid) >= registration.Quantity)   // TODO:
+            if (registration.Quantity > 1 && (LicenseGetUsage(request.LicenseUuid) >= registration.Quantity))
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT05Code));
             }

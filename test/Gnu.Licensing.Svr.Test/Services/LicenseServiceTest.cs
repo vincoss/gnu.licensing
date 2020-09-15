@@ -280,6 +280,60 @@ namespace Gnu.Licensing.Svr.Services
         }
 
         [Fact]
+        public async void ValidateAsync_ACT05Code_ShallNotOveruseIfPurchasedSinleLicense()
+        {
+            var options = Substitute.For<IOptionsSnapshot<AppSettings>>();
+            var logger = new LoggerFactory().CreateLogger<LicenseService>();
+
+            // In-memory database only exists while the connection is open
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    context.Database.EnsureCreated();
+                    var service = new LicenseService(context, logger, options);
+
+                    var product = CreateProduct();
+                    context.Add(product);
+                    context.SaveChanges();
+
+                    var registration = CreateRegistration(product);
+                    registration.Quantity = 1;
+                    context.Add(registration);
+                    context.SaveChanges();
+
+                    var licenseA = CreateLicense(registration);
+                    var licenseB = CreateLicense(registration);
+                    context.Add(licenseA);
+                    context.Add(licenseB);
+                    context.SaveChanges();
+
+                    var request = new LicenseRegisterRequest
+                    {
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = registration.ProductUuid
+                    };
+
+                    var result = await service.ValidateAsync(request);
+
+                    Assert.Null(result);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [Fact]
         public async void ValidateAsync_ACT05Code_OverusedLicense()
         {
             var options = Substitute.For<IOptionsSnapshot<AppSettings>>();
