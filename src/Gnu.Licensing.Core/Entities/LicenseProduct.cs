@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Gnu.Licensing.Svr.Data
+namespace Gnu.Licensing.Core.Entities
 {
     public class LicenseProduct
     {

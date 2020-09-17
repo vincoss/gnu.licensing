@@ -31,6 +31,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.5.1" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Gnu.Licensing.Core\Gnu.Licensing.Core.csproj" />
+    <ProjectReference Include="..\Gnu.Licensing.Sqlite\Gnu.Licensing.Sqlite.csproj" />
+    <ProjectReference Include="..\Gnu.Licensing.SqlServer\Gnu.Licensing.SqlServer.csproj" />
     <ProjectReference Include="..\Gnu.Licensing\Gnu.Licensing.csproj" />
   </ItemGroup>
   <ItemGroup>

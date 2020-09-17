@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Gnu.Licensing.Svr.Data
+namespace Gnu.Licensing.Core.Entities
 {
     public class LicenseRegistration
     {
@@ -27,9 +27,9 @@ namespace Gnu.Licensing.Svr.Data
         [Required]
         public LicenseType LicenseType { get; set; }
 
-        public bool IsActive { get; set; }  // Blacklist
+        public bool IsActive { get; set; }  // TODO: Blacklist
 
-        public string Comment { get; set; } // Reasons for blacklist
+        public string Comment { get; set; } // TODO: Reasons for blacklist
 
         public int Quantity { get; set; }
 

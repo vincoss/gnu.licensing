@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 
 
-namespace Gnu.Licensing.Svr.Data
+namespace Gnu.Licensing.Core.Entities
 {
-    public class License
+    public class LicenseActivation
     {
         [Key]
         public int LicenseId { get; set; }
