@@ -6,25 +6,25 @@ using Microsoft.Extensions.Options;
 using System;
 
 
-namespace Gnu.Licensing.Sqlite
+namespace Gnu.Licensing.SqlServer
 {
     public static class SqlServerApplicationExtensions
     {
-        public static IServiceCollection AddSqliteDatabase(this IServiceCollection services)
+        public static IServiceCollection AddSqlServerDatabase(this IServiceCollection services)
         {
-            services.AddDbContextProvider<SqliteContext>("Sqlite", (provider, options) =>
+            services.AddDbContextProvider<SqlServerContext>("SqlServer", (provider, options) =>
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
 
-                options.UseSqlite(databaseOptions.Value.ConnectionString);
+                options.UseSqlServer(databaseOptions.Value.ConnectionString);
             });
 
             return services;
         }
 
-        public static IServiceCollection AddSqliteDatabase(this IServiceCollection services, Action<DatabaseOptions> configure)
+        public static IServiceCollection AddSqlServerDatabase(this IServiceCollection services, Action<DatabaseOptions> configure)
         {
-            services.AddSqliteDatabase();
+            services.AddSqlServerDatabase();
             services.Configure(configure);
             return services;
         }

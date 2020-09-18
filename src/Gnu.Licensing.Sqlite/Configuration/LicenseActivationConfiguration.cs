@@ -26,44 +26,44 @@ namespace Gnu.Licensing.Sqlite.Configuration
                .HasColumnType("INTEGER");
 
             builder
-          .Property(t => t.LicenseString)
-                   .HasColumnType("NVARCHAR COLLATE NOCASE");
+                .Property(t => t.LicenseString)
+                .HasColumnType("NVARCHAR COLLATE NOCASE");
 
             builder
-        .Property(t => t.LicenseAttributes)
-                 .HasColumnType("NVARCHAR COLLATE NOCASE");
+                .Property(t => t.LicenseAttributes)
+                .HasColumnType("NVARCHAR COLLATE NOCASE");
 
             builder
-      .Property(t => t.LicenseChecksum)
-               .HasColumnType("NVARCHAR");
+                .Property(t => t.LicenseChecksum)
+                .HasColumnType("NVARCHAR");
 
             builder
-   .Property(t => t.AttributesChecksum)
-            .HasColumnType("NVARCHAR");
+                .Property(t => t.AttributesChecksum)
+                .HasColumnType("NVARCHAR");
 
             builder
- .Property(t => t.ChecksumType)
-              .HasColumnType("VARCHAR(12) COLLATE NOCASE");
+                .Property(t => t.ChecksumType)
+                .HasColumnType("VARCHAR(12) COLLATE NOCASE");
 
             builder
-.Property(t => t.IsActive)
-                      .HasColumnType("BOOLEAN");
+                    .Property(t => t.IsActive)
+                    .HasColumnType("BOOLEAN");
 
             builder
-.Property(t => t.CreatedDateTimeUtc)
-                   .HasColumnType("DATETIME");
+                .Property(t => t.CreatedDateTimeUtc)
+                .HasColumnType("DATETIME");
 
             builder
-.Property(t => t.ModifiedDateTimeUtc)
-                   .HasColumnType("DATETIME");
+                .Property(t => t.ModifiedDateTimeUtc)
+                .HasColumnType("DATETIME");
 
             builder
-.Property(t => t.CreatedByUser)
-                   .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
+                .Property(t => t.CreatedByUser)
+                .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
 
             builder
-.Property(t => t.ModifiedByUser)
-                   .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
+                .Property(t => t.ModifiedByUser)
+                .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
         }
     }
 }
