@@ -1,21 +1,21 @@
 ﻿using Microsoft.Extensions.Logging;
-using Gnu.Licensing.Svr.Data;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gnu.Licensing.Core.Entities;
 
 
 namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseProductService : ILicenseProductService
     {
-        private readonly EfDbContext _context;
+        private readonly AbstractContext _context;
         private readonly ILogger<LicenseProductService> _logger;
 
-        public LicenseProductService(EfDbContext context, ILogger<LicenseProductService> logger)
+        public LicenseProductService(AbstractContext context, ILogger<LicenseProductService> logger)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (logger == null) throw new ArgumentNullException(nameof(logger));

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gnu.Licensing.Core.Entities
 {
-    public abstract class AbstractContext<TContext> : DbContext where TContext : DbContext
+    public abstract class AbstractContext<TContext> : DbContext, IContext where TContext : DbContext
     {
         public AbstractContext(DbContextOptions<TContext> options) : base(options)
         {

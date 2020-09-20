@@ -17,7 +17,7 @@
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -35,8 +35,5 @@
     <ProjectReference Include="..\Gnu.Licensing.Sqlite\Gnu.Licensing.Sqlite.csproj" />
     <ProjectReference Include="..\Gnu.Licensing.SqlServer\Gnu.Licensing.SqlServer.csproj" />
     <ProjectReference Include="..\Gnu.Licensing\Gnu.Licensing.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>
