@@ -1,8 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Gnu.Licensing.Core.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Gnu.Licensing.Svr.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,11 +18,11 @@ namespace Gnu.Licensing.Svr.Services
     /// </summary>
     public class SignKeyHealthCheck : IHealthCheck
     {
-        private readonly EfDbContext _context;
+        private readonly IContext _context;
         private readonly ILogger<LicenseService> _logger;
         private readonly IOptionsSnapshot<AppSettings> _options;
 
-        public SignKeyHealthCheck(EfDbContext context, ILogger<LicenseService> logger, IOptionsSnapshot<AppSettings> options)
+        public SignKeyHealthCheck(IContext context, ILogger<LicenseService> logger, IOptionsSnapshot<AppSettings> options)
         {
             if (context == null)
             {

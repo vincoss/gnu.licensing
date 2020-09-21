@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Gnu.Licensing.Svr.Data;
 using Gnu.Licensing.Svr.Infrastructure.Filters;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.Services;
@@ -118,7 +117,7 @@ namespace Gnu.Licensing.Svr
         public static IServiceCollection AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<ILicenseService, LicenseService>();
-            services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
+           // services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
             services.AddScoped<SignKeyHealthCheck>();
             services.AddTransient<ICertificateService, CertificateService>();
 

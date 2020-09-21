@@ -7,20 +7,20 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using Gnu.Licensing.Validation;
-using Gnu.Licensing.Svr.Data;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text.Json;
+using Gnu.Licensing.Core.Entities;
 
 namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseService : ILicenseService
     {
-        private readonly EfDbContext _context;
+        private readonly IContext _context;
         private readonly ILogger<LicenseService> _logger;
         private readonly IOptionsSnapshot<AppSettings> _options;
 
-        public LicenseService(EfDbContext context, ILogger<LicenseService> logger, IOptionsSnapshot<AppSettings> options)
+        public LicenseService(IContext context, ILogger<LicenseService> logger, IOptionsSnapshot<AppSettings> options)
         {
             if(context == null)
             {
@@ -168,7 +168,7 @@ namespace Gnu.Licensing.Svr.Services
 
         private async Task<int> CreateLicenseRecordAsync(LicenseRegistration registration, string str, string attributesJson, string attributesChecksum, string userName)
         {
-            var license = new Gnu.Licensing.Svr.Data.License
+            var license = new LicenseActivation
             {
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
@@ -186,7 +186,7 @@ namespace Gnu.Licensing.Svr.Services
             };
 
             _context.Licenses.Add(license);
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync(default);
         }
 
         #region Private methods

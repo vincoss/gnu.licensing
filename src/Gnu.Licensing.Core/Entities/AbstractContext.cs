@@ -1,5 +1,6 @@
 ﻿using Gnu.Licensing.Core.Entities.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 
 namespace Gnu.Licensing.Core.Entities

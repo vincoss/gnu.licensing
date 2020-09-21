@@ -1,19 +1,18 @@
 ﻿using Microsoft.Extensions.Logging;
-using Gnu.Licensing.Svr.Data;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.ViewModels;
 using System;
 using System.Threading.Tasks;
-
+using Gnu.Licensing.Core.Entities;
 
 namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseRegistrationService : ILicenseRegistrationService
     {
-        private readonly EfDbContext _context;
+        private readonly IContext _context;
         private readonly ILogger<LicenseRegistrationService> _logger;
 
-        public LicenseRegistrationService(EfDbContext context, ILogger<LicenseRegistrationService> logger)
+        public LicenseRegistrationService(IContext context, ILogger<LicenseRegistrationService> logger)
         {
             if (context == null)
             {
@@ -43,8 +42,8 @@ namespace Gnu.Licensing.Svr.Services
                 CreatedByUser = createdByUser
             };
 
-            _context.Add(registration);
-            await _context.SaveChangesAsync();
+            _context.Registrations.Add(registration);
+            await _context.SaveChangesAsync(default);
 
             return registration.LicenseUuid;
         }

@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Gnu.Licensing.Svr.Data;
 using Gnu.Licensing.Svr.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -35,16 +34,16 @@ namespace Gnu.Licensing.Svr
                 var host = CreateHostBuilder(configuration, args).Build();
 
                 Log.Information("Applying migrations ({ApplicationContext})...", AppName);
-                host.MigrateDbContext<EfDbContext>((context, services) =>
-                {
-                    var env = services.GetService<IWebHostEnvironment>();
-                    var logger = services.GetService<ILogger<EfDbContextSeed>>();
-                    var settings = services.GetService<IOptions<AppSettings>>();
+                //host.MigrateDbContext<EfDbContext>((context, services) =>
+                //{
+                //    var env = services.GetService<IWebHostEnvironment>();
+                //    var logger = services.GetService<ILogger<EfDbContextSeed>>();
+                //    var settings = services.GetService<IOptions<AppSettings>>();
 
-                    new EfDbContextSeed()
-                        .SeedAsync(context, env, logger, settings)
-                        .Wait();
-                });
+                //    new EfDbContextSeed()
+                //        .SeedAsync(context, env, logger, settings)
+                //        .Wait();
+                //});
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
                 host.Run();

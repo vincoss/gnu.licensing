@@ -2,8 +2,6 @@
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Gnu.Licensing.Core.Entities;
 
@@ -12,10 +10,10 @@ namespace Gnu.Licensing.Svr.Services
 {
     public class LicenseProductService : ILicenseProductService
     {
-        private readonly AbstractContext _context;
+        private readonly IContext _context;
         private readonly ILogger<LicenseProductService> _logger;
 
-        public LicenseProductService(AbstractContext context, ILogger<LicenseProductService> logger)
+        public LicenseProductService(IContext context, ILogger<LicenseProductService> logger)
         {
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (logger == null) throw new ArgumentNullException(nameof(logger));
@@ -37,8 +35,8 @@ namespace Gnu.Licensing.Svr.Services
                 CreatedByUser = createdByUser
             };
 
-            _context.Add(product);
-            await _context.SaveChangesAsync();
+            _context.Products.Add(product);
+            await _context.SaveChangesAsync(default);
 
             return product.ProductUuid;
         }
