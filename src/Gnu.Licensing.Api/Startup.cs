@@ -3,15 +3,12 @@ using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Gnu.Licensing.Svr.Infrastructure.Filters;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 
 
 namespace Gnu.Licensing.Svr
@@ -25,30 +22,8 @@ namespace Gnu.Licensing.Svr
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // TODO:
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-            //})
-            //.AddCookie(options =>
-            //{
-            //    options.LoginPath = "/account/signin";
-            //    options.LogoutPath = "/account/signout";
-            //    options.AccessDeniedPath = "/account/accessdenied";
-            //    options.ReturnUrlParameter = "/home/";
-            //})
-            //.AddGoogle(options =>
-            //{
-            //    IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
-
-            //    options.ClientId = googleAuthNSection["ClientId"];
-            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
-            //});
-
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(HttpGlobalExceptionFilter));
@@ -64,9 +39,16 @@ namespace Gnu.Licensing.Svr
             services.AddRazorPages();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
+
+            app.UseForwardedHeaders();
+            app.UsePathBase(options.PathBase);
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
@@ -76,8 +58,6 @@ namespace Gnu.Licensing.Svr
             });
 
             app.UseRouting();
-            //app.UseAuthentication(); // TODO:
-            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -88,7 +68,7 @@ namespace Gnu.Licensing.Svr
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                }).RequireAuthorization();
+                }).RequireAuthorization(); // TODO: this require authorization which is not there??
             });
         }
     }

@@ -8,6 +8,7 @@ using Serilog;
 using Gnu.Licensing.Svr.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.CommandLineUtils;
 
 namespace Gnu.Licensing.Svr
 {
@@ -33,20 +34,29 @@ namespace Gnu.Licensing.Svr
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
                 var host = CreateHostBuilder(configuration, args).Build();
 
-                Log.Information("Applying migrations ({ApplicationContext})...", AppName);
-                //host.MigrateDbContext<EfDbContext>((context, services) =>
-                //{
-                //    var env = services.GetService<IWebHostEnvironment>();
-                //    var logger = services.GetService<ILogger<EfDbContextSeed>>();
-                //    var settings = services.GetService<IOptions<AppSettings>>();
+                if (!host.ValidateStartupOptions())
+                {
+                    return 1;
+                }
 
-                //    new EfDbContextSeed()
-                //        .SeedAsync(context, env, logger, settings)
-                //        .Wait();
-                //});
+                var app = new CommandLineApplication
+                {
+                    Name = "Gnu.Licensing",
+                    Description = "Gnu.Licensing service",
+                };
 
-                Log.Information("Starting web host ({ApplicationContext})...", AppName);
-                host.Run();
+                app.Option("--urls", "The URLs that should bind to.", CommandOptionType.SingleValue);
+
+                app.OnExecute(async () =>
+                {
+                    await host.RunMigrationsAsync(default);
+
+                    Log.Information("Starting web host ({ApplicationContext})...", AppName);
+                    await host.RunAsync(default);
+                    return 0;
+                });
+
+                app.Execute(args);
 
                 Log.Information("Started web host ({ApplicationContext})...", AppName);
 

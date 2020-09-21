@@ -31,15 +31,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnu.Licensing.Sample_XF.iOS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.Sample_XF", "src\Gnu.Licensing.Sample_XF\Gnu.Licensing.Sample_XF\Gnu.Licensing.Sample_XF.csproj", "{73E79F74-5FBC-4E4E-AFFC-EFA7BD1CC78B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnu.Licensing.Core", "src\Gnu.Licensing.Core\Gnu.Licensing.Core.csproj", "{FC0EDB5C-DD64-465E-9794-6999A3DC1E6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.Core", "src\Gnu.Licensing.Core\Gnu.Licensing.Core.csproj", "{FC0EDB5C-DD64-465E-9794-6999A3DC1E6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnu.Licensing.Sqlite", "src\Gnu.Licensing.Sqlite\Gnu.Licensing.Sqlite.csproj", "{68BB01F2-1D5E-40B6-B97A-A85563F2D73F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.Sqlite", "src\Gnu.Licensing.Sqlite\Gnu.Licensing.Sqlite.csproj", "{68BB01F2-1D5E-40B6-B97A-A85563F2D73F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnu.Licensing.SqlServer", "src\Gnu.Licensing.SqlServer\Gnu.Licensing.SqlServer.csproj", "{1A150518-0776-41F1-A4BA-4C2D259D7D33}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.SqlServer", "src\Gnu.Licensing.SqlServer\Gnu.Licensing.SqlServer.csproj", "{1A150518-0776-41F1-A4BA-4C2D259D7D33}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.Api", "src\Gnu.Licensing.Api\Gnu.Licensing.Api.csproj", "{391041ED-7EFE-4A01-BAD5-0ACBF00DD1E3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnu.Licensing.Web", "src\Gnu.Licensing.Web\Gnu.Licensing.Web.csproj", "{6C768910-930C-4458-BFC9-2226CC1EB787}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -421,30 +419,6 @@ Global
 		{391041ED-7EFE-4A01-BAD5-0ACBF00DD1E3}.Release|x64.Build.0 = Release|Any CPU
 		{391041ED-7EFE-4A01-BAD5-0ACBF00DD1E3}.Release|x86.ActiveCfg = Release|Any CPU
 		{391041ED-7EFE-4A01-BAD5-0ACBF00DD1E3}.Release|x86.Build.0 = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|ARM.Build.0 = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|x64.Build.0 = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Debug|x86.Build.0 = Debug|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|ARM.ActiveCfg = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|ARM.Build.0 = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|iPhone.Build.0 = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|x64.ActiveCfg = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|x64.Build.0 = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|x86.ActiveCfg = Release|Any CPU
-		{6C768910-930C-4458-BFC9-2226CC1EB787}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,5 +19,6 @@ namespace Gnu.Licensing.Core.Entities
         bool IsUniqueConstraintViolationException(DbUpdateException exception);
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        Task RunMigrationsAsync(CancellationToken cancellationToken);
     }
 }

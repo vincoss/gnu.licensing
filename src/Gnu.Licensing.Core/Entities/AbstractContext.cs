@@ -1,5 +1,6 @@
 ﻿using Gnu.Licensing.Core.Entities.Configuration;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -31,5 +32,10 @@ namespace Gnu.Licensing.Core.Entities
         }
 
         public abstract bool IsUniqueConstraintViolationException(DbUpdateException exception);
+
+        public Task RunMigrationsAsync(CancellationToken cancellationToken)
+        {
+            return Database.MigrateAsync(cancellationToken);
+        }
     }
 }

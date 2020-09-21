@@ -1,11 +1,17 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Gnu.Licensing.Core;
+using Gnu.Licensing.Core.Entities;
+using Gnu.Licensing.Core.Options;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Polly;
+using Serilog;
 using System;
-
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gnu.Licensing.Svr.Hosting
 {
@@ -51,6 +57,35 @@ namespace Gnu.Licensing.Svr.Hosting
         {
             context.Database.Migrate();
             seeder(context, services);
+        }
+
+
+        public static async Task RunMigrationsAsync(this IHost host, CancellationToken cancellationToken = default)
+        {
+            // Run migrations if necessary.
+            var options = host.Services.GetRequiredService<IOptions<LicensingOptions>>();
+
+            if (options.Value.RunMigrationsAtStartup)
+            {
+                Log.Information("Applying migrations ({ApplicationContext})...", Program.AppName);
+
+                using (var scope = host.Services.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<IContext>();
+                    if (ctx != null)
+                    {
+                        await ctx.RunMigrationsAsync(cancellationToken);
+                    }
+                }
+            }
+        }
+
+        public static bool ValidateStartupOptions(this IHost host)
+        {
+            return host
+                .Services
+                .GetRequiredService<ValidateStartupOptions>()
+                .Validate();
         }
     }
 }
