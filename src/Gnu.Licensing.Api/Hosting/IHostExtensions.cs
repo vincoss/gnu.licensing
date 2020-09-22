@@ -13,7 +13,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Gnu.Licensing.Svr.Hosting
+namespace Gnu.Licensing.Api.Hosting
 {
     public static class IHostExtensions
     {

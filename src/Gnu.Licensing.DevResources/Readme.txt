@@ -13,4 +13,4 @@ dotnet dev-certs https --trust
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\GnuLicensing.pfx -p todo-Pass@word1
 dotnet dev-certs https --clean
 dotnet dev-certs https --trust
-dotnet user-secrets -p src\Gnu.Licensing.Svr\Gnu.Licensing.Svr.csproj set "Kestrel:Certificates:Password" "todo-Pass@word1"
+dotnet user-secrets -p src\Gnu.Licensing.Api\Gnu.Licensing.Api.csproj set "Kestrel:Certificates:Password" "todo-Pass@word1"

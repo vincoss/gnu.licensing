@@ -5,7 +5,7 @@ using Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services;
 namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch
 {
     /// <summary>
-    /// NOTE: Ensure that the 'Gnu.Licensing.Svr' service is running.
+    /// NOTE: Ensure that the 'Gnu.Licensing.Api' service is running.
     /// </summary>
     class Program
     {

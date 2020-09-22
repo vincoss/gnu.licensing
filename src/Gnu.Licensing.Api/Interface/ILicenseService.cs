@@ -1,9 +1,9 @@
-﻿using Gnu.Licensing.Svr.Models;
+﻿using Gnu.Licensing.Api.Models;
 using Gnu.Licensing.Validation;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Svr.Interface
+namespace Gnu.Licensing.Api.Interface
 {
     public interface ILicenseService
     {

@@ -8,7 +8,7 @@
 
     <StackLayout Margin="5">
         <Label Text="License Sample" />
-        <Label Text="To register license for this app use example license key below. Ensure that 'Gnu.Licensing.Svr' is running."/>
+        <Label Text="To register license for this app use example license key below. Ensure that 'Gnu.Licensing.Api' is running."/>
         
         <Button Text="License" Clicked="Button_Clicked"/>
         <Label Text="App and License Path"/>

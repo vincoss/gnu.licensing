@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 
 
-namespace Gnu.Licensing.Svr.Infrastructure.ActionResults
+namespace Gnu.Licensing.Api.Infrastructure.ActionResults
 {
     public class InternalServerErrorObjectResult : ObjectResult
     {

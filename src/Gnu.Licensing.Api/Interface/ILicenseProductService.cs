@@ -1,9 +1,9 @@
-﻿using Gnu.Licensing.Svr.ViewModels;
+﻿using Gnu.Licensing.Api.ViewModels;
 using System;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Svr.Interface
+namespace Gnu.Licensing.Api.Interface
 {
     public interface ILicenseProductService
     {

@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Svr.Services
+namespace Gnu.Licensing.Api.Services
 {
     /// <summary>
     /// https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-3.1

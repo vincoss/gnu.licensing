@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Gnu.Licensing.Svr.Interface
+namespace Gnu.Licensing.Api.Interface
 {
     public interface ICertificateService
     {

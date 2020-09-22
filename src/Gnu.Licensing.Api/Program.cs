@@ -1,16 +1,14 @@
 using System;
-using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Serilog;
-using Gnu.Licensing.Svr.Hosting;
+using Gnu.Licensing.Api.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.CommandLineUtils;
 
-namespace Gnu.Licensing.Svr
+
+namespace Gnu.Licensing.Api
 {
     /// <summary>
     /// https://localhost/api/license
@@ -58,7 +56,7 @@ namespace Gnu.Licensing.Svr
 
                 app.Execute(args);
 
-                Log.Information("Started web host ({ApplicationContext})...", AppName);
+                Log.Information("Closing web host ({ApplicationContext})...", AppName);
 
                 return 0;
             }

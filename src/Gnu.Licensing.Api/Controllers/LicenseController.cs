@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Gnu.Licensing.Svr.Interface;
-using Gnu.Licensing.Svr.Models;
+using Gnu.Licensing.Api.Interface;
+using Gnu.Licensing.Api.Models;
 
 
-namespace Gnu.Licensing.Svr.Controllers
+namespace Gnu.Licensing.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

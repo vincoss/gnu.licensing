@@ -1,4 +1,4 @@
-﻿using Gnu.Licensing.Svr.Interface;
+﻿using Gnu.Licensing.Api.Interface;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Svr.Services
+namespace Gnu.Licensing.Api.Services
 {
     public class CertificateService : ICertificateService
     {

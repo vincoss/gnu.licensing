@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Gnu.Licensing.Svr.Infrastructure.Filters;
-using Gnu.Licensing.Svr.Interface;
-using Gnu.Licensing.Svr.Services;
+using Gnu.Licensing.Api.Infrastructure.Filters;
+using Gnu.Licensing.Api.Interface;
+using Gnu.Licensing.Api.Services;
 using Microsoft.Extensions.Hosting;
 using Gnu.Licensing.Core.Options;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -18,7 +18,7 @@ using Gnu.Licensing.Sqlite;
 using Gnu.Licensing.SqlServer;
 
 
-namespace Gnu.Licensing.Svr
+namespace Gnu.Licensing.Api
 {
     public class Startup
     {
@@ -63,7 +63,7 @@ namespace Gnu.Licensing.Svr
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gnu.Licensing.Svr V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Gnu.Licensing.Api V1");
             });
 
             app.UseRouting();
@@ -105,10 +105,10 @@ namespace Gnu.Licensing.Svr
 
         public static IServiceCollection AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<ILicenseService, LicenseService>();
+            //services.AddTransient<ILicenseService, LicenseService>();
            // services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
-            services.AddScoped<SignKeyHealthCheck>();
-            services.AddTransient<ICertificateService, CertificateService>();
+            //services.AddScoped<SignKeyHealthCheck>();
+            //services.AddTransient<ICertificateService, CertificateService>();
 
             services.TryAddSingleton<ValidateStartupOptions>();
 

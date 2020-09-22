@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace Gnu.Licensing.Svr.Extensions
+namespace Gnu.Licensing.Api.Extensions
 {
     public static class HttpContextExtensions
     {

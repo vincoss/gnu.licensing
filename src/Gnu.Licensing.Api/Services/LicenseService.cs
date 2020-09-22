@@ -1,6 +1,6 @@
 ﻿
-using Gnu.Licensing.Svr.Interface;
-using Gnu.Licensing.Svr.Models;
+using Gnu.Licensing.Api.Interface;
+using Gnu.Licensing.Api.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ using Microsoft.Extensions.Options;
 using System.Text.Json;
 using Gnu.Licensing.Core.Entities;
 
-namespace Gnu.Licensing.Svr.Services
+namespace Gnu.Licensing.Api.Services
 {
     public class LicenseService : ILicenseService
     {

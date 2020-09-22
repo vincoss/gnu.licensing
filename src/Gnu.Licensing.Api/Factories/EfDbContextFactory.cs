@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 
 
-namespace Gnu.Licensing.Svr.Factories
+namespace Gnu.Licensing.Api.Factories
 {
     //public class EfDbContextFactory : IDesignTimeDbContextFactory<EfDbContext>
     //{
@@ -18,7 +18,7 @@ namespace Gnu.Licensing.Svr.Factories
 
     //        var optionsBuilder = new DbContextOptionsBuilder<EfDbContext>();
 
-    //        optionsBuilder.UseSqlite(config.GetConnectionString("EfDbContext"), sqliteOptionsAction: o => o.MigrationsAssembly("Gnu.Licensing.Svr"));
+    //        optionsBuilder.UseSqlite(config.GetConnectionString("EfDbContext"), sqliteOptionsAction: o => o.MigrationsAssembly("Gnu.Licensing.Api"));
 
     //        return new EfDbContext(optionsBuilder.Options);
     //    }
