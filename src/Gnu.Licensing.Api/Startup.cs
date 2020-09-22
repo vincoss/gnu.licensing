@@ -9,6 +9,13 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Gnu.Licensing.Svr.Infrastructure.Filters;
 using Gnu.Licensing.Svr.Interface;
 using Gnu.Licensing.Svr.Services;
+using Microsoft.Extensions.Hosting;
+using Gnu.Licensing.Core.Options;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Gnu.Licensing.Core;
+using Gnu.Licensing.Core.Entities;
+using Gnu.Licensing.Sqlite;
+using Gnu.Licensing.SqlServer;
 
 
 namespace Gnu.Licensing.Svr
@@ -41,6 +48,8 @@ namespace Gnu.Licensing.Svr
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var options = Configuration.Get<LicensingOptions>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -100,6 +109,11 @@ namespace Gnu.Licensing.Svr
            // services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
             services.AddScoped<SignKeyHealthCheck>();
             services.AddTransient<ICertificateService, CertificateService>();
+
+            services.TryAddSingleton<ValidateStartupOptions>();
+
+            services.AddSqliteDatabase();
+            services.AddSqlServerDatabase();
 
             return services;
         }
