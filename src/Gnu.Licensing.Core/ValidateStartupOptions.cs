@@ -25,7 +25,6 @@ namespace Gnu.Licensing.Core
             {
                 _ = _root.Value;
                 _ = _database.Value;
-
                 return true;
             }
             catch (OptionsValidationException e)

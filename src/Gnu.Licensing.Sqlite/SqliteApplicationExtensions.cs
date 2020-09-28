@@ -15,7 +15,6 @@ namespace Gnu.Licensing.Sqlite
             services.AddDbContextProvider<SqliteContext>("Sqlite", (provider, options) =>
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
-
                 options.UseSqlite(databaseOptions.Value.ConnectionString);
             });
 

@@ -44,6 +44,12 @@ namespace Gnu.Licensing.Api
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            //services.AddLogging(builder =>
+            //{
+            //    builder.ClearProviders();
+            //    builder.AddConsole();
+            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -106,14 +112,21 @@ namespace Gnu.Licensing.Api
         public static IServiceCollection AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
         {
             //services.AddTransient<ILicenseService, LicenseService>();
-           // services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
+            // services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
             //services.AddScoped<SignKeyHealthCheck>();
             //services.AddTransient<ICertificateService, CertificateService>();
 
-            services.TryAddSingleton<ValidateStartupOptions>();
+            services.AddLicensingOptions<LicensingOptions>();
+            services.AddLicensingOptions<DatabaseOptions>(nameof(LicensingOptions.Database));
+
 
             services.AddSqliteDatabase();
             services.AddSqlServerDatabase();
+
+            services.AddScoped(DependencyInjectionExtensions.GetServiceFromProviders<IContext>);
+
+            services.TryAddSingleton<ValidateStartupOptions>();
+
 
             return services;
         }

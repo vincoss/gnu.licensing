@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Gnu.Licensing.Api.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.CommandLineUtils;
 
 
@@ -30,7 +29,7 @@ namespace Gnu.Licensing.Api
             try
             {
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
-                var host = CreateHostBuilder(configuration, args).Build();
+                var host = CreateHostBuilder(args).Build();
 
                 if (!host.ValidateStartupOptions())
                 {
@@ -51,6 +50,7 @@ namespace Gnu.Licensing.Api
 
                     Log.Information("Starting web host ({ApplicationContext})...", AppName);
                     await host.RunAsync(default);
+
                     return 0;
                 });
 
@@ -71,26 +71,23 @@ namespace Gnu.Licensing.Api
             }
         }
 
-        public static IHostBuilder CreateHostBuilder(IConfiguration configuration, string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            var configuration = GetConfiguration(args);
+
+            var host =  Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
                       .CaptureStartupErrors(false)
                       .UseStartup<Startup>()
                       .UseContentRoot(AppContext.BaseDirectory)
-                      .UseUrls("https://*:443")
                       .UseConfiguration(configuration)
                       .UseSerilog();
-                })
-                 .ConfigureHostConfiguration((cfg) =>
-                 {
-                     cfg.AddConfiguration(configuration);
-                 })
-                .ConfigureAppConfiguration((hostingContext, cfg) =>
-                {
-                    cfg.AddConfiguration(configuration);
                 });
+
+            return host;
+        }
 
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
@@ -101,7 +98,7 @@ namespace Gnu.Licensing.Api
                 .Enrich.WithProperty("ApplicationContext", AppName)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.File(logFilePath, shared: true)
+                .WriteTo.File(logFilePath, shared: true, rollingInterval: RollingInterval.Day)
                 .ReadFrom.Configuration(configuration);
 
             return cfg.CreateLogger();
