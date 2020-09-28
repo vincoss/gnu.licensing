@@ -91,7 +91,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("CompanyUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(36)")
-                        .HasDefaultValue(new Guid("a5aa7f9c-28e3-4028-b412-b4ad95cc1ded"));
+                        .HasDefaultValue(new Guid("dd24de2a-9c66-452d-963e-c7a1a9e58c27"));
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -100,7 +100,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2020, 9, 28, 7, 19, 0, 267, DateTimeKind.Utc).AddTicks(4583));
+                        .HasDefaultValue(new DateTime(2020, 9, 28, 21, 43, 40, 139, DateTimeKind.Utc).AddTicks(3157));
 
                     b.HasKey("LicenseCompanyId");
 
@@ -132,7 +132,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2020, 9, 28, 7, 19, 0, 269, DateTimeKind.Utc).AddTicks(9788));
+                        .HasDefaultValue(new DateTime(2020, 9, 28, 21, 43, 40, 141, DateTimeKind.Utc).AddTicks(1472));
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -145,7 +145,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("ProductUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(36)")
-                        .HasDefaultValue(new Guid("81c75420-def5-461a-a7fc-f5067625ea5d"));
+                        .HasDefaultValue(new Guid("f8856bae-f427-49d9-95e6-32ba245c4943"));
 
                     b.Property<string>("SignKeyName")
                         .IsRequired()
@@ -184,7 +184,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2020, 9, 28, 7, 19, 0, 273, DateTimeKind.Utc).AddTicks(7630));
+                        .HasDefaultValue(new DateTime(2020, 9, 28, 21, 43, 40, 152, DateTimeKind.Utc).AddTicks(8120));
 
                     b.Property<DateTime?>("ExpireUtc")
                         .HasColumnType("DATETIME");
@@ -208,7 +208,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("LicenseUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(36)")
-                        .HasDefaultValue(new Guid("520c92c9-985a-4976-a918-74e959b82974"));
+                        .HasDefaultValue(new Guid("02b0713f-dd4e-4f69-8977-f848b759fdcd"));
 
                     b.Property<Guid>("ProductUuid")
                         .HasColumnType("VARCHAR(36)");

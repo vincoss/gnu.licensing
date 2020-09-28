@@ -95,7 +95,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<Guid>("CompanyUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("bc994b2f-dff0-477f-a1d2-0e76c7d9319e"));
+                        .HasDefaultValue(new Guid("172973a6-7376-4f53-9912-71596b99f866"));
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -104,7 +104,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 9, 28, 7, 20, 58, 970, DateTimeKind.Utc).AddTicks(426));
+                        .HasDefaultValue(new DateTime(2020, 9, 28, 21, 42, 41, 449, DateTimeKind.Utc).AddTicks(4573));
 
                     b.HasKey("LicenseCompanyId");
 
@@ -137,7 +137,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 9, 28, 7, 20, 58, 971, DateTimeKind.Utc).AddTicks(9978));
+                        .HasDefaultValue(new DateTime(2020, 9, 28, 21, 42, 41, 451, DateTimeKind.Utc).AddTicks(4046));
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -150,7 +150,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<Guid>("ProductUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("866689d0-2efe-4ca3-8792-84ce89b11e25"));
+                        .HasDefaultValue(new Guid("aaf1bc47-8805-45f4-94b1-12aca7e799e8"));
 
                     b.Property<string>("SignKeyName")
                         .IsRequired()
@@ -190,7 +190,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 9, 28, 7, 20, 58, 974, DateTimeKind.Utc).AddTicks(8762));
+                        .HasDefaultValue(new DateTime(2020, 9, 28, 21, 42, 41, 463, DateTimeKind.Utc).AddTicks(1649));
 
                     b.Property<DateTime?>("ExpireUtc")
                         .HasColumnType("datetime2");
@@ -214,7 +214,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<Guid>("LicenseUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("001b0e8e-e6e4-4deb-87e8-c655dfb1d1d8"));
+                        .HasDefaultValue(new Guid("b01f7f29-8f27-421e-a6ad-7b4b73856e78"));
 
                     b.Property<Guid>("ProductUuid")
                         .HasColumnType("uniqueidentifier");

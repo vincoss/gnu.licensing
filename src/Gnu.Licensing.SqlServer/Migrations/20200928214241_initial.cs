@@ -38,9 +38,9 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 {
                     LicenseCompanyId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("bc994b2f-dff0-477f-a1d2-0e76c7d9319e")),
+                    CompanyUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("172973a6-7376-4f53-9912-71596b99f866")),
                     CompanyName = table.Column<string>(nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 9, 28, 7, 20, 58, 970, DateTimeKind.Utc).AddTicks(426)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 9, 28, 21, 42, 41, 449, DateTimeKind.Utc).AddTicks(4573)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -54,12 +54,12 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 {
                     LicenseProductId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("866689d0-2efe-4ca3-8792-84ce89b11e25")),
+                    ProductUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("aaf1bc47-8805-45f4-94b1-12aca7e799e8")),
                     CompanyId = table.Column<int>(nullable: false),
                     ProductName = table.Column<string>(nullable: false),
                     ProductDescription = table.Column<string>(nullable: false),
                     SignKeyName = table.Column<string>(nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 9, 28, 7, 20, 58, 971, DateTimeKind.Utc).AddTicks(9978)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 9, 28, 21, 42, 41, 451, DateTimeKind.Utc).AddTicks(4046)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -73,7 +73,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 {
                     LicenseRegistrationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LicenseUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("001b0e8e-e6e4-4deb-87e8-c655dfb1d1d8")),
+                    LicenseUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("b01f7f29-8f27-421e-a6ad-7b4b73856e78")),
                     ProductUuid = table.Column<Guid>(nullable: false),
                     CompanyId = table.Column<int>(nullable: false),
                     LicenseName = table.Column<string>(nullable: false),
@@ -83,7 +83,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     Comment = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false, defaultValue: 1),
                     ExpireUtc = table.Column<DateTime>(nullable: true),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 9, 28, 7, 20, 58, 974, DateTimeKind.Utc).AddTicks(8762)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 9, 28, 21, 42, 41, 463, DateTimeKind.Utc).AddTicks(1649)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

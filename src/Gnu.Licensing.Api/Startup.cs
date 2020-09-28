@@ -7,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Gnu.Licensing.Api.Infrastructure.Filters;
-using Gnu.Licensing.Api.Interface;
 using Gnu.Licensing.Api.Services;
 using Microsoft.Extensions.Hosting;
 using Gnu.Licensing.Core.Options;
@@ -16,7 +15,7 @@ using Gnu.Licensing.Core;
 using Gnu.Licensing.Core.Entities;
 using Gnu.Licensing.Sqlite;
 using Gnu.Licensing.SqlServer;
-
+using Gnu.Licensing.Api.Interface;
 
 namespace Gnu.Licensing.Api
 {
@@ -41,15 +40,6 @@ namespace Gnu.Licensing.Api
             .AddCustomMvc(Configuration);
 
             services.AddSwaggerGen();
-
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-
-            //services.AddLogging(builder =>
-            //{
-            //    builder.ClearProviders();
-            //    builder.AddConsole();
-            //});
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -111,10 +101,8 @@ namespace Gnu.Licensing.Api
 
         public static IServiceCollection AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddTransient<ILicenseService, LicenseService>();
-            // services.AddDbContext<EfDbContext>(options => options.UseSqlite(configuration.GetConnectionString("EfDbContext")), ServiceLifetime.Transient);
-            //services.AddScoped<SignKeyHealthCheck>();
-            //services.AddTransient<ICertificateService, CertificateService>();
+            services.AddTransient<ILicenseService, LicenseService>();
+            services.AddScoped<SignKeyHealthCheck>();
 
             services.AddLicensingOptions<LicensingOptions>();
             services.AddLicensingOptions<DatabaseOptions>(nameof(LicensingOptions.Database));
