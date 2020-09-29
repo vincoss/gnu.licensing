@@ -68,12 +68,11 @@ namespace Gnu.Licensing.Api
             {
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
-                endpoints.MapRazorPages();
                 endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
                 {
                     Predicate = _ => true,
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                }).RequireAuthorization(); // TODO: this require authorization which is not there??
+                });//.RequireAuthorization(); // TODO: this require authorization which is not there??
             });
         }
     }
@@ -84,9 +83,9 @@ namespace Gnu.Licensing.Api
         {
             services.AddHealthChecks()
                 .AddCheck("self", () => HealthCheckResult.Healthy())
-                .AddCheck<SignKeyHealthCheck>("license-sign-key-check", tags: new[] { "sign-key" })
-                .AddSqlite(sqliteConnectionString: configuration.GetConnectionString("EfDbContext"))
-                .AddUrlGroup(new Uri(configuration["SvrUrlHC"]), name: "shot-svr-check", tags: new string[] { "shot.svr" });
+                .AddCheck<SignKeyHealthCheck>(name: "license-sign-key-check", tags: new[] { "sign-key" })
+                .AddDatabaseHealthCheck(configuration)
+                .AddUrlGroup(new Uri(configuration["SvrUrlHC"]), name: "gnu-licensing-api-check", tags: new string[] { "gnu-licensing-api" });
 
             return services;
         }
@@ -117,6 +116,25 @@ namespace Gnu.Licensing.Api
 
 
             return services;
+        }
+
+        public static IHealthChecksBuilder AddDatabaseHealthCheck(this IHealthChecksBuilder builder, IConfiguration configuration)
+        {
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
+            var type = configuration.GetValue<string>("Database:Type");
+
+            if(type == "Sqlite")
+            {
+                builder.AddSqlite(name: "sqlite", sqliteConnectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlite" });
+            }
+            if (type == "SqlServer")
+            {
+                builder.AddSqlServer(name: "sql-server", connectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlserver" });
+            }
+
+            return builder;
         }
 
     }
