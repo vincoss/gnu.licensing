@@ -125,13 +125,13 @@ namespace Gnu.Licensing.Api
 
             var type = configuration.GetValue<string>("Database:Type");
 
-            if(type == "Sqlite")
+            if(type == DatabaseOptions.Sqlite)
             {
-                builder.AddSqlite(name: "sqlite", sqliteConnectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlite" });
+                builder.AddSqlite(name: DatabaseOptions.Sqlite, sqliteConnectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlite" });
             }
-            if (type == "SqlServer")
+            if (type == DatabaseOptions.SqlServer)
             {
-                builder.AddSqlServer(name: "sql-server", connectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlserver" });
+                builder.AddSqlServer(name: DatabaseOptions.Sqlite, connectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlserver" });
             }
 
             return builder;
