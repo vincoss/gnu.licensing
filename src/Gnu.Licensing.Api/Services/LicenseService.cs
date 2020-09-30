@@ -4,13 +4,12 @@ using Gnu.Licensing.Api.Models;
 using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.IO;
 using System.Threading.Tasks;
 using Gnu.Licensing.Validation;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using System.Text.Json;
 using Gnu.Licensing.Core.Entities;
+
 
 namespace Gnu.Licensing.Api.Services
 {
@@ -18,25 +17,14 @@ namespace Gnu.Licensing.Api.Services
     {
         private readonly IContext _context;
         private readonly ILogger<LicenseService> _logger;
-        private readonly IOptionsSnapshot<AppSettings> _options;
 
-        public LicenseService(IContext context, ILogger<LicenseService> logger, IOptionsSnapshot<AppSettings> options)
+        public LicenseService(IContext context, ILogger<LicenseService> logger)
         {
-            if(context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-            if (logger == null)
-            {
-                throw new ArgumentNullException(nameof(logger));
-            }
-            if(options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
             _context = context;
             _logger = logger;
-            _options = options;
         }
 
         public Task<IValidationFailure> ValidateAsync(LicenseRegisterRequest request)

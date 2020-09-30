@@ -93,7 +93,6 @@ namespace Gnu.Licensing.Api
         public static IServiceCollection AddCustomMvc(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddOptions();
-            services.Configure<AppSettings>(configuration);
 
             return services;
         }
