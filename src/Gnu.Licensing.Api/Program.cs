@@ -46,7 +46,8 @@ namespace Gnu.Licensing.Api
 
                 app.OnExecute(async () =>
                 {
-                    await host.RunMigrationsAsync(default);
+                    await host.RunMigrationsAsync();
+                    await host.RunDataSeedAsync();
 
                     Log.Information("Starting web host ({ApplicationContext})...", AppName);
                     await host.RunAsync(default);

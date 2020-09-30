@@ -12,13 +12,13 @@ namespace Gnu.Licensing.Svr.Data
 {
     public class ContextSeed
     {
-        public async Task SeedAsync(IContext context, ILogger<ContextSeed> logger, IOptions<LicensingOptions> settings, int? retry = 0)
+        public async Task SeedAsync(IContext context, ILogger<ContextSeed> logger, int? retry = 0)
         {
             int retryForAvaiability = retry.Value;
 
             try
             {
-                if (context.Products.Any() == false && settings.Value.UseCustomizationData)
+                if (context.Products.Any() == false)
                 {
                     DemoSeedData(context);
                 }
@@ -30,7 +30,7 @@ namespace Gnu.Licensing.Svr.Data
                 if (retryForAvaiability < 10)
                 {
                     retryForAvaiability++;
-                    await SeedAsync(context, logger, settings, retryForAvaiability);
+                    await SeedAsync(context, logger, retryForAvaiability);
                 }
             }
         }

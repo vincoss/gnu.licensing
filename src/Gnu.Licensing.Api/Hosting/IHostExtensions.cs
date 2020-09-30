@@ -1,6 +1,7 @@
 ﻿using Gnu.Licensing.Core;
 using Gnu.Licensing.Core.Entities;
 using Gnu.Licensing.Core.Options;
+using Gnu.Licensing.Svr.Data;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,6 +58,27 @@ namespace Gnu.Licensing.Api.Hosting
         {
             context.Database.Migrate();
             seeder(context, services);
+        }
+
+        public static async Task RunDataSeedAsync(this IHost host, CancellationToken cancellationToken = default)
+        {
+            // Run data seed if necessary.
+            var options = host.Services.GetRequiredService<IOptions<LicensingOptions>>();
+            var logger = host.Services.GetRequiredService<ILogger<ContextSeed>>();
+
+            if (options.Value.UseCustomizationData)
+            {
+                Log.Information("Seeding database ({ApplicationContext})...", Program.AppName);
+
+                using (var scope = host.Services.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<IContext>();
+                    if (ctx != null)
+                    {
+                        await new ContextSeed().SeedAsync(ctx, logger);
+                    }
+                }
+            }
         }
 
 
