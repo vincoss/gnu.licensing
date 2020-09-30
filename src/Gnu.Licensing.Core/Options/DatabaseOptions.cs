@@ -9,6 +9,7 @@ namespace Gnu.Licensing.Core.Options
         public const string Sqlite = "Sqlite";
         public const string SqlServer = "SqlServer";
 
+        [Required]
         public string Type { get; set; }
 
         [Required]
