@@ -75,7 +75,7 @@ namespace Gnu.Licensing.Api.Hosting
                     var ctx = scope.ServiceProvider.GetService<IContext>();
                     if (ctx != null)
                     {
-                        await new ContextSeed().SeedAsync(ctx, logger);
+                        await new ContextSeed(logger).SeedAsync(ctx, CancellationToken.None);
                     }
                 }
             }
