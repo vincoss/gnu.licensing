@@ -2,64 +2,19 @@
 using Gnu.Licensing.Core.Entities;
 using Gnu.Licensing.Core.Options;
 using Gnu.Licensing.Svr.Data;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Polly;
 using Serilog;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 
 namespace Gnu.Licensing.Api.Hosting
 {
     public static class IHostExtensions
     {
-        public static IHost MigrateDbContext<TContext>(this IHost webHost, Action<TContext, IServiceProvider> seeder) where TContext : DbContext
-        {
-            using (var scope = webHost.Services.CreateScope())
-            {
-                var services = scope.ServiceProvider;
-                var logger = services.GetRequiredService<ILogger<TContext>>();
-                var context = services.GetService<TContext>();
-
-                try
-                {
-                    logger.LogInformation("Migrating database associated with context {DbContextName}", typeof(TContext).Name);
-
-                    var retries = 10;
-                    var retry = Policy.Handle<SqliteException>()
-                        .WaitAndRetry(
-                            retryCount: retries,
-                            sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                            onRetry: (exception, timeSpan, retry, ctx) =>
-                            {
-                                logger.LogWarning(exception, "[{prefix}] Exception {ExceptionType} with message {Message} detected on attempt {retry} of {retries}", nameof(TContext), exception.GetType().Name, exception.Message, retry, retries);
-                            });
-
-                    retry.Execute(() => InvokeSeeder(seeder, context, services));
-
-                    logger.LogInformation("Migrated database associated with context {DbContextName}", typeof(TContext).Name);
-                }
-                catch (Exception ex)
-                {
-                    logger.LogError(ex, "An error occurred while migrating the database used on context {DbContextName}", typeof(TContext).Name);
-                    throw;
-                }
-            }
-
-            return webHost;
-        }
-
-        private static void InvokeSeeder<TContext>(Action<TContext, IServiceProvider> seeder, TContext context, IServiceProvider services) where TContext : DbContext
-        {
-            context.Database.Migrate();
-            seeder(context, services);
-        }
-
         public static async Task RunDataSeedAsync(this IHost host, CancellationToken cancellationToken = default)
         {
             // Run data seed if necessary.
@@ -68,28 +23,28 @@ namespace Gnu.Licensing.Api.Hosting
 
             if (options.Value.UseCustomizationData)
             {
-                Log.Information("Seeding database ({ApplicationContext})...", Program.AppName);
+                logger.LogInformation("Seeding database ({ApplicationContext})...", Program.AppName);
 
                 using (var scope = host.Services.CreateScope())
                 {
                     var ctx = scope.ServiceProvider.GetService<IContext>();
                     if (ctx != null)
                     {
-                        await new ContextSeed(logger).SeedAsync(ctx, CancellationToken.None);
+                        await new ContextSeed(logger).SeedAsync(ctx, cancellationToken);
                     }
                 }
             }
         }
 
-
         public static async Task RunMigrationsAsync(this IHost host, CancellationToken cancellationToken = default)
         {
             // Run migrations if necessary.
             var options = host.Services.GetRequiredService<IOptions<LicensingOptions>>();
+            var logger = host.Services.GetRequiredService<ILogger<ContextSeed>>();
 
             if (options.Value.RunMigrationsAtStartup)
             {
-                Log.Information("Applying migrations ({ApplicationContext})...", Program.AppName);
+                logger.LogInformation("Applying migrations ({ApplicationContext})...", Program.AppName);
 
                 using (var scope = host.Services.CreateScope())
                 {

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Gnu.Licensing.Svr</RootNamespace>
+    <RootNamespace>Gnu.Licensing.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Gnu.Licensing.Api\Gnu.Licensing.Api.csproj" />
+    <ProjectReference Include="..\..\src\Gnu.Licensing.Core\Gnu.Licensing.Core.csproj" />
   </ItemGroup>
 
 </Project>
