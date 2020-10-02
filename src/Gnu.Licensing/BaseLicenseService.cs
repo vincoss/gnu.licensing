@@ -187,8 +187,8 @@ namespace Gnu.Licensing
 
             var data = new
             {
-                LicenseId = licenseKey,
-                ProductId = productId,
+                LicenseUuid = licenseKey,
+                ProductUuid = productId,
                 Attributes = attributes
             };
 

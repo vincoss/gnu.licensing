@@ -86,6 +86,8 @@ namespace Gnu.Licensing.Api.Services
 
             try
             {
+                _logger.LogDebug(JsonSerializer.Serialize(request));
+
                 var failure = await ValidateAsync(request);
                 if (failure != null)
                 {
