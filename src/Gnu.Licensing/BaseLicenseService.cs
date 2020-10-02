@@ -185,6 +185,8 @@ namespace Gnu.Licensing
                 throw new ArgumentNullException(nameof(serverUrl));
             }
 
+            // TODO: Must pass model insted of dynamic type here
+
             var data = new
             {
                 LicenseUuid = licenseKey,
