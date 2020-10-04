@@ -2,8 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+
+    <PackageTags>NuGet</PackageTags>
+    <Description>The core libraries that power Gnu.Licensing.</Description>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Gnu.Licensing.snk</AssemblyOriginatorKeyFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/vincoss/gnu.licensing</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vincoss/gnu.licensing</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
    <ItemGroup>

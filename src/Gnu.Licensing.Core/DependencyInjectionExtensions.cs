@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Gnu.Licensing.Core.Entities;
 using Gnu.Licensing.Core.Options;
 using Microsoft.EntityFrameworkCore;

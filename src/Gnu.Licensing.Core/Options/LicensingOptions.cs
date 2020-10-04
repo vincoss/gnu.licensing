@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gnu.Licensing.Core.Options
 {
-    public class LicensingOptions // TODO: rename
+    public class LicensingOptions // TODO: rename & tests
     {
         /// <summary>
         /// The URLs the server will use.
@@ -17,7 +17,7 @@ namespace Gnu.Licensing.Core.Options
         /// </summary>
         public bool RunMigrationsAtStartup { get; set; } = true;
 
-        public bool UseCustomizationData { get; set; }
+        public bool UseCustomizationData { get; set; } = false;
 
         public string PathBase { get; set; }
 
