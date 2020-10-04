@@ -10,6 +10,7 @@ namespace Gnu.Licensing.Sqlite
     {
         /// <summary>
         /// The Sqlite error code for when a unique constraint is violated.
+        /// https://www.sqlite.org/rescode.html
         /// </summary>
         private const int SqliteUniqueConstraintViolationErrorCode = 19;
 

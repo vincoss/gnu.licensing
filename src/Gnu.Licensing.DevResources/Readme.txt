@@ -1,5 +1,8 @@
 ﻿
 
+## Tasks
+review the database objects, fix warnings
+
 ## Ef Migration
 add-migration initial -verbose
 remove-migration
