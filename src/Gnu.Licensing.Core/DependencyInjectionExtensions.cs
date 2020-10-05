@@ -13,7 +13,7 @@ namespace Gnu.Licensing.Core
 {
     public static partial class DependencyInjectionExtensions
     {
-        private static readonly string DatabaseTypeKey = $"{nameof(LicensingOptions.Database)}:{nameof(DatabaseOptions.Type)}";
+        private static readonly string DatabaseTypeKey = $"{nameof(ApplicationOptions.Database)}:{nameof(DatabaseOptions.Type)}";
 
         public static IServiceCollection AddDbContextProvider<TContext>(
           this IServiceCollection services,
@@ -104,6 +104,9 @@ namespace Gnu.Licensing.Core
 
         public TService GetOrNull(IServiceProvider provider, IConfiguration configuration)
         {
+            if (provider == null) throw new ArgumentNullException(nameof(provider));
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
+
             return _func(provider, configuration);
         }
     }

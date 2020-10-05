@@ -6,14 +6,14 @@ using System.Text;
 using Xunit;
 using Microsoft.Extensions.Logging;
 
-namespace Gnu.Licensing.Core.Test
+namespace Gnu.Licensing.Core.Options
 {
     public class ValidateStartupOptionsTest
     {
         [Fact]
         public void ValidTest()
         {
-            var root = Microsoft.Extensions.Options.Options.Create(new LicensingOptions());
+            var root = Microsoft.Extensions.Options.Options.Create(new ApplicationOptions());
             var database = Microsoft.Extensions.Options.Options.Create(new DatabaseOptions());
             var logger = new LoggerFactory().CreateLogger<ValidateStartupOptions>();
 

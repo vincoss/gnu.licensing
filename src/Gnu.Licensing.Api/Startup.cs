@@ -44,7 +44,7 @@ namespace Gnu.Licensing.Api
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            var options = Configuration.Get<LicensingOptions>();
+            var options = Configuration.Get<ApplicationOptions>();
 
             if (env.IsDevelopment())
             {
@@ -102,8 +102,8 @@ namespace Gnu.Licensing.Api
             services.AddTransient<ILicenseService, LicenseService>();
             services.AddScoped<SignKeyHealthCheck>();
 
-            services.AddLicensingOptions<LicensingOptions>();
-            services.AddLicensingOptions<DatabaseOptions>(nameof(LicensingOptions.Database));
+            services.AddLicensingOptions<ApplicationOptions>();
+            services.AddLicensingOptions<DatabaseOptions>(nameof(ApplicationOptions.Database));
 
 
             services.AddSqliteDatabase();

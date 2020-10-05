@@ -71,7 +71,6 @@ namespace Gnu.Licensing.Svr.Data
                         CreatedByUser = userName
                     };
 
-
                     context.Products.Add(product);
                     await context.SaveChangesAsync(cancellationToken);
 

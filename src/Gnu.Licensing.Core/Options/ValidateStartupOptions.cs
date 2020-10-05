@@ -4,15 +4,15 @@ using Microsoft.Extensions.Options;
 using System;
 
 
-namespace Gnu.Licensing.Core
+namespace Gnu.Licensing.Core.Options
 {
     public class ValidateStartupOptions
     {
-        private readonly IOptions<LicensingOptions> _root;
+        private readonly IOptions<ApplicationOptions> _root;
         private readonly IOptions<DatabaseOptions> _database;
         private readonly ILogger<ValidateStartupOptions> _logger;
 
-        public ValidateStartupOptions(IOptions<LicensingOptions> root, IOptions<DatabaseOptions> database, ILogger<ValidateStartupOptions> logger)
+        public ValidateStartupOptions(IOptions<ApplicationOptions> root, IOptions<DatabaseOptions> database, ILogger<ValidateStartupOptions> logger)
         {
             _root = root ?? throw new ArgumentNullException(nameof(root));
             _database = database ?? throw new ArgumentNullException(nameof(database));

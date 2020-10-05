@@ -18,7 +18,7 @@ namespace Gnu.Licensing.Api.Hosting
         public static async Task RunDataSeedAsync(this IHost host, CancellationToken cancellationToken = default)
         {
             // Run data seed if necessary.
-            var options = host.Services.GetRequiredService<IOptions<LicensingOptions>>();
+            var options = host.Services.GetRequiredService<IOptions<ApplicationOptions>>();
             var logger = host.Services.GetRequiredService<ILogger<ContextSeed>>();
 
             if (options.Value.UseCustomizationData)
@@ -39,7 +39,7 @@ namespace Gnu.Licensing.Api.Hosting
         public static async Task RunMigrationsAsync(this IHost host, CancellationToken cancellationToken = default)
         {
             // Run migrations if necessary.
-            var options = host.Services.GetRequiredService<IOptions<LicensingOptions>>();
+            var options = host.Services.GetRequiredService<IOptions<ApplicationOptions>>();
             var logger = host.Services.GetRequiredService<ILogger<ContextSeed>>();
 
             if (options.Value.RunMigrationsAtStartup)
