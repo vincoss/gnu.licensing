@@ -23,8 +23,8 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch
         public async void Sample()
         {
             /* 
-                1. Assume that the user already paid for the license and received an license ID (GUID|UUID). 
-                2. Call license service to generate actual license.
+                1. Assume that the user|customer already paid for the license and received an license ID (GUID|UUID). 
+                2. Call license service to generate|activate actual license.
                 3. Pass additional parameters to lock the license to a particular machine or software installation. The passed parameters will be added into the license file and signed.
                 4. Save license into client device
                 5. Validate lincese on the client device
@@ -40,7 +40,7 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch
             if(result.Successful)
             {
                 Console.WriteLine(service.GetPath());
-                Console.WriteLine("Device is licensed.");
+                Console.WriteLine("Device is licensed. (Full)");
             }
             else
             {

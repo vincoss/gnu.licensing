@@ -87,11 +87,9 @@ namespace Gnu.Licensing.Sample_Console
                 }
                 catch (Exception ex)
                 {
-                    // TODO: replace with logger
                     Console.WriteLine(ex);
 
                     var failure = FailureStrings.Get(FailureStrings.VAL01Code);
-
                     results.Add(failure);
                 }
                 return results.AsEnumerable();

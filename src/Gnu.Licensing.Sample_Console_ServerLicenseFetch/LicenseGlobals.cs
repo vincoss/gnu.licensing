@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+
 
 namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch
 {
