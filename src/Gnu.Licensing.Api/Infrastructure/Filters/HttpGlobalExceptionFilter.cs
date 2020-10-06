@@ -1,29 +1,28 @@
 ﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Gnu.Licensing.Api.Infrastructure.ActionResults;
 using System.Net;
-
+using System;
 
 
 namespace Gnu.Licensing.Api.Infrastructure.Filters
 {
     public partial class HttpGlobalExceptionFilter : IExceptionFilter
     {
-        private readonly IWebHostEnvironment env;
-        private readonly ILogger<HttpGlobalExceptionFilter> logger;
+        private readonly IWebHostEnvironment _env;
+        private readonly ILogger<HttpGlobalExceptionFilter> _logger;
 
         public HttpGlobalExceptionFilter(IWebHostEnvironment env, ILogger<HttpGlobalExceptionFilter> logger)
         {
-            this.env = env;
-            this.logger = logger;
+            _env = env ?? throw new ArgumentNullException(nameof(env));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public void OnException(ExceptionContext context)
         {
-            logger.LogError(new EventId(context.Exception.HResult),
+            _logger.LogError(new EventId(context.Exception.HResult),
                 context.Exception,
                 context.Exception.Message);
 
@@ -32,7 +31,7 @@ namespace Gnu.Licensing.Api.Infrastructure.Filters
                 Messages = new[] { "An error occurred. Try it again." }
             };
 
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 json.DeveloperMessage = context.Exception;
             }

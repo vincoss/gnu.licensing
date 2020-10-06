@@ -15,11 +15,7 @@ namespace Gnu.Licensing.Api.Controllers
 
         public LicenseController(ILicenseService licenseService)
         {
-            if(licenseService ==  null)
-            {
-                throw new ArgumentNullException(nameof(licenseService));
-            }
-            _licenseService = licenseService;
+            _licenseService = licenseService ?? throw new ArgumentNullException(nameof(licenseService));
         }
 
         /// <summary>

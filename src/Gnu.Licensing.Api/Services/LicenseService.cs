@@ -1,5 +1,4 @@
-﻿
-using Gnu.Licensing.Api.Interface;
+﻿using Gnu.Licensing.Api.Interface;
 using Gnu.Licensing.Api.Models;
 using System;
 using System.Linq;

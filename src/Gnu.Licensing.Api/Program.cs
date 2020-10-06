@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
-using Gnu.Licensing.Api.Hosting;
+using Gnu.Licensing.Core.Hosting;
 using Microsoft.Extensions.CommandLineUtils;
 
 

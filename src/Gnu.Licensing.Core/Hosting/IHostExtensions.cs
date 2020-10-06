@@ -1,17 +1,15 @@
-﻿using Gnu.Licensing.Core;
-using Gnu.Licensing.Core.Entities;
+﻿using Gnu.Licensing.Core.Entities;
 using Gnu.Licensing.Core.Options;
 using Gnu.Licensing.Svr.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Serilog;
 using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace Gnu.Licensing.Api.Hosting
+namespace Gnu.Licensing.Core.Hosting
 {
     public static class IHostExtensions
     {
@@ -23,7 +21,7 @@ namespace Gnu.Licensing.Api.Hosting
 
             if (options.Value.UseCustomizationData)
             {
-                logger.LogInformation("Seeding database ({ApplicationContext})...", Program.AppName);
+                logger.LogInformation("Seeding database ({ApplicationContext})...", nameof(IHostExtensions));
 
                 using (var scope = host.Services.CreateScope())
                 {
@@ -44,7 +42,7 @@ namespace Gnu.Licensing.Api.Hosting
 
             if (options.Value.RunMigrationsAtStartup)
             {
-                logger.LogInformation("Applying migrations ({ApplicationContext})...", Program.AppName);
+                logger.LogInformation("Applying migrations ({ApplicationContext})...", nameof(IHostExtensions));
 
                 using (var scope = host.Services.CreateScope())
                 {
