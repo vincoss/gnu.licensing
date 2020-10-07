@@ -20,8 +20,20 @@ namespace Gnu.Licensing.Api
             var createdDate = DateTime.UtcNow;
             var user = Environment.UserName;
 
+            var company = new LicenseCompany
+            {
+                CompanyUuid = Guid.NewGuid(),
+                CompanyName = "Gnu.Licensing.Api",
+                CreatedDateTimeUtc = createdDate,
+                CreatedByUser = user
+            };
+
+            context.Companies.AddRange(company);
+            await context.SaveChangesAsync(CancellationToken.None);
+
             var product = new LicenseProduct
             {
+                CompanyId = company.LicenseCompanyId,
                 ProductUuid = Guid.NewGuid(),
                 ProductName = "Gnu.Licensing.Svr",
                 ProductDescription = "Gnu.Licensing.Svr description",

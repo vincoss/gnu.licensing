@@ -86,7 +86,7 @@ namespace Gnu.Licensing.Api.Services
 
                     Assert.Equal(HealthStatus.Unhealthy, result.Status);
                     Assert.Equal("The sign-key task is finished.", result.Description);
-                    Assert.Equal("Search key: aaa, invalid, corrupted missing, Install the certificate.", result.Data[product.ProductName]);
+                    Assert.Equal("Search key: aaa, invalid, corrupted missing, Please install the certificate.", result.Data[product.ProductName]);
                     Assert.NotNull(result.Exception);
                 }
             }

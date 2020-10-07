@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using Xunit;
 
+
 namespace Gnu.Licensing.Api.Data
 {
     public class EfDbContext : AbstractContext<EfDbContext>
@@ -22,7 +23,7 @@ namespace Gnu.Licensing.Api.Data
     public class ContextTest
     {
         [Fact]
-        public async void Products_MemoeryTest()
+        public async void MemoryTest()
         {
             // In-memory database only exists while the connection is open
             var connection = new SqliteConnection("DataSource=:memory:");
@@ -40,10 +41,12 @@ namespace Gnu.Licensing.Api.Data
                     context.Database.EnsureCreated();
                     new TestSeedData().Initialize(context);
 
+                    var companies = await context.Companies.ToListAsync();
                     var products = await context.Products.ToListAsync();
                     var registrations = await context.Registrations.ToListAsync();
                     var licenses = await context.Licenses.ToListAsync();
 
+                    Assert.True(companies.Count > 0);
                     Assert.True(products.Count > 0);
                     Assert.True(registrations.Count > 0);
                     Assert.True(licenses.Count > 0);
@@ -56,10 +59,10 @@ namespace Gnu.Licensing.Api.Data
         }
 
         [Fact]
-        public async void Products_FileTest()
+        public async void FileTest()
         {
             var dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
-            var path = Path.Combine(dir, $"{nameof(Products_FileTest)}.db3");
+            var path = Path.Combine(dir, $"{nameof(FileTest)}.db3");
 
             // In-memory database only exists while the connection is open
             var connection = new SqliteConnection($"DataSource={path}");

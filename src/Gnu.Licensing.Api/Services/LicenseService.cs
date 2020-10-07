@@ -107,12 +107,12 @@ namespace Gnu.Licensing.Api.Services
 
                 var product = _context.Products.Single(x => x.ProductUuid == request.ProductUuid);
                 var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseUuid);
-                var str = await CreateLicenseAsync(request, registration, product);
+                var licenseString = await CreateLicenseAsync(request, registration, product);
 
-                await CreateLicenseRecordAsync(registration, str, attributesJson, attributesChecksum, userName);
+                await CreateLicenseRecordAsync(registration, licenseString, attributesJson, attributesChecksum, userName);
 
                 var result = new LicenseRegisterResult();
-                result.License = str;
+                result.License = licenseString;
 
                 return result;
             }
@@ -155,17 +155,17 @@ namespace Gnu.Licensing.Api.Services
             return task;
         }
 
-        private async Task<int> CreateLicenseRecordAsync(LicenseRegistration registration, string str, string attributesJson, string attributesChecksum, string userName)
+        private async Task<int> CreateLicenseRecordAsync(LicenseRegistration registration, string licenseString, string attributesJson, string attributesChecksum, string userName)
         {
             var license = new LicenseActivation
             {
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 CompanyId = registration.CompanyId,
-                LicenseString = str,
+                LicenseString = licenseString,
                 LicenseAttributes = attributesJson,
                 AttributesChecksum = attributesChecksum,
-                LicenseChecksum = Utils.GetSha256HashFromString(str),
+                LicenseChecksum = Utils.GetSha256HashFromString(licenseString),
                 ChecksumType = Utils.ChecksumType,
                 IsActive = true,
                 CreatedDateTimeUtc = DateTime.UtcNow,

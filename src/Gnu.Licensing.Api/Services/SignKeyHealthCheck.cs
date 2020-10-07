@@ -53,7 +53,7 @@ namespace Gnu.Licensing.Api.Services
             catch(Exception ex)
             {
                 _logger.LogError(ex, nameof(CheckHealthAsync));
-                data.Add(productName, $"Search key: {keyName}, invalid, corrupted missing, Install the certificate.");
+                data.Add(productName, $"Search key: {keyName}, invalid, corrupted missing, Please install the certificate.");
                 return Task.FromResult(HealthCheckResult.Unhealthy(message, ex, data));
             }
         }

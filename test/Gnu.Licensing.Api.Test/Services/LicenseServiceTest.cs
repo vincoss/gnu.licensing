@@ -26,7 +26,7 @@ namespace Gnu.Licensing.Api.Services
         }
     }
 
-        public class LicenseServiceTest
+    public class LicenseServiceTest
     {
         public static string PublicKey = new StreamReader(Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, "Data", "test.public.xml")).ReadToEnd();
 
@@ -284,6 +284,7 @@ namespace Gnu.Licensing.Api.Services
             }
         }
 
+        // TODO: fix that
         [Fact]
         public async void ValidateAsync_ACT05Code_ShallNotOveruseIfPurchasedSinleLicense()
         {
@@ -425,7 +426,7 @@ namespace Gnu.Licensing.Api.Services
         }
 
         [Fact]
-        public async void CreateAsync_Exeption()
+        public async void CreateAsync_Throws_ACT06Code()
         {
             var logger = Substitute.For<ILogger<LicenseService>>();
 
@@ -446,7 +447,7 @@ namespace Gnu.Licensing.Api.Services
                     var service = new LicenseService(context, logger);
 
                     var product = CreateProduct();
-                    product.SignKeyName = "";
+                    product.SignKeyName = ""; // Force to throw
                     context.Add(product);
                     context.SaveChanges();
 
@@ -523,6 +524,7 @@ namespace Gnu.Licensing.Api.Services
                     Assert.Equal(1, licenseRecord.LicenseId);
                     Assert.Equal(registration.LicenseUuid, licenseRecord.LicenseUuid);
                     Assert.Equal(registration.ProductUuid, licenseRecord.ProductUuid);
+                    Assert.Equal(registration.CompanyId, licenseRecord.CompanyId);
                     Assert.NotNull(licenseRecord.LicenseString);
                     Assert.NotNull(licenseRecord.LicenseAttributes);
                     Assert.NotNull(licenseRecord.LicenseChecksum);
@@ -531,7 +533,7 @@ namespace Gnu.Licensing.Api.Services
                     Assert.True(licenseRecord.IsActive.Value);
                     Assert.Equal(DateTime.UtcNow.ToString("yyyyMMdd"), licenseRecord.CreatedDateTimeUtc.ToString("yyyyMMdd"));
                     Assert.Equal(DateTime.UtcNow.ToString("yyyyMMdd"), licenseRecord.ModifiedDateTimeUtc.ToString("yyyyMMdd"));
-                    Assert.NotNull(licenseRecord.CreatedByUser); 
+                    Assert.NotNull(licenseRecord.CreatedByUser);
                     Assert.NotNull(licenseRecord.ModifiedByUser);
 
                     var license = License.Load(result.License);
@@ -586,7 +588,7 @@ namespace Gnu.Licensing.Api.Services
             {
                 LicenseUuid = Guid.NewGuid(),
                 ProductUuid = product.ProductUuid,
-                LicenseName  = "test-name",
+                LicenseName = "test-name",
                 LicenseEmail = "test-email",
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
