@@ -1,5 +1,4 @@
-﻿using Gnu.Licensing.Svr.Data;
-using System;
+﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text;
@@ -35,8 +34,8 @@ namespace Gnu.Licensing.Api
             {
                 CompanyId = company.LicenseCompanyId,
                 ProductUuid = Guid.NewGuid(),
-                ProductName = "Gnu.Licensing.Svr",
-                ProductDescription = "Gnu.Licensing.Svr description",
+                ProductName = "Gnu.Licensing.Api",
+                ProductDescription = "Gnu.Licensing.Api description",
                 SignKeyName = "CN=Gnu.Licensing",
                 CreatedDateTimeUtc = createdDate,
                 CreatedByUser = user
@@ -49,10 +48,12 @@ namespace Gnu.Licensing.Api
             {
                 LicenseUuid = Guid.NewGuid(),
                 ProductUuid = product.ProductUuid,
+                CompanyId = product.CompanyId,
                 LicenseName = "test-name",
                 LicenseEmail = "test@example.com",
                 LicenseType = LicenseType.Standard,
                 IsActive = true,
+                Comment = "Comment",
                 Quantity = 1,
                 ExpireUtc = null,
                 CreatedDateTimeUtc = createdDate,
@@ -66,8 +67,11 @@ namespace Gnu.Licensing.Api
             {
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
+                CompanyId = registration.CompanyId,
                 LicenseString = "license-string",
+                LicenseAttributes = "license-attributes",
                 LicenseChecksum = "checksum",
+                AttributesChecksum = "checksum",
                 ChecksumType = "sha256",
                 IsActive = true,
                 CreatedDateTimeUtc = createdDate,

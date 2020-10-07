@@ -6,7 +6,7 @@ using System.IO;
 using Xunit;
 
 
-namespace Gnu.Licensing.Api.Data
+namespace Gnu.Licensing.Api.Entity
 {
     public class EfDbContext : AbstractContext<EfDbContext>
     {
