@@ -85,7 +85,7 @@ namespace Gnu.Licensing.Api
                 .AddCheck("self", () => HealthCheckResult.Healthy())
                 .AddCheck<SignKeyHealthCheck>(name: "license-sign-key-check", tags: new[] { "sign-key" })
                 .AddDatabaseHealthCheck(configuration)
-                .AddUrlGroup(new Uri(configuration["SvrUrlHC"]), name: "gnu-licensing-api-check", tags: new string[] { "gnu-licensing-api" });
+                .AddUrlGroup(new Uri(configuration["SvrUrlHc"]), name: "gnu-licensing-api-check", tags: new string[] { "gnu-licensing-api" });
 
             return services;
         }
@@ -130,7 +130,7 @@ namespace Gnu.Licensing.Api
             }
             if (type == DatabaseOptions.SqlServer)
             {
-                builder.AddSqlServer(name: DatabaseOptions.Sqlite, connectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlserver" });
+                builder.AddSqlServer(name: DatabaseOptions.SqlServer, connectionString: configuration["Database:ConnectionString"], tags: new string[] { "sqlserver" });
             }
 
             return builder;

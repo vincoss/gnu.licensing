@@ -1,6 +1,7 @@
 ﻿using Gnu.Licensing.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 
 namespace Gnu.Licensing.Core.Entities.Configuration
@@ -32,6 +33,10 @@ namespace Gnu.Licensing.Core.Entities.Configuration
 
             builder.Property(t => t.LicenseEmail)
                    .IsRequired();
+
+            builder.Property(t => t.LicenseType)
+                .HasConversion(EnumToInt.Instance)
+                  .IsRequired();
 
             builder.Property(t => t.IsActive)
                 .IsRequired()
