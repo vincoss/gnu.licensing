@@ -19,6 +19,7 @@ namespace Gnu.Licensing.Sample_XF
         {
             InitializeComponent();
 
+            entryAppId.Text = new ApplicationContext().GetAppId();
             ePath.Text = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             eLicUrl.Text = LicenseGlobals.LicenseServerUrl;
         }
