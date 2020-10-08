@@ -55,6 +55,12 @@ namespace Gnu.Licensing
             return this;
         }
 
+        public ILicenseBuilder WithActivationId(Guid id)
+        {
+            license.ActivationId = id;
+            return this;
+        }
+
         /// <summary>
         /// Sets the <see cref="LicenseType"/> of the <see cref="License"/>.
         /// </summary>

@@ -19,6 +19,7 @@
         <Entry Text="D65321D5-B0F9-477D-828A-086F30E2BF89" IsReadOnly="True"/>
         <Label Text="App Id"/>
         <Entry x:Name="entryAppId" IsReadOnly="True" />
+        <Label Text="App Id is created when app is installed or first time started" FontSize="Small"/>
 
     </StackLayout>
 

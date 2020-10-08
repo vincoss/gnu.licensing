@@ -41,6 +41,13 @@ namespace Gnu.Licensing
         ILicenseBuilder WithUniqueIdentifier(Guid id);
 
         /// <summary>
+        /// Sets the unique identifier of the <see cref="License"/>.
+        /// </summary>
+        /// <param name="id">The unique identifier of the <see cref="License"/>.</param>
+        /// <returns>The <see cref="ILicenseBuilder"/>.</returns>
+        ILicenseBuilder WithActivationId(Guid id);
+
+        /// <summary>
         /// Sets the <see cref="LicenseType"/> of the <see cref="License"/>.
         /// </summary>
         /// <param name="type">The <see cref="LicenseType"/> of the <see cref="License"/>.</param>

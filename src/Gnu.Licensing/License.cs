@@ -73,6 +73,15 @@ namespace Gnu.Licensing
         }
 
         /// <summary>
+        /// Gets or sets the unique identifier of this <see cref="License"/>.
+        /// </summary>
+        public Guid ActivationId
+        {
+            get { return new Guid(GetTag("ActivationId") ?? Guid.Empty.ToString()); }
+            set { if (!IsSigned) SetTag("ActivationId", value.ToString()); }
+        }
+
+        /// <summary>
         /// Gets or set the <see cref="LicenseType"/> or this <see cref="License"/>.
         /// </summary>
         public LicenseType Type

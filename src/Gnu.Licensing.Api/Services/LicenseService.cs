@@ -107,7 +107,7 @@ namespace Gnu.Licensing.Api.Services
 
                 var product = _context.Products.Single(x => x.ProductUuid == request.ProductUuid);
                 var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseUuid);
-                var licenseString = await CreateLicenseAsync(request, registration, product);
+                var licenseString = await CreateLicenseAsync(request, registration, product, Guid.NewGuid());
 
                 await CreateLicenseRecordAsync(registration, licenseString, attributesJson, attributesChecksum, userName);
 
@@ -127,7 +127,7 @@ namespace Gnu.Licensing.Api.Services
             }
         }
 
-        private Task<string> CreateLicenseAsync(LicenseRegisterRequest request, LicenseRegistration registration, LicenseProduct product)
+        private Task<string> CreateLicenseAsync(LicenseRegisterRequest request, LicenseRegistration registration, LicenseProduct product, Guid activationId)
         {
             var task = Task.Run(() =>
             {
@@ -135,6 +135,7 @@ namespace Gnu.Licensing.Api.Services
                 {
                     var license = License.New()
                     .WithUniqueIdentifier(registration.LicenseUuid)
+                    .WithActivationId(activationId)
                     .As(registration.LicenseType)
                     .ExpiresAt(registration.ExpireUtc == null ? DateTime.MaxValue : registration.ExpireUtc.Value)
                     .WithMaximumUtilization(registration.Quantity)
