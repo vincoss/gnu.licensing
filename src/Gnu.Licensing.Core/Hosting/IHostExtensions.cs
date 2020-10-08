@@ -1,6 +1,6 @@
 ﻿using Gnu.Licensing.Core.Entities;
 using Gnu.Licensing.Core.Options;
-using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Api.Data;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

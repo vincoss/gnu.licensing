@@ -6,7 +6,7 @@ using Gnu.Licensing.Core.Entities;
 using Microsoft.Extensions.Logging;
 
 
-namespace Gnu.Licensing.Svr.Data
+namespace Gnu.Licensing.Api.Data
 {
     public class ContextSeed
     {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NSubstitute;
-using Gnu.Licensing.Svr.Data;
+using Gnu.Licensing.Api.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
