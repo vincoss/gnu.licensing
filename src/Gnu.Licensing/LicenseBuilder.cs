@@ -57,7 +57,7 @@ namespace Gnu.Licensing
 
         public ILicenseBuilder WithActivationId(Guid id)
         {
-            license.ActivationId = id;
+            license.ActivationUuid = id;
             return this;
         }
 

@@ -553,6 +553,7 @@ namespace Gnu.Licensing.Api.Services
                     Assert.False(failures.Any());
 
                     // License
+                    Assert.Equal(licenseRecord.ActivationUuid, license.ActivationUuid);
                     Assert.Equal(request.LicenseUuid, license.Id);
                     Assert.Equal(registration.LicenseType, license.Type);
                     Assert.Equal(expireDate.ToString("yyyyMMdd"), license.ExpirationUtc.ToString("yyyyMMdd"));

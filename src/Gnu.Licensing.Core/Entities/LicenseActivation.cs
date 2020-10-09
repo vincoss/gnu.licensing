@@ -10,6 +10,9 @@ namespace Gnu.Licensing.Core.Entities
         public int LicenseId { get; set; }
 
         [Required]
+        public Guid ActivationUuid { get; set; }
+
+        [Required]
         public Guid LicenseUuid { get; set; }
 
         [Required]

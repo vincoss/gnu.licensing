@@ -75,10 +75,10 @@ namespace Gnu.Licensing
         /// <summary>
         /// Gets or sets the unique identifier of this <see cref="License"/>.
         /// </summary>
-        public Guid ActivationId
+        public Guid ActivationUuid
         {
-            get { return new Guid(GetTag("ActivationId") ?? Guid.Empty.ToString()); }
-            set { if (!IsSigned) SetTag("ActivationId", value.ToString()); }
+            get { return new Guid(GetTag("ActivationUuid") ?? Guid.Empty.ToString()); }
+            set { if (!IsSigned) SetTag("ActivationUuid", value.ToString()); }
         }
 
         /// <summary>

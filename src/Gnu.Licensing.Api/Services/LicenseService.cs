@@ -105,11 +105,12 @@ namespace Gnu.Licensing.Api.Services
                     attributesChecksum = Utils.GetSha256HashFromString(attributesJson);
                 }
 
+                var activationId = Guid.NewGuid();
                 var product = _context.Products.Single(x => x.ProductUuid == request.ProductUuid);
                 var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseUuid);
-                var licenseString = await CreateLicenseAsync(request, registration, product, Guid.NewGuid());
+                var licenseString = await CreateLicenseAsync(request, registration, product, activationId);
 
-                await CreateLicenseRecordAsync(registration, licenseString, attributesJson, attributesChecksum, userName);
+                await CreateLicenseRecordAsync(registration, licenseString, attributesJson, attributesChecksum, userName, activationId);
 
                 var result = new LicenseRegisterResult();
                 result.License = licenseString;
@@ -156,10 +157,11 @@ namespace Gnu.Licensing.Api.Services
             return task;
         }
 
-        private async Task<int> CreateLicenseRecordAsync(LicenseRegistration registration, string licenseString, string attributesJson, string attributesChecksum, string userName)
+        private async Task<int> CreateLicenseRecordAsync(LicenseRegistration registration, string licenseString, string attributesJson, string attributesChecksum, string userName, Guid activationId)
         {
             var license = new LicenseActivation
             {
+                ActivationUuid = activationId,
                 LicenseUuid = registration.LicenseUuid,
                 ProductUuid = registration.ProductUuid,
                 CompanyId = registration.CompanyId,
