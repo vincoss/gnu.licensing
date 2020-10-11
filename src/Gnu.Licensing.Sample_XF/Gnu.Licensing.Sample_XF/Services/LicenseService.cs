@@ -84,5 +84,10 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
         {
             return RegisterAsync(licenseKey, LicenseGlobals.ProductId, LicenseGlobals.LicenseServerUrl, GetAttributes());
         }
+
+        public Task<bool> IsActivationValidAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

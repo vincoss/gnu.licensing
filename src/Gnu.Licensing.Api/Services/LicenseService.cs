@@ -8,7 +8,7 @@ using Gnu.Licensing.Validation;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using Gnu.Licensing.Core.Entities;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Gnu.Licensing.Api.Services
 {
@@ -185,7 +185,14 @@ namespace Gnu.Licensing.Api.Services
 
         private int LicenseGetUsage(Guid licenseId)
         {
-            return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive != null && x.IsActive.Value);
+            return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive);
+        }
+
+        public async Task<bool> IsActiveAsync(Guid activationId)
+        {
+            if (activationId == Guid.Empty) throw new ArgumentException(nameof(activationId));
+
+            return await _context.Licenses.AnyAsync(x => x.ActivationUuid == activationId && x.IsActive);
         }
 
         #endregion

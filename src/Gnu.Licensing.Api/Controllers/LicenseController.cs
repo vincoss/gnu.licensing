@@ -45,5 +45,22 @@ namespace Gnu.Licensing.Api.Controllers
             var result = await _licenseService.CreateAsync(request, string.IsNullOrWhiteSpace(User.Identity.Name) ? Environment.UserName: User.Identity.Name);
             return Ok(result);
         }
+
+        public async Task<IActionResult> Check(string id)
+        {
+            if(string.IsNullOrWhiteSpace(id))
+            {
+                return BadRequest();
+            }
+
+            Guid uuid;
+            Guid.TryParse(id, out uuid);
+            if(uuid == Guid.Empty)
+            {
+                return BadRequest();
+            }
+            var result = await _licenseService.IsActiveAsync(uuid);
+            return Ok( result);
+        }
     }
 }

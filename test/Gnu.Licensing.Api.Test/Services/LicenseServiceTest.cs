@@ -530,7 +530,7 @@ namespace Gnu.Licensing.Api.Services
                     Assert.NotNull(licenseRecord.LicenseChecksum);
                     Assert.NotNull(licenseRecord.AttributesChecksum);
                     Assert.Equal(Utils.ChecksumType, licenseRecord.ChecksumType);
-                    Assert.True(licenseRecord.IsActive.Value);
+                    Assert.True(licenseRecord.IsActive);
                     Assert.Equal(DateTime.UtcNow.ToString("yyyyMMdd"), licenseRecord.CreatedDateTimeUtc.ToString("yyyyMMdd"));
                     Assert.Equal(DateTime.UtcNow.ToString("yyyyMMdd"), licenseRecord.ModifiedDateTimeUtc.ToString("yyyyMMdd"));
                     Assert.NotNull(licenseRecord.CreatedByUser);
@@ -562,6 +562,95 @@ namespace Gnu.Licensing.Api.Services
                     Assert.Equal(registration.LicenseEmail, license.Customer.Email);
                     Assert.Equal(registration.LicenseName, license.Customer.Company);
                     Assert.Equal(request.Attributes["AppId"], license.AdditionalAttributes.Get("AppId"));
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [Fact]
+        public async void IsActiveAsync_NotActiveIfNotExists()
+        {
+            var logger = Substitute.For<ILogger<LicenseService>>();
+
+            // In-memory database only exists while the connection is open
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    context.Database.EnsureCreated();
+                    var service = new LicenseService(context, logger);
+
+                    var result = await service.IsActiveAsync(Guid.NewGuid());
+
+                    Assert.False(result);
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        [Fact]
+        public async void IsActiveAsync()
+        {
+            var logger = Substitute.For<ILogger<LicenseService>>();
+
+            // In-memory database only exists while the connection is open
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            try
+            {
+                var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
+                    .UseSqlite(connection)
+                    .Options;
+
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    context.Database.EnsureCreated();
+                    var service = new LicenseService(context, logger);
+
+                    var product = CreateProduct();
+                    context.Add(product);
+                    context.SaveChanges();
+
+                    var registration = CreateRegistration(product);
+                    registration.Quantity = 1;
+                    context.Add(registration);
+                    context.SaveChanges();
+
+                    var request = new LicenseRegisterRequest
+                    {
+                        LicenseUuid = registration.LicenseUuid,
+                        ProductUuid = product.ProductUuid
+                    };
+
+                    var createdResult = await service.CreateAsync(request, "test-user");
+                    var license = License.Load(createdResult.License);
+
+                    var active = await service.IsActiveAsync(license.ActivationUuid);
+
+                    var activation = context.Licenses.Single(x => x.ActivationUuid == license.ActivationUuid);
+                    activation.IsActive = false;
+                    context.SaveChanges();
+
+                    var notActive = await service.IsActiveAsync(license.ActivationUuid);
+
+                    Assert.True(active);
+                    Assert.False(notActive);
                 }
             }
             finally

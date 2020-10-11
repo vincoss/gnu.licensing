@@ -1,5 +1,6 @@
 ﻿using Gnu.Licensing.Api.Models;
 using Gnu.Licensing.Validation;
+using System;
 using System.Threading.Tasks;
 
 
@@ -9,5 +10,6 @@ namespace Gnu.Licensing.Api.Interface
     {
         Task<IValidationFailure> ValidateAsync(LicenseRegisterRequest request);
         Task<LicenseRegisterResult> CreateAsync(LicenseRegisterRequest request, string userName);
+        Task<bool> IsActiveAsync(Guid activationId);
     }
 }

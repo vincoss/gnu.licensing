@@ -2,6 +2,7 @@
 
 ## Tasks
 review the database objects, fix warnings
+shall not return license if not active
 
 ## Ef Migration
 add-migration initial -verbose

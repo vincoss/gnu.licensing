@@ -12,6 +12,8 @@ namespace Gnu.Licensing
 
         Task<LicenseResult> ValidateAsync();
 
+        Task<bool> IsActivationValidAsync();
+
         Task RunAsync();
     }
 }
