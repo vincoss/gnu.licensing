@@ -7,7 +7,7 @@ This project contains Gnu.Licensing SQL Server database provider.
 Add a migration with:
 
 ```
-dotnet ef migrations add initial --context SqlServerContext --output-dir Migrations --startup-project ..\Gnu.Licensing.Api\Gnu.Licensing.Api.csproj
+dotnet ef migrations add initial --verbose --context SqlServerContext --output-dir Migrations --startup-project ..\Gnu.Licensing.Api\Gnu.Licensing.Api.csproj
 
 dotnet ef database update --context SqlServerContext
 ```

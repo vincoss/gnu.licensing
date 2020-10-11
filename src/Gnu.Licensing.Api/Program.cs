@@ -76,7 +76,17 @@ namespace Gnu.Licensing.Api
         {
             var configuration = GetConfiguration(args);
 
-            var host =  Host.CreateDefaultBuilder(args)
+            var host =  Host
+                .CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((ctx, config) =>
+                {
+                    var root = Environment.GetEnvironmentVariable("CONFIG_ROOT");
+
+                    if (!string.IsNullOrEmpty(root))
+                    {
+                        config.SetBasePath(root);
+                    }
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
@@ -114,7 +124,8 @@ namespace Gnu.Licensing.Api
                 .AddEnvironmentVariables()
                 .AddCommandLine(args);
 
-            return builder.Build();
+            var configuration = builder.Build();
+            return configuration;
         }
     }
 }
