@@ -613,6 +613,7 @@ namespace Gnu.Licensing.Api.Services
 
             try
             {
+                License license = null;
                 var contextOptions = new DbContextOptionsBuilder<EfDbContext>()
                     .UseSqlite(connection)
                     .Options;
@@ -639,12 +640,18 @@ namespace Gnu.Licensing.Api.Services
                     };
 
                     var createdResult = await service.CreateAsync(request, "test-user");
-                    var license = License.Load(createdResult.License);
+                    license = License.Load(createdResult.License);
+                }
 
+                // Create the schema in the database
+                using (var context = new EfDbContext(contextOptions))
+                {
+                    var service = new LicenseService(context, logger);
                     var active = await service.IsActiveAsync(license.ActivationUuid);
 
-                    var activation = context.Licenses.Single(x => x.ActivationUuid == license.ActivationUuid);
+                    var activation = context.Licenses.SingleOrDefault(x => x.ActivationUuid == license.ActivationUuid);
                     activation.IsActive = false;
+                    context.Update(activation);
                     context.SaveChanges();
 
                     var notActive = await service.IsActiveAsync(license.ActivationUuid);

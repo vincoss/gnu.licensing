@@ -39,8 +39,7 @@ namespace Gnu.Licensing.Core.Entities.Configuration
                   .IsRequired();
 
             builder.Property(t => t.IsActive)
-                .IsRequired()
-                .HasDefaultValue(true);
+                .IsRequired();
 
             builder.Property(t => t.Quantity)
                    .IsRequired()

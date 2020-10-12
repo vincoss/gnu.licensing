@@ -46,11 +46,8 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsActive")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LicenseAttributes")
                         .HasColumnType("nvarchar(max)");
@@ -98,7 +95,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<Guid>("CompanyUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("689958d5-1c57-418b-9386-01b3723b8bc9"));
+                        .HasDefaultValue(new Guid("47dedf7b-e9cb-4677-900d-0814fda3c4ed"));
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -107,7 +104,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 11, 0, 23, 26, 131, DateTimeKind.Utc).AddTicks(6237));
+                        .HasDefaultValue(new DateTime(2020, 10, 12, 10, 50, 55, 98, DateTimeKind.Utc).AddTicks(1498));
 
                     b.HasKey("LicenseCompanyId");
 
@@ -140,7 +137,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 11, 0, 23, 26, 134, DateTimeKind.Utc).AddTicks(2485));
+                        .HasDefaultValue(new DateTime(2020, 10, 12, 10, 50, 55, 100, DateTimeKind.Utc).AddTicks(2719));
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -153,7 +150,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<Guid>("ProductUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("5519b698-5ded-41aa-849e-8ebcda76464c"));
+                        .HasDefaultValue(new Guid("65178e49-99f6-4b38-a5a9-e15f28d6126d"));
 
                     b.Property<string>("SignKeyName")
                         .IsRequired()
@@ -193,15 +190,13 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 11, 0, 23, 26, 140, DateTimeKind.Utc).AddTicks(3191));
+                        .HasDefaultValue(new DateTime(2020, 10, 12, 10, 50, 55, 104, DateTimeKind.Utc).AddTicks(6965));
 
                     b.Property<DateTime?>("ExpireUtc")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
+                        .HasColumnType("bit");
 
                     b.Property<string>("LicenseEmail")
                         .IsRequired()
@@ -217,7 +212,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<Guid>("LicenseUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("495f35c0-0c1e-4e95-8d2b-269da9e48367"));
+                        .HasDefaultValue(new Guid("5c1784ae-c909-4a79-a9d0-8dfd7892b835"));
 
                     b.Property<Guid>("ProductUuid")
                         .HasColumnType("uniqueidentifier");

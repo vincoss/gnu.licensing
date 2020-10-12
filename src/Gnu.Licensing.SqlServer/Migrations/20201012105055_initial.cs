@@ -22,7 +22,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     LicenseChecksum = table.Column<string>(nullable: false),
                     AttributesChecksum = table.Column<string>(nullable: true),
                     ChecksumType = table.Column<string>(nullable: false),
-                    IsActive = table.Column<bool>(nullable: false, defaultValue: true),
+                    IsActive = table.Column<bool>(nullable: false),
                     CreatedDateTimeUtc = table.Column<DateTime>(nullable: false),
                     ModifiedDateTimeUtc = table.Column<DateTime>(nullable: false),
                     CreatedByUser = table.Column<string>(nullable: false),
@@ -39,9 +39,9 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 {
                     LicenseCompanyId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("689958d5-1c57-418b-9386-01b3723b8bc9")),
+                    CompanyUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("47dedf7b-e9cb-4677-900d-0814fda3c4ed")),
                     CompanyName = table.Column<string>(nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 11, 0, 23, 26, 131, DateTimeKind.Utc).AddTicks(6237)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 12, 10, 50, 55, 98, DateTimeKind.Utc).AddTicks(1498)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -55,12 +55,12 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 {
                     LicenseProductId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("5519b698-5ded-41aa-849e-8ebcda76464c")),
+                    ProductUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("65178e49-99f6-4b38-a5a9-e15f28d6126d")),
                     CompanyId = table.Column<int>(nullable: false),
                     ProductName = table.Column<string>(nullable: false),
                     ProductDescription = table.Column<string>(nullable: false),
                     SignKeyName = table.Column<string>(nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 11, 0, 23, 26, 134, DateTimeKind.Utc).AddTicks(2485)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 12, 10, 50, 55, 100, DateTimeKind.Utc).AddTicks(2719)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -74,17 +74,17 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 {
                     LicenseRegistrationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    LicenseUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("495f35c0-0c1e-4e95-8d2b-269da9e48367")),
+                    LicenseUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("5c1784ae-c909-4a79-a9d0-8dfd7892b835")),
                     ProductUuid = table.Column<Guid>(nullable: false),
                     CompanyId = table.Column<int>(nullable: false),
                     LicenseName = table.Column<string>(nullable: false),
                     LicenseEmail = table.Column<string>(nullable: false),
                     LicenseType = table.Column<int>(nullable: false),
-                    IsActive = table.Column<bool>(nullable: false, defaultValue: true),
+                    IsActive = table.Column<bool>(nullable: false),
                     Comment = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false, defaultValue: 1),
                     ExpireUtc = table.Column<DateTime>(nullable: true),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 11, 0, 23, 26, 140, DateTimeKind.Utc).AddTicks(3191)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 12, 10, 50, 55, 104, DateTimeKind.Utc).AddTicks(6965)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>

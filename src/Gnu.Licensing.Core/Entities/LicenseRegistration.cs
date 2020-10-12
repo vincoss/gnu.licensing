@@ -27,10 +27,12 @@ namespace Gnu.Licensing.Core.Entities
         [Required]
         public LicenseType LicenseType { get; set; }
 
+        [Required]
         public bool IsActive { get; set; }  // TODO: Blacklist
 
         public string Comment { get; set; } // TODO: Reasons for blacklist
 
+        [Required]
         public int Quantity { get; set; }
 
         public DateTime? ExpireUtc { get; set; }  
