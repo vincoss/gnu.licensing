@@ -73,11 +73,8 @@ namespace Gnu.Licensing.Api
                 LicenseChecksum = "checksum",
                 AttributesChecksum = "checksum",
                 ChecksumType = "sha256",
-                IsActive = true,
                 CreatedDateTimeUtc = createdDate,
-                ModifiedDateTimeUtc = createdDate,
                 CreatedByUser = user,
-                ModifiedByUser = user
             };
 
             context.Licenses.AddRange(license);

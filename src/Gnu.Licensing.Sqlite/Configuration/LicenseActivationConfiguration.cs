@@ -46,23 +46,11 @@ namespace Gnu.Licensing.Sqlite.Configuration
                 .HasColumnType("VARCHAR(12) COLLATE NOCASE");
 
             builder
-                    .Property(t => t.IsActive)
-                    .HasColumnType("BOOLEAN");
-
-            builder
                 .Property(t => t.CreatedDateTimeUtc)
                 .HasColumnType("DATETIME");
 
             builder
-                .Property(t => t.ModifiedDateTimeUtc)
-                .HasColumnType("DATETIME");
-
-            builder
                 .Property(t => t.CreatedByUser)
-                .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
-
-            builder
-                .Property(t => t.ModifiedByUser)
                 .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
         }
     }

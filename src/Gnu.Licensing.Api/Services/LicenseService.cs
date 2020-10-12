@@ -171,11 +171,8 @@ namespace Gnu.Licensing.Api.Services
                 AttributesChecksum = attributesChecksum,
                 LicenseChecksum = Utils.GetSha256HashFromString(licenseString),
                 ChecksumType = Utils.ChecksumType,
-                IsActive = true,
                 CreatedDateTimeUtc = DateTime.UtcNow,
-                ModifiedDateTimeUtc = DateTime.UtcNow,
-                CreatedByUser = userName,
-                ModifiedByUser = userName
+                CreatedByUser = userName
             };
 
             _context.Licenses.Add(license);
@@ -186,15 +183,14 @@ namespace Gnu.Licensing.Api.Services
 
         private int LicenseGetUsage(Guid licenseId)
         {
-            return _context.Licenses.Count(x => x.LicenseUuid == licenseId && x.IsActive);
+            return _context.Licenses.Count(x => x.LicenseUuid == licenseId);
         }
 
         public async  Task<bool> IsActiveAsync(Guid activationId)
         {
             if (activationId == Guid.Empty) throw new ArgumentException(nameof(activationId));
 
-            var all = _context.Licenses.ToArray();
-            return await _context.Licenses.AnyAsync(x => x.ActivationUuid == activationId && x.IsActive);
+            return await _context.Licenses.AnyAsync(x => x.ActivationUuid == activationId);
         }
 
         #endregion

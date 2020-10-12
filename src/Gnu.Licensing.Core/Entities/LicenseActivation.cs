@@ -35,18 +35,9 @@ namespace Gnu.Licensing.Core.Entities
         public string ChecksumType { get; set; }
 
         [Required]
-        public bool IsActive { get; set; }
-
-        [Required]
         public DateTime CreatedDateTimeUtc { get; set; }
 
         [Required]
-        public DateTime ModifiedDateTimeUtc { get; set; }
-
-        [Required]
         public string CreatedByUser { get; set; }
-
-        [Required]
-        public string ModifiedByUser { get; set; }
     }
 }

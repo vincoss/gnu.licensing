@@ -42,9 +42,6 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .HasColumnType("DATETIME");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("BOOLEAN");
-
                     b.Property<string>("LicenseAttributes")
                         .HasColumnType("NVARCHAR COLLATE NOCASE");
 
@@ -59,19 +56,12 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("LicenseUuid")
                         .HasColumnType("VARCHAR(36)");
 
-                    b.Property<string>("ModifiedByUser")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR(64) COLLATE NOCASE");
-
-                    b.Property<DateTime>("ModifiedDateTimeUtc")
-                        .HasColumnType("DATETIME");
-
                     b.Property<Guid>("ProductUuid")
                         .HasColumnType("VARCHAR(36)");
 
                     b.HasKey("LicenseId");
 
-                    b.HasIndex("LicenseId", "IsActive")
+                    b.HasIndex("LicenseId")
                         .IsUnique();
 
                     b.ToTable("LicenseActivation");
@@ -90,7 +80,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("CompanyUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(36)")
-                        .HasDefaultValue(new Guid("7622c3ba-008c-40b5-ae8a-500b1ef57532"));
+                        .HasDefaultValue(new Guid("7040d84b-86b1-4ea9-9394-7b0b84fc784e"));
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -99,7 +89,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2020, 10, 12, 10, 51, 31, 66, DateTimeKind.Utc).AddTicks(7888));
+                        .HasDefaultValue(new DateTime(2020, 10, 12, 22, 18, 56, 47, DateTimeKind.Utc).AddTicks(7343));
 
                     b.HasKey("LicenseCompanyId");
 
@@ -131,7 +121,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2020, 10, 12, 10, 51, 31, 68, DateTimeKind.Utc).AddTicks(5685));
+                        .HasDefaultValue(new DateTime(2020, 10, 12, 22, 18, 56, 49, DateTimeKind.Utc).AddTicks(7882));
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -144,7 +134,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("ProductUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(36)")
-                        .HasDefaultValue(new Guid("08e4e3c7-c202-412e-849a-326195c5881e"));
+                        .HasDefaultValue(new Guid("d2b71c0f-df99-4ea5-ac42-6a624362c9dc"));
 
                     b.Property<string>("SignKeyName")
                         .IsRequired()
@@ -183,7 +173,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("DATETIME")
-                        .HasDefaultValue(new DateTime(2020, 10, 12, 10, 51, 31, 72, DateTimeKind.Utc).AddTicks(5728));
+                        .HasDefaultValue(new DateTime(2020, 10, 12, 22, 18, 56, 54, DateTimeKind.Utc).AddTicks(3302));
 
                     b.Property<DateTime?>("ExpireUtc")
                         .HasColumnType("DATETIME");
@@ -205,7 +195,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     b.Property<Guid>("LicenseUuid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("VARCHAR(36)")
-                        .HasDefaultValue(new Guid("cd446dc1-023e-4cbd-ad01-60b5807fa9d1"));
+                        .HasDefaultValue(new Guid("4232a2b4-1f51-4228-befd-cc02a6d8a093"));
 
                     b.Property<Guid>("ProductUuid")
                         .HasColumnType("VARCHAR(36)");

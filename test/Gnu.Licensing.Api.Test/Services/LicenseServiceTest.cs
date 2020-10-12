@@ -530,11 +530,8 @@ namespace Gnu.Licensing.Api.Services
                     Assert.NotNull(licenseRecord.LicenseChecksum);
                     Assert.NotNull(licenseRecord.AttributesChecksum);
                     Assert.Equal(Utils.ChecksumType, licenseRecord.ChecksumType);
-                    Assert.True(licenseRecord.IsActive);
                     Assert.Equal(DateTime.UtcNow.ToString("yyyyMMdd"), licenseRecord.CreatedDateTimeUtc.ToString("yyyyMMdd"));
-                    Assert.Equal(DateTime.UtcNow.ToString("yyyyMMdd"), licenseRecord.ModifiedDateTimeUtc.ToString("yyyyMMdd"));
                     Assert.NotNull(licenseRecord.CreatedByUser);
-                    Assert.NotNull(licenseRecord.ModifiedByUser);
 
                     var license = License.Load(result.License);
 
@@ -649,15 +646,7 @@ namespace Gnu.Licensing.Api.Services
                     var service = new LicenseService(context, logger);
                     var active = await service.IsActiveAsync(license.ActivationUuid);
 
-                    var activation = context.Licenses.SingleOrDefault(x => x.ActivationUuid == license.ActivationUuid);
-                    activation.IsActive = false;
-                    context.Update(activation);
-                    context.SaveChanges();
-
-                    var notActive = await service.IsActiveAsync(license.ActivationUuid);
-
                     Assert.True(active);
-                    Assert.False(notActive);
                 }
             }
             finally
@@ -705,11 +694,8 @@ namespace Gnu.Licensing.Api.Services
                 LicenseString = "license",
                 LicenseChecksum = "checksum",
                 ChecksumType = "sha256",
-                IsActive = true,
                 CreatedDateTimeUtc = DateTime.UtcNow,
-                ModifiedDateTimeUtc = DateTime.UtcNow.AddDays(1),
                 CreatedByUser = "created-user",
-                ModifiedByUser = "modified-user"
             };
         }
 

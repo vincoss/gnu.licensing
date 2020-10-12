@@ -22,11 +22,8 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     LicenseChecksum = table.Column<string>(type: "NVARCHAR", nullable: false),
                     AttributesChecksum = table.Column<string>(type: "NVARCHAR", nullable: true),
                     ChecksumType = table.Column<string>(type: "VARCHAR(12) COLLATE NOCASE", nullable: false),
-                    IsActive = table.Column<bool>(type: "BOOLEAN", nullable: false),
                     CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false),
-                    ModifiedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false),
-                    CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false),
-                    ModifiedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
+                    CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,9 +36,9 @@ namespace Gnu.Licensing.Sqlite.Migrations
                 {
                     LicenseCompanyId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CompanyUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("7622c3ba-008c-40b5-ae8a-500b1ef57532")),
+                    CompanyUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("7040d84b-86b1-4ea9-9394-7b0b84fc784e")),
                     CompanyName = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 10, 12, 10, 51, 31, 66, DateTimeKind.Utc).AddTicks(7888)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 10, 12, 22, 18, 56, 47, DateTimeKind.Utc).AddTicks(7343)),
                     CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },
                 constraints: table =>
@@ -55,12 +52,12 @@ namespace Gnu.Licensing.Sqlite.Migrations
                 {
                     LicenseProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("08e4e3c7-c202-412e-849a-326195c5881e")),
+                    ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("d2b71c0f-df99-4ea5-ac42-6a624362c9dc")),
                     CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductName = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
                     ProductDescription = table.Column<string>(type: "NVARCHAR(1024) COLLATE NOCASE", nullable: false),
                     SignKeyName = table.Column<string>(type: "VARCHAR(64) COLLATE NOCASE", nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 10, 12, 10, 51, 31, 68, DateTimeKind.Utc).AddTicks(5685)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 10, 12, 22, 18, 56, 49, DateTimeKind.Utc).AddTicks(7882)),
                     CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },
                 constraints: table =>
@@ -74,7 +71,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                 {
                     LicenseRegistrationId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    LicenseUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("cd446dc1-023e-4cbd-ad01-60b5807fa9d1")),
+                    LicenseUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false, defaultValue: new Guid("4232a2b4-1f51-4228-befd-cc02a6d8a093")),
                     ProductUuid = table.Column<Guid>(type: "VARCHAR(36)", nullable: false),
                     CompanyId = table.Column<int>(type: "INTEGER", nullable: false),
                     LicenseName = table.Column<string>(type: "NVARCHAR(256) COLLATE NOCASE", nullable: false),
@@ -85,7 +82,7 @@ namespace Gnu.Licensing.Sqlite.Migrations
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false, defaultValue: 1)
                         .Annotation("Sqlite:Autoincrement", true),
                     ExpireUtc = table.Column<DateTime>(type: "DATETIME", nullable: true),
-                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 10, 12, 10, 51, 31, 72, DateTimeKind.Utc).AddTicks(5728)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(type: "DATETIME", nullable: false, defaultValue: new DateTime(2020, 10, 12, 22, 18, 56, 54, DateTimeKind.Utc).AddTicks(3302)),
                     CreatedByUser = table.Column<string>(type: "NVARCHAR(64) COLLATE NOCASE", nullable: false)
                 },
                 constraints: table =>
@@ -94,9 +91,9 @@ namespace Gnu.Licensing.Sqlite.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LicenseActivation_LicenseId_IsActive",
+                name: "IX_LicenseActivation_LicenseId",
                 table: "LicenseActivation",
-                columns: new[] { "LicenseId", "IsActive" },
+                column: "LicenseId",
                 unique: true);
 
             migrationBuilder.CreateIndex(

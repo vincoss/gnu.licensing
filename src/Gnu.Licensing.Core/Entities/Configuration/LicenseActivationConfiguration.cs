@@ -9,7 +9,7 @@ namespace Gnu.Licensing.Core.Entities.Configuration
         public void Configure(EntityTypeBuilder<LicenseActivation> builder)
         {
             builder.ToTable(nameof(LicenseActivation))
-                   .HasIndex(x => new { x.LicenseId, x.IsActive }).IsUnique();
+                   .HasIndex(x => new { x.LicenseId }).IsUnique();
 
             builder.HasKey(x => x.LicenseId);
 
@@ -38,19 +38,10 @@ namespace Gnu.Licensing.Core.Entities.Configuration
             builder.Property(t => t.ChecksumType)
               .IsRequired();
 
-            builder.Property(t => t.IsActive)
-                      .IsRequired();
-
             builder.Property(x => x.CreatedDateTimeUtc)
                    .IsRequired();
 
-            builder.Property(x => x.ModifiedDateTimeUtc)
-               .IsRequired();
-
             builder.Property(x => x.CreatedByUser)
-                   .IsRequired();
-
-            builder.Property(x => x.ModifiedByUser)
                    .IsRequired();
         }
     }
