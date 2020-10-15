@@ -9,7 +9,8 @@
   },
   "profiles": {
     "IIS Express": {
-      "commandName": "IISExpress",
+      "commandName": "Executable",
+      "executablePath": "C:\\_Dev\\GitHub\\FL\\Gnu.Licensing\\src\\Gnu.Licensing.Api\\bin\\Debug\\netcoreapp3.1\\Gnu.Licensing.Api.exe",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

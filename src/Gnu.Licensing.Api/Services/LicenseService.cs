@@ -188,9 +188,14 @@ namespace Gnu.Licensing.Api.Services
 
         public async  Task<bool> IsActiveAsync(Guid activationId)
         {
-            if (activationId == Guid.Empty) throw new ArgumentException(nameof(activationId));
+            if (activationId == Guid.Empty)
+            {
+                return false;
+            }
 
-            return await _context.Licenses.AnyAsync(x => x.ActivationUuid == activationId);
+            var result = await _context.Licenses.AnyAsync(x => x.ActivationUuid == activationId);
+
+            return result;
         }
 
         #endregion

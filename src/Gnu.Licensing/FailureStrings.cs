@@ -90,6 +90,10 @@ namespace Gnu.Licensing
         public const string VAL05Message    = "VAL05Message";
         public const string VAL05Resolve    = "VAL05Resolve";
 
+        public const string VAL06Code       = "VAL06Code";
+        public const string VAL06Message    = "VAL06Message";
+        public const string VAL06Resolve    = "VAL06Resolve";
+
         #endregion
 
         #region Public methods
@@ -170,6 +174,10 @@ namespace Gnu.Licensing
             yield return VAL05Code;
             yield return VAL05Message;
             yield return VAL05Resolve;
+
+            yield return VAL06Code;
+            yield return VAL06Message;
+            yield return VAL06Resolve;
         }
 
         #endregion

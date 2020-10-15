@@ -50,7 +50,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.ViewModels
                 LicenseGlobals.Set(AppLicense.Demo);
                 Description = $"Product Name - {LicenseGlobals.Get()}";
 
-                var result = await _licenseService.ValidateAsync();
+                var result = await _licenseService.ValidateAsync(true);
                 if(result.Successful)
                 {
                     LicenseGlobals.Set(AppLicense.Full);

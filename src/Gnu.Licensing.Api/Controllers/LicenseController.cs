@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Gnu.Licensing.Api.Interface;
 using Gnu.Licensing.Api.Models;
-
+using System.Net;
 
 namespace Gnu.Licensing.Api.Controllers
 {
@@ -35,6 +35,8 @@ namespace Gnu.Licensing.Api.Controllers
         /// <response code="201">Returns the created license.</response>
         /// <response code="400">If the request is null.</response>      
         [HttpPost]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(LicenseRegisterResult), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Post([FromBody] LicenseRegisterRequest request)
         {
             if (request == null)
@@ -46,20 +48,22 @@ namespace Gnu.Licensing.Api.Controllers
             return Ok(result);
         }
 
-        public async Task<IActionResult> Check(string id)
+        /// <summary>
+        /// Check if the license activation still exists.
+        /// </summary>
+        /// <param name="id">License Activation UUID</param>
+        /// <returns>True if exists, otherwise false.</returns>
+        [HttpPost("check")]
+        [ProducesResponseType(typeof(void), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Check([FromBody] LicenseActivationCheckRequest request)
         {
-            if(string.IsNullOrWhiteSpace(id))
+            if (request == null)
             {
                 return BadRequest();
             }
 
-            Guid uuid;
-            Guid.TryParse(id, out uuid);
-            if(uuid == Guid.Empty)
-            {
-                return BadRequest();
-            }
-            var result = await _licenseService.IsActiveAsync(uuid);
+            var result = await _licenseService.IsActiveAsync(request.Id);
             return Ok( result);
         }
     }

@@ -14,7 +14,7 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
 
         Task<LicenseResult> RegisterAsync(Guid licenseKey);
 
-        Task<LicenseResult> ValidateAsync();
+        Task<LicenseResult> ValidateAsync(bool onlineCheck = false);
 
         Task RunAsync();
     }

@@ -51,7 +51,7 @@ namespace Gnu.Licensing
             _httpClient = httpClient; ;
         }
 
-        public async Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, string url, IDictionary<string, string> attributes)
+        public async Task<LicenseResult> RegisterAsync(Guid licenseKey, Guid productId, IDictionary<string, string> attributes)
         {
             if (licenseKey == Guid.Empty)
             {
@@ -60,10 +60,6 @@ namespace Gnu.Licensing
             if (productId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(productId));
-            }
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                throw new ArgumentNullException(nameof(url));
             }
             if (attributes == null)
             {
@@ -74,6 +70,7 @@ namespace Gnu.Licensing
 
             try
             {
+                var url = GetLicenseServerUrl();
                 result = await RegisterHttpAsync(licenseKey, productId, attributes, url);
             }
             catch (Exception ex)
@@ -112,7 +109,24 @@ namespace Gnu.Licensing
             return new LicenseResult(validationResult.License, null, null);
         }
 
-        public Task<LicenseResult> ValidateAsync()
+        public async Task<bool> CheckAsync(Guid activationUuid)
+        {
+            if (activationUuid == Guid.Empty) throw new ArgumentNullException(nameof(activationUuid));
+
+            // TODO: Must pass model insted of dynamic type here
+
+            var data = new
+            {
+                Id = activationUuid
+            };
+
+            var url = $"{GetLicenseServerUrl()}/check";
+            var json = JsonSerializer.Serialize(data);
+            var result = await PostHttpAsync<bool>(url, json);
+            return result;
+        }
+
+        public Task<LicenseResult> ValidateAsync(bool onlineCheck = false)
         {
             var task = Task.Run(async() =>
             {
@@ -139,6 +153,16 @@ namespace Gnu.Licensing
                         results.Add(f);
                     }
 
+                    if(results.Any() == false && onlineCheck && IsConnected())
+                    {
+                        var activationActiveResult = await CheckAsync(actual.ActivationUuid);
+                        if(activationActiveResult == false)
+                        {
+                            var vf = FailureStrings.Get(FailureStrings.VAL06Code);
+                            results.Add(vf);
+                        }
+                    }
+
                     return new LicenseResult(results.Any() ? null : actual, null, results);
                 }
                 catch (Exception ex)
@@ -160,7 +184,11 @@ namespace Gnu.Licensing
 
         protected abstract Stream LicenseOpenRead();
 
-        protected abstract Stream LicenseOpenWrite(); 
+        protected abstract Stream LicenseOpenWrite();
+
+        protected abstract bool IsConnected();
+
+        public abstract string GetLicenseServerUrl();
 
         #endregion
 

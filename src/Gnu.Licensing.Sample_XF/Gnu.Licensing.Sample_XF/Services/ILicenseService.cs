@@ -10,9 +10,7 @@ namespace Gnu.Licensing
 
         Task<LicenseResult> RegisterAsync(Guid licenseKey);
 
-        Task<LicenseResult> ValidateAsync();
-
-        Task<bool> IsActivationValidAsync();
+        Task<LicenseResult> ValidateAsync(bool onlineCheck = false);
 
         Task RunAsync();
     }

@@ -234,4 +234,13 @@
   <data name="VAL05Resolve" xml:space="preserve">
     <value>Если вы все еще не можете решить вашу проблему, напишите в службу технической поддержки.</value>
   </data>
+  <data name="VAL06Code" xml:space="preserve">
+    <value>VAL.06</value>
+  </data>
+  <data name="VAL06Message" xml:space="preserve">
+    <value>Активация лицензии не найдена.</value>
+  </data>
+  <data name="VAL06Resolve" xml:space="preserve">
+    <value>Пожалуйста, попробуйте активировать снова.</value>
+  </data>
 </root>

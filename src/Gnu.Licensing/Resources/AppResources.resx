@@ -234,4 +234,13 @@
   <data name="VAL05Resolve" xml:space="preserve">
     <value>If you are still unable to resolve your issue, email to Technical Support.</value>
   </data>
+  <data name="VAL06Code" xml:space="preserve">
+    <value>VAL.06</value>
+  </data>
+  <data name="VAL06Message" xml:space="preserve">
+    <value>License activation not found.</value>
+  </data>
+  <data name="VAL06Resolve" xml:space="preserve">
+    <value>Please attempt to activate again.</value>
+  </data>
 </root>

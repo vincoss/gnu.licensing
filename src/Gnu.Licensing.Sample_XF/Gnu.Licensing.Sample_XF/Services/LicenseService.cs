@@ -70,7 +70,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
         {
             var task = Task.Run(async() =>
             {
-                var result = await ValidateAsync();
+                var result = await ValidateAsync(true);
                 if (result.Successful)
                 {
                     LicenseGlobals.Set(AppLicense.Full);
@@ -82,12 +82,17 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
 
         public Task<LicenseResult> RegisterAsync(Guid licenseKey)
         {
-            return RegisterAsync(licenseKey, LicenseGlobals.ProductId, LicenseGlobals.LicenseServerUrl, GetAttributes());
+            return RegisterAsync(licenseKey, LicenseGlobals.ProductId, GetAttributes());
         }
 
-        public Task<bool> IsActivationValidAsync()
+        protected override bool IsConnected()
         {
-            throw new NotImplementedException();
+            return true;
+        }
+
+        public override string GetLicenseServerUrl()
+        {
+            return "https://localhost/api/license";
         }
     }
 }

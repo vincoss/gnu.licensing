@@ -42,7 +42,7 @@ namespace Gnu.Licensing
 
             var service = new TestBaseLicenseService(client);
             service.Path = path;
-            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
+            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>());
 
             Assert.False(result.Successful);
             Assert.Null(result.License);
@@ -75,7 +75,7 @@ namespace Gnu.Licensing
 
             var service = new TestBaseLicenseService(client);
             service.Path = writePath;
-            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
+            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>());
 
             Assert.True(result.Successful);
             Assert.NotNull(result.License);
@@ -105,7 +105,7 @@ namespace Gnu.Licensing
 
             var service = new TestBaseLicenseService(client);
             service.Path = writePath;
-            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
+            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>());
 
             Assert.False(result.Successful);
             Assert.Null(result.License);
@@ -146,7 +146,7 @@ namespace Gnu.Licensing
                 }
             };
 
-            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), "http://test.com/api/license", new Dictionary<string, string>());
+            var result = await service.RegisterAsync(Guid.NewGuid(), Guid.NewGuid(), new Dictionary<string, string>());
 
             Assert.False(result.Successful);
             Assert.Null(result.License);
@@ -247,6 +247,16 @@ namespace Gnu.Licensing
 
             public TestBaseLicenseService(HttpClient client) : base(client)
             { }
+
+            public override string GetLicenseServerUrl()
+            {
+                return "http://test.com/api/license";
+            }
+
+            protected override bool IsConnected()
+            {
+                throw new NotImplementedException();
+            }
 
             protected override Stream LicenseOpenRead()
             {

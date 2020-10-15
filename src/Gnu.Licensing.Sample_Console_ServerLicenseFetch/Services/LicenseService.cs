@@ -75,7 +75,17 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
 
         public Task<LicenseResult> RegisterAsync(Guid licenseKey)
         {
-            return RegisterAsync(licenseKey, LicenseGlobals.ProductId, LicenseGlobals.LicenseServerUrl, GetAttributes());
+            return RegisterAsync(licenseKey, LicenseGlobals.ProductId, GetAttributes());
+        }
+
+        protected override bool IsConnected()
+        {
+            return true;
+        }
+
+        public override string GetLicenseServerUrl()
+        {
+            return "https://localhost/api/license";
         }
     }
 }
