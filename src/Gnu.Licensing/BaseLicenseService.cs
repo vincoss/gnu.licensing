@@ -113,16 +113,28 @@ namespace Gnu.Licensing
         {
             if (activationUuid == Guid.Empty) throw new ArgumentNullException(nameof(activationUuid));
 
-            // TODO: Must pass model insted of dynamic type here
+            /*
+                NOTE: Must return true if http request is not successfull. 
+            */
 
-            var data = new
+            var result = true;
+
+            try
             {
-                Id = activationUuid
-            };
+                var data = new
+                {
+                    Id = activationUuid
+                };
 
-            var url = $"{GetLicenseServerUrl()}/check";
-            var json = JsonSerializer.Serialize(data);
-            var result = await PostHttpAsync<bool>(url, json);
+                var url = $"{GetLicenseServerUrl()}/check";
+                var json = JsonSerializer.Serialize(data);
+                result = await PostHttpAsync<bool>(url, json);
+
+            }
+            catch (Exception ex)
+            {
+                // TODO: Logging
+            }
             return result;
         }
 

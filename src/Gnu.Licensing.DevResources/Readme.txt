@@ -2,7 +2,7 @@
 
 ## Tasks
 review the database objects, fix warnings
-shall not return license if not active
++check action if there is not internet connection or requiest fails for some reasons need to mark as success
 if there is internet connection connection but activation fails example HTTPS not valid then shows VAL01 which is not right
 localize string must verify the code keys and keys in the resources
 
