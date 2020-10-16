@@ -85,7 +85,7 @@ namespace Gnu.Licensing.Sample_Console_ServerLicenseFetch.Services
 
         public override string GetLicenseServerUrl()
         {
-            return "https://localhost/api/license";
+            return LicenseGlobals.LicenseServerUrl;
         }
     }
 }
