@@ -48,7 +48,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.ViewModels
                 LicenseKey = null;
                 ShowError = false;
                 LicenseGlobals.Set(AppLicense.Demo);
-                Description = $"Product Name - {LicenseGlobals.Get()}";
+                Description = $"Product Name - {LicenseGlobals.Get()}"; // TODO: localize
 
                 var result = await _licenseService.ValidateAsync(true);
                 if(result.Successful)
@@ -62,7 +62,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.ViewModels
                 {
                     ShowLicenseError(result);
                 }
-                Description = $"Product Name - {LicenseGlobals.Get()}";
+                Description = $"Product Name - {LicenseGlobals.Get()}"; // TODO: localize, second time???
             }
             finally
             {

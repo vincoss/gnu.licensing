@@ -16,7 +16,7 @@ namespace Gnu.Licensing.Sample_XamarinForms
         public static Guid ProductId = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"); // Example
         public const string AppId = "AppId";
         public const string LicenseKey = "LicenseKey";
-        public const string LicenseServerUrl = "https://localhost/api/license";
+        public const string LicenseServerUrl = "https://localhost/api/license"; // TODO: Remove
 
         public static AppLicense Get()
         {

@@ -2,13 +2,7 @@
 
 ## Tasks
 review the database objects, fix warnings
-+check action if there is not internet connection or requiest fails for some reasons need to mark as success
 localize string must verify the code keys and keys in the resources
-
-## Ef Migration
-add-migration initial -verbose
-remove-migration
-add-migration initial -Context EfDbContext
 
 ## Enable SSL on localhost|help
 dotnet dev-certs https --help

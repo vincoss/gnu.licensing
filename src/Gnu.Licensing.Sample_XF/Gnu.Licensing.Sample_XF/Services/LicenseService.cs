@@ -92,7 +92,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
 
         public override string GetLicenseServerUrl()
         {
-            return "https://localhost/api/license";
+            return LicenseGlobals.LicenseServerUrl;
         }
     }
 }
