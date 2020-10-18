@@ -3,6 +3,9 @@
 ## Tasks
 review the database objects, fix warnings
 localize string must verify the code keys and keys in the resources
+register license send more info about device (easier to manage|unregister the license)
+	see the device info sample
+allow 5 license activation per on purchased license, possible allow configuration that on the product
 
 ## Enable SSL on localhost|help
 dotnet dev-certs https --help

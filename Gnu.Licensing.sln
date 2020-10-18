@@ -41,7 +41,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.Api.Test", "test\Gnu.Licensing.Api.Test\Gnu.Licensing.Api.Test.csproj", "{71E96922-CD06-4EAC-842D-0D165C79D3C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnu.Licensing.Core.Test", "test\Gnu.Licensing.Core.Test\Gnu.Licensing.Core.Test.csproj", "{9FD31BE1-867A-479A-8513-924388AAA544}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gnu.Licensing.Core.Test", "test\Gnu.Licensing.Core.Test\Gnu.Licensing.Core.Test.csproj", "{9FD31BE1-867A-479A-8513-924388AAA544}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
