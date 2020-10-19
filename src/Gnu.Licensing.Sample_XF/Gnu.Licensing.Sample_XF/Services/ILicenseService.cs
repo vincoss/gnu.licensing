@@ -12,6 +12,6 @@ namespace Gnu.Licensing
 
         Task<LicenseResult> ValidateAsync(bool onlineCheck = false);
 
-        Task RunAsync();
+        Task RunAsync(bool onlineCheck = false);
     }
 }

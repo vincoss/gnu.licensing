@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <License>
   <Id>d65321d5-b0f9-477d-828a-086f30e2bf89</Id>
+  <ActivationUuid>1392d4a3-0ce0-4b49-86dc-cd7497484483</ActivationUuid>
   <Type>Standard</Type>
-  <Expiration>Fri, 31 Dec 9999 13:59:59 GMT</Expiration>
+  <Expiration>Fri, 31 Dec 9999 23:59:59 GMT</Expiration>
   <Quantity>2</Quantity>
   <Customer>
     <Name>Demo-User</Name>
@@ -21,10 +22,10 @@
           <Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
         </Transforms>
         <DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256" />
-        <DigestValue>lqWn8DMXbtgYtnoZFrXfEMvP4hdwJw0+XVhxjaBMwoI=</DigestValue>
+        <DigestValue>GQsk7Mf+CqHzIce/pa0h400LnfIzbaYjnrsjySP0ysc=</DigestValue>
       </Reference>
     </SignedInfo>
-    <SignatureValue>c2qU3nt/ZXEDT++ykr4Ouu8OJX1JzrVNyIny1qQHc6AjAKVR0oSarJHfoTPaZmolhhx2DFYF8WkIq2xLGHPKoR191/p8DOYJyrYqxI4Ibvd45HbvhAu//QSqVo4kmakxhaOACMrOFjAwT/wq7z6igawrPjWo2RZ5dOdrbwGq+wdzxSd5z12CCSjmsvlj8VQrPNrOb3/11I6x5xd4JpFN83aHzrioeEncjpmn0aYQ64nae7q306KZ6k63/YKT7fe/+j+pOHhWjCWoRfIMiIWx1dgoaC021K+CHPGkijouoeZnpKmpWzLOZpAM5tuWDtKm5FbXU9cU4+qeJ/+Vbjl7OIsWein5L8aWWoAFo7mTxsG796uSQHAQNDdB4R/DzI3Zzjw5aBVh08+P2Wla/n7DQUZd3RI2DRe/SYzdRHCvdMuWbj24kqZRGp+lgk8PYCvAwBNpfsTWIcKqMXBSo3pO+4uYf7GLFS4kQFahRfM8PI6RAM/Q+ps1khi+7XCSJSzivXb0U+MmQD1w6nQiZPsyKBwJH0wGZniOuOiBAytqVM7/MiCQSK10ju61yX0OjEZ3M6JNK0RPu3RPnyZIxddX/CdArHZv4dTcRD9zpkaupj5mk3kCRJvG1iIL5ML8lqsfFwwWYuB4SJTP7qQSUCvdOvNkHh+Afderxq5e7w/PXeo=</SignatureValue>
+    <SignatureValue>o+ThsrTAz00GHt8CsT4W5QyqTsYDEiQ8m2NQPta+xa1YuWLU20GbznO41krYNiFW8yE66wGKsRBHOnpX3qN8B9k607xEy9IRJviNZwcTtxkCxn/qnpfQzOMGEY1kizgSitNWyOMQgFOPfe4KtevY2kGgJx3cbBpFCXD9QiJgwMLTF8X85CVywyFvjxLzHac0MnM0O22WS0dMLHq1CSG2ckFoKsxfTNQHDtKPTFLt6mSkAgV3Fy4Q3982nCw7lPIZ6jM/cO9G0VoUv2XqpDTIEP63X0Aeff1JCXF2CWoeKfP2OtsFfzTUyn+A04Tsx7HmYsjXHAlToEz4yH6qspASYZm+lyjlXFEdhl5Ns5d5s/YI7S6rRQvAM+3EeAHEfESf+iygKPQnvouNKF73UbOv9+IvOKxoqFZa+5jCFGlohX21Zm90xba7lUxPA4N5pj8ICIhJwAwVG2m1QRMTbxbiKG7FoiyOmAmKWECD+S0AJGcSLmMJ2HysE3AHqOo7wx9LtDaRtcPy/FVJ302xERG2IH9jU01F1Uq6DtmQ2AIPwnRoVanOFmnwaw5Hy0rMpAse0E0/qCHxWHM54AAum9jz28PBZ6fYl6gKM135DwwcoF3123fXAXo+dhDVySdbBWKnFemL21dkGSvY/ZczBznZ93kBTjDVSAKBG6Wy52xwV/0=</SignatureValue>
     <KeyInfo>
       <KeyValue>
         <RSAKeyValue>

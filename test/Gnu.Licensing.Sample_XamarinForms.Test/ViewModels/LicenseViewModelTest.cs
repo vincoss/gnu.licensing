@@ -25,7 +25,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.ViewModels
             var license = License.Load(File.OpenRead(path));
             var validationResult = new LicenseResult(license, null, null);
 
-            service.ValidateAsync().Returns(validationResult);
+            service.ValidateAsync(Arg.Any<bool>()).Returns(validationResult);
             ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
 
             model.Initialize();
@@ -58,7 +58,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.ViewModels
             };
             var validationResult = new LicenseResult(null, exception, validation);
 
-            service.ValidateAsync().Returns(validationResult);
+            service.ValidateAsync(Arg.Any<bool>()).Returns(validationResult);
             ctx.GetValueOrDefault(LicenseGlobals.AppId, null).Returns(appId);
 
             model.Initialize();
@@ -99,7 +99,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.ViewModels
             var licenseResult = new LicenseResult(license, null, null);
 
             service.RegisterAsync(Arg.Any<Guid>()).Returns(licenseResult);
-            service.ValidateAsync().Returns(licenseResult);
+            service.ValidateAsync(Arg.Any<bool>()).Returns(licenseResult);
 
             var key = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89");
             model.RegisterKey = key.ToString();
@@ -107,7 +107,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.ViewModels
             model.ActivateCommand.Execute(null);
 
             service.Received().RegisterAsync(key);
-            service.Received().ValidateAsync();
+            service.Received().ValidateAsync(Arg.Any<bool>());
             ctx.Received().SetLicenseKeyAsync(key.ToString());
             Assert.Equal(AppLicense.Full, LicenseGlobals.Get());
             Assert.False(model.IsBusy);
@@ -131,7 +131,7 @@ namespace Gnu.Licensing.Sample_XamarinForms.Test.ViewModels
             };
             var licenseResult = new LicenseResult(null, exception, validation);
             service.RegisterAsync(Arg.Any<Guid>()).Returns(licenseResult);
-            service.ValidateAsync().Returns(licenseResult);
+            service.ValidateAsync(Arg.Any<bool>()).Returns(licenseResult);
 
             model.Initialize();
 

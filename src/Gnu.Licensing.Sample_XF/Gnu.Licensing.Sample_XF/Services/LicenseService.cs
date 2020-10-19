@@ -66,11 +66,11 @@ namespace Gnu.Licensing.Sample_XamarinForms.Services
             return attributes;
         }
 
-        public Task RunAsync()
+        public Task RunAsync(bool onlineCheck = false)
         {
             var task = Task.Run(async() =>
             {
-                var result = await ValidateAsync(true);
+                var result = await ValidateAsync(onlineCheck);
                 if (result.Successful)
                 {
                     LicenseGlobals.Set(AppLicense.Full);
