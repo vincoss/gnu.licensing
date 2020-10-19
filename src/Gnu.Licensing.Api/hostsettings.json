@@ -1,4 +1,4 @@
 ﻿{
-  "Environment": "linux",
+  "Environment": "Development",
   "urls": "http://*;https://*;"
 }
