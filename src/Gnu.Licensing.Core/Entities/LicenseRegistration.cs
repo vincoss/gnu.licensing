@@ -28,9 +28,9 @@ namespace Gnu.Licensing.Core.Entities
         public LicenseType LicenseType { get; set; }
 
         [Required]
-        public bool IsActive { get; set; }  // TODO: Blacklist
+        public bool IsActive { get; set; }  // Note: To blacklist
 
-        public string Comment { get; set; } // TODO: Reasons for blacklist
+        public string Comment { get; set; } // Note: Reasons for blacklist
 
         [Required]
         public int Quantity { get; set; }
