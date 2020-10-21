@@ -12,7 +12,7 @@ namespace Gnu.Licensing.Sqlite
     {
         public static IServiceCollection AddSqliteDatabase(this IServiceCollection services)
         {
-            services.AddDbContextProvider<SqliteContext>("Sqlite", (provider, options) =>
+            services.AddDbContextProvider<SqliteContext>(DatabaseOptions.Sqlite, (provider, options) =>
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
                 options.UseSqlite(databaseOptions.Value.ConnectionString);

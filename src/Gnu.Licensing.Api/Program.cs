@@ -36,7 +36,7 @@ namespace Gnu.Licensing.Api
                     return 1;
                 }
 
-                var app = new CommandLineApplication // TODO: remove ???
+                var app = new CommandLineApplication
                 {
                     Name = "Gnu.Licensing",
                     Description = "Gnu.Licensing service",

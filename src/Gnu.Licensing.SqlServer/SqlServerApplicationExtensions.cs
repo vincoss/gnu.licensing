@@ -12,7 +12,7 @@ namespace Gnu.Licensing.SqlServer
     {
         public static IServiceCollection AddSqlServerDatabase(this IServiceCollection services)
         {
-            services.AddDbContextProvider<SqlServerContext>("SqlServer", (provider, options) =>
+            services.AddDbContextProvider<SqlServerContext>(DatabaseOptions.SqlServer, (provider, options) =>
             {
                 var databaseOptions = provider.GetRequiredService<IOptionsSnapshot<DatabaseOptions>>();
 

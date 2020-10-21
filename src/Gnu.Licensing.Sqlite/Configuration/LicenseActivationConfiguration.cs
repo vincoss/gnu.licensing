@@ -23,7 +23,7 @@ namespace Gnu.Licensing.Sqlite.Configuration
 
             builder
                .Property(t => t.CompanyId)
-               .HasColumnType("INTEGER");
+               .HasColumnType("VARCHAR(36)");
 
             builder
                 .Property(t => t.LicenseString)
