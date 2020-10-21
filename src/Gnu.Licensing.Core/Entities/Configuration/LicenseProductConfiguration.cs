@@ -11,22 +11,15 @@ namespace Gnu.Licensing.Core.Entities.Configuration
         public void Configure(EntityTypeBuilder<LicenseProduct> builder)
         {
             builder.ToTable(nameof(LicenseProduct))
-                   .HasIndex(x => new { x.LicenseProductId, x.ProductName }).IsUnique();
+                   .HasIndex(x => new { x.ProductName }).IsUnique();
 
             builder.ToTable(nameof(LicenseProduct))
-                   .HasIndex(x => x.ProductUuid).IsUnique();
-
-            builder.ToTable(nameof(LicenseProduct))
-                   .HasIndex(x => x.ProductName).IsUnique();
+                   .HasIndex(x => x.LicenseProductId).IsUnique();
 
             builder.HasKey(x => x.LicenseProductId);
 
             builder.Property(t => t.LicenseProductId)
                  .IsRequired();
-
-            builder.Property(t => t.ProductUuid)
-                   .IsRequired()
-                   .HasDefaultValue(Guid.NewGuid());
 
             builder.Property(t => t.CompanyId)
                  .IsRequired();

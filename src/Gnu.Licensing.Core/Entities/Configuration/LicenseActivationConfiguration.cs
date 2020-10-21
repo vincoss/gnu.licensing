@@ -9,17 +9,17 @@ namespace Gnu.Licensing.Core.Entities.Configuration
         public void Configure(EntityTypeBuilder<LicenseActivation> builder)
         {
             builder.ToTable(nameof(LicenseActivation))
-                   .HasIndex(x => new { x.LicenseId }).IsUnique();
+                   .HasIndex(x => new { x.LicenseActivationId }).IsUnique();
 
-            builder.HasKey(x => x.LicenseId);
+            builder.HasKey(x => x.LicenseActivationId);
 
-            builder.Property(t => t.LicenseId)
+            builder.Property(t => t.LicenseActivationId)
                 .IsRequired();
 
-            builder.Property(t => t.LicenseUuid)
+            builder.Property(t => t.LicenseId)
                    .IsRequired();
 
-            builder.Property(t => t.ProductUuid)
+            builder.Property(t => t.ProductId)
                 .IsRequired();
 
             builder.Property(t => t.CompanyId)

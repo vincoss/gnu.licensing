@@ -7,19 +7,16 @@ namespace Gnu.Licensing.Core.Entities
     public class LicenseActivation
     {
         [Key]
-        public int LicenseId { get; set; }
+        public Guid LicenseActivationId { get; set; }
 
         [Required]
-        public Guid ActivationUuid { get; set; }
+        public Guid LicenseId { get; set; }
 
         [Required]
-        public Guid LicenseUuid { get; set; }
+        public Guid ProductId { get; set; }
 
         [Required]
-        public Guid ProductUuid { get; set; }
-
-        [Required]
-        public int CompanyId { get; set; }
+        public Guid CompanyId { get; set; }
 
         [Required]
         public string LicenseString { get; set; }

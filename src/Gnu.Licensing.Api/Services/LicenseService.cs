@@ -43,14 +43,14 @@ namespace Gnu.Licensing.Api.Services
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
 
-            var registration = _context.Registrations.SingleOrDefault(x => x.LicenseUuid == request.LicenseUuid);
+            var registration = _context.Registrations.SingleOrDefault(x => x.LicenseRegistrationId == request.LicenseUuid);
 
             if (registration == null)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT01Code));
             }
 
-            if (registration.ProductUuid != request.ProductUuid)
+            if (registration.ProductId != request.ProductUuid)
             {
                 return Task.FromResult(FailureStrings.Get(FailureStrings.ACT02Code));
             }
@@ -107,8 +107,8 @@ namespace Gnu.Licensing.Api.Services
                 }
 
                 var activationId = Guid.NewGuid();
-                var product = _context.Products.Single(x => x.ProductUuid == request.ProductUuid);
-                var registration = _context.Registrations.Single(x => x.LicenseUuid == request.LicenseUuid);
+                var product = _context.Products.Single(x => x.LicenseProductId == request.ProductUuid);
+                var registration = _context.Registrations.Single(x => x.LicenseRegistrationId == request.LicenseUuid);
                 var licenseString = await CreateLicenseAsync(request, registration, product, activationId);
 
                 await CreateLicenseRecordAsync(registration, licenseString, attributesJson, attributesChecksum, userName, activationId);
@@ -136,7 +136,7 @@ namespace Gnu.Licensing.Api.Services
                 try
                 {
                     var license = License.New()
-                    .WithUniqueIdentifier(registration.LicenseUuid)
+                    .WithUniqueIdentifier(registration.LicenseRegistrationId)
                     .WithActivationId(activationId)
                     .As(registration.LicenseType)
                     .ExpiresAt(registration.ExpireUtc == null ? DateTime.MaxValue : registration.ExpireUtc.Value)
@@ -162,9 +162,9 @@ namespace Gnu.Licensing.Api.Services
         {
             var license = new LicenseActivation
             {
-                ActivationUuid = activationId,
-                LicenseUuid = registration.LicenseUuid,
-                ProductUuid = registration.ProductUuid,
+                LicenseActivationId = activationId,
+                LicenseId = registration.LicenseRegistrationId,
+                ProductId = registration.ProductId,
                 CompanyId = registration.CompanyId,
                 LicenseString = licenseString,
                 LicenseAttributes = attributesJson,
@@ -183,7 +183,7 @@ namespace Gnu.Licensing.Api.Services
 
         private int LicenseGetUsage(Guid licenseId)
         {
-            return _context.Licenses.Count(x => x.LicenseUuid == licenseId);
+            return _context.Licenses.Count(x => x.LicenseId == licenseId);
         }
 
         public async  Task<bool> IsActiveAsync(Guid activationId)
@@ -193,7 +193,7 @@ namespace Gnu.Licensing.Api.Services
                 return false;
             }
 
-            var result = await _context.Licenses.AnyAsync(x => x.ActivationUuid == activationId);
+            var result = await _context.Licenses.AnyAsync(x => x.LicenseActivationId == activationId);
 
             return result;
         }

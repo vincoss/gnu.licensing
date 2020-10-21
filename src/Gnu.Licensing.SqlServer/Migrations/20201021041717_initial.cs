@@ -11,12 +11,10 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 name: "LicenseActivation",
                 columns: table => new
                 {
-                    LicenseId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ActivationUuid = table.Column<Guid>(nullable: false),
-                    LicenseUuid = table.Column<Guid>(nullable: false),
-                    ProductUuid = table.Column<Guid>(nullable: false),
-                    CompanyId = table.Column<int>(nullable: false),
+                    LicenseActivationId = table.Column<Guid>(nullable: false),
+                    LicenseId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false),
                     LicenseString = table.Column<string>(nullable: false),
                     LicenseAttributes = table.Column<string>(nullable: true),
                     LicenseChecksum = table.Column<string>(nullable: false),
@@ -27,18 +25,16 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LicenseActivation", x => x.LicenseId);
+                    table.PrimaryKey("PK_LicenseActivation", x => x.LicenseActivationId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "LicenseCompany",
                 columns: table => new
                 {
-                    LicenseCompanyId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("0b83f13d-09b0-432a-b7c6-74bc366d46ed")),
+                    LicenseCompanyId = table.Column<Guid>(nullable: false),
                     CompanyName = table.Column<string>(nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 12, 22, 18, 11, 779, DateTimeKind.Utc).AddTicks(1585)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 21, 4, 17, 17, 744, DateTimeKind.Utc).AddTicks(3796)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -50,14 +46,12 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 name: "LicenseProduct",
                 columns: table => new
                 {
-                    LicenseProductId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("d8bdb8ee-909d-427c-9ded-163a17217a1a")),
-                    CompanyId = table.Column<int>(nullable: false),
+                    LicenseProductId = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false),
                     ProductName = table.Column<string>(nullable: false),
                     ProductDescription = table.Column<string>(nullable: false),
                     SignKeyName = table.Column<string>(nullable: false),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 12, 22, 18, 11, 781, DateTimeKind.Utc).AddTicks(9289)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 21, 4, 17, 17, 750, DateTimeKind.Utc).AddTicks(6609)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -69,11 +63,9 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 name: "LicenseRegistration",
                 columns: table => new
                 {
-                    LicenseRegistrationId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LicenseUuid = table.Column<Guid>(nullable: false, defaultValue: new Guid("1cdaa326-506c-4559-9185-877c9e7f4472")),
-                    ProductUuid = table.Column<Guid>(nullable: false),
-                    CompanyId = table.Column<int>(nullable: false),
+                    LicenseRegistrationId = table.Column<Guid>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    CompanyId = table.Column<Guid>(nullable: false),
                     LicenseName = table.Column<string>(nullable: false),
                     LicenseEmail = table.Column<string>(nullable: false),
                     LicenseType = table.Column<int>(nullable: false),
@@ -81,7 +73,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     Comment = table.Column<string>(nullable: true),
                     Quantity = table.Column<int>(nullable: false, defaultValue: 1),
                     ExpireUtc = table.Column<DateTime>(nullable: true),
-                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 12, 22, 18, 11, 787, DateTimeKind.Utc).AddTicks(3623)),
+                    CreatedDateTimeUtc = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 21, 4, 17, 17, 755, DateTimeKind.Utc).AddTicks(3714)),
                     CreatedByUser = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -90,9 +82,9 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_LicenseActivation_LicenseId",
+                name: "IX_LicenseActivation_LicenseActivationId",
                 table: "LicenseActivation",
-                column: "LicenseId",
+                column: "LicenseActivationId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -102,39 +94,21 @@ namespace Gnu.Licensing.SqlServer.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LicenseCompany_CompanyUuid",
+                name: "IX_LicenseCompany_LicenseCompanyId",
                 table: "LicenseCompany",
-                column: "CompanyUuid",
+                column: "LicenseCompanyId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_LicenseCompany_LicenseCompanyId_CompanyName",
-                table: "LicenseCompany",
-                columns: new[] { "LicenseCompanyId", "CompanyName" },
+                name: "IX_LicenseProduct_LicenseProductId",
+                table: "LicenseProduct",
+                column: "LicenseProductId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_LicenseProduct_ProductName",
                 table: "LicenseProduct",
                 column: "ProductName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LicenseProduct_ProductUuid",
-                table: "LicenseProduct",
-                column: "ProductUuid",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LicenseProduct_LicenseProductId_ProductName",
-                table: "LicenseProduct",
-                columns: new[] { "LicenseProductId", "ProductName" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LicenseRegistration_LicenseUuid",
-                table: "LicenseRegistration",
-                column: "LicenseUuid",
                 unique: true);
 
             migrationBuilder.CreateIndex(

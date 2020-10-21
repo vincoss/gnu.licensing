@@ -21,7 +21,7 @@ namespace Gnu.Licensing.Api
 
             var company = new LicenseCompany
             {
-                CompanyUuid = Guid.NewGuid(),
+                LicenseCompanyId = Guid.NewGuid(),
                 CompanyName = "Gnu.Licensing.Api",
                 CreatedDateTimeUtc = createdDate,
                 CreatedByUser = user
@@ -33,7 +33,7 @@ namespace Gnu.Licensing.Api
             var product = new LicenseProduct
             {
                 CompanyId = company.LicenseCompanyId,
-                ProductUuid = Guid.NewGuid(),
+                LicenseProductId = Guid.NewGuid(),
                 ProductName = "Gnu.Licensing.Api",
                 ProductDescription = "Gnu.Licensing.Api description",
                 SignKeyName = "CN=Gnu.Licensing",
@@ -46,8 +46,8 @@ namespace Gnu.Licensing.Api
 
             var registration = new LicenseRegistration
             {
-                LicenseUuid = Guid.NewGuid(),
-                ProductUuid = product.ProductUuid,
+                LicenseRegistrationId = Guid.NewGuid(),
+                ProductId = product.LicenseProductId,
                 CompanyId = product.CompanyId,
                 LicenseName = "test-name",
                 LicenseEmail = "test@example.com",
@@ -65,8 +65,8 @@ namespace Gnu.Licensing.Api
 
             var license = new LicenseActivation
             {
-                LicenseUuid = registration.LicenseUuid,
-                ProductUuid = registration.ProductUuid,
+                LicenseId = registration.LicenseRegistrationId,
+                ProductId = registration.ProductId,
                 CompanyId = registration.CompanyId,
                 LicenseString = "license-string",
                 LicenseAttributes = "license-attributes",

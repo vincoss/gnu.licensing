@@ -13,17 +13,13 @@ namespace Gnu.Licensing.Core.Entities.Configuration
             builder.ToTable(nameof(LicenseRegistration))
                   .HasIndex(x => new { x.LicenseRegistrationId, x.LicenseName, x.LicenseEmail, x.IsActive }).IsUnique();
 
-            builder.ToTable(nameof(LicenseRegistration))
-                .HasIndex(x => new { x.LicenseUuid }).IsUnique();
-
             builder.HasKey(x => x.LicenseRegistrationId);
 
             builder.Property(t => t.LicenseRegistrationId)
                    .IsRequired();
 
-            builder.Property(t => t.LicenseUuid)
-                   .IsRequired()
-                   .HasDefaultValue(Guid.NewGuid());
+            builder.Property(t => t.ProductId)
+                  .IsRequired();
 
             builder.Property(t => t.CompanyId)
                  .IsRequired();

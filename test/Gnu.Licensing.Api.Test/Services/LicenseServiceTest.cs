@@ -173,7 +173,7 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
+                        LicenseUuid = registration.LicenseRegistrationId,
                         ProductUuid = Guid.NewGuid()
                     };
 
@@ -222,8 +222,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = registration.ProductUuid
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = registration.ProductId
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -269,8 +269,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = registration.ProductUuid
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = registration.ProductId
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -323,8 +323,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = registration.ProductUuid
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = registration.ProductId
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -376,8 +376,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = registration.ProductUuid
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = registration.ProductId
                     };
 
                     var result = await service.ValidateAsync(request);
@@ -458,8 +458,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = product.ProductUuid
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = product.LicenseProductId
                     };
 
                     var result = await service.CreateAsync(request, "test-user");
@@ -507,8 +507,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = registration.ProductUuid,
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = registration.ProductId,
                         Attributes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     };
 
@@ -516,14 +516,14 @@ namespace Gnu.Licensing.Api.Services
 
                     var result = await service.CreateAsync(request, "test-user");
                     var lic = context.Licenses.ToArray();
-                    var licenseRecord = await context.Licenses.SingleAsync(x => x.LicenseUuid == registration.LicenseUuid);
+                    var licenseRecord = await context.Licenses.SingleAsync(x => x.LicenseId == registration.LicenseRegistrationId);
 
                     Assert.Null(result.Failure);
                     Assert.NotNull(result.License);
                     Assert.NotNull(licenseRecord);
-                    Assert.Equal(1, licenseRecord.LicenseId);
-                    Assert.Equal(registration.LicenseUuid, licenseRecord.LicenseUuid);
-                    Assert.Equal(registration.ProductUuid, licenseRecord.ProductUuid);
+                    Assert.False(licenseRecord.LicenseActivationId == Guid.Empty);
+                    Assert.Equal(registration.LicenseRegistrationId, licenseRecord.LicenseId);
+                    Assert.Equal(registration.ProductId, licenseRecord.ProductId);
                     Assert.Equal(registration.CompanyId, licenseRecord.CompanyId);
                     Assert.NotNull(licenseRecord.LicenseString);
                     Assert.NotNull(licenseRecord.LicenseAttributes);
@@ -550,7 +550,7 @@ namespace Gnu.Licensing.Api.Services
                     Assert.False(failures.Any());
 
                     // License
-                    Assert.Equal(licenseRecord.ActivationUuid, license.ActivationUuid);
+                    Assert.Equal(licenseRecord.LicenseActivationId, license.ActivationUuid);
                     Assert.Equal(request.LicenseUuid, license.Id);
                     Assert.Equal(registration.LicenseType, license.Type);
                     Assert.Equal(expireDate.ToString("yyyyMMdd"), license.ExpirationUtc.ToString("yyyyMMdd"));
@@ -632,8 +632,8 @@ namespace Gnu.Licensing.Api.Services
 
                     var request = new LicenseRegisterRequest
                     {
-                        LicenseUuid = registration.LicenseUuid,
-                        ProductUuid = product.ProductUuid
+                        LicenseUuid = registration.LicenseRegistrationId,
+                        ProductUuid = product.LicenseProductId
                     };
 
                     var createdResult = await service.CreateAsync(request, "test-user");
@@ -659,7 +659,7 @@ namespace Gnu.Licensing.Api.Services
         {
             return new LicenseProduct
             {
-                ProductUuid = Guid.NewGuid(),
+                LicenseProductId = Guid.NewGuid(),
                 ProductName = "test-product",
                 ProductDescription = "test-description",
                 SignKeyName = "CN=Gnu.Licensing",
@@ -672,8 +672,8 @@ namespace Gnu.Licensing.Api.Services
         {
             return new LicenseRegistration
             {
-                LicenseUuid = Guid.NewGuid(),
-                ProductUuid = product.ProductUuid,
+                LicenseRegistrationId = Guid.NewGuid(),
+                ProductId = product.LicenseProductId,
                 LicenseName = "test-name",
                 LicenseEmail = "test-email",
                 LicenseType = LicenseType.Standard,
@@ -689,8 +689,8 @@ namespace Gnu.Licensing.Api.Services
         {
             return new LicenseActivation
             {
-                LicenseUuid = registration.LicenseUuid,
-                ProductUuid = registration.ProductUuid,
+                LicenseId = registration.LicenseRegistrationId,
+                ProductId = registration.ProductId,
                 LicenseString = "license",
                 LicenseChecksum = "checksum",
                 ChecksumType = "sha256",

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gnu.Licensing.SqlServer.Migrations
 {
     [DbContext(typeof(SqlServerContext))]
-    [Migration("20201012221812_initial")]
+    [Migration("20201021041717_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,12 +23,8 @@ namespace Gnu.Licensing.SqlServer.Migrations
 
             modelBuilder.Entity("Gnu.Licensing.Core.Entities.LicenseActivation", b =>
                 {
-                    b.Property<int>("LicenseId")
+                    b.Property<Guid>("LicenseActivationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<Guid>("ActivationUuid")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AttributesChecksum")
@@ -38,8 +34,8 @@ namespace Gnu.Licensing.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -55,19 +51,19 @@ namespace Gnu.Licensing.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("LicenseId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("LicenseString")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("LicenseUuid")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProductUuid")
-                        .HasColumnType("uniqueidentifier");
+                    b.HasKey("LicenseActivationId");
 
-                    b.HasKey("LicenseId");
-
-                    b.HasIndex("LicenseId")
+                    b.HasIndex("LicenseActivationId")
                         .IsUnique();
 
                     b.ToTable("LicenseActivation");
@@ -75,19 +71,13 @@ namespace Gnu.Licensing.SqlServer.Migrations
 
             modelBuilder.Entity("Gnu.Licensing.Core.Entities.LicenseCompany", b =>
                 {
-                    b.Property<int>("LicenseCompanyId")
+                    b.Property<Guid>("LicenseCompanyId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid>("CompanyUuid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("0b83f13d-09b0-432a-b7c6-74bc366d46ed"));
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -96,17 +86,14 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 12, 22, 18, 11, 779, DateTimeKind.Utc).AddTicks(1585));
+                        .HasDefaultValue(new DateTime(2020, 10, 21, 4, 17, 17, 744, DateTimeKind.Utc).AddTicks(3796));
 
                     b.HasKey("LicenseCompanyId");
 
                     b.HasIndex("CompanyName")
                         .IsUnique();
 
-                    b.HasIndex("CompanyUuid")
-                        .IsUnique();
-
-                    b.HasIndex("LicenseCompanyId", "CompanyName")
+                    b.HasIndex("LicenseCompanyId")
                         .IsUnique();
 
                     b.ToTable("LicenseCompany");
@@ -114,13 +101,12 @@ namespace Gnu.Licensing.SqlServer.Migrations
 
             modelBuilder.Entity("Gnu.Licensing.Core.Entities.LicenseProduct", b =>
                 {
-                    b.Property<int>("LicenseProductId")
+                    b.Property<Guid>("LicenseProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -129,7 +115,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 12, 22, 18, 11, 781, DateTimeKind.Utc).AddTicks(9289));
+                        .HasDefaultValue(new DateTime(2020, 10, 21, 4, 17, 17, 750, DateTimeKind.Utc).AddTicks(6609));
 
                     b.Property<string>("ProductDescription")
                         .IsRequired()
@@ -139,24 +125,16 @@ namespace Gnu.Licensing.SqlServer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid>("ProductUuid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("d8bdb8ee-909d-427c-9ded-163a17217a1a"));
-
                     b.Property<string>("SignKeyName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("LicenseProductId");
 
+                    b.HasIndex("LicenseProductId")
+                        .IsUnique();
+
                     b.HasIndex("ProductName")
-                        .IsUnique();
-
-                    b.HasIndex("ProductUuid")
-                        .IsUnique();
-
-                    b.HasIndex("LicenseProductId", "ProductName")
                         .IsUnique();
 
                     b.ToTable("LicenseProduct");
@@ -164,16 +142,15 @@ namespace Gnu.Licensing.SqlServer.Migrations
 
             modelBuilder.Entity("Gnu.Licensing.Core.Entities.LicenseRegistration", b =>
                 {
-                    b.Property<int>("LicenseRegistrationId")
+                    b.Property<Guid>("LicenseRegistrationId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Comment")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CompanyId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("CreatedByUser")
                         .IsRequired()
@@ -182,7 +159,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<DateTime>("CreatedDateTimeUtc")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 12, 22, 18, 11, 787, DateTimeKind.Utc).AddTicks(3623));
+                        .HasDefaultValue(new DateTime(2020, 10, 21, 4, 17, 17, 755, DateTimeKind.Utc).AddTicks(3714));
 
                     b.Property<DateTime?>("ExpireUtc")
                         .HasColumnType("datetime2");
@@ -201,12 +178,7 @@ namespace Gnu.Licensing.SqlServer.Migrations
                     b.Property<int>("LicenseType")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("LicenseUuid")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValue(new Guid("1cdaa326-506c-4559-9185-877c9e7f4472"));
-
-                    b.Property<Guid>("ProductUuid")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Quantity")
@@ -215,9 +187,6 @@ namespace Gnu.Licensing.SqlServer.Migrations
                         .HasDefaultValue(1);
 
                     b.HasKey("LicenseRegistrationId");
-
-                    b.HasIndex("LicenseUuid")
-                        .IsUnique();
 
                     b.HasIndex("LicenseRegistrationId", "LicenseName", "LicenseEmail", "IsActive")
                         .IsUnique();

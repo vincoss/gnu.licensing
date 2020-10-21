@@ -100,7 +100,7 @@ namespace Gnu.Licensing.Api.Services
         {
             return new LicenseProduct
             {
-                ProductUuid = Guid.NewGuid(),
+                LicenseProductId = Guid.NewGuid(),
                 ProductName = "test-product",
                 ProductDescription = "test-description",
                 SignKeyName = "CN=Gnu.Licensing",

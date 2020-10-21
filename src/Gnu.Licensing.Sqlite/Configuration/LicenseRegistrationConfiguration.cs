@@ -10,15 +10,11 @@ namespace Gnu.Licensing.Sqlite.Configuration
         public void Configure(EntityTypeBuilder<LicenseRegistration> builder)
         {
             builder
-            .Property(t => t.LicenseRegistrationId)
-            .HasColumnType("INTEGER");
-
-            builder
-              .Property(t => t.LicenseUuid)
+              .Property(t => t.LicenseRegistrationId)
               .HasColumnType("VARCHAR(36)");
 
             builder
-              .Property(t => t.ProductUuid)
+              .Property(t => t.ProductId)
               .HasColumnType("VARCHAR(36)");
 
             builder

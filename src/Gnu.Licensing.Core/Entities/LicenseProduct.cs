@@ -7,13 +7,10 @@ namespace Gnu.Licensing.Core.Entities
     public class LicenseProduct
     {
         [Key]
-        public int LicenseProductId { get; set; }
+        public Guid LicenseProductId { get; set; }
 
         [Required]
-        public Guid ProductUuid { get; set; }
-        
-        [Required]
-        public int CompanyId { get; set; }
+        public Guid CompanyId { get; set; }
 
         [Required]
         public string ProductName { get; set; }

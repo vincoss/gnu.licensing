@@ -9,6 +9,7 @@ register license send more info about device (easier to manage|unregister the li
 	see the device info sample
 	if show attributes then user can see AppId on device then know what device use particular activation
 TODO: public int MaxActivations { get; set; } = 5;
+if user get 2 licenses the must have license registration for each???
 
 ## Enable SSL on localhost|help
 dotnet dev-certs https --help

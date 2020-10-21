@@ -50,7 +50,7 @@ namespace Gnu.Licensing.Api.Data
 
                 var company = new LicenseCompany
                 {
-                    CompanyUuid = new Guid("A8AD667E-8DDC-4819-914F-55AA9B6CD50B"),
+                    LicenseCompanyId = new Guid("A8AD667E-8DDC-4819-914F-55AA9B6CD50B"),
                     CompanyName = "Demo-Company",
                     CreatedByUser = userName,
                     CreatedDateTimeUtc = createdDate
@@ -63,7 +63,7 @@ namespace Gnu.Licensing.Api.Data
                     var product = new LicenseProduct
                     {
                         CompanyId = company.LicenseCompanyId,
-                        ProductUuid = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"),
+                        LicenseProductId = new Guid("C3F80BD7-9618-48F6-8250-65D113F9AED2"),
                         ProductName = "Demo-Product-(Full License)",
                         ProductDescription = "Demo-Product-Description-(Full License)",
                         SignKeyName = "CN=Gnu.Licensing",
@@ -78,8 +78,8 @@ namespace Gnu.Licensing.Api.Data
                     {
                         var registration = new LicenseRegistration
                         {
-                            LicenseUuid = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89"),
-                            ProductUuid = product.ProductUuid,
+                            LicenseRegistrationId = new Guid("D65321D5-B0F9-477D-828A-086F30E2BF89"),
+                            ProductId = product.LicenseProductId,
                             CompanyId = company.LicenseCompanyId,
                             LicenseName = "Demo-User",
                             LicenseEmail = "Demo-User-Email",
