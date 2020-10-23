@@ -12,7 +12,7 @@
 **/*.dbmdl
 **/*.jfm
 **/azds.yaml
-**/bin
+##**/bin
 **/charts
 **/docker-compose*
 **/Dockerfile*
@@ -25,3 +25,4 @@ LICENSE
 README.md
 [b|B]in
 [O|o]bj
+**/obj

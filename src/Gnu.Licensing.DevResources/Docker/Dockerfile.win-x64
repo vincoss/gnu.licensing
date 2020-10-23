@@ -6,6 +6,7 @@ ARG HTTP_PORT=80
 ARG APP_HOME=/var/app
 
 WORKDIR ${APP_HOME}
+
 COPY ["/src/Gnu.Licensing.Api/bin/Release/netcoreapp3.1/publish/win-x64/.", "./"]
 
 ENV HOME ${APP_HOME}
