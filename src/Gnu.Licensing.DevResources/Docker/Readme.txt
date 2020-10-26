@@ -56,7 +56,7 @@ dotnet dev-certs https --trust
 ## Browse
 https://localhost/api/license
 https://localhost:1999/api/license
-https://172.17.0.2:1999/api/license
+https://172.29.102.187/api/license
 https://shotapi/api/license
 https://{ip-here}/api/license
 
